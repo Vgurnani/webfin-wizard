@@ -8,8 +8,24 @@
     "start": "next start"
   },
   "dependencies": {
+    "@svgr/webpack": "^5.5.0",
+    "@zeit/next-sass": "^1.0.1",
+    "bootstrap": "^4.5.3",
+    "bulma": "^0.9.0",
     "next": "^10.0.0",
+    "node-sass": "^5.0.0",
+    "prop-types": "^15.6.0",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-bootstrap": "^1.4.0",
+    "react-dom": "16.13.1",
+    "react-otp-input": "^2.3.0",
+    "react-redux": "^7.2.2",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-form": "^8.3.7",
+    "redux-promise-middleware": "^6.1.2",
+    "redux-thunk": "^2.3.0",
+    "sass": "^1.32.2",
+    "url-loader": "^4.1.1"
   }
 }
