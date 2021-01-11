@@ -25,8 +25,8 @@ const Navbar = (props) => {
 
     const LinkView = () => {
       if(pathname !== '/register' && pathname !== '/login' && pathname !== '/forget-password'){
-        return(<Link className="btn btn-secondary" href="/login">
-          Login
+        return(<Link  href="/login">
+          <a className="btn btn-secondary">login</a>
         </Link>)
       }else{
         return null

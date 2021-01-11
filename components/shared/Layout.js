@@ -4,7 +4,6 @@ import Navbar from './Navbar'
 import { addBodyClass } from '../../utils/helpers'
 
 const TemplateWrapper = (props) => {
-  debugger
   const pathname = props?.pathname
   useEffect(()=> {
     addBodyClass(pathname)
