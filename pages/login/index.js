@@ -6,6 +6,8 @@ import { reduxForm } from 'redux-form';
 import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import { loginUser } from '../../actions/user/auth'
+import withPublicRoute from '../../components/hoc/withPublicRoute'
+
 import 
   {
     Container,
@@ -120,5 +122,4 @@ LoginPage.propTypes = {
 export default reduxForm({
   form: 'loginform',
   validate
-})(LoginPage)
-
+})(withPublicRoute(LoginPage))

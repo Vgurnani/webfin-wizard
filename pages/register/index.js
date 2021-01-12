@@ -2,6 +2,7 @@ import React from 'react'
 import Link  from 'next/link'
 import PropTypes from 'prop-types';
 import { registrationUser } from '../../actions/user/auth'
+import withPublicRoute from '../../components/hoc/withPublicRoute'
 
 import 
   {
@@ -125,4 +126,4 @@ RegisterPage.propTypes = {
 export default reduxForm({
   form: 'registerForm',
   validate
-})(RegisterPage)
+})(withPublicRoute(RegisterPage))

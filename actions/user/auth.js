@@ -1,5 +1,7 @@
 import {ActionTypes} from './actionTypes'
 import { postData } from '../../lib/api'
+import Cookies from 'js-cookie'
+import Router from 'next/router'
 export const loginRequest = () => {
     return {
         type: ActionTypes.LOGIN_REQUEST,
@@ -24,7 +26,8 @@ export const loginUser = (data) => {
         dispatch(loginRequest())
         postData(`/auth/login`, data).then((response)=>{
             response.data['accessToken'] = response.accessToken
-            localStorage.setItem('user', JSON.stringify(response.data))
+            Cookies.set('user', JSON.stringify(response.data))
+            Router.push('/dashboard')
             dispatch(loginSuccess(response.data))
         }).catch((error) => {
             dispatch(loginFailure(error.message))
@@ -57,7 +60,8 @@ export const registrationUser = (data) => {
         postData(`/auth/signup`, data)
             .then((response) => {
                 response.data['accessToken'] = response.accessToken
-                localStorage.setItem('user', JSON.stringify(response.data))
+                Cookies.set('user', JSON.stringify(response.data))
+                Router.push('/dashboard')
                 dispatch(registrationSuccess(response.data))
             })
             .catch((error) => {
