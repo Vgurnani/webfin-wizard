@@ -1,6 +1,8 @@
 import React from 'react'
 import Link  from 'next/link'
 import PropTypes from 'prop-types';
+import { registrationUser } from '../../actions/user/auth'
+
 import 
   {
     Container,
@@ -16,10 +18,13 @@ import { reduxForm } from 'redux-form';
 import { Field } from 'redux-form';
 import googleLogin from '../../assets/images/google-login.svg';
 import facebookLogin from '../../assets/images/facebook-login.svg';
+import { useDispatch } from 'react-redux'
 
 const RegisterPage = (props) => {
+  const dispatch = useDispatch();
   const { handleSubmit } = props
   const submitData = (data) => {
+    dispatch(registrationUser(data))
   }
 
   return(
@@ -52,6 +57,14 @@ const RegisterPage = (props) => {
                   </p>
                   <Form className="form" onSubmit={handleSubmit(submitData)}>  
                     <Field
+                      name="username"
+                      label="username"
+                      type="text"
+                      component={ renderFieldWG }
+                      maxLength="150"
+                      placeholder='Enter your username'
+                    />
+                    <Field
                       name="email"
                       label="email"
                       type="text"
@@ -70,7 +83,7 @@ const RegisterPage = (props) => {
                     <Field
                       name="confirmPassword"
                       label="confirm password"
-                      type="text"
+                      type="password"
                       component={ renderFieldWG }
                       maxLength="150"
                       placeholder='Enter your password'

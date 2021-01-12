@@ -21,6 +21,10 @@ export const registerValidate = values => {
     if (!values.confirmPassword) {
         errors.confirmPassword = 'Please enter confirm password';
     }
+
+    if( values.password !== values.confirmPassword){
+        errors.confirmPassword = 'Password should be match';
+    }
     return errors;
 }
 

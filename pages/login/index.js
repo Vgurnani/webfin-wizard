@@ -5,7 +5,7 @@ import { loginValidate as validate } from '../../utils/validates'
 import { reduxForm } from 'redux-form';
 import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
-
+import { loginUser } from '../../actions/user/auth'
 import 
   {
     Container,
@@ -15,13 +15,15 @@ import
     Button
   }
 from 'react-bootstrap';
-
+import { useDispatch } from 'react-redux'
 import googleLogin from '../../assets/images/google-login.svg';
 import facebookLogin from '../../assets/images/facebook-login.svg';
 
 const LoginPage = (props) => {
+  const dispatch = useDispatch();
   const { handleSubmit } = props
   const submitData = (data) => {
+    dispatch(loginUser(data))
   }
   return(
     <section className="login-section main-section">
