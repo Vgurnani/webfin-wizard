@@ -35,6 +35,14 @@ export const loginUser = (data) => {
     };
 };
 
+export const logoutUser = () => {
+    return (dispatch) => {
+        dispatch(loginRequest())
+        Cookies.remove('user')
+        Router.push('/login')
+    };
+};
+
 export const registrationRequest = () => {
     return {
         type: ActionTypes.REGISTRATION_REQUEST,

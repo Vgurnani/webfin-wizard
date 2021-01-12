@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie'
+
 export const addBodyClass = (pathname) =>{
     const path = pathname?.replace('/','')
     document.body.className = ''
@@ -20,4 +22,15 @@ export const addBodyClass = (pathname) =>{
     } else if(path === '404'){
         document.body.classList.add('light-bg');
     }
+}
+
+export const getUser = () => {
+    const user = Cookies.get('user') || '';
+    return user && JSON.parse(user)
+  
+}
+export const isLoggedIn = () => {
+    const user = getUser();
+    return Object.keys(user).length > 0 && user.constructor === Object;
+
 }

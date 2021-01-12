@@ -4,11 +4,14 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import webFinLogo from '../../assets/images/header/webFin-Logo.svg';
+import { isLoggedIn } from '../../utils/helpers'
+import { logoutUser } from '../../actions/user/auth';
+import { useDispatch } from 'react-redux'
 
 const Navbar = (props) => {
+  const dispatch  = useDispatch();
   const [active , setActive] = useState(false)
   const [navBarActiveClass , setNavBarActiveClass] = useState('')
-
   const btAction = (pathname) => {
     if(pathname === '/register'){
       return 'logo-right no-login';
@@ -19,12 +22,15 @@ const Navbar = (props) => {
     }
     
   }
-
-
+    const logout = () => {
+      dispatch(logoutUser()) 
+    }
     const { pathname } = props
-
     const LinkView = () => {
-      if(pathname !== '/register' && pathname !== '/login' && pathname !== '/forget-password'){
+      if(isLoggedIn()){
+        return<button className="btn btn-secondary" onClick={logout} >logout</button>
+      }
+      else if(pathname === '/'){
         return(<Link  href="/login">
           <a className="btn btn-secondary">login</a>
         </Link>)
