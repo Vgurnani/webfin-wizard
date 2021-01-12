@@ -20,7 +20,7 @@ export default WrappedComponent => {
         const wrappedProps = await WrappedComponent.getInitialProps({...context, auth: userAuth});
         return { ...wrappedProps, userAuth };
         }
-        return userAuth
+        return {userAuth: userAuth}
   };
   return hocComponent;
 };
