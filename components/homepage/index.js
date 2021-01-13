@@ -12,6 +12,7 @@ import websiteComparison from '../../assets/images/home/website-comparison.png';
 import basicPlan from '../../assets/images/home/basic-plan.png';
 import premiumPlan from '../../assets/images/home/premium-plan.png';
 import vipPlan from '../../assets/images/home/vip-plan.png';
+import Link from 'next/link'
 const HomePage = (props) => {
   return( 
     <section className="main-section">
@@ -26,9 +27,11 @@ const HomePage = (props) => {
               <p>
                 Build a website, as easy as answering a couple of questions.
               </p>
-              <button className="btn btn-primary">
-              Get started  
-              </button>
+
+              <Link href="/assessment">
+                <a className="btn btn-primary" >Get started</a>
+              </Link>
+              
               </div>
             </Col>
             <Col className="img-side col-5">
