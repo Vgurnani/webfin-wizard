@@ -44,3 +44,11 @@ export const forgetPasswordValidate = values => {
     }
     return errors;
 }
+
+export const assessmentFormValidate = values => {
+    const errors = {};
+    if (!values.websiteName) {
+        errors.websiteName = 'required';
+    }
+    return errors;
+}

@@ -7,6 +7,7 @@
 import React from 'react';
 import { Form, Row } from 'react-bootstrap';
 import OtpInput from 'react-otp-input';
+import Dropzone from 'react-dropzone'
 
 export const Validations = (props) => {
     const {
@@ -135,6 +136,8 @@ const renderStyleMultipleRadio = (props) => {
         defaultValue,
         width,
         imgWidth,
+        isColors,
+        fontStyled,
         meta: { touched, error, warning },
     } = props;
     return (
@@ -158,10 +161,11 @@ const renderStyleMultipleRadio = (props) => {
                                     <span className='row ml-5'>
                                         {item.imageUrl && <>
                                             <img src={ item.imageUrl } className='styled-radio-img'  alt={ item.label } style={ { width: imgWidth || 'auto' } } /></>}
-                                        <p className="emojiText mb-0 mt-1" dangerouslySetInnerHTML={ { __html:  item.label  } } />
-                                        <p className='row checkbox-colors'>
+                                        {fontStyled ? <p style={{fontStyle: item.value}} className="emojiText mb-0 mt-1" dangerouslySetInnerHTML={ { __html:  item.label  } } /> : 
+                                        <p className="emojiText mb-0 mt-1" dangerouslySetInnerHTML={ { __html:  item.label  } } /> }
+                                        {isColors && <p className='row checkbox-colors'>
                                             {item.colors && item.colors.map((color,ind) => <span style={{backgroundColor: color}}></span>)}
-                                        </p>
+                                        </p>}
                                     </span>
                                 </div>
                             </label>
@@ -179,8 +183,58 @@ const renderStyleMultipleRadio = (props) => {
             />
         </Form.Group>)
 }
+const renderFileDrop = (props)=> {
+    const {
+        input,
+        //setUrl,
+        url,
+        formClass,
+        placeholder,
+        meta: { touched, error, warning },
+    } = props;
+
+    const handleDrop = (acceptedFiles) => {
+        acceptedFiles.forEach((file) => {
+            const reader = new FileReader()
+
+            reader.onabort = () => console.log('file reading was aborted')
+            reader.onerror = () => console.log('file reading has failed')
+            reader.onload = () => {
+                const base64 = reader.result
+                //setUrl(base64);
+            }
+            input.onChange(file)
+            reader.readAsDataURL(file);
+        })
+    }
+
+    return(
+        <>
+            <Dropzone accept="image/jpeg, image/png" multiple={ false } onDrop={ acceptedFiles => handleDrop(acceptedFiles) } >
+                {({ getRootProps, getInputProps }) => {
+                    return(
+                        <section>
+                            <div { ...getRootProps() } className={ formClass + ' avatar-user' }>
+                                <div className="c-avatar cursor-pointer"
+                                    style={ {  backgroundImage: url ? `url(${ url })`: null } } >
+                                    <input  name={ input.name } { ...getInputProps()  } />
+                                    <p dangerouslySetInnerHTML={{__html: placeholder}}/>
+                                </div>
+                            </div>
+                        </section>
+                    )}}
+            </Dropzone>
+            <Validations
+                props={ {
+                    touched,
+                    error,
+                    warning
+                } }
+            /></>)
+}
 
 export {
+    renderFileDrop,
     renderFieldWG,
     renderField,
     renderOTPField,
