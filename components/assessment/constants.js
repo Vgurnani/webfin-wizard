@@ -13,3 +13,8 @@ export const colorPalette = [
     {label: 'Orange',colors: ['#EF2013','#EF2013','#EF2013', '#EF2013'], value: 'orange'},
     {label: 'Green',colors: ['#EF2013','#EF2013','#EF2013', '#EF2013'], value: 'green'},
 ]
+
+export const fontStyle = [
+    {label: 'Halvetica', value: 'Halvetica'},
+    {label: 'Mulish', value: 'mulish'},
+]
