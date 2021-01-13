@@ -6,6 +6,10 @@ import Carousel from 'react-bootstrap/Carousel';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { useRouter } from 'next/router';
+
+import { ROUTES } from '../../constants/appRoutes';
+
 import slider1 from '../../assets/images/home/slider-1.png';
 import websiteBuilding from '../../assets/images/home/website-building.png';
 import websiteComparison from '../../assets/images/home/website-comparison.png';
@@ -14,7 +18,12 @@ import premiumPlan from '../../assets/images/home/premium-plan.png';
 import vipPlan from '../../assets/images/home/vip-plan.png';
 import Link from 'next/link'
 const HomePage = (props) => {
-  return( 
+  const router = useRouter();
+  const handleStartNavigation = () => {
+    router.push(ROUTES.REGISTER)
+  }
+
+  return(
     <section className="main-section">
       <section className="home-banner">
         <Container>
@@ -35,7 +44,7 @@ const HomePage = (props) => {
               </div>
             </Col>
             <Col className="img-side col-5">
-              <Carousel controls={false}>  
+              <Carousel controls={false}>
                 <Carousel.Item>
                  <img src={slider1} alt='slider1' />
                 </Carousel.Item>
@@ -54,7 +63,7 @@ const HomePage = (props) => {
         <div className="get-website-inner">
         <Container>
           <Row className="align-items-center">
-            <Col className="heading-side col-7">  
+            <Col className="heading-side col-7">
               <div className="heading-side-inner">
               <h3>
               Get the website you want From scratch and without previous experience
@@ -66,23 +75,23 @@ const HomePage = (props) => {
                 <p>
                 You don’t need previous experience in design. <br/>Just let us know what kind of site you want and we’ll do the work fo you.
                 </p>
-                <button href="" className="btn-normal">Get Started</button>
+                <button onClick={handleStartNavigation} href="" className="btn-normal">Get Started</button>
               </div>
             </Col>
           </Row>
-        </Container>        
+        </Container>
         </div>
       </section>
       <section className="website-building">
         <Container>
           <Row className="align-items-center">
-            <Col className="content-side col-6">  
+            <Col className="content-side col-6">
             <div className="content-side-inner">
-             <h4>Pain free website building</h4>    
+             <h4>Pain free website building</h4>
              <p>
              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
              </p>
-             <button className="btn-normal">Start now</button>
+             <button onClick={handleStartNavigation} className="btn-normal">Start now</button>
              </div>
             </Col>
             <Col className="col-6">
@@ -97,7 +106,7 @@ const HomePage = (props) => {
           <Col className="col-6">
               <img src={websiteComparison} alt="" />
             </Col>
-            <Col className="content-side col-6">     
+            <Col className="content-side col-6">
             <div className="content-side-inner">
              <h4>Us in comparison</h4>
              <p>
@@ -109,25 +118,25 @@ const HomePage = (props) => {
                <li>Lorem ipsum dolor sit amet.</li>
                <li>Lorem ipsum dolor sit amet.</li>
              </ul>
-             <button href='#' className="btn btn-primary">Get on creating</button>
+             <button onClick={handleStartNavigation} href='#' className="btn btn-primary">Get on creating</button>
              </div>
             </Col>
-           
+
           </Row>
         </Container>
       </section>
       <section className="website-plan">
-        <Container>     
+        <Container>
           <h3>Select a plan</h3>
           <p>30 day money back warranty on your upgraded plan</p>
           <Row className="">
             <Col className="col-4">
-              <div className="plan-detail">   
+              <div className="plan-detail">
                 <div className="plan-detail-inner">
                   <div className="plan-img">
                     <img src={basicPlan} alt="Basic Plan" />
                   </div>
-                  <h4 className="plan-name">Basic Plan</h4>      
+                  <h4 className="plan-name">Basic Plan</h4>
                   <ul className="plan-feature">
                     <li>Features</li>
                     <li>Features</li>
@@ -183,11 +192,11 @@ const HomePage = (props) => {
             </Col>
           </Row>
           </Container>
-      </section>  
+      </section>
       <section className="website-faq">
-        <Container>             
+        <Container>
           <Accordion defaultActiveKey="0" className="accordion-faq">
-            <Card className="accordion-card">       
+            <Card className="accordion-card">
               <Card.Header className="accordion-card-header">
                 <Accordion.Toggle as={Button} variant="link" eventKey="0" className="accordion-card-btn">
                 Our FAQ
@@ -197,7 +206,7 @@ const HomePage = (props) => {
                 <Card.Body className="accordion-card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</Card.Body>
               </Accordion.Collapse>
             </Card>
-            <Card className="accordion-card">       
+            <Card className="accordion-card">
               <Card.Header className="accordion-card-header">
                 <Accordion.Toggle as={Button} variant="link" eventKey="6" className="accordion-card-btn">
                 How do I lorem ipsum dolor sit amet?
@@ -207,7 +216,7 @@ const HomePage = (props) => {
                 <Card.Body className="accordion-card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</Card.Body>
               </Accordion.Collapse>
             </Card>
-            <Card className="accordion-card">       
+            <Card className="accordion-card">
               <Card.Header className="accordion-card-header">
                 <Accordion.Toggle as={Button} variant="link" eventKey="1" className="accordion-card-btn">
                 How do I lorem ipsum dolor sit amet?
@@ -217,7 +226,7 @@ const HomePage = (props) => {
                 <Card.Body className="accordion-card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</Card.Body>
               </Accordion.Collapse>
             </Card>
-            <Card className="accordion-card">       
+            <Card className="accordion-card">
               <Card.Header className="accordion-card-header">
                 <Accordion.Toggle as={Button} variant="link" eventKey="2" className="accordion-card-btn">
                 How do I lorem ipsum dolor sit amet?
@@ -227,7 +236,7 @@ const HomePage = (props) => {
                 <Card.Body className="accordion-card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</Card.Body>
               </Accordion.Collapse>
             </Card>
-            <Card className="accordion-card">       
+            <Card className="accordion-card">
               <Card.Header className="accordion-card-header">
                 <Accordion.Toggle as={Button} variant="link" eventKey="3" className="accordion-card-btn">
                 How do I lorem ipsum dolor sit amet?
@@ -237,7 +246,7 @@ const HomePage = (props) => {
                 <Card.Body className="accordion-card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</Card.Body>
               </Accordion.Collapse>
             </Card>
-            <Card className="accordion-card">       
+            <Card className="accordion-card">
               <Card.Header className="accordion-card-header">
                 <Accordion.Toggle as={Button} variant="link" eventKey="4" className="accordion-card-btn">
                 How do I lorem ipsum dolor sit amet?
@@ -247,7 +256,7 @@ const HomePage = (props) => {
                 <Card.Body className="accordion-card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</Card.Body>
               </Accordion.Collapse>
             </Card>
-            <Card className="accordion-card">       
+            <Card className="accordion-card">
               <Card.Header className="accordion-card-header">
                 <Accordion.Toggle as={Button} variant="link" eventKey="5" className="accordion-card-btn">
                 How do I lorem ipsum dolor sit amet?
@@ -257,13 +266,13 @@ const HomePage = (props) => {
                 <Card.Body className="accordion-card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</Card.Body>
               </Accordion.Collapse>
             </Card>
-             
+
           </Accordion>
         </Container>
       </section>
     </section>)
 }
- 
+
 
 
 export default HomePage
