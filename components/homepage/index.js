@@ -6,10 +6,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { useRouter } from 'next/router';
-
 import { ROUTES } from '../../constants/appRoutes';
-
 import slider1 from '../../assets/images/home/slider-1.png';
 import websiteBuilding from '../../assets/images/home/website-building.png';
 import websiteComparison from '../../assets/images/home/website-comparison.png';
@@ -18,11 +15,6 @@ import premiumPlan from '../../assets/images/home/premium-plan.png';
 import vipPlan from '../../assets/images/home/vip-plan.png';
 import Link from 'next/link'
 const HomePage = (props) => {
-  const router = useRouter();
-  const handleStartNavigation = () => {
-    router.push(ROUTES.REGISTER)
-  }
-
   return(
     <section className="main-section">
       <section className="home-banner">
@@ -37,7 +29,7 @@ const HomePage = (props) => {
                 Build a website, as easy as answering a couple of questions.
               </p>
 
-              <Link href="/assessment">
+              <Link href={ROUTES.ASSESSMENT}>
                 <a className="btn btn-primary" >Get started</a>
               </Link>
               
