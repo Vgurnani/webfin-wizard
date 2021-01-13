@@ -1,5 +1,5 @@
 import React from 'react'
-import withPrivateRoute from '../components/hoc/withPrivateRoute'
+import withPrivateRoute from '../../components/hoc/withPrivateRoute'
 const Dashboard =(props) => {
 
     return(<></>)
