@@ -5,7 +5,7 @@
 */
 
 import React from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Row } from 'react-bootstrap';
 import OtpInput from 'react-otp-input';
 
 export const Validations = (props) => {
@@ -125,8 +125,64 @@ const renderOTPField = (props) => {
     );
 };
 
+
+const renderStyleMultipleRadio = (props) => {
+    const {
+        input,
+        validationError,
+        options,
+        className,
+        defaultValue,
+        width,
+        imgWidth,
+        meta: { touched, error, warning },
+    } = props;
+    return (
+
+        <Form.Group className="form-group">
+   
+                { options.map((item,index) => {
+                    return(
+                        <div key={ index } className={ `  ${ className || 'styled-radio' }` }>
+                            <label className="labl" >
+                                <input { ...input }
+                                    onChange={ (value) => {
+                                        const elm = value.currentTarget;
+                                        input.onChange(value || elm?.value)
+                                    } }
+                                    type="radio"
+                                    value={ item.value }
+                                    checked={ item.value === (input.value || defaultValue) }
+                                    id={ input.name } />
+                                <div className='align-items-center d-inline-flex justify-content-center p-2 shadow-sm' style={ { width: width || 'auto' } }>
+                                    <span className='row ml-5'>
+                                        {item.imageUrl && <>
+                                            <img src={ item.imageUrl } className='styled-radio-img'  alt={ item.label } style={ { width: imgWidth || 'auto' } } /></>}
+                                        <p className="emojiText mb-0 mt-1" dangerouslySetInnerHTML={ { __html:  item.label  } } />
+                                        <p className='row checkbox-colors'>
+                                            {item.colors && item.colors.map((color,ind) => <span style={{backgroundColor: color}}></span>)}
+                                        </p>
+                                    </span>
+                                </div>
+                            </label>
+                        </div>)
+
+                })}
+
+            <Validations
+                props={ {
+                    touched,
+                    error,
+                    validationError,
+                    warning,
+                } }
+            />
+        </Form.Group>)
+}
+
 export {
     renderFieldWG,
     renderField,
-    renderOTPField
+    renderOTPField,
+    renderStyleMultipleRadio
 };
