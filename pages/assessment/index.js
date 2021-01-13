@@ -44,9 +44,14 @@ const AssessmentPage = (props) => {
   return(
    
     <section className="forgot-password-section main-section main-form-section">
-        
+        <Container className="positionUnset">   
+          
+          <Row className="align-items-center positionUnset">
+            <Col className="col-12 form-side">
               {handleView()}
-            
+            </Col>
+          </Row>
+        </Container>
     </section>
 )
 }
