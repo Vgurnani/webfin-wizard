@@ -18,7 +18,6 @@ const StepFour = (props) => {
     const [open, setOpen ] = useState(false)
     const form  = useSelector((state) => state.form.assessmentForm)
     const { handleSubmit ,prevPage, assessmentData} = props;
-    debugger
     return(<Row>
         <Col className='col-md-6'>
             <div className="forget-forms signup-forms">
