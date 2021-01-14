@@ -13,7 +13,7 @@ from 'react-bootstrap';
 const StepTwo = (props) => {
     const { handleSubmit,prevPage ,colorPalette} = props;
     return(
-            <div className="forget-forms signup-forms">
+            <div className="forget-forms signup-forms">        
                 <Form className="form" onSubmit={handleSubmit}>  
                     <div className="forget-form-inner">
                         <div className="forget-forms-element">
