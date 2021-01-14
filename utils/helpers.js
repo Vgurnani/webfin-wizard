@@ -41,3 +41,9 @@ export const isLoggedIn = () => {
 export const getLabel = (data,value) => {
     return data.filter((item)=> item.value === value)[0]?.label
 }
+
+export const isLoading = (state) => {
+    const result = Object.keys(state)?.filter((item) => state[item].loading)
+    return result?.length > 0
+}
+

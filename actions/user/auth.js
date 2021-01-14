@@ -43,11 +43,17 @@ export const loginUser = (data) => {
         })
     };
 };
-
+export const logoutSuccess = (data) => {
+    return {
+        type: ActionTypes.LOGOUT_SUCCESS,
+        payload: data,
+    };
+};
 export const logoutUser = () => {
     return (dispatch) => {
         dispatch(loginRequest())
         Cookies.remove('user')
+        dispatch(logoutSuccess())
         Router.push(ROUTES.LOGIN)
     };
 };
