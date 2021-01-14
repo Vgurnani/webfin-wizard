@@ -67,7 +67,9 @@ const HomePage = (props) => {
                 <p>
                 You don’t need previous experience in design. <br/>Just let us know what kind of site you want and we’ll do the work fo you.
                 </p>
-                <button onClick={handleStartNavigation} href="" className="btn-normal">Get Started</button>
+                <Link href={ROUTES.ASSESSMENT}>
+                  <a className="btn-normal" >Get started</a>
+                </Link>
               </div>
             </Col>
           </Row>
@@ -83,7 +85,9 @@ const HomePage = (props) => {
              <p>
              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
              </p>
-             <button onClick={handleStartNavigation} className="btn-normal">Start now</button>
+              <Link href={ROUTES.ASSESSMENT}>
+                  <a className="btn-normal" >Get started</a>
+              </Link>
              </div>
             </Col>
             <Col className="col-6">
@@ -110,7 +114,9 @@ const HomePage = (props) => {
                <li>Lorem ipsum dolor sit amet.</li>
                <li>Lorem ipsum dolor sit amet.</li>
              </ul>
-             <button onClick={handleStartNavigation} href='#' className="btn btn-primary">Get on creating</button>
+                <Link href={ROUTES.ASSESSMENT}>
+                  <a className="btn btn-primary" >Get started</a>
+                </Link>
              </div>
             </Col>
 

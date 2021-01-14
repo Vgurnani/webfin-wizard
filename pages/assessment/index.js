@@ -6,8 +6,10 @@ import StepOne from  '../../components/assessment/StepOne';
 import StepTwo from  '../../components/assessment/StepTwo';
 import StepThree from  '../../components/assessment/StepThree';
 import StepFour from  '../../components/assessment/StepFour';
-import { getAssessment } from '../../actions/assessments/';
+import TemplateLayout from  '../../components/assessment/TemplateLayout';
 
+import { getAssessment } from '../../actions/assessments/';
+import { Container, Row, Col} from 'react-bootstrap'
 const AssessmentPage = (props) => {
   const dispatch  = useDispatch()
   const [ step, setStep ] = useState(1)
@@ -31,11 +33,13 @@ const AssessmentPage = (props) => {
     switch(step){
     case 1:
         return <StepOne  kindOfBuild={niches} onSubmit={nextPage} />
-    case 2:
-        return <StepTwo  colorPalette={colorPalette} prevPage={prevPage} onSubmit={nextPage} />
+    case 2: 
+      return <TemplateLayout onSubmit={nextPage} />
     case 3:
-        return <StepThree  assessmentData={assessmentData} prevPage={prevPage} onSubmit={nextPage} />
+        return <StepTwo  colorPalette={colorPalette} prevPage={prevPage} onSubmit={nextPage} />
     case 4:
+        return <StepThree  assessmentData={assessmentData} prevPage={prevPage} onSubmit={nextPage} />
+    case 5:
         return <StepFour  assessmentData={assessmentData} prevPage={prevPage} onSubmit={nextPage} />
     default:
         return null

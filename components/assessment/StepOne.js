@@ -25,7 +25,7 @@ const StepOne = (props) => {
                             <Col className="col-12">
                                 <a href="/">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.5 18L9.5 12L15.5 6" stroke="white" stroke-linejoin="round"/>
+                                    <path d="M15.5 18L9.5 12L15.5 6" stroke="white" strokeLinejoin="round"/>
                                     </svg>
                                     Back to Home 
                                 </a>
@@ -64,11 +64,7 @@ const StepOne = (props) => {
                             />
                             <div className="step-btns">
                                 <div className="step-btn-left">
-                                    <div className="step-btn">
-                                        <Button type="button" variant="secondary">
-                                        Back
-                                        </Button>
-                                    </div>
+                                  
                                 </div> 
                                 <div className="step-btn-right">
                                     <div className="step-btn">
