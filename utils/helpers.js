@@ -1,5 +1,4 @@
 import Cookies from 'js-cookie'
-
 import { ROUTES } from '../constants/appRoutes';
 
 export const addBodyClass = (pathname) =>{
