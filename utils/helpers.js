@@ -34,3 +34,7 @@ export const isLoggedIn = () => {
     return Object.keys(user).length > 0 && user.constructor === Object;
 
 }
+
+export const getLabel = (data,value) => {
+    return data.filter((item)=> item.value === value)[0]?.label
+}

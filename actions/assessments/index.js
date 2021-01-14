@@ -23,12 +23,14 @@ export const getAssessmentFailure = (error) => {
 export const getAssessment = (data) => {
     return (dispatch) => {
         dispatch(getAssessmentRequest())
-        // getData(`/auth/login`).then((response)=>{
-        //     response.data['accessToken'] = response.accessToken
-        //     dispatch(loginSuccess(response.data))
-        // }).catch((error) => {
-        //     dispatch(loginFailure(error.message))
-        // })
-        dispatch(getAssessmentSuccess({colorPalette,kindOfBuild,fontStyle}))
+        getData(`/assessment`).then((response)=>{
+            const result  = response.data
+            const niches = result.niches.map((item) => ({label: item.label,value: item.id.toString(),imgUrl: item.icon}))
+            const colorPalette = result.pallete.map((item) => ({label: item.label,value: item.id.toString(),colors: item.colours.split(',')}))
+            const fonts = result.fonts.map((item) => ({label: item.label,value: item.id.toString()}))
+            dispatch(getAssessmentSuccess({niches, colorPalette,fonts}))
+        }).catch((error) => {
+            dispatch(getAssessmentFailure(error.message))
+        })
     };
 };

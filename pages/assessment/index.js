@@ -20,9 +20,10 @@ const AssessmentPage = (props) => {
   const dispatch  = useDispatch()
   const [ step, setStep ] = useState(1)
   const { assessmentData } = useSelector((state) => state.assessment)
-  const {  kindOfBuild ,
+  const {  
+    niches ,
     colorPalette,
-    fontStyle } = assessmentData
+  } = assessmentData
   useEffect(() =>{
     dispatch(getAssessment())
   },[])
@@ -37,13 +38,13 @@ const AssessmentPage = (props) => {
   const handleView = () => {
     switch(step){
     case 1:
-        return <StepOne  kindOfBuild={kindOfBuild} onSubmit={nextPage} />
+        return <StepOne  kindOfBuild={niches} onSubmit={nextPage} />
     case 2:
         return <StepTwo  colorPalette={colorPalette} prevPage={prevPage} onSubmit={nextPage} />
     case 3:
-        return <StepThree  fontStyle={fontStyle} prevPage={prevPage} onSubmit={nextPage} />
+        return <StepThree  assessmentData={assessmentData} prevPage={prevPage} onSubmit={nextPage} />
     case 4:
-        return <StepFour  fontStyle={fontStyle} prevPage={prevPage} onSubmit={nextPage} />
+        return <StepFour  assessmentData={assessmentData} prevPage={prevPage} onSubmit={nextPage} />
     default:
         return null
     }
