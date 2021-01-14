@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-import { NOTIFICATION_TYPES } from '../constants/app';
+import { NOTIFICATION_TYPES } from '../../constants/app';
 
 export const notification = (type = NOTIFICATION_TYPES.INFO, message) => {
     toast[type](message, {
