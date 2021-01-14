@@ -147,7 +147,7 @@ const renderStyleMultipleRadio = (props) => {
                 { options.map((item,index) => {
                     return(
                         <div key={ index } className={ `  ${ className || 'styled-radio' }` }>
-                            <label className="labl" >
+                            
                                 <input { ...input }
                                     onChange={ (value) => {
                                         const elm = value.currentTarget;
@@ -157,18 +157,18 @@ const renderStyleMultipleRadio = (props) => {
                                     value={ item.value }
                                     checked={ item.value === (input.value || defaultValue) }
                                     id={ input.name } />
-                                <div className='align-items-center d-inline-flex justify-content-center p-2 shadow-sm' style={ { width: width || 'auto' } }>
-                                    <span className='row ml-5'>
+                                <div className='input-radio-label' style={ { width: width || 'auto' } }>
+                                    
                                         {item.imageUrl && <>
                                             <img src={ item.imageUrl } className='styled-radio-img'  alt={ item.label } style={ { width: imgWidth || 'auto' } } /></>}
                                         {fontStyled ? <p style={{fontStyle: item.value}} className="emojiText mb-0 mt-1" dangerouslySetInnerHTML={ { __html:  item.label  } } /> : 
-                                        <p className="emojiText mb-0 mt-1" dangerouslySetInnerHTML={ { __html:  item.label  } } /> }
-                                        {isColors && <p className='row checkbox-colors'>
+                                        <span className="emojiText mb-0 mt-1" dangerouslySetInnerHTML={ { __html:  item.label  } } /> }
+                                        {isColors && <span className='checkbox-colors'>
                                             {item.colors && item.colors.map((color,ind) => <span style={{backgroundColor: color}}></span>)}
-                                        </p>}
-                                    </span>
+                                        </span>}
+                                    
                                 </div>
-                            </label>
+                            
                         </div>)
 
                 })}

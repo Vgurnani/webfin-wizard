@@ -2,14 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch , useSelector } from 'react-redux'
 import PropTypes from 'prop-types';
 import withPublicRoute from '../../components/hoc/withPublicRoute'
-import 
-  {
-    Container,
-    Col,
-
-  }
-from 'react-bootstrap';
-
 import StepOne from  '../../components/assessment/StepOne';
 import StepTwo from  '../../components/assessment/StepTwo';
 import StepThree from  '../../components/assessment/StepThree';
@@ -52,11 +44,9 @@ const AssessmentPage = (props) => {
   return(
    
     <section className="forgot-password-section main-section main-form-section">
-        <Container className="positionUnset">   
-            <Col className="col-12 form-side">
+        
               {handleView()}
-            </Col>
-        </Container>
+            
     </section>
 )
 }

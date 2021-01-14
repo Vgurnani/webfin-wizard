@@ -134,7 +134,18 @@ body .btn
     &:focus
       background-color: $white-color
       border-color:  $primary-color-hover
-      color: $primary-color-hover    
+      color: $primary-color-hover
+  &.btn-light
+    border: none
+    padding-left: 0
+    padding-right: 0
+    color: rgba(48, 50, 200, 0.8)
+    border-radius: 0
+    background: transparent
+    &:hover,
+    &:active,
+    &:focus
+      background: transparent
 
 .btn-normal,
 .btn-normal:not([href])
@@ -424,10 +435,12 @@ ul
     background: transparent
     border-radius: 0
     border-bottom: 1px solid #F7F7F7 !important
+    box-shadow: none
     .accordion-card-header
       padding: 25px 0
       border: none
       background: transparent !important  
+      box-shadow: none
       .accordion-card-btn
         border: none
         padding: 0
@@ -730,3 +743,64 @@ ul
     opacity: 1
     &.active
       background: #E2E2E2
+.styled-radio-btn
+  border: 1px solid #E2E2E2
+  border-radius: 24px
+  padding: 10px 18px
+  margin: 12px 0 0
+  label
+    margin: 0
+  .input-radio-label
+    display: inline-block
+    vertical-align: middle
+    color: #1B1B1B
+    font-size: 16px
+    line-height: 1.5
+    margin: 0 0 0 15px
+  input  
+    display: inline-block
+    vertical-align: middle
+.main-section      
+  .step-banner
+    background: linear-gradient(219.41deg, #3032C8 0%, #506BF0 100%)
+    color: $white-color
+    padding: 22px 0
+    .back-to-home 
+      a
+        color: $white-color
+        svg
+          display: inline-block
+          vertical-align: middle
+    h1
+      color: $white-color
+      font-size: 72px
+      line-height: 1
+      letter-spacing: -1.5px
+      font-weight: normal
+      margin: 5px 0 28px
+    p
+      font-weight: bold
+      font-size: 20px
+      line-height: 1.3
+      color: $white-color
+      margin: 0  
+.step-form
+  padding: 30px 0 60px
+  .form-heading
+    border-bottom: 1px solid #1B1B1B
+    padding: 18px 0
+    h2
+      color: #212121
+      font-size: 34px
+      line-height: 1.3
+  .step-btns
+    width: 100%
+    display: flex
+    justify-content: space-between
+    margin: 55px 0 0
+    .step-btn
+      display: inline-block
+      margin-left: 25px
+      vertical-align: middle
+      &:first-child
+        margin-left: 0

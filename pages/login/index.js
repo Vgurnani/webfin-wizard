@@ -32,14 +32,12 @@ const LoginPage = (props) => {
       <Container>
         <Row className="back-to-home">
           <Col className="col-12">
-            <Link href="/">
-              <>
+            <a href="/">
               <svg width="24" height="15" viewBox="0 0 24 15" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15.5 13.4999L9.5 7.49986L15.5 1.49986" stroke="#757575" strokeLinejoin="round"/>
               </svg>
               Back to Home 
-              </> 
-            </Link>
+            </a>
           </Col>
         </Row>
         <div className="small-wrapper">
