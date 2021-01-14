@@ -3,7 +3,7 @@ import Link  from 'next/link'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import webFinLogo from '../../assets/images/header/webFin-Logo.svg';
+import webFinLogo from '../../assets/images/header/webFin-logo.svg';
 import { isLoggedIn } from '../../utils/helpers'
 import { logoutUser } from '../../actions/user/auth';
 import { useDispatch } from 'react-redux'
