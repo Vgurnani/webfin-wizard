@@ -1,6 +1,5 @@
 import { ActionTypes } from './actionTypes'
 import { getData } from '../../lib/api'
-import { colorPalette,kindOfBuild,fontStyle  } from '../../components/assessment/constants'
 export const getAssessmentRequest = () => {
     return {
         type: ActionTypes.GET_ASSESSMENT_REQUEST,
