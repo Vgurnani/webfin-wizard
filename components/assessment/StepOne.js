@@ -7,46 +7,90 @@ import PropTypes from 'prop-types';
 import 
   {
     Form,
-    Button
+    Button,
+    Container,
+    Col,
+    Row,
   }
 from 'react-bootstrap';
+import  Link from 'next/link'
 const StepOne = (props) => {
     const { handleSubmit,kindOfBuild } = props;
     return(
-            <div className="forget-forms signup-forms">
-                <Form className="form" onSubmit={handleSubmit}>  
-                    <div className="forget-form-inner">
-                        <div className="forget-forms-element">
-                            <h1 className="section-heading">   
-                            What kind you blog are you looking to build ?
-                            </h1>
-                            <div className="small-wrapper">
-                                
+        <div className="assesment-step assesment-step-1">
+            <Row className="step-banner">
+                <Col className="col-12">
+                    <Container>
+                        <Row className="back-to-home">
+                            <Col className="col-12">
+                                <a href="/">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.5 18L9.5 12L15.5 6" stroke="white" stroke-linejoin="round"/>
+                                    </svg>
+                                    Back to Home 
+                                </a>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col className="col-12">
+                                <h1>
+                                Let’s start!
+                                </h1>
+                                <p>
+                                Answer some questions for us and we’ll build a website for you.
+                                </p>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Col> 
+            </Row>
+            <Row className="step-form">
+                <Col className="col-12">
+                    <Container>
+                        <Form className="form" onSubmit={handleSubmit}>  
+                            <div className="form-heading">   
+                                <h2>
+                                What kind you blog are you looking to build ?
+                                </h2>
+                            </div>
                             <Field
                                 name="kind"
                                 options={ kindOfBuild || []}
                                 component={ renderStyleMultipleRadio }
                                 defaultValue={ 'no' }
                                 placeholder={ 'gaveCraving' }
-                                className='styled-radio-btn btn-outline'
+                                className='styled-radio-btn'
                                 imgWidth="30px"
                             />
-                             
+                            <div className="step-btns">
+                                <div className="step-btn-left">
+                                    <div className="step-btn">
+                                        <Button type="button" variant="secondary">
+                                        Back
+                                        </Button>
+                                    </div>
+                                </div> 
+                                <div className="step-btn-right">
+                                    <div className="step-btn">
+                                        <Button type="button" variant="light" >
+                                        Save  
+                                        </Button>
+                                    </div>
+                                    <div className="step-btn">
+                                        <Button type="submit" variant="primary">
+                                        Next
+                                        </Button>
+                                      
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div className="forgot-btns">
-                        <div className="small-wrapper">
-                            <Button className="btn btn-secondry" type="button">
-                            Save
-                            </Button>
-                            <Button className="btn btn-primary" type="submit">
-                            Continue
-                            </Button>
-                            </div>
-                        </div>   
-                    </div>
-                </Form>
-            </div>
+                           
+                        </Form>
+                    </Container>
+                </Col>
+            </Row>
+            
+        </div>
         
     )
 }
