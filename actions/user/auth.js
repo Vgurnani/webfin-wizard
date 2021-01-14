@@ -1,8 +1,11 @@
-import { ActionTypes } from './actionTypes';
-import { postData } from '../../lib/api';
 import Cookies from 'js-cookie';
 import Router from 'next/router';
+
+import { ActionTypes } from './actionTypes';
+import { postData } from '../../lib/api';
 import { ROUTES } from '../../constants/appRoutes';
+import { NOTIFICATION_TYPES } from '../../constants/app';
+import { notification } from '../../services/notification';
 
 export const loginRequest = () => {
     return {
@@ -32,8 +35,10 @@ export const loginUser = (data) => {
             response.data['accessToken'] = response.accessToken
             Cookies.set('user', JSON.stringify(response.data))
             Router.push(ROUTES.DASHBOARD)
+            notification(NOTIFICATION_TYPES.SUCCESS, 'Login Successfully');
             dispatch(loginSuccess(response.data))
         }).catch((error) => {
+            notification(NOTIFICATION_TYPES.ERROR, 'Somthing went wrong!')
             dispatch(loginFailure(error.message))
         })
     };
@@ -76,9 +81,11 @@ export const registrationUser = (data) => {
                 response.data['accessToken'] = response.accessToken
                 Cookies.set('user', JSON.stringify(response.data))
                 Router.push(ROUTES.DASHBOARD)
+                notification(NOTIFICATION_TYPES.SUCCESS, 'Registration Successfully');
                 dispatch(registrationSuccess(response.data))
             })
             .catch((error) => {
+                notification(NOTIFICATION_TYPES.ERROR, 'Somthing went wrong!')
                 dispatch(registrationFailure(error.message));
             });
 
