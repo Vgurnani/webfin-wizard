@@ -41,7 +41,10 @@ export const isLoggedIn = () => {
 export const getLabel = (data,value) => {
     return data.filter((item)=> item.value === value)[0]?.label
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> 789a3de... feat: api integration to get assessments (fonts, colors, kind of blogs)
+
+export const isLoading = (state) => {
+    const result = Object.keys(state)?.filter((item) => state[item].loading)
+    return result?.length > 0
+}
+

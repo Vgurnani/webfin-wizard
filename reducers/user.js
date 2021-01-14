@@ -11,6 +11,8 @@ export default (state = initialState, action) => {
         return { ...state, user: action.payload, loading: false };
       case ActionTypes.LOGIN_FAILURE:
         return { ...state, error: action?.payload, loading: false };
+      case ActionTypes.LOGOUT_SUCCESS:
+        return {...state, loading: false};
       case ActionTypes.REGISTRATION_REQUEST:
         return { ...state, loading: true };
       case ActionTypes.REGISTRATION_SUCCESS:
