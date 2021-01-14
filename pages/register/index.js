@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { registrationUser } from '../../actions/user/auth'
 import withPublicRoute from '../../components/hoc/withPublicRoute'
 
-import 
+import
   {
     Container,
     Row,
@@ -32,9 +32,9 @@ const RegisterPage = (props) => {
     <section className="signup-section main-section">
       <Container>
         <Row className="align-items-center">
-        <Col className="content-side col-6 light-content">  
+        <Col className="content-side col-6 light-content">
             <div className="content-side-inner">
-             <h4>Benefits of Registering </h4>    
+             <h4>Benefits of Registering </h4>
              <p>
              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.
              </p>
@@ -56,18 +56,26 @@ const RegisterPage = (props) => {
                   <p className="heading-detail">
                   Already have an account?  <Link href="/login">Sign In</Link>
                   </p>
-                  <Form className="form" onSubmit={handleSubmit(submitData)}>  
+                  <Form className="form" onSubmit={handleSubmit(submitData)}>
                     <Field
-                      name="username"
-                      label="username"
+                      name="firstName"
+                      label="First Name:"
                       type="text"
                       component={ renderFieldWG }
                       maxLength="150"
-                      placeholder='Enter your username'
+                      placeholder='Enter your first name'
+                    />
+                    <Field
+                      name="lastName"
+                      label="Last Name:"
+                      type="text"
+                      component={ renderFieldWG }
+                      maxLength="150"
+                      placeholder='Enter your last name'
                     />
                     <Field
                       name="email"
-                      label="email"
+                      label="Email:"
                       type="text"
                       component={ renderFieldWG }
                       maxLength="150"
@@ -75,7 +83,7 @@ const RegisterPage = (props) => {
                     />
                     <Field
                       name="password"
-                      label="password"
+                      label="Password:"
                       type="password"
                       component={ renderFieldWG }
                       maxLength="150"
@@ -83,13 +91,13 @@ const RegisterPage = (props) => {
                     />
                     <Field
                       name="confirmPassword"
-                      label="confirm password"
+                      label="Confirm Password:"
                       type="password"
                       component={ renderFieldWG }
                       maxLength="150"
-                      placeholder='Enter your password'
+                      placeholder='Confirm password'
                     />
-           
+
                     <Button className="btn btn-primary" type="submit">
                       Sign Up
                     </Button>
@@ -114,7 +122,7 @@ const RegisterPage = (props) => {
             </div>
           </Col>
         </Row>
-        
+
       </Container>
     </section>
 )}
