@@ -37,7 +37,6 @@ export const getUser = () => {
 export const isLoggedIn = () => {
     const user = getUser();
     return Object.keys(user).length > 0 && user.constructor === Object;
-
 }
 
 export const getLabel = (data,value) => {
