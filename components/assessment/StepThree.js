@@ -1,6 +1,7 @@
 import React,{ useState } from 'react'
 import { Field } from 'redux-form';
 import { renderField ,renderFileDrop } from '../../utils/formUtils'
+import { getLabel } from '../../utils/helpers'
 import PropTypes from 'prop-types';
 import FontStyleModal from './shared/FontStyleModal'
 import { useSelector } from 'react-redux';
@@ -17,7 +18,7 @@ from 'react-bootstrap';
 const StepThree = (props) => {
     const [open, setOpen ] = useState(false)
     const form  = useSelector((state) => state.form.assessmentForm)
-    const { handleSubmit, submitData , prevPage ,fontStyle} = props;
+    const { handleSubmit, submitData , prevPage ,assessmentData} = props;
     return(<Row>
         <Col className='col-md-6'>
             <div className="forget-forms signup-forms">
@@ -48,8 +49,8 @@ const StepThree = (props) => {
                                 </Button>
                             </div>
                         </div>
-                        {form.values?.kind && <div><span>{form.values?.kind}</span></div>}
-                        {form.values?.colorPalette && <div><span>{form.values?.colorPalette}</span></div>}
+                        {form.values?.kind && <div><span>{getLabel(assessmentData.niches, form.values?.kind)}</span></div>}
+                        {form.values?.colorPalette && <div><span>{getLabel(assessmentData.colorPalette, form.values?.colorPalette)}</span></div>}
                         <div className="">
                         <div className="small-wrapper">
                             <Button className="btn btn-primary" type="button" onClick={prevPage}>
@@ -64,7 +65,7 @@ const StepThree = (props) => {
                             </div>
                         </div>   
                     </div>
-                    {open && <FontStyleModal setOpen={setOpen} fontStyle={fontStyle} />}
+                    {open && <FontStyleModal setOpen={setOpen} fonts={assessmentData.fonts} />}
                 </Form>
             </div>
             </Col>
@@ -76,7 +77,8 @@ const StepThree = (props) => {
 }
 StepThree.propTypes = {
     handleSubmit: PropTypes.func,
-    submitData: PropTypes.func
+    submitData: PropTypes.func,
+    assessmentData: PropTypes.object
 };
 export default reduxForm({
     form: 'assessmentForm',

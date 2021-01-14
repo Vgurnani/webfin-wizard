@@ -2,21 +2,20 @@ import React from 'react'
 import { Field } from 'redux-form';
 import { renderStyleMultipleRadio } from '../../../utils/formUtils'
 import PropTypes from 'prop-types';
-import { fontStyle } from '../constants'
 import 
   {
     Button
   }
 from 'react-bootstrap';
 const FontStyleModal = (props) => {
-    const { setOpen } = props;
+    const { setOpen, fonts } = props;
     return(
             <div className="forget-forms signup-forms">
                 <p>Fonts</p>
                 <span onClick={() => setOpen(false)}>close</span>
                     <Field
                         name="fontStyle"
-                        options={ fontStyle }
+                        options={ fonts }
                         component={ renderStyleMultipleRadio }
                         defaultValue={ 'no' }
                         placeholder={ 'gaveCraving' }
