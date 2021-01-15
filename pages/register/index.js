@@ -106,14 +106,13 @@ const RegisterPage = (props) => {
                     <div className="social-btn">
                       <button href='#' className="btn btn-primary btn-facebook">
                       <img src={facebookLogin} alt="facebook" />
-                        <span>Sign up with Facebook</span>
+                        <a href={`${process.env.API_URL}/oauth2/authorize/facebook`}>Sign up with Facebook</a>
                       </button>
                     </div>
                     <div className="social-btn">
                       <button href='#' className="btn btn-primary btn-google">
-
                         <img src={googleLogin} alt="Google" />
-                        <span>Sign up with Google</span>
+                        <a href={`${process.env.API_URL}/oauth2/authorize/google`}>Sign up with Google</a>
                       </button>
                     </div>
                   </div>
