@@ -156,7 +156,9 @@ const renderStyleMultipleRadio = (props) => {
                                     type="radio"
                                     value={ item.value }
                                     checked={ item.value === (input.value || defaultValue) }
-                                    id={ input.name } />
+                                    id={ input.name } 
+                                    className="styled-radio"
+                                    />
                                 <div className='input-radio-label' style={ { width: width || 'auto' } }>
                                     
                                         {item.imageUrl && <>

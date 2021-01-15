@@ -9,7 +9,6 @@ import StepFour from  '../../components/assessment/StepFour';
 import TemplateLayout from  '../../components/assessment/TemplateLayout';
 
 import { getAssessment } from '../../actions/assessments/';
-import { Container, Row, Col} from 'react-bootstrap'
 const AssessmentPage = (props) => {
   const dispatch  = useDispatch()
   const [ step, setStep ] = useState(1)
@@ -47,15 +46,8 @@ const AssessmentPage = (props) => {
 }
   return(
    
-    <section className="forgot-password-section main-section main-form-section">
-        <Container className="positionUnset">   
-          
-          <Row className="align-items-center positionUnset">
-            <Col className="col-12 form-side">
-              {handleView()}
-            </Col>
-          </Row>
-        </Container>
+    <section className="main-section">
+      {handleView()}
     </section>
 )
 }

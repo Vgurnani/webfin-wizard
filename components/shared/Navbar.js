@@ -59,7 +59,7 @@ const Navbar = (props) => {
                 <div
                   id="navMenu"
                   className={`navbar-menu ${navBarActiveClass}`}
-                >    
+                >
                   <div className="">
                     {LinkView()}
                   </div>

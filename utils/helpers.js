@@ -22,7 +22,7 @@ export const addBodyClass = (pathname) =>{
         document.body.classList.add('light-bg');
     } else if(path === '/404'){
         document.body.classList.add('light-bg');
-    } else if(path === 'assessment'){
+    } else if(path === ROUTES.ASSESSMENT){
         document.body.classList.add('no-footer');
         document.body.classList.add('light-bg');
     }

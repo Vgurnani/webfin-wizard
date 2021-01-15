@@ -53,6 +53,7 @@ const StepOne = (props) => {
                                 What kind you blog are you looking to build ?
                                 </h2>
                             </div>
+                            <div class="small-wrapper">
                             <Field
                                 name="kind"
                                 options={ kindOfBuild || []}
@@ -62,6 +63,7 @@ const StepOne = (props) => {
                                 className='styled-radio-btn'
                                 imgWidth="30px"
                             />
+                            </div>
                             <div className="step-btns">
                                 <div className="step-btn-left">
                                   
