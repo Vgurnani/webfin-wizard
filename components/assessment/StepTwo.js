@@ -7,54 +7,73 @@ import PropTypes from 'prop-types';
 import 
   {
     Form,
-    Button
+    Button,
+    Container,
+    Col,
+    Row,
   }
 from 'react-bootstrap';
 const StepTwo = (props) => {
     const { handleSubmit,prevPage ,colorPalette} = props;
     return(
-            <div className="forget-forms signup-forms">        
-                <Form className="form" onSubmit={handleSubmit}>  
-                    <div className="forget-form-inner">
-                        <div className="forget-forms-element">
-                            <h1 className="section-heading">   
-                             Choose color paletters
-                            </h1>
-                            <p className="heading-detail">
-                                Select one of these color paletters
-                            </p>
-                            <div className="small-wrapper">
+        <div className="assesment-step assesment-step-2">
+            <Row  className="step-form">
+                <Col className="col-12">
+                    <Container>
+                        <Form className="form" onSubmit={handleSubmit}>  
+                        <div className="form-heading">   
+                                <h2>
+                                Choose Your Color Palette!
+                                </h2>
+                            </div>
+                            <Row className="color-palatte">
+                                <Col className="col-6 color-palatte-selector">
+                                    <Field
+                                        name="colorPalette"
+                                        options={ colorPalette }
+                                        component={ renderStyleMultipleRadio }
+                                        defaultValue={ 'no' }
+                                        placeholder={ 'gaveCraving' }
+                                        isColors={true}
+                                        className='styled-radio-btn btn-outline'
+                                        imgWidth="30px"
+                                    />
+                                </Col>
+                                <Col className="col-6 color-palatte-preview">
+
+                                </Col>
+                            </Row>
+                       
+                                    
                                 
-                            <Field
-                                name="colorPalette"
-                                options={ colorPalette }
-                                component={ renderStyleMultipleRadio }
-                                defaultValue={ 'no' }
-                                placeholder={ 'gaveCraving' }
-                                isColors={true}
-                                className='styled-radio-btn btn-outline'
-                                imgWidth="30px"
-                            />
-                             
+                                
+                               
+                                
+                                <div className="step-btns">
+                                <div className="step-btn-left">
+                                <Button type="button" variant="secondary" >
+                                        Back  
+                                        </Button>
+                                </div> 
+                                <div className="step-btn-right">
+                                    <div className="step-btn">
+                                        <Button type="button" variant="light" >
+                                        Save  
+                                        </Button>
+                                    </div>
+                                    <div className="step-btn">
+                                        <Button type="submit" variant="primary">
+                                        Next
+                                        </Button>
+                                      
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div className="forgot-btns">
-                        <div className="small-wrapper">
-                            
-                            <Button className="btn btn-primary" type="button" onClick={prevPage}>
-                            Back
-                            </Button>
-                            <Button className="btn btn-secondry" type="button">
-                            Save
-                            </Button>
-                            <Button className="btn btn-primary" type="submit">
-                            Continue
-                            </Button>
-                            </div>
-                        </div>   
-                    </div>
-                </Form>
-            </div>
+                        </Form>
+                    </Container>
+                </Col>
+            </Row>
+        </div>
         
     )
 }
