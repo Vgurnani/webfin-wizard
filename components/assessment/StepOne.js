@@ -53,7 +53,7 @@ const StepOne = (props) => {
                                 What kind you blog are you looking to build ?
                                 </h2>
                             </div>
-                            <div class="small-wrapper">
+                            <div className="small-wrapper">
                             <Field
                                 name="kind"
                                 options={ kindOfBuild || []}

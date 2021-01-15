@@ -50,5 +50,8 @@ export const assessmentFormValidate = values => {
     if (!values.websiteName) {
         errors.websiteName = 'required';
     }
+    if (!values.kind) {
+        errors.kind = 'required';
+    }
     return errors;
 }
