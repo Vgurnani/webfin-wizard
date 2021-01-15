@@ -24,7 +24,7 @@ export const getAssessment = (data) => {
         dispatch(getAssessmentRequest())
         getData(`/assessment`).then((response)=>{
             const result  = response.data
-            const niches = result.niches.map((item) => ({label: item.label,value: item.id.toString(),imgUrl: item.icon}))
+            const niches = result.niches.map((item) => ({label: item.label,value: item.id.toString(),icon: item.icon}))
             const colorPalette = result.pallete.map((item) => ({label: item.label,value: item.id.toString(),colors: item.colours.split(',')}))
             const fonts = result.fonts.map((item) => ({label: item.label,value: item.id.toString()}))
             dispatch(getAssessmentSuccess({niches, colorPalette,fonts}))
