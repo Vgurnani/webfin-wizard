@@ -62,6 +62,7 @@ const StepOne = (props) => {
                                 placeholder={ 'gaveCraving' }
                                 className='styled-radio-btn'
                                 imgWidth="30px"
+                                isIcons={true}
                             />
                             </div>
                             <div className="step-btns">

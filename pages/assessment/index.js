@@ -6,7 +6,7 @@ import StepOne from  '../../components/assessment/StepOne';
 import StepTwo from  '../../components/assessment/StepTwo';
 import StepThree from  '../../components/assessment/StepThree';
 import StepFour from  '../../components/assessment/StepFour';
-import TemplateLayout from  '../../components/assessment/TemplateLayout';
+import Preview from  '../../components/assessment/Preview';
 
 import { getAssessment } from '../../actions/assessments/';
 const AssessmentPage = (props) => {
@@ -32,14 +32,12 @@ const AssessmentPage = (props) => {
     switch(step){
     case 1:
         return <StepOne  kindOfBuild={niches} onSubmit={nextPage} />
-    case 2: 
-      return <TemplateLayout onSubmit={nextPage} />
-    case 3:
+    case 2:
         return <StepTwo  colorPalette={colorPalette} prevPage={prevPage} onSubmit={nextPage} />
-    case 4:
+    case 3:
         return <StepThree  assessmentData={assessmentData} prevPage={prevPage} onSubmit={nextPage} />
-    case 5:
-        return <StepFour  assessmentData={assessmentData} prevPage={prevPage} onSubmit={nextPage} />
+    case 4:
+        return <Preview  assessmentData={assessmentData} prevPage={prevPage} onSubmit={nextPage} />
     default:
         return null
     }
