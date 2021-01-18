@@ -42,7 +42,7 @@ const StepThree = (props) => {
                                 placeholder={ 'Enter your website name' }
                             />
                             <Field
-                                name="sd"
+                                name="logoUrl"
                                 component={ renderFileDrop }
                                 placeholder={"<a><i className='fa fa-plus'/> upload your logo</a>"}
                             />

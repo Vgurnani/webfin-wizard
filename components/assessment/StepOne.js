@@ -61,7 +61,7 @@ const StepOne = (props) => {
                             </div>
                             <div className="small-wrapper">
                             <Field
-                                name="kind"
+                                name="nicheId"
                                 options={ kindOfBuild || []}
                                 component={ renderStyleMultipleRadio }
                                 defaultValue={ 'no' }

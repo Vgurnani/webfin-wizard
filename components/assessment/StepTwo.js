@@ -30,7 +30,7 @@ const StepTwo = (props) => {
                             <Row className="color-palatte">
                                 <Col className="col-6 color-palatte-selector">
                                     <Field
-                                        name="colorPalette"
+                                        name="colourId"
                                         options={ colorPalette }
                                         component={ renderStyleMultipleRadio }
                                         defaultValue={ 'no' }
