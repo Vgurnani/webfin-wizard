@@ -47,9 +47,9 @@ const renderFieldWG = (props) => {
     } = props;
 
     return (
-        <Form.Group controlId={name} className="form-group">
-            <Form.Label className="form-label">{label || ''}</Form.Label>
-            <Form.Control rows={ rows } { ...input }  maxLength={ maxLength } disabled={ disabled || false } type={ type } className={ validationError || (touched && error) ? 'form-control validation-error' : 'form-control' } placeholder={ placeholder || '' } />
+        <Form.Group controlId={name}>
+           { label &&  <Form.Label>{label || ''}</Form.Label> }
+            <Form.Control rows={ rows } { ...input }  maxLength={ maxLength } disabled={ disabled || false } type={ type } className={ validationError || (touched && error) ? 'validation-error' : '' } placeholder={ placeholder || '' } />
             {defaultWarning && !input.value && <span className="default-warning"><i className="fas fa-exclamation-triangle"></i> {defaultWarning}</span>}
             <Validations
                 props={ {
@@ -143,7 +143,7 @@ const renderStyleMultipleRadio = (props) => {
     } = props;
     return (
 
-        <Form.Group className="form-group">
+        <Form.Group>
    
                 { options.map((item,index) => {
                     return(
@@ -217,15 +217,15 @@ const renderFileDrop = (props)=> {
             <Dropzone accept="image/jpeg, image/png" multiple={ false } onDrop={ acceptedFiles => handleDrop(acceptedFiles) } >
                 {({ getRootProps, getInputProps }) => {
                     return(
-                        <section>
+                        
                             <div { ...getRootProps() } className={ formClass + ' avatar-user' }>
-                                <div className="c-avatar cursor-pointer"
+                                <div className="c-avatar cursor-pointer upload-file"
                                     style={ {  backgroundImage: url ? `url(${ url })`: null } } >
                                     <input  name={ input.name } { ...getInputProps()  } />
                                     <p dangerouslySetInnerHTML={{__html: placeholder}}/>
                                 </div>
                             </div>
-                        </section>
+                        
                     )}}
             </Dropzone>
             <Validations

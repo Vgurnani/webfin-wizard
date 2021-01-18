@@ -50,7 +50,7 @@ const LoginPage = (props) => {
             <p className="heading-detail">
             Don’t have an account?  <Link href="/register">Sign Up</Link>
             </p>
-            <Form className="form" onSubmit={handleSubmit(submitData)}>  
+            <Form onSubmit={handleSubmit(submitData)}>  
               <Field
                 name="email"
                 label="email"
@@ -59,7 +59,7 @@ const LoginPage = (props) => {
                 maxLength="150"
                 placeholder='Enter your email'
               />
-              <Form.Group controlId="formBasicEmail" className="form-group">
+              <Form.Group controlId="formBasicEmail">
                 <Form.Label>Password:</Form.Label>
                 <div className="password-wrap">
                   <Field
@@ -82,11 +82,11 @@ const LoginPage = (props) => {
                     </svg>
                 </span>
                 </div>
-                <Form.Text className="form-text">
+                <Form.Text>
                 Don't remember your password?
                 </Form.Text>
               </Form.Group>            
-              <Button className="btn btn-primary" type="submit">
+              <Button type="submit">
                 Sign In
               </Button>
             </Form>

@@ -87,7 +87,7 @@ const StepOne = (props) => {
                                         Next
                                         </Button>
                                         </span>
-                                        <span class="enter-btn">
+                                        <span className="enter-btn">
                                             <a>
                                             or Press Enter
                                             <img src={enterIcon} alt="Enter" />
