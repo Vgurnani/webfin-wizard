@@ -26,7 +26,7 @@ const Preview = (props) => {
                         <div className="forgot-btns">
                         <div className="small-wrapper">
                             <Button className="btn btn-primary" type="submit">
-                            Save your work
+                            Save your work!
                             </Button>
                             </div>
                         </div>   

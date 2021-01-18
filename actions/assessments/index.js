@@ -33,6 +33,7 @@ export const getAssessment = (data) => {
             const fonts = result.fonts.map((item) => ({label: item.label,value: item.id.toString()}))
             dispatch(getAssessmentSuccess({niches, colorPalette,fonts}))
         }).catch((error) => {
+            notification(NOTIFICATION_TYPES.ERROR, 'Something went wrong')
             dispatch(getAssessmentFailure(error.message))
         })
     };
@@ -70,7 +71,7 @@ export const createAssessment = (data) => {
             dispatch(reset('assessmentForm'))
             dispatch(createAssessmentSuccess(response.data))
         }).catch((error) => {
-            notification(NOTIFICATION_TYPES.ERROR, 'Somthing went wrong!')
+            notification(NOTIFICATION_TYPES.ERROR, error.message)
             dispatch(createAssessmentFailure(error.message))
         })
     };
