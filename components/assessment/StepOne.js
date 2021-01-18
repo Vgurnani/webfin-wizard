@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { renderStyleMultipleRadio } from '../../utils/formUtils'
 import { assessmentFormValidate as validate } from '../../utils/validates'
 import { assessmentIntialValues } from '../../utils/helpers'
+import enterIcon from '../../public/images/enter-icon.png';
 
 import 
   {
@@ -81,10 +82,17 @@ const StepOne = (props) => {
                                         </Button>
                                     </div>
                                     <div className="step-btn">
+                                        <span>
                                         <Button type="submit" variant="primary">
                                         Next
                                         </Button>
-                                      
+                                        </span>
+                                        <span class="enter-btn">
+                                            <a>
+                                            or Press Enter
+                                            <img src={enterIcon} alt="Enter" />
+                                            </a>
+                                        </span>
                                     </div>
                                 </div>
                             </div>

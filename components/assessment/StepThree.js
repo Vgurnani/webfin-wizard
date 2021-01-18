@@ -16,6 +16,7 @@ import
     Row,
   }
 from 'react-bootstrap';
+import enterIcon from '../../public/images/enter-icon.png';
 const StepThree = (props) => {
     const [open, setOpen ] = useState(false)
     const form  = useSelector((state) => state.form.assessmentForm)
@@ -72,10 +73,17 @@ const StepThree = (props) => {
                                         </Button>
                                     </div>
                                     <div className="step-btn">
+                                    <span>
                                         <Button type="submit" variant="primary">
                                         Next
                                         </Button>
-                                      
+                                        </span>
+                                        <span class="enter-btn">
+                                            <a>
+                                            or Press Enter
+                                            <img src={enterIcon} alt="Enter" />
+                                            </a>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
