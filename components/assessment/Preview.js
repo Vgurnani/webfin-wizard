@@ -33,11 +33,11 @@ const Preview = (props) => {
                                 <Col className="col-12 color-palatte-preview">
                                     <div className="color-preview">
                                     {/*<TemplateLayoutOne />*/}
-                                        <img src={preview} alt="Preview" />
+                                        <img src={preview} alt="Preview" style={{width: '-webkit-fill-available'}} />
                                     </div>
                                 </Col>
                             </Row>
-                                <div className="step-btns">
+                                <div className="step-btns justify-content-center">
                                 <div className="step-btn-right">
                                     <div className="step-btn">
                                     <Button className="btn btn-primary" type="submit">
