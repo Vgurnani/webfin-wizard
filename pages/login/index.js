@@ -17,15 +17,16 @@ import
     Button
   }
 from 'react-bootstrap';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import googleLogin from '../../assets/images/google-login.svg';
 import facebookLogin from '../../assets/images/facebook-login.svg';
 
 const LoginPage = (props) => {
   const dispatch = useDispatch();
+  const assessmentForm = useSelector((state)=>state.form.assessmentForm)
   const { handleSubmit } = props
   const submitData = (data) => {
-    dispatch(loginUser(data))
+    dispatch(loginUser(data,assessmentForm?.values))
   }
   return(
     <section className="login-section main-section">

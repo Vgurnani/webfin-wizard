@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Field } from 'redux-form';
-import { renderStyleMultipleRadio } from '../../utils/formUtils'
-import { assessmentFormValidate as validate } from '../../utils/validates'
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
+import { renderStyleMultipleRadio } from '../../utils/formUtils'
+import { assessmentFormValidate as validate } from '../../utils/validates'
+import { assessmentIntialValues } from '../../utils/helpers'
+
 import 
   {
     Form,
@@ -15,7 +17,10 @@ import
 from 'react-bootstrap';
 import  Link from 'next/link'
 const StepOne = (props) => {
-    const { handleSubmit,kindOfBuild } = props;
+    const { handleSubmit, kindOfBuild, saveData, initialize } = props;
+    useEffect(()=>{
+        initialize(assessmentIntialValues())
+    },[])
     return(
         <div className="assesment-step assesment-step-1">
             <Row className="step-banner">
@@ -71,7 +76,7 @@ const StepOne = (props) => {
                                 </div> 
                                 <div className="step-btn-right">
                                     <div className="step-btn">
-                                        <Button type="button" variant="light" >
+                                        <Button type="button" onClick={saveData} variant="light" >
                                         Save  
                                         </Button>
                                     </div>
@@ -95,7 +100,8 @@ const StepOne = (props) => {
 }
 StepOne.propTypes = {
     handleSubmit: PropTypes.func,
-    submitData: PropTypes.func
+    submitData: PropTypes.func,
+    saveData: PropTypes.func
 };
 export default reduxForm({
     form: 'assessmentForm',

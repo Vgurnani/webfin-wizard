@@ -11,6 +11,12 @@ export default (state = initialState, action) => {
         return { ...state, assessmentData: action.payload, loading: false };
       case ActionTypes.GET_ASSESSMENT_FAILURE:
         return { ...state, error: action.payload.error, loading: false };
+      case ActionTypes.CREATE_ASSESSMENT_REQUEST:
+        return { ...state, loading: true };
+      case ActionTypes.CREATE_ASSESSMENT_SUCCESS:
+        return { ...state, assessmentData: action.payload, loading: false };
+      case ActionTypes.CREATE_ASSESSMENT_FAILURE:
+        return { ...state, error: action.payload.error, loading: false };
       default:
         return state;
     }

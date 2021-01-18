@@ -10,7 +10,7 @@ import
   }
 from 'react-bootstrap';
 const Preview = (props) => {
-    const {handleSubmit} = props;
+    const {handleSubmit ,saveData} = props;
     return(
             <div className="forget-forms signup-forms">        
                 <Form className="form" onSubmit={handleSubmit}>  
@@ -38,7 +38,8 @@ const Preview = (props) => {
 }
 Preview.propTypes = {
     handleSubmit: PropTypes.func,
-    submitData: PropTypes.func
+    submitData: PropTypes.func,
+    saveData: PropTypes.func
 };
 export default reduxForm({
     form: 'assessmentForm',

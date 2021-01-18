@@ -14,7 +14,7 @@ import
   }
 from 'react-bootstrap';
 const StepTwo = (props) => {
-    const { handleSubmit,prevPage ,colorPalette} = props;
+    const { handleSubmit,prevPage ,colorPalette, saveData} = props;
     return(
         <div className="assesment-step assesment-step-2">
             <Row  className="step-form">
@@ -57,7 +57,7 @@ const StepTwo = (props) => {
                                 </div> 
                                 <div className="step-btn-right">
                                     <div className="step-btn">
-                                        <Button type="button" variant="light" >
+                                        <Button type="button" onClick={saveData} variant="light" >
                                         Save  
                                         </Button>
                                     </div>
@@ -79,7 +79,8 @@ const StepTwo = (props) => {
 }
 StepTwo.propTypes = {
     handleSubmit: PropTypes.func,
-    submitData: PropTypes.func
+    submitData: PropTypes.func,
+    saveData: PropTypes.func
 };
 export default reduxForm({
     form: 'assessmentForm',

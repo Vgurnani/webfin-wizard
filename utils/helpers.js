@@ -4,9 +4,8 @@ import { ROUTES } from '../constants/appRoutes';
 export const addBodyClass = (pathname) =>{
     const path = pathname
     document.body.className = ''
-    document.body.classList.add(path ==='' ? 'homepage' : path);
 
-    if(path === ''){
+    if(path === '/'){
         document.body.classList.add('light-bg');
     } else if(path === ROUTES.REGISTER){
         document.body.classList.add('blue-left');
@@ -47,3 +46,7 @@ export const isLoading = (state) => {
     return result?.length > 0
 }
 
+export const assessmentIntialValues = () =>{
+    const result = localStorage.getItem('assessmentForm')
+    return result ? JSON.parse(result) : {}
+}

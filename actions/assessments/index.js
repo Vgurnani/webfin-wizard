@@ -33,3 +33,38 @@ export const getAssessment = (data) => {
         })
     };
 };
+
+
+export const createAssessmentRequest = () => {
+    return {
+        type: ActionTypes.CREATE_ASSESSMENT_REQUEST,
+
+    };
+};
+
+export const createAssessmentSuccess = (data) => {
+    return {
+        type: ActionTypes.CREATE_ASSESSMENT_SUCCESS,
+        payload: data,
+    };
+};
+
+export const createAssessmentFailure = (error) => {
+    return {
+        type: ActionTypes.CREATE_ASSESSMENT_FAILURE,
+        payload: error,
+    };
+};
+
+export const createAssessment = (data) => {
+    return (dispatch) => {
+        dispatch(createAssessmentRequest())
+        postData(`/auth/createAssessment`, data).then((response)=>{
+            notification(NOTIFICATION_TYPES.SUCCESS, 'Create Assessment Successfully');
+            dispatch(createAssessmentSuccess(response.data))
+        }).catch((error) => {
+            notification(NOTIFICATION_TYPES.ERROR, 'Somthing went wrong!')
+            dispatch(createAssessmentFailure(error.message))
+        })
+    };
+};

@@ -6,7 +6,7 @@ import { postData } from '../../lib/api';
 import { ROUTES } from '../../constants/appRoutes';
 import { NOTIFICATION_TYPES } from '../../constants/app';
 import { notification } from '../../services/notification';
-
+import { createAssessment } from '../assessments'
 export const loginRequest = () => {
     return {
         type: ActionTypes.LOGIN_REQUEST,
@@ -28,7 +28,7 @@ export const loginFailure = (error) => {
     };
 };
 
-export const loginUser = (data) => {
+export const loginUser = (data,assessmentData) => {
     return (dispatch) => {
         dispatch(loginRequest())
         postData(`/auth/login`, data).then((response)=>{
@@ -37,6 +37,7 @@ export const loginUser = (data) => {
             Router.push(ROUTES.DASHBOARD)
             notification(NOTIFICATION_TYPES.SUCCESS, 'Login Successfully');
             dispatch(loginSuccess(response.data))
+            // assessmentData && dispatch(createAssessment(assessmentData))
         }).catch((error) => {
             notification(NOTIFICATION_TYPES.ERROR, 'Somthing went wrong!')
             dispatch(loginFailure(error.message))

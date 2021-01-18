@@ -19,7 +19,7 @@ from 'react-bootstrap';
 const StepThree = (props) => {
     const [open, setOpen ] = useState(false)
     const form  = useSelector((state) => state.form.assessmentForm)
-    const { handleSubmit, submitData , prevPage ,assessmentData} = props;
+    const { handleSubmit, submitData , prevPage ,assessmentData, saveData} = props;
     return(
         <div className="assesment-step assesment-step-2">
             <Row  className="step-form">
@@ -67,7 +67,7 @@ const StepThree = (props) => {
                                 </div> 
                                 <div className="step-btn-right">
                                     <div className="step-btn">
-                                        <Button type="button" variant="light" >
+                                        <Button type="button" onClick={saveData} variant="light" >
                                         Save  
                                         </Button>
                                     </div>
@@ -92,7 +92,8 @@ const StepThree = (props) => {
 StepThree.propTypes = {
     handleSubmit: PropTypes.func,
     submitData: PropTypes.func,
-    assessmentData: PropTypes.object
+    assessmentData: PropTypes.object,
+    saveData: PropTypes.func
 };
 export default reduxForm({
     form: 'assessmentForm',
