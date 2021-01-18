@@ -17,7 +17,7 @@ import
   }
 from 'react-bootstrap';
 import enterIcon from '../../public/images/enter-icon.png';
-import websitePreview from '../../public/images/website-preview.jpg';
+import preview from '../../public/images/preview.png';
 const StepThree = (props) => {
     const [open, setOpen ] = useState(false)
     const form  = useSelector((state) => state.form.assessmentForm)
@@ -65,7 +65,7 @@ const StepThree = (props) => {
                                 </Col>
                                 <Col className="col-6 name-website-selector">
                                     <div className="blog-preview">
-                                        <img src={websitePreview} alt="Preview" />
+                                        <img src={preview} alt="Preview" />
                                     </div>
                                 </Col>
                             </Row>

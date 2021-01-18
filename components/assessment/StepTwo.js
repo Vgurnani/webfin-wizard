@@ -14,7 +14,7 @@ import
   }
 from 'react-bootstrap';
 import enterIcon from '../../public/images/enter-icon.png';
-import colorPalatePreview from '../../public/images/color-preview.jpg';
+import preview from '../../public/images/preview.png';
 const StepTwo = (props) => {
     const { handleSubmit,prevPage ,colorPalette, saveData} = props;
     return(
@@ -43,7 +43,7 @@ const StepTwo = (props) => {
                                 </Col>
                                 <Col className="col-6 color-palatte-preview">
                                     <div className="color-preview">
-                                        <img src={colorPalatePreview} alt="Preview" />
+                                        <img src={preview} alt="Preview" />
                                     </div>
                                 </Col>
                             </Row>
