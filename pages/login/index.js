@@ -26,7 +26,7 @@ const LoginPage = (props) => {
   const assessmentForm = useSelector((state)=>state.form.assessmentForm)
   const { handleSubmit } = props
   const submitData = (data) => {
-    dispatch(loginUser(data,assessmentForm?.values))
+    dispatch(loginUser(data))
   }
   return(
     <section className="login-section main-section">

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link  from 'next/link'
 import PropTypes from 'prop-types';
 import { registrationUser } from '../../actions/user/auth'
@@ -19,13 +19,17 @@ import { reduxForm } from 'redux-form';
 import { Field } from 'redux-form';
 import googleLogin from '../../assets/images/google-login.svg';
 import facebookLogin from '../../assets/images/facebook-login.svg';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { assessmentIntialValues } from '../../utils/helpers'
 
 const RegisterPage = (props) => {
   const dispatch = useDispatch();
+  
+  const assessmentForm = useSelector((state)=>state.form.assessmentForm)
   const { handleSubmit } = props
   const submitData = (data) => {
-    dispatch(registrationUser(data))
+    const assessmentFormData = assessmentForm?.values || assessmentIntialValues();
+    dispatch(registrationUser(data, assessmentFormData))
   }
 
   return(

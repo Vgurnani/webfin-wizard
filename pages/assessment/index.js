@@ -19,6 +19,7 @@ const AssessmentPage = (props) => {
     niches ,
     colorPalette,
   } = assessmentData
+
   useEffect(() =>{
     dispatch(getAssessment())
   },[])
@@ -38,7 +39,10 @@ const AssessmentPage = (props) => {
   }
 
   const finalSubmit = (data) =>{
-    Router.push(ROUTES.LOGIN)
+    if(data){
+      localStorage.setItem('assessmentForm', JSON.stringify(data))
+    }
+    Router.push(ROUTES.REGISTER)
   }
 
   const handleView = () => {

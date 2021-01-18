@@ -48,9 +48,9 @@ const StepThree = (props) => {
                             <p>Optional! if you have logo upload here</p>
                             <div className=''>
                             </div>
-                                <Button type="button" onClick={() => setOpen(!open)} >
+                                {/*<Button type="button" onClick={() => setOpen(!open)} >
                                 Optional! Change Font
-                                </Button>
+                                 </Button>*/}
                           
                         {form.values?.kind && <div><span>{getLabel(assessmentData.niches, form.values?.kind)}</span></div>}
                         {form.values?.colorPalette && <div><span>{getLabel(assessmentData.colorPalette, form.values?.colorPalette)}</span></div>}
@@ -61,7 +61,7 @@ const StepThree = (props) => {
                            
                         <div className="step-btns">
                                 <div className="step-btn-left">
-                                <Button type="button" variant="secondary" >
+                                <Button type="button" onClick={prevPage} variant="secondary" >
                                         Back  
                                         </Button>
                                 </div> 

@@ -7,6 +7,7 @@ import { ROUTES } from '../../constants/appRoutes';
 import { NOTIFICATION_TYPES } from '../../constants/app';
 import { notification } from '../../services/notification';
 import { createAssessment } from '../assessments'
+import _ from 'lodash'
 export const loginRequest = () => {
     return {
         type: ActionTypes.LOGIN_REQUEST,
@@ -28,7 +29,7 @@ export const loginFailure = (error) => {
     };
 };
 
-export const loginUser = (data,assessmentData) => {
+export const loginUser = (data) => {
     return (dispatch) => {
         dispatch(loginRequest())
         postData(`/auth/login`, data).then((response)=>{
@@ -80,7 +81,7 @@ export const registrationFailure = (error) => {
     };
 };
 
-export const registrationUser = (data) => {
+export const registrationUser = (data, assessmentData) => {
     return (dispatch) => {
         dispatch(registrationRequest())
         postData(`/auth/signup`, data)
@@ -90,6 +91,8 @@ export const registrationUser = (data) => {
                 Router.push(ROUTES.DASHBOARD)
                 notification(NOTIFICATION_TYPES.SUCCESS, 'Registration Successfully');
                 dispatch(registrationSuccess(response.data))
+                !_.isEmpty(assessmentData) && dispatch(createAssessment(assessmentData))
+
             })
             .catch((error) => {
                 notification(NOTIFICATION_TYPES.ERROR, 'Somthing went wrong!')

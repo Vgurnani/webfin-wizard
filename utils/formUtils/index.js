@@ -162,7 +162,7 @@ const renderStyleMultipleRadio = (props) => {
                                     />
                                 <div className='input-radio-label' style={ { width: width || 'auto' } }>
                                         {isColors && <span className='checkbox-colors'>
-                                            {item.colors && <span style={{backgroundColor: item.colors[1]}}></span>}
+                                            {item.colors && <span style={{backgroundColor: item.colors[0]}}></span>}
                                         </span>}
                                         {isIcons && item.icon &&  <span className='emojiText mb-0 mt-1' dangerouslySetInnerHTML={ { __html:  item.icon  } } />}
                                         {item.imageUrl && <>
