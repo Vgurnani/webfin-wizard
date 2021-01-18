@@ -18,8 +18,8 @@ import
   }
 from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'
-import googleLogin from '../../assets/images/google-login.svg';
-import facebookLogin from '../../assets/images/facebook-login.svg';
+import googleLogin from '../../public/images/google-login.svg';
+import facebookLogin from '../../public/images/facebook-login.svg';
 
 const LoginPage = (props) => {
   const dispatch = useDispatch();

@@ -21,6 +21,7 @@ body
   line-height: 1.5 !important
   color: $body-font-color !important
   background-color: #F7F7F7 !important
+  min-height: 100vh
   &.light-bg
     background-color: #fff !important
   &.blue-left,
@@ -200,7 +201,7 @@ ul
       margin: 0 0 50px
       padding: 0
       li
-        background-image: url('../assets/images/account-slider-1.png')
+        background-image: url('/images/checked-checkbox.svg')
         background-repeat: no-repeat
         background-position: 0 3px
         margin: 0 0 20px
@@ -412,7 +413,7 @@ ul
         margin: 25px 0 28px
       ul
         li
-          background-image: url('../assets/images/checked.svg')
+          background-image: url('/images/checked.svg')
           background-position: 0 5px
           background-repeat: no-repeat
           margin: 0 0 15px
@@ -590,9 +591,13 @@ ul
   .btn.btn-primary.btn-facebook
     background-color: #3B5998
     border-color: #3B5998
+    a
+      color: $white-color
   .btn.btn-primary.btn-google
     background-color: #2D3748
     border-color: #2D3748
+    a
+      color: $white-color
 .form-side
   min-height: 90vh
   min-height: calc(100vh - 142px)
@@ -765,13 +770,18 @@ ul
     height: 100%
     z-index: 2
     opacity: 0
+    &:checked + .input-radio-label
+      background-image: url('/images/radio-checked.png')
   .input-radio-label
     display: inline-block
     vertical-align: middle
     color: #1B1B1B
     font-size: 16px
     line-height: 1.5
-    padding: 0 0 0 35px
+    padding: 0 0 0 25px
+    background-image: url('/images/radio.png')
+    background-repeat: no-repeat
+    background-position: 0 4px
     .emojiText 
       margin: 0 0 0 5px !important
 .main-section      
@@ -829,14 +839,24 @@ ul
       max-width: 100%
       margin-left: 25px
       float: left
-      border: 1px solid rgba(51, 51, 51, 0.3)
-      border-radius: 10px
-      padding: 8px 5px
+      border: none
+      border-radius: 0
+      padding: 0
       &:nth-child(2n+1)
         clear: left
         margin-left: 0
+      .styled-radio
+        &:checked + .input-radio-label  
+          background-image: none
+          border: 2px solid #3032C8
+          .emojiText
+            color: #3032C8
       .input-radio-label
-        padding: 0
+        border: 1px solid rgba(51, 51, 51, 0.3)
+        border-radius: 10px
+        padding: 8px 5px
+        background-image: none
+        width: 100% !important
         .emojiText
           color: #000000
           font-size: 24px

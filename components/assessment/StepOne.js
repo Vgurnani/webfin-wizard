@@ -41,9 +41,9 @@ const StepOne = (props) => {
                                 <h1>
                                 Let’s start!
                                 </h1>
-                                <p>
+                                {/* <p>
                                 Answer some questions for us and we’ll build a website for you.
-                                </p>
+                                </p> */}
                             </Col>
                         </Row>
                     </Container>

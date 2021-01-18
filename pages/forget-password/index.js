@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { forgetPasswordValidate as validate } from '../../utils/validates'
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
-import accountSlider1 from '../../assets/images/account-slider-1.png';
+import accountSlider1 from '../../public/images/account-slider-1.png';
 import withPublicRoute from '../../components/hoc/withPublicRoute'
 import 
   {

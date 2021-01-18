@@ -17,8 +17,8 @@ import { renderFieldWG } from '../../utils/formUtils'
 import { registerValidate as validate } from '../../utils/validates'
 import { reduxForm } from 'redux-form';
 import { Field } from 'redux-form';
-import googleLogin from '../../assets/images/google-login.svg';
-import facebookLogin from '../../assets/images/facebook-login.svg';
+import googleLogin from '../../public/images/google-login.svg';
+import facebookLogin from '../../public/images/facebook-login.svg';
 import { useDispatch, useSelector } from 'react-redux'
 import { assessmentIntialValues } from '../../utils/helpers'
 

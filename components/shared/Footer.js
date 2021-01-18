@@ -3,7 +3,7 @@ import  Link  from 'next/link'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import webFinLogo from '../../assets/images/header/webFin-logo.svg';
+import webFinLogo from '../../public/images/header/webFin-logo.svg';
 
 const Footer = () => (
   <footer className="site-footer">

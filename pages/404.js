@@ -7,7 +7,7 @@ import
   }
 from 'react-bootstrap';
 import Link from 'next/link'
-import notFound from '../assets/images/notFound.png';
+import notFound from '../public/images/notFound.png';
 
 const NotFoundPage = () => (
   <section className="login-section main-section">

@@ -7,12 +7,12 @@ import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { ROUTES } from '../../constants/appRoutes';
-import slider1 from '../../assets/images/home/slider-1.png';
-import websiteBuilding from '../../assets/images/home/website-building.png';
-import websiteComparison from '../../assets/images/home/website-comparison.png';
-import basicPlan from '../../assets/images/home/basic-plan.png';
-import premiumPlan from '../../assets/images/home/premium-plan.png';
-import vipPlan from '../../assets/images/home/vip-plan.png';
+import slider1 from '../../public/images/home/slider-1.png';
+import websiteBuilding from '../../public/images/home/website-building.png';
+import websiteComparison from '../../public/images/home/website-comparison.png';
+import basicPlan from '../../public/images/home/basic-plan.png';
+import premiumPlan from '../../public/images/home/premium-plan.png';
+import vipPlan from '../../public/images/home/vip-plan.png';
 import Link from 'next/link'
 const HomePage = (props) => {
   return(
