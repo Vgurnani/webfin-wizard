@@ -52,15 +52,14 @@ const StepThree = (props) => {
                                             placeholder={"<a><i className='fa fa-plus'/> upload your logo</a>"}
                                         />
                                         <ul className="cat-list">
-                                            <li>
-                                            Food
-                                            </li>
-                                            <li>
-                                            Classic Blue
-                                            </li>
+                                            {form.values?.nicheId && <li>
+                                            { getLabel(assessmentData.niches, form.values?.nicheId)}
+                                            </li>}
+                                            {form.values?.colourId &&<li>
+                                            {getLabel(assessmentData.colorPalette, form.values?.colourId)}
+                                            </li>}
                                         </ul>
-                                        {form.values?.kind && <div><span>{getLabel(assessmentData.niches, form.values?.kind)}</span></div>}
-                                        {form.values?.colorPalette && <div><span>{getLabel(assessmentData.colorPalette, form.values?.colorPalette)}</span></div>}
+                                       
                                     </div>
                                 </Col>
                                 <Col className="col-6 name-website-selector">
