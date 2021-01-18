@@ -50,8 +50,11 @@ export const assessmentFormValidate = values => {
     if (!values.websiteName) {
         errors.websiteName = 'required';
     }
-    if (!values.kind) {
-        errors.kind = 'required';
+    if (!values.nicheId) {
+        errors.nicheId = 'required';
+    }
+    if (!values.colourId) {
+        errors.colourId = 'required';
     }
     return errors;
 }

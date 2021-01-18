@@ -1,5 +1,9 @@
 import { ActionTypes } from './actionTypes'
-import { getData } from '../../lib/api'
+import { getData, postData } from '../../lib/api'
+import {reset} from 'redux-form';
+import { NOTIFICATION_TYPES } from '../../constants/app';
+import { notification } from '../../services/notification';
+
 export const getAssessmentRequest = () => {
     return {
         type: ActionTypes.GET_ASSESSMENT_REQUEST,
@@ -58,9 +62,12 @@ export const createAssessmentFailure = (error) => {
 
 export const createAssessment = (data) => {
     return (dispatch) => {
+        
         dispatch(createAssessmentRequest())
-        postData(`/auth/createAssessment`, data).then((response)=>{
+        postData(`/assessment`, data).then((response)=>{
             notification(NOTIFICATION_TYPES.SUCCESS, 'Create Assessment Successfully');
+            localStorage.clear();
+            dispatch(reset('assessmentForm'))
             dispatch(createAssessmentSuccess(response.data))
         }).catch((error) => {
             notification(NOTIFICATION_TYPES.ERROR, 'Somthing went wrong!')
