@@ -13,6 +13,8 @@ import
     Row,
   }
 from 'react-bootstrap';
+import enterIcon from '../../public/images/enter-icon.png';
+import colorPalatePreview from '../../public/images/color-preview.jpg';
 const StepTwo = (props) => {
     const { handleSubmit,prevPage ,colorPalette, saveData} = props;
     return(
@@ -40,7 +42,9 @@ const StepTwo = (props) => {
                                     />
                                 </Col>
                                 <Col className="col-6 color-palatte-preview">
-
+                                    <div className="color-preview">
+                                        <img src={colorPalatePreview} alt="Preview" />
+                                    </div>
                                 </Col>
                             </Row>
                        
@@ -62,10 +66,17 @@ const StepTwo = (props) => {
                                         </Button>
                                     </div>
                                     <div className="step-btn">
+                                    <span>
                                         <Button type="submit" variant="primary">
                                         Next
                                         </Button>
-                                      
+                                        </span>
+                                        <span className="enter-btn">
+                                            <a>
+                                            or Press Enter
+                                            <img src={enterIcon} alt="Enter" />
+                                            </a>
+                                        </span>
                                     </div>
                                 </div>
                             </div>

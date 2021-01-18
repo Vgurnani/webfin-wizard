@@ -226,60 +226,74 @@ ul
   max-width: 100%
   margin: 0 auto
 
-.form
-  .form-text
+
+.form-text
+  font-size: 14px
+  line-height: 1.4
+  color: #757575
+  font-weight: normal
+  margin-top: 10px
+  margin-bottom: 0
+  text-align: left
+.form-group
+  position: relative
+  width: 100%
+  display: inline-block
+  p
+    margin: 0 !important
+  .form-label
+    color: #757575
     font-size: 14px
     line-height: 1.4
-    color: #757575
     font-weight: normal
-    margin-top: -5px
-    margin-bottom: 1rem
-  .form-group
-    position: relative
-    
-    .form-label
-      color: #757575
-      font-size: 14px
-      line-height: 1.4
-      font-weight: normal
-    .form-control
-      font-size: 16px
-      line-height: 1.5
-      letter-spacing: 0.5px
+    text-align: left
+    width: 100%
+    text-transform: capitalize
+  .form-control
+    font-size: 16px
+    line-height: 1.5
+    letter-spacing: 0.5px
+    color: #1B1B1B
+    font-weight: normal
+    border: 1px solid $white-color
+    background-color: $white-color
+    border-radius: 24px
+    padding: 10px 15px
+    width: 100%
+    min-height: 48px
+    /* Change the white to any color ;) */
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover, 
+    &:-webkit-autofill:focus, 
+    &:-webkit-autofill:active
+      -webkit-box-shadow: 0 0 0 30px white inset !important
+    &:-webkit-autofill
+      //-webkit-text-fill-color: yellow !important
+    &::placeholder
       color: #1B1B1B
-      font-weight: normal
-      border: 1px solid $white-color
-      background-color: $white-color
-      border-radius: 24px
-      padding: 10px 15px
-      width: 100%
-      &::placeholder
-        color: #1B1B1B
-        opacity: 1
-    .password-wrap
-      position: relative
-      .password-swap
-        position: absolute
-        top: 6px
-        right: 15px   
-    .field_error
+      opacity: 1
+    &:focus
+      box-shadow: none    
+  .password-wrap
+    position: relative
+    .password-swap
       position: absolute
-      bottom: -21px
-      left: 2px
-      background-color: #ff4f00
-      color: #fff
-      font-size: 12px
-      border-radius: 6px
-      padding: 0 5px
-      &::after
-        content: ""
-        position: absolute
-        bottom: 100%
-        left: 20px
-        margin-left: -5px
-        border-width: 5px
-        border-style: solid
-        border-color: transparent transparent #ff4f00 transparent
+      top: 6px
+      right: 15px   
+  .field_error
+    color: #FF0000
+    font-size: 14px
+    line-height: 1
+    font-weight: 300
+    // &::after
+    //   content: ""
+    //   position: absolute
+    //   bottom: 100%
+    //   left: 20px
+    //   margin-left: -5px
+    //   border-width: 5px
+    //   border-style: solid
+    //   border-color: transparent transparent #ff4f00 transparent
 
 
 .main-header
@@ -549,7 +563,7 @@ ul
 .login-forms
   text-align: center
   margin: 8px 0 0
-  .form
+  form
     text-align: left 
     margin: 28px 0 0
     .btn
@@ -666,6 +680,8 @@ ul
 .main-section
   .page-section
     padding: 35px 0
+    min-height: 80vh
+    min-height: calc(100vh - 365px)
   .page-heading
     font-weight: normal
     font-size: 34px
@@ -826,9 +842,20 @@ ul
     .step-btn
       display: inline-block
       margin-left: 25px
-      vertical-align: middle
+      vertical-align: top
+      text-align: center
       &:first-child
         margin-left: 0
+      span
+        display: block
+        &.enter-btn
+          font-size: 14px
+          line-height: 1.4
+          margin: 8px 0 0
+          img
+            display: inline-block
+            vertical-align: middle
+            margin-left: 8px
 .step-form
   .small-wrapper
     margin: 0
@@ -854,9 +881,11 @@ ul
       .input-radio-label
         border: 1px solid rgba(51, 51, 51, 0.3)
         border-radius: 10px
-        padding: 8px 5px
+        padding: 9px 5px
         background-image: none
         width: 100% !important
+        height: 58px
+        box-sizing: border-box
         .emojiText
           color: #000000
           font-size: 24px
@@ -879,3 +908,62 @@ ul
             border-radius: 100%
             display: inline-block
             border: none
+
+.assesment-step
+  .form-control
+    background-color: #F7F7F7
+  .logo-optional
+    margin: 0 0 3px
+  .upload-file
+    position: relative
+    color: #3032C8
+    font-size: 14px
+    line-height: 17px
+    font-weight: 600
+    &::after
+      content: ''
+      display: inline-block
+      vertical-align: middle
+      position: absolute
+      top: 0
+      left: 0
+      background-image: url('/images/plus.png')
+      background-repeat: no-repeat
+      background-position: 0 0
+      width: 24px
+      height: 24px
+    p
+      margin: 0
+      display: inline-block
+      padding: 0 0 0 26px
+      font-weight: 600
+      font-size: 14px
+      line-height: 1.6
+      color: #3032C8
+      text-transform: capitalize
+      i
+        font-style: unset
+.cat-list
+  margin: 0
+  padding: 0
+  list-style: none
+  li
+    width: 100% !important
+    display: inline-block !important
+    background: rgba(28, 30, 153, 0.1)
+    border: 2px solid #3032C8
+    border-radius: 24px
+    color: #3032C8
+    font-size: 16px
+    line-height: 36px
+    margin: 0 0 15px !important
+    background-image: url(/images/radio-checked.png)
+    background-repeat: no-repeat
+    background-position: 14px center
+    height: 40px
+    &::after
+      display: none
+.website-loader
+  align-items: center
+  .spinner-border
+    color:#3032C8      

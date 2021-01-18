@@ -14,7 +14,7 @@ const OtpForm = (props) => {
     const { handleSubmit, submitData } = props;
     return(
         <div className="forget-forms signup-forms">
-        <Form className="form" onSubmit={handleSubmit(submitData)}>  
+        <Form onSubmit={handleSubmit(submitData)}>  
             <div className="forget-form-inner">
                 <div className="forget-forms-element">
                     <h1 className="section-heading">   
