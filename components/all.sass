@@ -195,6 +195,7 @@ ul
 
 ::-webkit-scrollbar
   width: 8px
+  height: 8px
 ::-webkit-scrollbar-track
   background: $white-color
   border-radius: 16px
@@ -1054,14 +1055,16 @@ ul
       .logo-gallery
         width: 100%
         display: inline-block
+        overflow: auto
         ul
           margin: 0
           padding: 0
           list-style: none
+          white-space: nowrap
           li
             margin-left: 2%
             margin-bottom: 2%
-            width: 18.4%
+            width: auto
             display: inline-block
             &:nth-child(5n+1)
               margin-left: 0
@@ -1071,7 +1074,7 @@ ul
             img 
               border: 2px solid 51,51,51,0.3
               border-radius: 16px
-              width: 100%
+              width: 92px
               height: 92px
               object-fit: cover
             &.selected

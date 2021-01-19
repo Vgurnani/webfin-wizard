@@ -13,21 +13,9 @@ import
     Container,
     Col,
     Row,
-    Modal,
-    ProgressBar
   }
 from 'react-bootstrap';
-import  Link from 'next/link'
-import media1 from '../../public/images/media/media-1.jpg';
-import media2 from '../../public/images/media/media-2.jpg';
-import media3 from '../../public/images/media/media-3.jpg';
-import media4 from '../../public/images/media/media-4.jpg';
-import media5 from '../../public/images/media/media-5.jpg';
-import media6 from '../../public/images/media/media-6.jpg';
-import media7 from '../../public/images/media/media-7.jpg';
-import media8 from '../../public/images/media/media-8.jpg';
-import media9 from '../../public/images/media/media-9.jpg';
-import media10 from '../../public/images/media/media-10.jpg';
+
 const StepOne = (props) => {
     const { handleSubmit, kindOfBuild, saveData, initialize } = props;
     useEffect(()=>{
@@ -108,83 +96,7 @@ const StepOne = (props) => {
                                 </div>
                             </div>
                             
-                            <Modal show={true} className="logo-upload-modal">
-								<Modal.Header closeButton>
-                                    <div className="logo-upload-header">
-                                        <Row>
-                                            <Col className="col-6">
-                                                <Modal.Title>Images</Modal.Title>
-                                            </Col>
-                                            <Col className="col-6 search-wrapper">
-                                                <Field
-                                                    name="search"
-                                                    component={ renderFieldWG }
-                                                    placeholder={ 'Search' }
-                                                />
-                                            </Col>
-                                        </Row>
-                                    </div>
-								</Modal.Header>
-								<Modal.Body>	
-								
-                                <div className="">
-                                    <Row>
-                                        <Col className="col-4">
-                                            <Field
-                                                name="logoUrl"
-                                                component={ renderFileDrop }
-                                                placeholder={"<a><i className='fa fa-plus'/> upload your logo</a>"}
-                                            /> 
-                                        </Col>
-                                        <Col className="col-8">
-                                            <div className="logo-gallery">
-                                                <ul>
-                                                    <li>
-                                                        <img src={media1} alt="media1" />
-                                                    </li>
-                                                    <li>
-                                                        <img src={media2} alt="media2" />
-                                                    </li>
-                                                    <li>
-                                                        <img src={media3} alt="media3" />
-                                                    </li>
-                                                    <li class="selected">
-                                                        <img src={media4} alt="media4" />
-                                                    </li>
-                                                    <li>
-                                                        <img src={media5} alt="media5" />
-                                                    </li>
-                                                    <li>
-                                                        <img src={media6} alt="media6" />
-                                                    </li>
-                                                    <li>
-                                                        <img src={media7} alt="media7" />
-                                                    </li>
-                                                    <li>
-                                                        <img src={media8} alt="media8" />
-                                                    </li>
-                                                    <li>
-                                                        <img src={media9} alt="media9" />
-                                                    </li>
-                                                    <li>
-                                                        <img src={media10} alt="media10" />
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div className="logo-upload-progress">
-                                            <ProgressBar now={60} />
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                </div>
-								</Modal.Body>
-								<Modal.Footer>
-									<div className="modal-btns">
-                                        <Button variant="secondary">Unsplash</Button>
-                                        <Button variant="primary">Confirm</Button>
-                                    </div>
-								</Modal.Footer>
-							</Modal>
+                            
                         </Form>
                     </Container>
                 </Col>
