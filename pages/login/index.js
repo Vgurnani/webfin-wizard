@@ -15,7 +15,7 @@ import
     Col,
     Form,
     Button
-  }
+  }  
 from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'
 import googleLogin from '../../public/images/google-login.svg';
