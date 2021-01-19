@@ -7,30 +7,19 @@ export default WrappedComponent => {
   
   hocComponent.getInitialProps = async (context) => {
     const userAuth = ServerCookie(context)['user'];
-    if (!userAuth) {
+    if (userAuth && userAuth.enabled) {
         if (context.res) {
-            context.res?.writeHead(302, {
-            Location: '/login',
-            });
+            context.res?.writeHead(302, {Location: '/dashboard'});
             context.res?.end();
         } else {
-            Router.replace('/login');
+          Router.replace('/dashboard')
         }
-    }else if(!userAuth.enabled){
-      if (context.res) {
-        context.res?.writeHead(302, {
-        Location: '/confirm-account',
-        });
-        context.res?.end();
-      } else {
-          Router.replace('/confirm-account');
       }
-    } 
-    else if (WrappedComponent.getInitialProps) {
+      else if (WrappedComponent.getInitialProps) {
       const wrappedProps = await WrappedComponent.getInitialProps({...context, auth: userAuth});
       return { ...wrappedProps, userAuth };
-    }
-    return userAuth
+      }
+      return {userAuth: userAuth}
   };
   return hocComponent;
 };

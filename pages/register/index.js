@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Link  from 'next/link'
 import PropTypes from 'prop-types';
-import { registrationUser } from '../../actions/user/auth'
+import { registrationUser } from '../../middleware/auth'
 import withPublicRoute from '../../components/hoc/withPublicRoute'
 import { togglePassword } from '../../utils/helpers'
 

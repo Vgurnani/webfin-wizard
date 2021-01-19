@@ -19,6 +19,15 @@ export default (state = initialState, action) => {
         return { ...state, user: action.payload, loading: false };
       case ActionTypes.REGISTRATION_FAILURE:
         return { ...state, error: action.payload, loading: false };
+      case ActionTypes.EMAIL_VERIFICATION_SUCCESS:
+        return { ...state, success: action.payload, loading: false };
+      case ActionTypes.EMAIL_VERIFICATION_FAILURE:
+        return { ...state, error: action.error, loading: false };
+      case ActionTypes.RESEND_CODE_SUCCESS:
+        return { ...state, success: action.payload, loading: false };
+      case ActionTypes.RESEND_CODE_FAILURE:
+        return { ...state, error: action.error, loading: false };
+
       default:
         return state;
     }

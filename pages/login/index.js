@@ -6,7 +6,7 @@ import { loginValidate as validate } from '../../utils/validates'
 import { reduxForm } from 'redux-form';
 import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
-import { loginUser } from '../../actions/user/auth'
+import { loginUser } from '../../middleware/auth'
 import withPublicRoute from '../../components/hoc/withPublicRoute'
 
 import 

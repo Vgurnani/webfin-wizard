@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import webFinLogo from '../../public/images/header/webFin-logo.svg';
 import { isLoggedIn } from '../../utils/helpers'
-import { logoutUser } from '../../actions/user/auth';
+import { logoutUser } from '../../middleware/auth';
 import { useDispatch } from 'react-redux'
 
 const Navbar = (props) => {

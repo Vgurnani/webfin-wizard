@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Router from 'next/router'
 import { useDispatch , useSelector } from 'react-redux'
-import PropTypes from 'prop-types';
 import withPublicRoute from '../../components/hoc/withPublicRoute'
 import StepOne from  '../../components/assessment/StepOne';
 import StepTwo from  '../../components/assessment/StepTwo';
@@ -9,7 +8,7 @@ import StepThree from  '../../components/assessment/StepThree';
 import StepFour from  '../../components/assessment/StepFour';
 import Preview from  '../../components/assessment/Preview';
 import { ROUTES } from '../../constants/appRoutes'
-import { getAssessment } from '../../actions/assessments/';
+import { getAssessment } from '../../middleware/assessments';
 
 const AssessmentPage = (props) => {
   const dispatch  = useDispatch()
