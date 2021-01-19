@@ -95,7 +95,7 @@ export const registrationUser = (data, assessmentData) => {
 
             })
             .catch((error) => {
-                notification(NOTIFICATION_TYPES.ERROR, 'Somthing went wrong!')
+                notification(NOTIFICATION_TYPES.ERROR, error.message)
                 dispatch(registrationFailure(error.message));
             });
 

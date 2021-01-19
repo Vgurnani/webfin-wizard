@@ -5,34 +5,53 @@ import { assessmentFormValidate as validate } from '../../utils/validates'
 import TemplateLayoutOne from './shared/TemplateLayoutOne'
 import 
   {
+    Row,
+    Col,
+    Container,
     Form,
     Button
   }
 from 'react-bootstrap';
+import preview from '../../public/images/preview.png';
+
 const Preview = (props) => {
     const {handleSubmit ,saveData} = props;
     return(
-            <div className="forget-forms signup-forms">        
-                <Form className="form" onSubmit={handleSubmit}>  
-                    <div className="forget-form-inner">
-                        <div className="forget-forms-element">
-                            <h1 className="section-heading">   
-                             Choose color paletters
-                            </h1>
-                            <div className="small-wrapper">
-                                <TemplateLayoutOne />
+
+
+        <div className="assesment-step assesment-step-2">
+            <Row  className="step-form">
+                <Col className="col-12">
+                    <Container>
+                        <Form className="form" onSubmit={handleSubmit}>  
+                        <div className="form-heading">   
+                                <h2>
+                                Congratulation! Here is your NEW website
+                                </h2>
                             </div>
-                        </div>
-                        <div className="forgot-btns">
-                        <div className="small-wrapper">
-                            <Button className="btn btn-primary" type="submit">
-                            Save your work
-                            </Button>
+                            <Row className="color-palatte">
+                                <Col className="col-12 color-palatte-preview">
+                                    <div className="color-preview">
+                                    {/*<TemplateLayoutOne />*/}
+                                        <img src={preview} alt="Preview" style={{width: '-webkit-fill-available'}} />
+                                    </div>
+                                </Col>
+                            </Row>
+                                <div className="step-btns justify-content-center">
+                                <div className="step-btn-right">
+                                    <div className="step-btn">
+                                    <Button className="btn btn-primary" type="submit">
+                                    Save your work!
+                                    </Button>
+                                  
+                                    </div>
+                                </div>
                             </div>
-                        </div>   
-                    </div>
-                </Form>
-            </div>
+                        </Form>
+                    </Container>
+                </Col>
+            </Row>
+        </div>
         
     )
 }
