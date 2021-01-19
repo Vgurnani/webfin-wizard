@@ -13,8 +13,8 @@ import
     Button,
     Container,
     Col,
-		Row,
-		Modal
+	Row,
+	Modal
   }
 from 'react-bootstrap';
 import enterIcon from '../../public/images/enter-icon.png';
