@@ -3,7 +3,6 @@ import { Field } from 'redux-form';
 import { renderFieldWG ,renderFileDrop } from '../../utils/formUtils'
 import { getLabel } from '../../utils/helpers'
 import PropTypes from 'prop-types';
-import FontStyleModal from './shared/FontStyleModal'
 import { useSelector } from 'react-redux';
 import { assessmentFormValidate as validate } from '../../utils/validates'
 import { reduxForm } from 'redux-form';
@@ -13,22 +12,21 @@ import
     Button,
     Container,
     Col,
-		Row,
-		Modal
+	Row,
   }
 from 'react-bootstrap';
 import enterIcon from '../../public/images/enter-icon.png';
 import preview from '../../public/images/preview.png';
+import UploadImageModal from './shared/UploadImageModal'
 const StepThree = (props) => {
-		const [open, setOpen ] = useState(false)
-		const [openModal, setModalOpen ] = useState(false)
+	const [openModal, setModalOpen ] = useState(false)
     const form  = useSelector((state) => state.form.assessmentForm)
     const { handleSubmit, submitData , prevPage ,assessmentData, saveData} = props;
-		const handleToggleModal = () => {
-			setModalOpen(!openModal)
-		}
+    const handleToggleModal = () => {
+        setModalOpen(!openModal)
+    }
 		
-		return(
+return(
     <div className="assesment-step assesment-step-2">
       <Row  className="step-form">
 				<Col className="col-12">
@@ -51,7 +49,10 @@ const StepThree = (props) => {
 												/>
 										
 												<p className="logo-optional">Optional! if you have logo upload here</p>
-												<button type='button' onClick={handleToggleModal} className=''>upload your logo</button>
+												<div className="upload-media-btn">
+												<button type='button' onClick={handleToggleModal}>upload your logo</button>
+												</div>
+												
 											
 												<ul className="cat-list">
 														{form.values?.nicheId && <li>
@@ -98,28 +99,9 @@ const StepThree = (props) => {
 										</div>
 								</div>
 							</div>
-							{open && <FontStyleModal setOpen={setOpen} fonts={assessmentData.fonts} />}
+							
 
-							<Modal show={openModal} onHide={handleToggleModal}>
-								<Modal.Header closeButton>
-								<Modal.Title>Modal heading</Modal.Title>
-								</Modal.Header>
-								<Modal.Body>	
-									<Field
-										name="logoUrl"
-										component={ renderFileDrop }
-										placeholder={"<a><i className='fa fa-plus'/> upload your logo</a>"}
-								/>
-								</Modal.Body>
-								<Modal.Footer>
-									<Button variant="secondary" onClick={handleToggleModal}>
-											Close
-									</Button>
-									<Button  variant="primary">
-											Save Changes
-									</Button>
-								</Modal.Footer>
-							</Modal>
+							<UploadImageModal openModal={openModal} handleToggleModal={handleToggleModal} />
 						</Form>
 					</Container>
 				</Col>

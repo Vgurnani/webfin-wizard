@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Field } from 'redux-form';
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
-import { renderStyleMultipleRadio } from '../../utils/formUtils'
+import { renderStyleMultipleRadio, renderFieldWG ,renderFileDrop } from '../../utils/formUtils'
 import { assessmentFormValidate as validate } from '../../utils/validates'
 import { assessmentIntialValues } from '../../utils/helpers'
 import enterIcon from '../../public/images/enter-icon.png';
-
+import _ from 'lodash'
 import 
   {
     Form,
@@ -16,11 +16,13 @@ import
     Row,
   }
 from 'react-bootstrap';
-import  Link from 'next/link'
+
 const StepOne = (props) => {
     const { handleSubmit, kindOfBuild, saveData, initialize } = props;
     useEffect(()=>{
-        initialize(assessmentIntialValues())
+        if(!_.isEmpty(assessmentIntialValues())){
+            initialize(assessmentIntialValues())
+        }
     },[])
     return(
         <div className="assesment-step assesment-step-1">
@@ -59,7 +61,7 @@ const StepOne = (props) => {
                                 What kind you blog are you looking to build ?
                                 </h2>
                             </div>
-                            <div className="small-wrapper">
+                            <div className="category-wrapper">
                             <Field
                                 name="nicheId"
                                 options={ kindOfBuild || []}
@@ -96,7 +98,8 @@ const StepOne = (props) => {
                                     </div>
                                 </div>
                             </div>
-                           
+                            
+                            
                         </Form>
                     </Container>
                 </Col>
@@ -109,7 +112,7 @@ const StepOne = (props) => {
 StepOne.propTypes = {
     handleSubmit: PropTypes.func,
     submitData: PropTypes.func,
-    saveData: PropTypes.func
+    saveData: PropTypes.func,
 };
 export default reduxForm({
     form: 'assessmentForm',

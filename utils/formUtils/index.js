@@ -146,6 +146,7 @@ const renderStyleMultipleRadio = (props) => {
         <Form.Group>
    
                 { options.map((item,index) => {
+                    
                     return(
                         <div key={ index } className={ `  ${ className || 'styled-radio' }` }>
                             
@@ -161,7 +162,7 @@ const renderStyleMultipleRadio = (props) => {
                                     className="styled-radio"
                                     />
                                 <div className='input-radio-label' style={ { width: width || 'auto' } }>
-                                        {isColors && <span className='checkbox-colors'>
+                                        {isColors && <span className={`checkbox-colors ${item.label === 'Clean White' ? 'round-border' : null}`}>
                                             {item.colors && <span style={{backgroundColor: item.colors[0]}}></span>}
                                         </span>}
                                         {isIcons && item.icon &&  <span className='emojiText mb-0 mt-1' dangerouslySetInnerHTML={ { __html:  item.icon  } } />}
@@ -193,6 +194,7 @@ const renderFileDrop = (props)=> {
         //setUrl,
         url,
         formClass,
+        isDropText,
         placeholder,
         meta: { touched, error, warning },
     } = props;
@@ -222,7 +224,8 @@ const renderFileDrop = (props)=> {
                                 <div className="c-avatar cursor-pointer upload-file"
                                     style={ {  backgroundImage: url ? `url(${ url })`: null } } >
                                     <input  name={ input.name } { ...getInputProps()  } />
-                                    <p dangerouslySetInnerHTML={{__html: placeholder}}/>
+                                    <p className='' dangerouslySetInnerHTML={{__html: placeholder}}/>
+                                    {isDropText ? <div className='drag-image-box'><p>{isDropText}</p></div> : null }
                                 </div>
                             </div>
                         

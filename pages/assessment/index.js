@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import {reset} from 'redux-form';
 import Router from 'next/router'
 import { useDispatch , useSelector } from 'react-redux'
 import withPublicRoute from '../../components/hoc/withPublicRoute'
@@ -22,6 +23,9 @@ const AssessmentPage = (props) => {
 
   useEffect(() =>{
     dispatch(getAssessment())
+    return () => {
+      dispatch(reset('assessmentForm'))
+    }
   },[])
   const nextPage = (data) => {
     setStep(step+1)
