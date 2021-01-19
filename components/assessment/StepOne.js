@@ -58,7 +58,7 @@ const StepOne = (props) => {
                                 What kind you blog are you looking to build ?
                                 </h2>
                             </div>
-                            <div className="small-wrapper">
+                            <div className="category-wrapper">
                             <Field
                                 name="nicheId"
                                 options={ kindOfBuild || []}

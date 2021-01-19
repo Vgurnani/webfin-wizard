@@ -62,7 +62,10 @@ const StepThree = (props) => {
 												/>
 										
 												<p className="logo-optional">Optional! if you have logo upload here</p>
-												<button type='button' onClick={handleToggleModal} className=''>upload your logo</button>
+												<div className="upload-media-btn">
+												<button type='button' onClick={handleToggleModal}>upload your logo</button>
+												</div>
+												
 											
 												<ul className="cat-list">
 														{form.values?.nicheId && <li>
@@ -111,7 +114,7 @@ const StepThree = (props) => {
 							</div>
 							
 
-							<Modal show={true} className="logo-upload-modal">
+							<Modal show={false} className="logo-upload-modal">
 								<Modal.Header closeButton>
                                     <div className="logo-upload-header">
                                         <Row>
