@@ -1,27 +1,7 @@
 @import "~bulma/sass/utilities/initial-variables"
-@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,2000,3000,4000,5000,6000,7000,8000,9001,2001,3001,4001,5001,6001,7001,8001,900&family=Nunito+Sans:ital,wght@0,2000,3000,4000,6000,7000,8000,9001,2001,3001,4001,6001,7001,8001,900&display=swap')
 @import "~bulma"
-
-$body-color: #757575
-$primary-color: #3032C8
-$light-blue-color: #506bf0
-$dark-grey-color: #1B1B1B
-$grey-color: #212121
-$light-grey-color: #ececec
-$secondary-grey-color: #0B132A
-$secondary-light-grey-color: #4F5665
-$optional-grey-color: #18181B
-$optional-light-grey-color: #E2E2E2
-$light-bg-color: #F7F7F7
-$white-color: #ffffff
-$black-color: #000000
-$red-color: #FF0000
-$facebook-color: #3B5998
-$google-color: #2D3748
-$breakpoint-ipad-pro: 1025px
-$breakpoint-ipad: 991px
-$breakpoint-mobile: 767px
-$ipad-media-queries: "(max-width: #{$breakpoint-ipad})"
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap')  
+@import 'variables.sass'
 
 body
   font-family: 'Mulish', sans-serif !important
@@ -637,8 +617,10 @@ ul
       color: $white-color
 .form-side
   min-height: 90vh
-  min-height: calc(100vh - 142px)
-  
+  min-height: calc(100vh - 76px)
+  &.form-side-right
+    .small-wrapper
+      float: right
 
 
 .forget-form-inner
@@ -700,7 +682,7 @@ ul
       min-height: inherit
       display: flex
       justify-content: space-between
-      padding: 0 0 120px
+      padding: 60px 0 120px
       flex-direction: column
 
 .forgot-btns
@@ -1164,17 +1146,7 @@ ul
             &.selected
               img
                 border: 5px solid $primary-color
-      .logo-upload-progress
-        width: 100%
-        display: inline-block
-        .progress
-          height: 8px
-          border-radius: 4px
-          .progress-bar
-            background: rgba(51, 51, 51, 0.3)
-            opacity: 0.5
-            border-radius: 4px
-            height: 8px
+      
 .category-wrapper
   width: 727px
   max-width: 100%
@@ -1187,3 +1159,19 @@ ul
       &:nth-child(2n+1)
         margin-left: 0
         clear: left
+
+.progress
+  height: 27px
+  border-radius: 15px
+  border: 1px solid rgba(51, 51, 51, 0.3)
+  background-color: transparent
+  .progress-bar
+    background: $green-color
+    border-radius: 15px
+    height: 27px
+    color: $black-color
+    font-size: 16px
+    line-height: 1.5
+    font-weight: 600
+    padding: 0 9px
+    text-align: left

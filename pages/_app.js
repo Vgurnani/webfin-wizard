@@ -6,6 +6,8 @@ import configureStore from '../store';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-toastify/dist/ReactToastify.css';
 import '../components/all.sass'
+import '../components/dashboard.sass'
+
 
 const store = configureStore();
 // Store Strapi Global object in context
