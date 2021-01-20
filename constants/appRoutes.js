@@ -5,5 +5,6 @@ export const ROUTES = {
     ASSESSMENT: '/assessment',
     FORGET_PASSWORD: '/forget-password',
     TERMS_CONDITIONS: '/terms-conditions',
-    PRIVACY_POLICY: '/privacy-policy'
+    PRIVACY_POLICY: '/privacy-policy',
+    CONFIRM_ACCOUNT: '/confirm-account'
 }

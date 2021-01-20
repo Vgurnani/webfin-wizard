@@ -12,9 +12,26 @@ export const loginValidate = values => {
 
 export const registerValidate = values => {
     const errors = {};
+    const letter = /^[a-zA-Z][a-zA-Z\s]*$/;
+    if(!values.firstName){
+        errors.firstName = 'Please enter first name';
+    }
+    if(!values.lastName){
+        errors.lastName = 'Please enter last name';
+    }
+    if(values.firstName && !values.firstName.match(letter)){
+        errors.firstName = 'should be character only';
+    }
+    if(values.lastName && !values.lastName.match(letter)){
+        errors.lastName = 'should be character only';
+    }
     if (!values.email) {
         errors.email = 'Please enter email';
     }
+    if(values.email && (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email))){
+        errors.email = 'Please enter valid email';
+    }
+    
     if (!values.password) {
         errors.password = 'Please enter password';
     }

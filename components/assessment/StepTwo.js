@@ -55,7 +55,7 @@ const StepTwo = (props) => {
                                 
                                 <div className="step-btns">
                                 <div className="step-btn-left">
-                                <Button type="button" variant="secondary" >
+                                <Button onClick={prevPage} type="button" variant="secondary" >
                                         Back  
                                         </Button>
                                 </div> 

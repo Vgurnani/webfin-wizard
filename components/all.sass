@@ -1,29 +1,38 @@
 @import "~bulma/sass/utilities/initial-variables"
 @import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,2000,3000,4000,5000,6000,7000,8000,9001,2001,3001,4001,5001,6001,7001,8001,900&family=Nunito+Sans:ital,wght@0,2000,3000,4000,6000,7000,8000,9001,2001,3001,4001,6001,7001,8001,900&display=swap')
 @import "~bulma"
-//import "./assets/images/checked-checkbox.svg"
 
-// Config vars
-// Kaldi logo brand color: #FD461E
-
-$body-font-color: rgba(117,117,117,1)
-$dark-grey-color: rgba(27,27,27,1)
-$primary-color: rgba(48,50,200,1)
-$primary-color-hover: rgba(48,50,200,.8)
-$white-color: rgba(255,255,255,1)
-$dark-blue:  rgba(48,50,200,1)
-$black-color: rgba(0,0,0,1)
+$body-color: #757575
+$primary-color: #3032C8
+$light-blue-color: #506bf0
+$dark-grey-color: #1B1B1B
+$grey-color: #212121
+$light-grey-color: #ececec
+$secondary-grey-color: #0B132A
+$secondary-light-grey-color: #4F5665
+$optional-grey-color: #18181B
+$optional-light-grey-color: #E2E2E2
+$light-bg-color: #F7F7F7
+$white-color: #ffffff
+$black-color: #000000
+$red-color: #FF0000
+$facebook-color: #3B5998
+$google-color: #2D3748
+$breakpoint-ipad-pro: 1025px
+$breakpoint-ipad: 991px
+$breakpoint-mobile: 767px
+$ipad-media-queries: "(max-width: #{$breakpoint-ipad})"
 
 body
   font-family: 'Mulish', sans-serif !important
   font-weight: 400 !important
   font-size: 16px !important
   line-height: 1.5 !important
-  color: $body-font-color !important
-  background-color: #F7F7F7 !important
+  color: $body-color !important
+  background-color: $light-bg-color !important
   min-height: 100vh
   &.light-bg
-    background-color: #fff !important
+    background-color: $white-color !important
   &.blue-left,
   &.blue-right
     position: relative
@@ -34,7 +43,7 @@ body
       top: 0
       bottom: 0
       width: 50%
-      background-color: #506bf0
+      background-color: $light-blue-color
       z-index: -1
   &.blue-left
     &::after
@@ -51,7 +60,7 @@ p
   font-weight: 400
   font-size: 16px
   line-height: 1.5
-  color: $body-font-color
+  color: $body-color
   letter-spacing: 0.5px
   &::last-child
     margin-bottom: 0
@@ -124,8 +133,8 @@ body .btn
     &:hover,
     &:active,
     &:focus
-      background-color: $primary-color-hover
-      border-color:  $primary-color-hover
+      background-color: $light-blue-color
+      border-color:  $light-blue-color
       color: $white-color
   &.btn-secondary
     background-color: $white-color
@@ -135,8 +144,8 @@ body .btn
     &:active,
     &:focus
       background-color: $white-color
-      border-color:  $primary-color-hover
-      color: $primary-color-hover
+      border-color:  $light-blue-color
+      color: $light-blue-color
   &.btn-light
     border: none
     padding-left: 0
@@ -151,7 +160,7 @@ body .btn
 
 .btn-normal,
 .btn-normal:not([href])
-  color: $dark-blue
+  color: $primary-color
   font-size: 16px
   font-weight: 900
   font-family: 'Nunito Sans', sans-serif 
@@ -181,8 +190,21 @@ ul
     font-weight: 400
     font-size: 16px
     line-height: 1.5
-    color: $body-font-color 
-    letter-spacing: 0.5px    
+    color: $body-color 
+    letter-spacing: 0.5px
+
+::-webkit-scrollbar
+  width: 8px
+  height: 8px
+::-webkit-scrollbar-track
+  background: $white-color
+  border-radius: 16px
+::-webkit-scrollbar-thumb 
+  background: rgba(51, 51, 51, 0.3)
+  opacity: .5
+  border-radius: 16px
+::-webkit-scrollbar-thumb:hover
+  background: rgba(51, 51, 51, 0.3)
   
 .content-side
   .content-side-inner
@@ -230,7 +252,7 @@ ul
 .form-text
   font-size: 14px
   line-height: 1.4
-  color: #757575
+  color: $body-color
   font-weight: normal
   margin-top: 10px
   margin-bottom: 0
@@ -242,7 +264,7 @@ ul
   p
     margin: 0 !important
   .form-label
-    color: #757575
+    color: $body-color
     font-size: 14px
     line-height: 1.4
     font-weight: normal
@@ -253,7 +275,7 @@ ul
     font-size: 16px
     line-height: 1.5
     letter-spacing: 0.5px
-    color: #1B1B1B
+    color: $dark-grey-color
     font-weight: normal
     border: 1px solid $white-color
     background-color: $white-color
@@ -270,7 +292,7 @@ ul
     &:-webkit-autofill
       //-webkit-text-fill-color: yellow !important
     &::placeholder
-      color: #1B1B1B
+      color: $dark-grey-color
       opacity: 1
     &:focus
       box-shadow: none    
@@ -281,7 +303,7 @@ ul
       top: 6px
       right: 15px   
   .field_error
-    color: #FF0000
+    color: $red-color
     font-size: 14px
     line-height: 1
     font-weight: 300
@@ -293,7 +315,7 @@ ul
     //   margin-left: -5px
     //   border-width: 5px
     //   border-style: solid
-    //   border-color: transparent transparent #ff4f00 transparent
+    //   border-color: transparent transparent $red-color transparent
 
 
 .main-header
@@ -304,6 +326,8 @@ ul
       .navbar-brand
         margin: 0
         padding: 0
+        img
+          cursor: pointer
     .header-menu
       text-align: right
       .navbar
@@ -321,9 +345,6 @@ ul
         .navbar-brand
           justify-content: flex-end
 
-
-
-
 .home-banner
   padding: 55px 0
   .text-side
@@ -336,7 +357,7 @@ ul
     p
       width: 280px
       max-width: 100% 
-      color: $body-font-color
+      color: $body-color
       margin: 65px 0 25px
     .btn
       width: 340px
@@ -355,7 +376,7 @@ ul
           right: 25px
           top: 25px
           bottom: 25px
-          border: 2px solid #ececec
+          border: 2px solid $light-grey-color
           position: absolute
           z-index: 0
           border-radius: 4px
@@ -376,7 +397,7 @@ ul
       left: 0
       bottom: 0
       width: 50%
-      background-color: #506BF0
+      background-color: $light-blue-color
   .heading-side
     position: relative
     z-index: 1
@@ -385,7 +406,7 @@ ul
       max-width: 100%
       padding: 142px 0 140px
     h3
-      color: #fff
+      color: $white-color
       font-size: 34px
       line-height: 44.2px
 
@@ -402,13 +423,12 @@ ul
     font-weight: 700
     font-size: 20px
     line-height: 26px
-    color: #0B132A
+    color: $secondary-grey-color
   p
-    color: #4F5665
+    color: $secondary-light-grey-color
   .plan-detail
     margin: 40px 0 0
     border: 1px solid rgba(0,0,0,.08)
-    //box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08)
     width: 333px
     max-width: 100%
     display: inline-block
@@ -436,21 +456,21 @@ ul
         text-align: center
         font-size: 34px
         line-height: 44.2px
-        color: rgba(11,19,42,1)
+        color: $secondary-grey-color
         margin: 50px 0 10px
         sub
           font-size: 20px
           font-weight: 700    
 
 .website-faq
-  background-color: #506BF0
+  background-color: $light-blue-color
   padding: 28px 0 45px
 .accordion-faq
   .accordion-card
     border: none
     background: transparent
     border-radius: 0
-    border-bottom: 1px solid #F7F7F7 !important
+    border-bottom: 1px solid $light-bg-color !important
     box-shadow: none
     .accordion-card-header
       padding: 25px 0
@@ -460,7 +480,7 @@ ul
       .accordion-card-btn
         border: none
         padding: 0
-        color: #fff
+        color: $white-color
         font-size: 20px
         font-weight: 700
         letter-spacing: 0.18px
@@ -475,7 +495,7 @@ ul
           text-decoration: none    
     .accordion-card-body
       padding: 0 0 27px
-      color: #fff  
+      color: $white-color  
 
 .site-footer
   padding: 93px 0 58px
@@ -517,7 +537,7 @@ ul
           &:last-child
             padding-right: 0 
           a
-            background-color: #F7F7F7
+            background-color: $light-bg-color
             width: 24px
             height: 24px
             text-align: center
@@ -529,7 +549,7 @@ ul
       &:last-child
         padding-right: 0
     a
-      color: #3032C8
+      color: $primary-color
       font-size: 16px
       font-weight: 900
       text-decoration: underline
@@ -538,25 +558,28 @@ ul
   a
     font-size: 14px
     line-height: 1.4
-    color: #757575
+    color: $body-color
     font-weight: normal
     svg
       padding-right: 3px     
       display: inline-block
       vertical-align: middle
+  span
+    cursor: pointer
+
 
 .section-heading
   font-size: 34px
   line-height: 1.3
-  color: #506BF0
+  color: $light-blue-color
   font-weight: normal
   margin: 0 0 10px
 
 .heading-detail
-  color: #18181B
+  color: $optional-grey-color
   font-weight: normal
   a
-    color: #3032C8
+    color: $primary-color
     text-decoration: underline
     font-weight: 900
 
@@ -603,13 +626,13 @@ ul
   .btn.btn-primary
     padding: 14px 30px    
   .btn.btn-primary.btn-facebook
-    background-color: #3B5998
-    border-color: #3B5998
+    background-color: $facebook-color
+    border-color: $facebook-color
     a
       color: $white-color
   .btn.btn-primary.btn-google
-    background-color: #2D3748
-    border-color: #2D3748
+    background-color: $google-color
+    border-color: $google-color
     a
       color: $white-color
 .form-side
@@ -637,6 +660,27 @@ ul
       top: 50%
       transform: translate(-50%,-50%)
       left: 50%
+      background: $white-color
+      border-radius: 4px
+      width: 383px
+      max-width: 95%
+      padding: 30px 50px 0
+      .carousel-indicators
+        top: 10px
+        li
+          border-color: $light-blue-color
+          &.active
+            background: #506BF0
+  .crausel-side-left
+    position: relative
+    right: 0
+    top: 0
+    bottom: 0
+    .carousel 
+      position: absolute
+      top: 50%
+      transform: translate(-50%,-50%)
+      left: 50%
       background: #fff
       border-radius: 4px
       width: 383px
@@ -647,7 +691,7 @@ ul
         li
           border-color: #506BF0
           &.active
-            background: #506BF0
+            background: $light-blue-color
 .forget-forms
   min-height: inherit
   form
@@ -669,7 +713,7 @@ ul
     height: 44px
     border-radius: 100%
     border: none
-    background-color: #fff
+    background-color: $white-color
     font-size: 16px
     line-height: 1.5
     margin-right: 15px
@@ -686,26 +730,26 @@ ul
     font-weight: normal
     font-size: 34px
     line-height: 1.3
-    color: #506BF0
+    color: $light-blue-color
     margin: 0 0 25px
   h4
     font-weight: bold
     font-size: 20px
     line-height: 1.3
-    color: #1B1B1B
+    color: $dark-grey-color
     margin: 0 0 25px
   p
     font-weight: normal
     font-size: 16px
     line-height: 1.3
-    color: #1B1B1B
+    color: $dark-grey-color
     letter-spacing: 0.5px
     margin: 0 0 28px
   ul
     font-weight: normal
     font-size: 16px
     line-height: 1.3
-    color: #1B1B1B
+    color: $dark-grey-color
     letter-spacing: 0.5px
     margin: 0 0 25px
     list-style: none
@@ -726,7 +770,7 @@ ul
 .not-found-page
   margin: 52px 0 20px
   h1
-    color: #1B1B1B
+    color: $dark-grey-color
     letter-spacing: -1.5px
     font-size: 72px
     line-height: 1
@@ -740,7 +784,7 @@ ul
       margin-right: 25px
       padding: 11px 30px
     p
-      color: #757575
+      color: $body-color
       display: inline-block
       vertical-align: middle
       width: 200px
@@ -758,15 +802,15 @@ ul
   li
     width: 7.74px
     height: 8.1px
-    border: 2px solid #E2E2E2
+    border: 2px solid $optional-light-grey-color
     background: transparent
     border-radius: 100%
     margin: 0 0 0 10px
     opacity: 1
     &.active
-      background: #E2E2E2
+      background: $optional-light-grey-color
 .styled-radio-btn
-  border: 1px solid #E2E2E2
+  border: 1px solid $optional-light-grey-color
   border-radius: 24px
   padding: 10px 18px
   margin: 16px 0 0
@@ -791,7 +835,7 @@ ul
   .input-radio-label
     display: inline-block
     vertical-align: middle
-    color: #1B1B1B
+    color: $dark-grey-color
     font-size: 16px
     line-height: 1.5
     padding: 0 0 0 25px
@@ -802,7 +846,7 @@ ul
       margin: 0 0 0 5px !important
 .main-section      
   .step-banner
-    background: linear-gradient(219.41deg, #3032C8 0%, #506BF0 100%)
+    background: linear-gradient(219.41deg, $primary-color 0%, $light-blue-color 100%)
     color: $white-color
     padding: 22px 0
     .back-to-home 
@@ -827,11 +871,11 @@ ul
 .step-form
   padding: 30px 0 60px
   .form-heading
-    border-bottom: 1px solid #1B1B1B
+    border-bottom: 1px solid $dark-grey-color
     padding: 18px 0
     margin: 0 0 32px
     h2
-      color: #212121
+      color: $grey-color
       font-size: 34px
       line-height: 1.3
   .step-btns
@@ -875,9 +919,9 @@ ul
       .styled-radio
         &:checked + .input-radio-label  
           background-image: none
-          border: 2px solid #3032C8
+          border: 2px solid $primary-color
           .emojiText
-            color: #3032C8
+            color: $primary-color
       .input-radio-label
         border: 1px solid rgba(51, 51, 51, 0.3)
         border-radius: 10px
@@ -887,7 +931,7 @@ ul
         height: 58px
         box-sizing: border-box
         .emojiText
-          color: #000000
+          color: $black-color
           font-size: 24px
           line-height: 1.5
           letter-spacing: 0.5px
@@ -908,18 +952,67 @@ ul
             border-radius: 100%
             display: inline-block
             border: none
+.avatar-user
+  &:focus,
+  &:active
+    outline: none
+.upload-file
+  position: relative
+  color: $primary-color
+  font-size: 14px
+  line-height: 17px
+  font-weight: 600
+  &:focus,
+  &:active
+    outline: none
+  &::after
+    content: ''
+    display: inline-block
+    vertical-align: middle
+    position: absolute
+    top: 0
+    left: 0
+    background-image: url('/images/plus.png')
+    background-repeat: no-repeat
+    background-position: 0 0
+    width: 24px
+    height: 24px
+  p
+    margin: 0
+    display: inline-block
+    padding: 0 0 0 26px
+    font-weight: 600
+    font-size: 14px
+    line-height: 1.6
+    color: $primary-color
+    text-transform: capitalize
+    &:focus,
+    &:active
+      outline: none
+    i
+      font-style: unset
+    a 
+      &:focus,
+      &:active
+        outline: none
 
-.assesment-step
-  .form-control
-    background-color: #F7F7F7
-  .logo-optional
-    margin: 0 0 3px
-  .upload-file
+.upload-media-btn
+  width: 100%
+  display: inline-block
+  margin: 20px 0 60px
+  button
     position: relative
-    color: #3032C8
+    color: $primary-color
     font-size: 14px
     line-height: 17px
     font-weight: 600
+    padding: 0 0 0 26px
+    background: transparent
+    border: none
+    text-transform: capitalize
+    &:focus,
+    &:active
+      outline: none
     &::after
       content: ''
       display: inline-block
@@ -931,18 +1024,14 @@ ul
       background-repeat: no-repeat
       background-position: 0 0
       width: 24px
-      height: 24px
-    p
-      margin: 0
-      display: inline-block
-      padding: 0 0 0 26px
-      font-weight: 600
-      font-size: 14px
-      line-height: 1.6
-      color: #3032C8
-      text-transform: capitalize
-      i
-        font-style: unset
+      height: 24px    
+
+.assesment-step
+  .form-control
+    background-color: $light-bg-color
+  .logo-optional
+    margin: 0 0 3px
+    
 .cat-list
   margin: 0
   padding: 0
@@ -951,9 +1040,9 @@ ul
     width: 100% !important
     display: inline-block !important
     background: rgba(28, 30, 153, 0.1)
-    border: 2px solid #3032C8
+    border: 2px solid $primary-color
     border-radius: 24px
-    color: #3032C8
+    color: $primary-color
     font-size: 16px
     line-height: 36px
     margin: 0 0 15px !important
@@ -966,4 +1055,135 @@ ul
 .website-loader
   align-items: center
   .spinner-border
-    color:#3032C8      
+    color:$primary-color
+.drag-image-box 
+  width: 100%
+  height: 100px
+  background: #dddddd
+  border: 1px solid #cccccc
+  border-radius: 30px
+  align-items: center
+  p
+    color: #1d1a1a
+    text-align: center
+
+.round-border 
+  span
+    border: 1px solid #ccc !important
+.modal-backdrop
+  z-index: 39  
+.modal 
+  .modal-dialog
+    max-width: 95%
+    .modal-content
+      border-radius: 16px
+      border: none
+      .close
+        padding: 0
+        font-size: 0
+        width: 24px
+        height: 24px
+        background-image: url('/images/close.png')
+        background-repeat: no-repeat
+        background-position: 0 0
+        margin: 0
+        &:focus
+          outline: none
+      .modal-header
+        border: none
+      .modal-footer
+        border: none
+      .modal-title
+        color: $grey-color
+        font-size: 34px
+        line-height: 1.3
+
+.modal-btns
+  text-align: center
+  width: 100%
+  .btn
+    margin-left: 18px
+    &:first-child
+      margin-left: 0
+.logo-upload-modal
+  .modal-dialog
+    .modal-content
+      padding: 65px
+      width: 888px
+      .close
+        position: absolute
+        right: 0
+        top:0
+      .modal-header
+        padding: 45px 0 15px
+        position: relative
+        border-bottom: 1px solid $optional-light-grey-color
+      .modal-body
+        padding: 18px 0
+      .logo-upload-header  
+        width: 100%
+        .search-wrapper 
+          text-align: right
+          .form-group
+            margin: 0
+            text-align: right
+            width: auto
+            .form-control
+              background-color: $light-bg-color
+              width: 297px
+              max-width: 100%
+              background-image: url('/images/search.png')
+              background-repeat: no-repeat
+              background-position: 16px center
+              padding-left: 50px
+      .logo-gallery
+        width: 100%
+        display: inline-block
+        overflow: auto
+        ul
+          margin: 0
+          padding: 0
+          list-style: none
+          white-space: nowrap
+          li
+            margin-left: 2%
+            margin-bottom: 2%
+            width: auto
+            display: inline-block
+            &:nth-child(5n+1)
+              margin-left: 0
+              clear: left
+            &::after
+              display: none
+            img 
+              border: 2px solid 51,51,51,0.3
+              border-radius: 16px
+              width: 92px
+              height: 92px
+              object-fit: cover
+            &.selected
+              img
+                border: 5px solid $primary-color
+      .logo-upload-progress
+        width: 100%
+        display: inline-block
+        .progress
+          height: 8px
+          border-radius: 4px
+          .progress-bar
+            background: rgba(51, 51, 51, 0.3)
+            opacity: 0.5
+            border-radius: 4px
+            height: 8px
+.category-wrapper
+  width: 727px
+  max-width: 100%
+  .form-group
+    .styled-radio-btn
+      margin-left: 5%
+      width: 47.5%
+      display: inline-block
+      vertical-align: middle
+      &:nth-child(2n+1)
+        margin-left: 0
+        clear: left
