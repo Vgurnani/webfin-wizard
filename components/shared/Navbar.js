@@ -15,6 +15,8 @@ const Navbar = (props) => {
   const btAction = (pathname) => {
     if(pathname === '/register'){
       return 'logo-right no-login';
+    } else if(pathname === '/confirm-account'){
+      return 'logo-right no-login';
     } else if(pathname === '/login'){
       return 'no-login';
     } else {

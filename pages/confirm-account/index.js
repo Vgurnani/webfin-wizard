@@ -34,65 +34,72 @@ const ConfirmAccount = (props) => {
   return(
     <section className="forgot-password-section main-section main-form-section">
         <Container className="positionUnset">   
-          
           <Row className="align-items-center positionUnset">
-        <Col className="crausel-side-left col-6 text-center">  
-            <Carousel controls={false} className="carousel slide" id="sampleSlide">  
-        
-            <Carousel.Item className="carousel-item">
-                <img src={accountSlider1} alt='slider1' />
-            </Carousel.Item>
-            <Carousel.Item className="carousel-item">
-                <img src={accountSlider1} alt='slider2'/>
-            </Carousel.Item>
-            <Carousel.Item className="carousel-item">
-                <img src={accountSlider1} alt='slider3'/>
-            </Carousel.Item>
+            <Col className="crausel-side crausel-side-left col-6 text-center">  
+                <Carousel controls={false} className="carousel slide" id="sampleSlide">  
+                  <Carousel.Item className="carousel-item">
+                    <img src={accountSlider1} alt='slider1' />
+                  </Carousel.Item>
+                  <Carousel.Item className="carousel-item">
+                    <img src={accountSlider1} alt='slider2'/>
+                  </Carousel.Item>
+                  <Carousel.Item className="carousel-item">
+                    <img src={accountSlider1} alt='slider3'/>
+                  </Carousel.Item>
+                </Carousel>
+              </Col>
+            <Col className="col-6 form-side form-side-right">
+            
+              <div className="forget-forms signup-forms">
+              
+                <Form className="form" onSubmit={handleSubmit(submitData)}>
+                  <div className="forget-form-inner">
+                      <div className="forget-forms-element">
+                      <div className="small-wrapper">
+                          <h1 className="section-heading">   
+                          Confirm account
+                          </h1>
+                          <p className="heading-detail">
+                          Please enter confirmation code.
+                          </p>
+                          
+                            <Form.Group controlId="formBasicEmail">
+                              <Form.Label>Code:</Form.Label>
+                              <Field
+                                  label="Code"
+                                  name="code"
+                                  type="text"
+                                  numInputs={6}
+                                  component={ renderOTPField }
+                                  formClass="otpFieldsInput"
+                              /> 
+                              <Form.Text className="form-text">
+                                Review your email!
+                              </Form.Text>
+                            </Form.Group>
+                          
+                      </div>
+                      </div>
+                      <div className="forgot-btns">
+                      <div className="small-wrapper">
+                          <Button className="btn btn-primary" type="submit">
+                          Continue
+                          </Button>   
+                          <p className="heading-detail">
+                          Didn't receive code  <a href="#" onClick={handleResendCode} >Resend</a>
+                          </p>   
+                          </div>
+                      </div>   
+                  </div>
+                 
+                </Form>
                 
-            </Carousel>
-        </Col>
-          <Col className="col-6 form-side">
-            <div className="small-wrapper">
-              <Row className="login-forms signup-forms">
-                <Col className="col-12">
-                  <h1 className="section-heading">
-                  Confirm account
-                  </h1>
-                  <p className="heading-detail">
-                  please enter confirmation code.
-                  </p>
-                  <Form className="form" onSubmit={handleSubmit(submitData)}>
-                  <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Code:</Form.Label>
-                    <Field
-                        label="Code"
-                        name="code"
-                        type="text"
-                        numInputs={6}
-                        component={ renderOTPField }
-                        formClass="otpFieldsInput"
-                    /> 
-                    </Form.Group>
-                    <Form.Text className="form-text">
-                        Review your email!
-                    </Form.Text>
-
-
-                    <Button className="btn btn-primary" type="submit">
-                      Continue
-                    </Button>
-                    <p className="heading-detail">
-                    Didn't receive code  <a href="#" onClick={handleResendCode} >Resend</a>
-                    </p>
-                  </Form>
-                </Col>
-              </Row>
-            </div>
-          </Col>
-        </Row>
-
-      </Container>
+              </div>
+            </Col>
+          </Row>
+        </Container>
     </section>
+    
 )}
 
 ConfirmAccount.propTypes = {

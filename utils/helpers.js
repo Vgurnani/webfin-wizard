@@ -24,7 +24,10 @@ export const addBodyClass = (pathname) =>{
     } else if(path === ROUTES.ASSESSMENT){
         document.body.classList.add('no-footer');
         document.body.classList.add('light-bg');
-    }
+    } else if(path === ROUTES.CONFIRM_ACCOUNT){
+        document.body.classList.add('blue-left');
+        document.body.classList.add('no-footer');
+    } 
 }
 
 export const getUser = () => {
