@@ -27,6 +27,12 @@ export default (state = initialState, action) => {
         return { ...state, success: action.payload, loading: false };
       case ActionTypes.RESEND_CODE_FAILURE:
         return { ...state, error: action.error, loading: false };
+      case ActionTypes.FORGET_PASSWORD_REQUEST:
+        return { ...state, loading: true };
+      case ActionTypes.FORGET_PASSWORD_SUCCESS:
+        return { ...state, success: action.payload, loading: false };
+      case ActionTypes.FORGET_PASSWORD_FAILURE:
+        return { ...state, error: action?.payload, loading: false };
 
       default:
         return state;

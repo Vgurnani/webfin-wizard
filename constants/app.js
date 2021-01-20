@@ -3,3 +3,17 @@ export const NOTIFICATION_TYPES = {
     ERROR: 'error',
     INFO: 'info'
 }
+
+export const MESSAGE = {
+    REGISTRATION_SUCCESS: 'Registration Successfully',
+    LOGIN_SUCCESS: 'Login Successfully',
+    EMAIL_ACTIVATE: 'Email is activate Successfully',
+    CODE_SEND: 'Code Send Successfully',
+    CREATE_ASSESSMENT: 'Create Assessment Successfully',
+    SOMETHING_WRONG: 'Something went wrong',
+    REQUIRED: 'required',
+    PASSWORD_MATCH: 'password should be match',
+    SHOULD_CHAR: 'should be character only',
+    INVALID_EMAIL: 'Invalid email',
+    VALID_ENTER: (value) => `Please enter ${value}`
+}

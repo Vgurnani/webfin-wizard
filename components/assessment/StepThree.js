@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { assessmentFormValidate as validate } from '../../utils/validates'
 import { reduxForm } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux'
+import { change as reduxChange } from 'redux-form'
 
 import 
   {
@@ -39,6 +40,14 @@ const StepThree = (props) => {
 		let query  = form.values?.nicheId && getLabel(assessmentData.niches, form.values?.nicheId)
 		query = event.currentTarget.value || query
 		dispatch(getUnsplash('/photos',query))
+	}
+
+	const getFile = (file) => {
+		dispatch(reduxChange('assessmentForm', 'logoUrl', file))
+	}
+
+	const clearImage = () => {
+		dispatch(reduxChange('assessmentForm', 'logoUrl', null))
 	}
 		
 return(
@@ -116,7 +125,7 @@ return(
 							</div>
 							
 
-							<UploadImageModal handleSearch={handleSearch} unsplashImages={unsplashImages} openModal={openModal} handleToggleModal={handleToggleModal} />
+							<UploadImageModal  clearImage={clearImage} previewFile={form.values?.logoUrl} getFile={getFile} handleSearch={handleSearch} unsplashImages={unsplashImages} openModal={openModal} handleToggleModal={handleToggleModal} />
 						</Form>
 					</Container>
 				</Col>

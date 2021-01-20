@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { forgetPasswordValidate as validate } from '../../utils/validates'
 import { reduxForm } from 'redux-form';
+import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types';
 import accountSlider1 from '../../public/images/account-slider-1.png';
 import withPublicRoute from '../../components/hoc/withPublicRoute'
+import { forgetPassword } from '../../middleware/auth'
 import 
   {
     Container,
@@ -19,10 +21,11 @@ import OtpForm from '../../components/forget-password/OtpForm';
 import ResetPasswordForm from '../../components/forget-password/ResetPasswordForm';
 
 const ForgetPasswordPage = (props) => {
+  const dispatch = useDispatch()
   const [ step, setStep ] = useState(1)
   const { handleSubmit } = props
   const submitData = (data) => {
-    setStep(step+1)
+    dispatch(forgetPassword(step, setStep,data))
   }
 
   const handleView = () => {

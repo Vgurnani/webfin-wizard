@@ -80,3 +80,26 @@ export const resendCodeFailure = (error) => {
         error: error,
     };
 };
+
+
+
+export const forgetPasswordRequest = () => {
+    return {
+        type: ActionTypes.FORGET_PASSWORD_REQUEST,
+    };
+};
+
+export const forgetPasswordSuccess = (data) => {
+    return {
+        type: ActionTypes.FORGET_PASSWORD_SUCCESS,
+        payload: data,
+    };
+};
+
+export const forgetPasswordFailure = (error) => {
+    return {
+        type: ActionTypes.FORGET_PASSWORD_FAILURE,
+        payload: error,
+    };
+};
+

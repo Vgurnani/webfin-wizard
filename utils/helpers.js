@@ -64,3 +64,21 @@ export const togglePassword = (event) => {
     input.type = input.type === 'text' ? 'password' : 'text'
 
 }
+
+
+export const createFileFromUrl = async(url,id) => {
+    let response = await fetch(url);
+    let data = await response.blob();
+    let metadata = {
+      type: 'image/jpeg'
+    };
+    let file = new File([data], `${id}.jpg`, metadata);
+    return file
+}
+
+export const bytesToSize = (bytes) =>  {
+    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    if (bytes == 0) return '0 Byte';
+    var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+ }

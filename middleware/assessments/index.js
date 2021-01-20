@@ -1,5 +1,5 @@
 import {reset} from 'redux-form';
-import { NOTIFICATION_TYPES } from '../../constants/app';
+import { NOTIFICATION_TYPES, MESSAGE } from '../../constants/app';
 import { notification } from '../../services/notification';
 import axiosInstance from '../../services/api';
 import unsplashClient from '../../services/unsplashClient';
@@ -23,7 +23,7 @@ export const getAssessment = (data) => {
             const fonts = result.fonts.map((item) => ({label: item.label,value: item.id.toString()}))
             dispatch(getAssessmentSuccess({niches, colorPalette,fonts}))
         }).catch((error) => {
-            notification(NOTIFICATION_TYPES.ERROR, 'Something went wrong')
+            notification(NOTIFICATION_TYPES.ERROR, MESSAGE.SOMETHING_WRONG)
             dispatch(getAssessmentFailure(error?.response?.data?.message))
         })
     };
@@ -35,7 +35,7 @@ export const createAssessment = (data) => {
         
         dispatch(createAssessmentRequest())
         axiosInstance.post(`/assessment`, data).then((response)=>{
-            notification(NOTIFICATION_TYPES.SUCCESS, 'Create Assessment Successfully');
+            notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CREATE_ASSESSMENT);
             localStorage.clear();
             dispatch(reset('assessmentForm'))
             dispatch(createAssessmentSuccess(response.data))
