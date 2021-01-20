@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Field } from 'redux-form';
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
+import Link from 'next/link'
 import { renderStyleMultipleRadio, renderFieldWG ,renderFileDrop } from '../../utils/formUtils'
 import { assessmentFormValidate as validate } from '../../utils/validates'
 import { assessmentIntialValues } from '../../utils/helpers'
@@ -31,12 +32,14 @@ const StepOne = (props) => {
                     <Container>
                         <Row className="back-to-home">
                             <Col className="col-12">
-                                <a href="/">
+                                <Link href="/">
+                                    <span>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M15.5 18L9.5 12L15.5 6" stroke="white" strokeLinejoin="round"/>
                                     </svg>
-                                    Back to Home 
-                                </a>
+                                    Back to Home
+                                    </span>
+                                </Link>
                             </Col>
                         </Row>
                         <Row>

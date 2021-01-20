@@ -2,13 +2,15 @@ import {reset} from 'redux-form';
 import { NOTIFICATION_TYPES } from '../../constants/app';
 import { notification } from '../../services/notification';
 import axiosInstance from '../../services/api';
+import unsplashClient from '../../services/unsplashClient';
 import { 
     getAssessmentRequest,
     getAssessmentSuccess,
     getAssessmentFailure,
     createAssessmentRequest,
     createAssessmentSuccess,
-    createAssessmentFailure
+    createAssessmentFailure,
+    getUnsplashSuccess
 
 } from '../../actions/assessments'
 export const getAssessment = (data) => {
@@ -43,3 +45,17 @@ export const createAssessment = (data) => {
         })
     };
 };
+
+
+export const getUnsplash = (url,query) => {
+    return async (dispatch) => {
+       const result = await  unsplashClient.search.getPhotos({
+        query: query,
+        page: 1,
+        perPage: 20
+       })
+       dispatch(getUnsplashSuccess(result?.response?.results))
+    };
+};
+
+

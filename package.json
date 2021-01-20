@@ -33,6 +33,7 @@
     "redux-promise-middleware": "^6.1.2",
     "redux-thunk": "^2.3.0",
     "sass": "^1.32.2",
+    "unsplash-js": "^7.0.2",
     "url-loader": "^4.1.1"
   }
 }

@@ -1,11 +1,13 @@
-import React,{ useState } from 'react'
+import React,{ useState , useEffect } from 'react'
 import { Field } from 'redux-form';
 import { renderFieldWG ,renderFileDrop } from '../../utils/formUtils'
 import { getLabel } from '../../utils/helpers'
+import { getUnsplash } from '../../middleware/assessments'
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import { assessmentFormValidate as validate } from '../../utils/validates'
 import { reduxForm } from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux'
+
 import 
   {
     Form,
@@ -19,12 +21,25 @@ import enterIcon from '../../public/images/enter-icon.png';
 import preview from '../../public/images/preview.png';
 import UploadImageModal from './shared/UploadImageModal'
 const StepThree = (props) => {
+	const dispatch = useDispatch()
 	const [openModal, setModalOpen ] = useState(false)
-    const form  = useSelector((state) => state.form.assessmentForm)
+	const form  = useSelector((state) => state.form.assessmentForm)
+	const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
     const { handleSubmit, submitData , prevPage ,assessmentData, saveData} = props;
     const handleToggleModal = () => {
         setModalOpen(!openModal)
-    }
+	}
+	
+	useEffect(()=>{
+		const query = form.values?.nicheId && getLabel(assessmentData.niches, form.values?.nicheId)
+		dispatch(getUnsplash('/photos',query))
+	},[])
+
+	const handleSearch = (event) => {
+		let query  = form.values?.nicheId && getLabel(assessmentData.niches, form.values?.nicheId)
+		query = event.currentTarget.value || query
+		dispatch(getUnsplash('/photos',query))
+	}
 		
 return(
     <div className="assesment-step assesment-step-2">
@@ -101,7 +116,7 @@ return(
 							</div>
 							
 
-							<UploadImageModal openModal={openModal} handleToggleModal={handleToggleModal} />
+							<UploadImageModal handleSearch={handleSearch} unsplashImages={unsplashImages} openModal={openModal} handleToggleModal={handleToggleModal} />
 						</Form>
 					</Container>
 				</Col>

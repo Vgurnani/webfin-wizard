@@ -42,3 +42,18 @@ export const createAssessmentFailure = (error) => {
         payload: error,
     };
 };
+
+export const getUnsplashSuccess = (data) => {
+    return {
+        type:  ActionTypes.GET_UNSPLASH_SUCCESS,
+        payload: data
+    }
+}
+
+
+export const getUnsplashError = (error) => {
+    return {
+        type:  ActionTypes.GET_UNSPLASH_ERROR,
+        error: error
+    }
+}
