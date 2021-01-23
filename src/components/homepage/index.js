@@ -6,7 +6,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Layout from '../../components/shared/Layout';
 
 import { ROUTES } from '../../constants/appRoutes';
@@ -18,8 +18,6 @@ import premiumPlan from '../../public/images/home/premium-plan.png';
 import vipPlan from '../../public/images/home/vip-plan.png';
 
 const HomePage = (props) => {
-  const history = useHistory();
-  console.log(history);
   return(
     <Layout className="main-layout" pathname={ROUTES.ROOT}>
     <section className="main-section">

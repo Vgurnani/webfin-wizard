@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../../middleware/auth'
 // import withPrivateRoute from '../../components/hoc/withPrivateRoute';
+import Layout from '../../components/shared/Layout';
 
 const Dashboard =(props) => {
     const dispatch = useDispatch();

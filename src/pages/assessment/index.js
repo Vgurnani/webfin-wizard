@@ -3,7 +3,7 @@ import {reset} from 'redux-form';
 // import Router from 'next/router'
 import { useHistory } from "react-router-dom";
 import { useDispatch , useSelector } from 'react-redux'
-import withPublicRoute from '../../components/hoc/withPublicRoute'
+// import withPublicRoute from '../../components/hoc/withPublicRoute'
 import StepOne from  '../../components/assessment/StepOne';
 import StepTwo from  '../../components/assessment/StepTwo';
 import StepThree from  '../../components/assessment/StepThree';
@@ -12,6 +12,7 @@ import Preview from  '../../components/assessment/Preview';
 import { ROUTES } from '../../constants/appRoutes'
 import { getAssessment ,createAssessment } from '../../middleware/assessments';
 import { isLoggedIn } from '../../utils/helpers'
+import Layout from '../../components/shared/Layout';
 
 const AssessmentPage = (props) => {
   const history = useHistory();
@@ -69,9 +70,11 @@ const AssessmentPage = (props) => {
     }
 }
   return(
-    <section className="main-section">
-      {handleView()}
-    </section>
+    <Layout className="main-layout" pathname={ROUTES.ASSESSMENT}>
+      <section className="main-section">
+        {handleView()}
+      </section>
+    </Layout>
 )
 }
 AssessmentPage.propTypes = {

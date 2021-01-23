@@ -3,8 +3,7 @@ import axios from 'axios'
 import { NOTIFICATION_TYPES } from '../constants/app';
 import { notification } from './notification';
 import { getUser } from '../utils/helpers';
-const baseUrl = `${process.env.API_URL}/v1`;
-
+const baseUrl = `${process.env.REACT_APP_API_URL}/v1`;
 
 const axiosInstance =  axios.create({
     baseURL: baseUrl,
@@ -17,7 +16,7 @@ const axiosInstance =  axios.create({
 })
 axiosInstance.interceptors.request.use(function (config) {
     const token = getUser() && getUser().accessToken;
-    config.headers.Authorization =  token ? `Bearer ${ token }` :  null ; 
+    config.headers.Authorization =  token ? `Bearer ${ token }` :  null ;
     return config;
 });
 
@@ -31,7 +30,7 @@ axiosInstance.interceptors.response.use((response) => {
         notification(NOTIFICATION_TYPES.ERROR, error.message)
         return Promise.reject(error);
     }
-  
+
     return Promise.reject(error);
 });
 

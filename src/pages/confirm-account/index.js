@@ -18,7 +18,7 @@ import { registerValidate as validate } from '../../utils/validates'
 import { reduxForm } from 'redux-form';
 import { Field } from 'redux-form';
 import accountSlider1 from '../../public/images/account-slider-1.png';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 
 const ConfirmAccount = (props) => {
   const dispatch = useDispatch();

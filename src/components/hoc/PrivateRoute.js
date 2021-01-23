@@ -1,6 +1,6 @@
 import React from "react"
 import { Route, Redirect } from "react-router-dom"
-import { getItem } from "../utils/cache"
+import { getItem } from "../../utils/cache"
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
   const savedUser = getItem("user")
