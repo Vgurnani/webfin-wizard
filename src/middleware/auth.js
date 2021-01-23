@@ -2,8 +2,8 @@ import { ROUTES } from '../constants/appRoutes';
 import { NOTIFICATION_TYPES,MESSAGE } from '../constants/app';
 import { notification } from '../services/notification';
 import { createAssessment } from './assessments/'
-import Cookies from 'js-cookie';
 import axiosInstance from '../services/api';
+import { getItem, setItem, removeItem } from '../utils/cache';
 
 import {
     loginRequest,
@@ -28,7 +28,7 @@ export const loginUser = (data) => {
         dispatch(loginRequest())
         axiosInstance.post(`/auth/login`, data).then((response)=>{
             response.data.data['accessToken'] = response.data.accessToken
-            Cookies.set('user', JSON.stringify(response.data.data))
+            setItem('user', response.data.data)
             // Router.push(ROUTES.DASHBOARD)
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.LOGIN_SUCCESS);
             dispatch(loginSuccess(response.data.data))
@@ -43,7 +43,7 @@ export const loginUser = (data) => {
 export const logoutUser = () => {
     return (dispatch) => {
         dispatch(loginRequest())
-        Cookies.remove('user')
+        removeItem('user')
         dispatch(logoutSuccess())
         // Router.push(ROUTES.LOGIN)
     };
@@ -55,7 +55,7 @@ export const registrationUser = (data, assessmentData) => {
         axiosInstance.post(`/auth/signup`, data)
             .then((response) => {
                 response.data.data['accessToken'] = response.data.accessToken
-                Cookies.set('user', JSON.stringify(response.data.data))
+                setItem('user', response.data.data)
                 notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.REGISTRATION_SUCCESS);
                 dispatch(registrationSuccess(response.data.data))
                 // !_.isEmpty(assessmentData) && dispatch(createAssessment(assessmentData))
@@ -74,10 +74,10 @@ export const emailVerification = (data) => {
         dispatch(registrationRequest())
         axiosInstance.get(`/user/verify?code=${data.code}`)
             .then((response) => {
-                let  user = Cookies.get('user');
+                let  user = getItem('user');
                 user = JSON.parse(user)
                 user['enabled'] = true
-                Cookies.set('user',JSON.stringify(user))
+                setItem('user', user)
                 // Router.push(ROUTES.DASHBOARD)
                 dispatch(emailVerificationSuccess(response))
                 notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.EMAIL_ACTIVATE);

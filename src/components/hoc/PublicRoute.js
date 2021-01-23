@@ -14,7 +14,7 @@ export const PublicRoute = ({ component: Component, ...rest }) => {
         isLoggedIn ? (
           <Redirect
             to={{
-              pathname: '/profile',
+              pathname: '/dashboard',
               state: { from: props.location },
             }}
           />

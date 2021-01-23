@@ -1,6 +1,6 @@
-import Cookies from 'js-cookie'
 import { ROUTES } from '../constants/appRoutes';
-import _ from 'lodash'
+import _ from 'lodash';
+import { getItem } from './cache';
 export const addBodyClass = (pathname) =>{
     const path = pathname
     document.body.className = ''
@@ -27,12 +27,11 @@ export const addBodyClass = (pathname) =>{
     } else if(path === ROUTES.CONFIRM_ACCOUNT){
         document.body.classList.add('blue-left');
         document.body.classList.add('no-footer');
-    } 
+    }
 }
 
 export const getUser = () => {
-    const user = Cookies.get('user') || '';
-    return user && JSON.parse(user)
+    return getItem('user') || '';
 }
 
 export const isLoggedIn = () => {
