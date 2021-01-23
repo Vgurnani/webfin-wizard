@@ -1,0 +1,112 @@
+import React,{ useEffect ,useState} from 'react'
+import { Field } from 'redux-form';
+import { useSelector } from 'react-redux'
+import { renderStyleMultipleRadio } from '../../utils/formUtils'
+import { assessmentSaved } from '../../utils/helpers'
+import { assessmentFormValidate as validate } from '../../utils/validates'
+import { reduxForm } from 'redux-form';
+import PropTypes from 'prop-types';
+import 
+  {
+    Form,
+    Button,
+    Container,
+    Col,
+    Row,
+  }
+from 'react-bootstrap';
+import enterIcon from '../../public/images/enter-icon.png';
+import preview from '../../public/images/preview.png';
+const StepTwo = (props) => {
+    const [isSave, setSave ] = useState(false)
+    const { handleSubmit,prevPage ,colorPalette, saveData} = props;
+    const assessmentForm = useSelector((state) => state.form.assessmentForm)
+
+    useEffect(()=>{
+        setSave(assessmentSaved('step2',assessmentForm?.values))
+    },[assessmentForm?.values])
+
+    const handleSave = () => {
+        setSave(true)
+        saveData()
+    }
+    return(
+        <div className="assesment-step assesment-step-2">
+            <Row  className="step-form">
+                <Col className="col-12">
+                    <Container>
+                        <Form className="form" onSubmit={handleSubmit}>  
+                        <div className="form-heading">   
+                                <h2>
+                                Choose Your Color Palette!
+                                </h2>
+                            </div>
+                            <Row className="color-palatte">
+                                <Col className="col-6 color-palatte-selector">
+                                    <Field
+                                        name="colourId"
+                                        options={ colorPalette }
+                                        component={ renderStyleMultipleRadio }
+                                        defaultValue={ 'no' }
+                                        placeholder={ 'gaveCraving' }
+                                        isColors={true}
+                                        className='styled-radio-btn btn-outline'
+                                        imgWidth="30px"
+                                    />
+                                </Col>
+                                <Col className="col-6 color-palatte-preview">
+                                    <div className="color-preview">
+                                        <img src={preview} alt="Preview" />
+                                    </div>
+                                </Col>
+                            </Row>
+                                <div className="step-btns">
+                                <div className="step-btn-left">
+                                <Button onClick={prevPage} type="button" variant="secondary" >
+                                        Back  
+                                        </Button>
+                                </div> 
+                                <div className="step-btn-right">
+                                    <div className="step-btn">
+                                        <Button type="button"  disabled={!props.valid} onClick={handleSave} variant="light" >
+                                        { isSave ? 'Saved' : 'Save'}   
+                                        </Button>
+                                    </div>
+                                    <div className="step-btn">
+                                    <span>
+                                    { props.valid  ? 
+                                         <Button type="submit" variant="primary">
+                                         Next
+                                         </Button>
+                                        : 
+                                        <Button type="button" disabled={true} variant="primary">
+                                        Next
+                                        </Button>}
+                                        </span>
+                                        <span className="enter-btn">
+                                            <a>
+                                            or Press Enter
+                                            <img src={enterIcon} alt="Enter" />
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </Form>
+                    </Container>
+                </Col>
+            </Row>
+        </div>
+        
+    )
+}
+StepTwo.propTypes = {
+    handleSubmit: PropTypes.func,
+    submitData: PropTypes.func,
+    saveData: PropTypes.func
+};
+export default reduxForm({
+    form: 'assessmentForm',
+    destroyOnUnmount: false,
+    validate
+  })(StepTwo);
