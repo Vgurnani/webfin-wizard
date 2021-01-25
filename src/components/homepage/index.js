@@ -7,8 +7,6 @@ import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
-import Layout from '../../components/shared/Layout';
-
 import { ROUTES } from '../../constants/appRoutes';
 import slider1 from '../../public/images/home/slider-1.png';
 import websiteBuilding from '../../public/images/home/website-building.png';
@@ -19,7 +17,7 @@ import vipPlan from '../../public/images/home/vip-plan.png';
 
 const HomePage = (props) => {
   return(
-    <Layout className="main-layout" pathname={ROUTES.ROOT}>
+  
     <section className="main-section">
       <section className="home-banner">
         <Container>
@@ -272,8 +270,7 @@ const HomePage = (props) => {
           </Accordion>
         </Container>
       </section>
-    </section>
-    </Layout>)
+    </section>)
 }
 
 

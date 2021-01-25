@@ -41,7 +41,6 @@ const ForgetPasswordPage = (props) => {
     }
 }
   return(
-
     <section className="forgot-password-section main-section main-form-section">
         <Container className="positionUnset">
 
@@ -66,8 +65,7 @@ const ForgetPasswordPage = (props) => {
             </Col>
           </Row>
         </Container>
-    </section>
-)
+    </section>)
 }
 ForgetPasswordPage.propTypes = {
   handleSubmit: PropTypes.func

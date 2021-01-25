@@ -16,11 +16,13 @@ import {PublicRoute}  from './components/hoc/PublicRoute'
 import {RegisterRoute}  from './components/hoc/RegisterRoute'
 import ConfirmAccount from './pages/confirm-account'
 import {ConfirmAccountRoute} from './components/hoc/ConfirmAccountRoute'
+import Layout from './components/shared/Layout'
 import './components/all.sass'
 
 const App = (props) => {
   return (
     <Switch>
+      <Layout className="main-layout">
       <Route exact path={ROUTES.ROOT} component={HomePage} />
       <PublicRoute path={ROUTES.LOGIN} name="Login Page" component={ LoginPage }/>
       <RegisterRoute path={ROUTES.REGISTER} name="Register Page" component={ RegisterPage }/>
@@ -31,6 +33,8 @@ const App = (props) => {
       <ConfirmAccountRoute  path={ ROUTES.CONFIRM_ACCOUNT } component={ ConfirmAccount } />
       <Route exact path={ROUTES.TERMS_CONDITIONS} component={TermsCondition} />
       <Route exact path={ROUTES.PRIVACY_POLICY} component={PrivacyPolicy} />
+     
+      </Layout>
       <Route exact component={NotFoundPage} />
     </Switch>);
 }
