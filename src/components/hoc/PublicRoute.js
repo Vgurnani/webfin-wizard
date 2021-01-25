@@ -1,24 +1,26 @@
 import React from "react"
 import { Route, Redirect } from "react-router-dom"
-
-import { getItem } from "../utils/cache"
-
+import { isLoggedIn, getUser } from '../../utils/helpers'
 export const PublicRoute = ({ component: Component, ...rest }) => {
-  const savedUser = getItem("user")
-  const isLoggedIn = savedUser && JSON.parse(savedUser || {}) && JSON.parse(savedUser || {}).access_token
-
+  const user = getUser()
   return (
     <Route
+      exact={ true }
       {...rest}
       render={(props) =>
-        isLoggedIn ? (
+        isLoggedIn() ? (user.enabled ? (
           <Redirect
             to={{
               pathname: '/dashboard',
               state: { from: props.location },
             }}
           />
-        ) : (
+        ) :  <Redirect
+              to={{
+                pathname: '/confirm-account',
+                state: { from: props.location },
+              }}
+            />): (
             <Component {...props} />
           )
       }

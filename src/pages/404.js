@@ -6,7 +6,7 @@ import
     Container
   }
 from 'react-bootstrap';
-import Link from 'next/link'
+import {Link} from 'react-router-dom'
 import notFound from '../public/images/notFound.png';
 
 const NotFoundPage = () => (
@@ -17,7 +17,7 @@ const NotFoundPage = () => (
       <Col className="col-6">
         <h1>    404 Page not found.</h1>
         <div className="not-found-btns">      
-          <Link href='/'><a className="btn btn-primary">Return home</a></Link>
+          <Link to='/' className="btn btn-primary">Return home</Link><br/>
           <p>We're unable to find the page you are looking for. </p>
         </div>       
       </Col>

@@ -1,5 +1,5 @@
 import React from 'react'
-import  Link  from 'next/link'
+import { Link } from "react-router-dom";
 import { Field } from 'redux-form';
 import { renderOTPField } from '../../utils/formUtils'
 import PropTypes from 'prop-types';
@@ -45,7 +45,7 @@ const OtpForm = (props) => {
                     Continue
                     </Button>   
                     <p className="heading-detail">
-                        Didn't receive code?  <Link href="/register">Send again</Link>
+                        Didn't receive code?  <Link to="/register">Send again</Link>
                     </p>
                     </div>
                 </div>   

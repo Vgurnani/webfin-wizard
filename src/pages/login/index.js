@@ -37,6 +37,7 @@ const LoginPage = (props) => {
     dispatch(loginUser(data))
   }
   useEffect(() => {
+    debugger
     if(!localStorage.assessmentForm){
       setRedirectToAssessment(true)
     }
@@ -117,14 +118,14 @@ const LoginPage = (props) => {
               <div className="social-btn">
                 <button href='#' className="btn btn-primary btn-facebook">
                 <img src={facebookLogin} alt="facebook" />
-                  <a href={`${process.env.API_URL}/oauth2/authorize/facebook`}>Continue with Facebook</a>
+                  <a href={`${process.env.REACT_APP_API_URL}/oauth2/authorize/facebook`}>Continue with Facebook</a>
                 </button>
               </div>
               <div className="social-btn">
                 <button href='#' className="btn btn-primary btn-google">
 
                   <img src={googleLogin} alt="Google" />
-                  <a href={`${process.env.API_URL}/oauth2/authorize/google`}>Continue with Google</a>
+                  <a href={`${process.env.REACT_APP_API_URL}/oauth2/authorize/google`}>Continue with Google</a>
                 </button>
               </div>
             </div>

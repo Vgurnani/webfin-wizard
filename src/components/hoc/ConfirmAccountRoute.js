@@ -2,9 +2,8 @@ import React from "react"
 import { Route, Redirect } from "react-router-dom"
 
 import { isLoggedIn, getUser } from '../../utils/helpers'
-
-export const PrivateRoute = ({ component: Component, ...rest }) => {
-  const user = getUser();
+export const ConfirmAccountRoute = ({ component: Component, ...rest }) => {
+  const user = getUser()
   return (
     <Route
       {...rest}
@@ -15,16 +14,17 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
               pathname: '/login',
               state: { from: props.location },
             }}
-          /> : (!user.enabled ? (
-            <Redirect
-              to={{
-                pathname: '/confirm-account',
-                state: { from: props.location },
-              }}
-            />
-          ) :  <Component {...props} /> )
-        
+          /> : 
+        (user.enabled ? 
+          <Redirect
+            to={{
+              pathname: '/dashboard',
+              state: { from: props.location },
+            }}
+          />
+        :   <Component {...props} /> )
       }
     />
   )
 }
+

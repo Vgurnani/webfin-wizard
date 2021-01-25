@@ -31,12 +31,12 @@ export const addBodyClass = (pathname) =>{
 }
 
 export const getUser = () => {
-    return getItem('user') || '';
+    return getItem('user') && JSON.parse(getItem('user'));
 }
 
 export const isLoggedIn = () => {
     const user = getUser();
-    return Object.keys(user).length > 0 && user.constructor === Object;
+    return user && Object.keys(user).length > 0 && user.constructor === Object;
 }
 
 export const getLabel = (data,value) => {
@@ -99,4 +99,13 @@ export const assessmentSaved = (step,values) => {
             return false
     }
 
+}
+
+export const queryStringToObject = (queryString) => {
+    const pairs = queryString.substring(1).split('&');
+    var array = pairs.map((el) => {
+      const parts = el.split('=');
+      return parts;
+    });
+    return Object.fromEntries(array);
 }

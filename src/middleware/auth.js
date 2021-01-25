@@ -4,7 +4,8 @@ import { notification } from '../services/notification';
 import { createAssessment } from './assessments/'
 import axiosInstance from '../services/api';
 import { getItem, setItem, removeItem } from '../utils/cache';
-
+import history from '../utils/history'
+import _ from 'lodash';
 import {
     loginRequest,
     loginSuccess,
@@ -29,9 +30,9 @@ export const loginUser = (data) => {
         axiosInstance.post(`/auth/login`, data).then((response)=>{
             response.data.data['accessToken'] = response.data.accessToken
             setItem('user', response.data.data)
-            // Router.push(ROUTES.DASHBOARD)
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.LOGIN_SUCCESS);
             dispatch(loginSuccess(response.data.data))
+            history.push(ROUTES.DASHBOARD)
             // assessmentData && dispatch(createAssessment(assessmentData))
         }).catch((error) => {
             notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)
@@ -45,7 +46,7 @@ export const logoutUser = () => {
         dispatch(loginRequest())
         removeItem('user')
         dispatch(logoutSuccess())
-        // Router.push(ROUTES.LOGIN)
+        history.push(ROUTES.LOGIN)
     };
 };
 
@@ -58,7 +59,7 @@ export const registrationUser = (data, assessmentData) => {
                 setItem('user', response.data.data)
                 notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.REGISTRATION_SUCCESS);
                 dispatch(registrationSuccess(response.data.data))
-                // !_.isEmpty(assessmentData) && dispatch(createAssessment(assessmentData))
+                !_.isEmpty(assessmentData) && dispatch(createAssessment(assessmentData))
 
             })
             .catch((error) => {
@@ -78,7 +79,7 @@ export const emailVerification = (data) => {
                 user = JSON.parse(user)
                 user['enabled'] = true
                 setItem('user', user)
-                // Router.push(ROUTES.DASHBOARD)
+                history.push(ROUTES.DASHBOARD)
                 dispatch(emailVerificationSuccess(response))
                 notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.EMAIL_ACTIVATE);
             })

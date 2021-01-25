@@ -3,8 +3,8 @@ import { NOTIFICATION_TYPES, MESSAGE } from '../../constants/app';
 import { notification } from '../../services/notification';
 import axiosInstance from '../../services/api';
 import unsplashClient from '../../services/unsplashClient';
-// import Router from 'next/router';
 import { ROUTES } from '../../constants/appRoutes';
+import history  from '../../utils/history'
 
 import {
     getAssessmentRequest,
@@ -35,18 +35,17 @@ export const getAssessment = (data) => {
 
 export const createAssessment = (data) => {
     return (dispatch) => {
-
         dispatch(createAssessmentRequest())
         axiosInstance.post(`/assessment`, data).then((response)=>{
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CREATE_ASSESSMENT);
             localStorage.clear();
             dispatch(reset('assessmentForm'))
             dispatch(createAssessmentSuccess(response.data))
-            // Router.push(ROUTES.DASHBOARD)
+            history.push(ROUTES.DASHBOARD)
         }).catch((error) => {
             notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)
             dispatch(createAssessmentFailure(error?.response?.data?.message))
-            // Router.push(ROUTES.ASSESSMENT)
+            history.push(ROUTES.ASSESSMENT)
         })
     };
 };

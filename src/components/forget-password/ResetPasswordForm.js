@@ -1,5 +1,5 @@
 import React from 'react'
-import Link  from 'next/link'
+import { Link } from "react-router-dom";
 import { Field } from 'redux-form';
 import { renderFieldWG } from '../../utils/formUtils'
 import PropTypes from 'prop-types';
@@ -48,7 +48,7 @@ const ResetPasswordForm = (props) => {
                     Reset
                     </Button>   
                     <p className="heading-detail">
-                    Don’t have an account?  <Link href="/register">Sign Up</Link>
+                    Don’t have an account?  <Link to="/register">Sign Up</Link>
                     </p>
                     </div>
                 </div>   

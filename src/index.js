@@ -2,7 +2,8 @@ import React, { Suspense } from 'react'
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import configureStore from './store';
@@ -16,6 +17,17 @@ const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
+     <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+    />
     <Router history={browserHistory}>
       <Suspense fallback={'Loading...'}>
         <App />

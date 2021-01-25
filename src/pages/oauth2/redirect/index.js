@@ -1,42 +1,41 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { Container } from 'react-bootstrap';
-import { useRouter } from 'next/router'
-
+import history from '../../../utils/history'
 import { ROUTES } from '../../../constants/appRoutes';
 import { NOTIFICATION_TYPES } from '../../../constants/app';
 import { notification } from '../../../services/notification';
 import { createAssessment } from '../../../middleware/assessments';
 import { setItem } from '../../../utils/cache';
+import { queryStringToObject } from '../../../utils/helpers'
 
-const RedirectAuth = () => {
-    const router = useRouter();
+const RedirectAuth = (props) => {
     const dispatch  = useDispatch();
-    let queryParams = router.query;
 
     useEffect(()=> {
-        let queryData = {... queryParams}
-
+        let queryData = queryStringToObject(props.history.location.search)
+        debugger
         if (queryData?.token?.length) {
             const needFillAssessment = queryData.test === 'false'
             setItem('user', {accessToken: queryData.token,enabled: true, needFillAssessment: needFillAssessment});
             if(!needFillAssessment){
-                router.push(ROUTES.DASHBOARD)
+                history.push(ROUTES.DASHBOARD)
                 notification(NOTIFICATION_TYPES.SUCCESS, 'Login Successfully');
             }else if(localStorage.getItem('assessmentForm') && checkValidAssessmentData()){
                 dispatch(createAssessment(JSON.parse(localStorage.assessmentForm)))
             }else{
-                router.push(ROUTES.ASSESSMENT)
+                history.push(ROUTES.ASSESSMENT)
                 notification(NOTIFICATION_TYPES.SUCCESS, 'Please fill assessment');
             }
 
 
         } else if (queryData?.error?.length){
             let errorMessage = 'Login error: ' + queryData.error;
-            router.push(ROUTES.LOGIN)
+            history.push(ROUTES.LOGIN)
             notification(NOTIFICATION_TYPES.ERROR, errorMessage);
         }
-    },[queryParams]);
+    },[props.history.location.search]);
 
     const checkValidAssessmentData = () =>{
         const assessmentForm = JSON.parse(localStorage.getItem('assessmentForm'))
@@ -52,4 +51,4 @@ const RedirectAuth = () => {
     )
 }
 
-export default RedirectAuth;
+export default withRouter(RedirectAuth);
