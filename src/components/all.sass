@@ -337,14 +337,54 @@ ul
       .navbar-brand
         margin: 0
         padding: 0
+        .navbar-item
+          padding: 0
         img
           cursor: pointer
     .header-menu
       text-align: right
+      @media (max-width: $breakpoint-ipad)
+        position: unset
+      .mobile-humberger
+        display: none
+        cursor: pointer
+        @media (max-width: $breakpoint-ipad)
+          display: inline-block
+        .bar1, 
+        .bar2, 
+        .bar3 
+          width: 35px
+          height: 5px
+          background-color: $dark-grey-color
+          margin: 6px 0
+          transition: 0.4s
+        &.change 
+          .bar1
+            -webkit-transform: rotate(-45deg) translate(-9px, 6px)
+            transform: rotate(-45deg) translate(-9px, 6px)
+          .bar2 
+            opacity: 0;
+          .bar3 
+            -webkit-transform: rotate(45deg) translate(-8px, -8px)
+            transform: rotate(45deg) translate(-8px, -8px)   
+          & + .navbar
+            display: inline-block  
       .navbar
         background: transparent
+        @media (max-width: $breakpoint-ipad)
+          position: absolute
+          top: 100%
+          left: 15px
+          right: 15px
+          z-index: 20
+          display: none
       .navbar-menu
         justify-content: flex-end
+        @media (max-width: $breakpoint-ipad)
+          display: inline-block
+          width: 100%
+          justify-content: flex-start
+          padding: 15px 0
         .main-navigation
           margin: 0
           padding: 0
@@ -353,6 +393,10 @@ ul
             display: inline-block
             vertical-align: middle
             position: relative
+            @media (max-width: $breakpoint-ipad)
+              width: 100%
+              text-align: left
+              margin: 10px 0
             &.header-profile-img
               a
                 padding-right: 0
@@ -409,6 +453,7 @@ ul
           justify-content: flex-end
           @media (max-width: $breakpoint-mobile)
             justify-content: center
+         
 
 .home-banner
   padding: 55px 0
