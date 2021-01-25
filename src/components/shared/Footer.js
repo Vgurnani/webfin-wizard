@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import webFinLogo from '../../public/images/header/webFin-logo.svg';
+import { ROUTES } from '../../constants/appRoutes';
 
 const Footer = () => (
   <footer className="site-footer">
@@ -25,7 +26,7 @@ const Footer = () => (
               </Link>
             </li>
             <li>
-              <Link to="/">
+              <Link to={ ROUTES.ASSESSMENT }>
               Assesment
               </Link>
             </li>
@@ -78,12 +79,12 @@ const Footer = () => (
         <Col className="col-12">
           <ul>
           <li>
-              <Link to="/">
+              <Link to={ ROUTES.PRIVACY_POLICY }>
               Privacy Policy
               </Link>
             </li>
             <li>
-              <Link to="/">
+              <Link to={ ROUTES.TERMS_CONDITIONS }>
               Terms & Conditions
               </Link>
             </li>

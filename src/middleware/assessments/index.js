@@ -5,6 +5,7 @@ import axiosInstance from '../../services/api';
 import unsplashClient from '../../services/unsplashClient';
 import { ROUTES } from '../../constants/appRoutes';
 import history  from '../../utils/history'
+import { removeItem } from '../../utils/cache';
 
 import {
     getAssessmentRequest,
@@ -38,7 +39,7 @@ export const createAssessment = (data) => {
         dispatch(createAssessmentRequest())
         axiosInstance.post(`/assessment`, data).then((response)=>{
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CREATE_ASSESSMENT);
-            localStorage.clear();
+            removeItem('assessmentForm')
             dispatch(reset('assessmentForm'))
             dispatch(createAssessmentSuccess(response.data))
             history.push(ROUTES.DASHBOARD)

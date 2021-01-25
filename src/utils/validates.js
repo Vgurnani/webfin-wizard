@@ -60,7 +60,7 @@ export const forgetPasswordValidate = values => {
     if (!values.confirmPassword) {
         errors.confirmPassword = MESSAGE.VALID_ENTER('confirm password');
     }
-    if (values.password === values.confirmPassword) {
+    if (values.password !== values.confirmPassword) {
         errors.confirmPassword = MESSAGE.PASSWORD_MATCH
     }
     return errors;

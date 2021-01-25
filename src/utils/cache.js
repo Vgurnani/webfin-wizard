@@ -1,11 +1,9 @@
-import localforage from "localforage"
-
 export const loadCachedItem = async (key) => {
-  return await localforage.getItem(key)
+  return await localStorage.getItem(key)
 }
 
 export const cacheItem = async (key, item) => {
-  await localforage.setItem(key, item)
+  await localStorage.setItem(key, item)
 }
 
 export const setItem = (key, item) => {

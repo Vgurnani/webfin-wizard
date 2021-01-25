@@ -28,6 +28,7 @@ const OtpForm = (props) => {
                     label="Code"
                         name="code"
                         type="text"
+                        numInputs={6}
                         component={ renderOTPField }
                         formClass="otpFieldsInput"
                     />   

@@ -37,14 +37,12 @@ const LoginPage = (props) => {
     dispatch(loginUser(data))
   }
   useEffect(() => {
-    debugger
     if(!localStorage.assessmentForm){
       setRedirectToAssessment(true)
     }
   },[])
 
   const handleAccess = () =>{
-    debugger
     if(redirectAssessment){
       history.push(ROUTES.ASSESSMENT)
     }else{

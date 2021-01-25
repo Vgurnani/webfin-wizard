@@ -19,7 +19,6 @@ import {ConfirmAccountRoute} from './components/hoc/ConfirmAccountRoute'
 import './components/all.sass'
 
 const App = (props) => {
-  debugger
   return (
     <Switch>
       <Route exact path={ROUTES.ROOT} component={HomePage} />

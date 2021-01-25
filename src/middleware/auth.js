@@ -115,7 +115,6 @@ export const forgetPassword = (step, setStep, data) =>{
         dispatch(forgetPasswordRequest())
         const url = step === 1 ? '/password' : (step === 2 ) ? '/password/verify' : '/password/reset'
         const method = step === 3 ? 'patch' : 'post'
-        debugger
         axiosInstance({
             method: method,
             url: url,

@@ -15,7 +15,6 @@ const RedirectAuth = (props) => {
 
     useEffect(()=> {
         let queryData = queryStringToObject(props.history.location.search)
-        debugger
         if (queryData?.token?.length) {
             const needFillAssessment = queryData.test === 'false'
             setItem('user', {accessToken: queryData.token,enabled: true, needFillAssessment: needFillAssessment});
@@ -33,7 +32,7 @@ const RedirectAuth = (props) => {
         } else if (queryData?.error?.length){
             let errorMessage = 'Login error: ' + queryData.error;
             history.push(ROUTES.LOGIN)
-            notification(NOTIFICATION_TYPES.ERROR, errorMessage);
+            notification(NOTIFICATION_TYPES.ERROR, 'Something went wrong please try again');
         }
     },[props.history.location.search]);
 
