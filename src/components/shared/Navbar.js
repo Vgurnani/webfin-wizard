@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-//import Link  from 'next/link'
+import {Link }  from 'react-router-dom'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -15,7 +15,7 @@ import {
 
 const Navbar = (props) => {
   const dispatch  = useDispatch();
-  const [active , setActive] = useState(false)
+  const [ mobileHumberger, setMobileHumberger] = useState(false)
   const [navBarActiveClass , setNavBarActiveClass] = useState('')
   const btAction = (pathname) => {
     if(pathname === '/register'){
@@ -64,26 +64,13 @@ const Navbar = (props) => {
             </li>
           </ul>
         )
-      } else{
+      } else if(pathname !== '/forget-password' &&  pathname !== '/confirm-account'){
         return(
-          <ul className="main-navigation">
-            <li>
-              <a href="/login" className="btn btn-secondary">
-                login
-              </a>
-            </li>
-          </ul>
+          <Link to="/login">
+          <a className="btn btn-secondary">login</a>
+          </Link>
         )
       }
-      // else if(pathname === '/'){
-      //   return(
-      //   <Link  href="/login">
-      //     <a className="btn btn-secondary">login</a>
-      //   </Link>
-      //   )
-      // }
-      
-       
     }
     return (
       <header className={`main-header ${btAction(pathname)}`}>
@@ -97,7 +84,7 @@ const Navbar = (props) => {
               </div>                                     
             </Col>
             <Col className="header-menu">
-              <div class="mobile-humberger">
+              <div class={`mobile-humberger ${mobileHumberger ? 'change' : ''}`} onClick={() => setMobileHumberger(!mobileHumberger)}>
                 <div class="bar1"></div>
                 <div class="bar2"></div>
                 <div class="bar3"></div>
@@ -124,4 +111,4 @@ const Navbar = (props) => {
   }
 
 
-export default Navbar
+export default (Navbar)
