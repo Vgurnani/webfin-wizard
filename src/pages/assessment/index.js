@@ -7,12 +7,10 @@ import { useDispatch , useSelector } from 'react-redux'
 import StepOne from  '../../components/assessment/StepOne';
 import StepTwo from  '../../components/assessment/StepTwo';
 import StepThree from  '../../components/assessment/StepThree';
-import StepFour from  '../../components/assessment/StepFour';
 import Preview from  '../../components/assessment/Preview';
 import { ROUTES } from '../../constants/appRoutes'
 import { getAssessment ,createAssessment } from '../../middleware/assessments';
 import { isLoggedIn } from '../../utils/helpers'
-import Layout from '../../components/shared/Layout';
 
 const AssessmentPage = (props) => {
   const history = useHistory();
@@ -70,11 +68,9 @@ const AssessmentPage = (props) => {
     }
 }
   return(
-    <Layout className="main-layout" pathname={ROUTES.ASSESSMENT}>
       <section className="main-section">
         {handleView()}
       </section>
-    </Layout>
 )
 }
 AssessmentPage.propTypes = {

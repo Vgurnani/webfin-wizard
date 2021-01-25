@@ -25,7 +25,6 @@ import facebookLogin from '../../public/images/facebook-login.svg';
 // import Route  from 'next/router'
 import { useHistory } from "react-router-dom";
 import { ROUTES } from '../../constants/appRoutes';
-import Layout from '../../components/shared/Layout';
 
 const LoginPage = (props) => {
   const history = useHistory();
@@ -50,7 +49,6 @@ const LoginPage = (props) => {
     }
   }
   return(
-    <Layout className="main-layout" pathname={ROUTES.LOGIN}>
     <section className="login-section main-section">
       <Container>
         <Row className="back-to-home">
@@ -132,7 +130,6 @@ const LoginPage = (props) => {
         </div>
       </Container>
     </section>
-    </Layout>
 )
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 // import Link  from 'next/link'
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
@@ -23,8 +23,7 @@ import googleLogin from '../../public/images/google-login.svg';
 import facebookLogin from '../../public/images/facebook-login.svg';
 import { useDispatch, useSelector } from 'react-redux'
 import { assessmentIntialValues } from '../../utils/helpers'
-import Layout from '../../components/shared/Layout';
-import { ROUTES } from '../../constants/appRoutes';
+
 
 const RegisterPage = (props) => {
   const dispatch = useDispatch();
@@ -37,7 +36,6 @@ const RegisterPage = (props) => {
   }
 
   return(
-    <Layout className="main-layout" pathname={ROUTES.REGISTER}>
     <section className="signup-section main-section">
       <Container>
         <Row className="align-items-center">
@@ -160,7 +158,6 @@ const RegisterPage = (props) => {
 
       </Container>
     </section>
-    </Layout>
 )}
 
 RegisterPage.propTypes = {

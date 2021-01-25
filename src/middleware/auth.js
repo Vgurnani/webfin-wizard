@@ -114,15 +114,16 @@ export const forgetPassword = (step, setStep, data) =>{
     return(dispatch) => {
         dispatch(forgetPasswordRequest())
         const url = step === 1 ? '/password' : (step === 2 ) ? '/password/verify' : '/password/reset'
-        const method = step === 3 ? 'patch' : 'post'
+        const method = step === 3 ? 'put' : 'post'
+        const message = step === 1 ? MESSAGE.CODE_SEND : (step === 3 ? 'Successfully updated' : 'Vefied Code' )
         axiosInstance({
             method: method,
             url: url,
             data: data
         }).then((response) => {
-            setStep(step+1)
             dispatch(forgetPasswordSuccess(response))
-            notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CODE_SEND);
+            notification(NOTIFICATION_TYPES.SUCCESS, message);
+            step === 3 ? history.push(ROUTES.LOGIN) : setStep(step+1)
         })
         .catch((error) => {
             notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)
