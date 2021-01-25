@@ -94,7 +94,7 @@ const HomePage = (props) => {
               </Link>
              </div>
             </Col>
-            <Col className="col-6">
+            <Col className="col-6 website-build-img">
               <img src={websiteBuilding} alt="" />
             </Col>
           </Row>
@@ -103,7 +103,7 @@ const HomePage = (props) => {
       <section className="website-comparison">
         <Container>
           <Row className="align-items-center">
-          <Col className="col-6">
+          <Col className="col-6 website-compare-img">
               <img src={websiteComparison} alt="" />
             </Col>
             <Col className="content-side col-6">
