@@ -32,7 +32,7 @@ export const registerValidate = values => {
     if(values.email && (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email))){
         errors.email = MESSAGE.INVALID_EMAIL;
     }
-    
+
     if (!values.password) {
         errors.password = MESSAGE.VALID_ENTER('password');
     }
@@ -79,6 +79,17 @@ export const assessmentFormValidate = values => {
     }
     if(!values.domain){
         errors.domain = MESSAGE.VALID_SELECT('domain');
+    }
+    return errors;
+}
+
+export const blogValidate = values => {
+    const errors = {};
+    if (!values.title) {
+        errors.email = 'Please enter title';
+    }
+    if (!values.description) {
+        errors.password = 'Please enter description';
     }
     return errors;
 }

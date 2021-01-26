@@ -11,6 +11,29 @@ import { withHistory } from 'slate-history'
 
 import { Button, Icon, Toolbar } from './components'
 
+import {
+  FontSizeEditor,
+  FontFamilyEditor,
+  BoldEditor,
+  ItalicEditor,
+  UnderlineEditor,
+  StrikeThroghEditor,
+  HighlightEditor,
+  ListNumberedEditor,
+  ListBulletedEditor,
+  LinkEditor,
+  QuoteEditor,
+  ImageUploadEditor,
+  TableEditor,
+  MediaEditor,
+  UndoEditor,
+  RedoEditor,
+} from '../../utils/svg';
+
+import { 
+  Form,
+} from 'react-bootstrap';
+
 const HOTKEYS = {
   'mod+b': 'bold',
   'mod+i': 'italic',
@@ -31,37 +54,124 @@ const RichTextEditor = (props) => {
   }, [value])
 
   return (
-    <Slate editor={editor} value={value} onChange={value => setValue(value)}>
-      <Toolbar>
-        <MarkButton format="bold" icon="format_bold" />
-        <MarkButton format="italic" icon="format_italic" />
+    <Slate editor={editor} value={value} onChange={value => setValue(value)} className="custom-rte-editor">
+      <Toolbar className="custom-rte-toolbar">
+        <div className="toolbar-wrapper">
+          <div className="toolbar-box">
+            <Form.Control as="select" custom>
+              <option>Paragraph</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </Form.Control>
+          </div>
+          <div className="toolbar-box">
+            <MarkButton format="font-size" icon="FontSizeEditor"/>
+            <MarkButton format="font-family" icon="FontFamilyEditor"/>
+          </div>
+              <div className="toolbar-box">
+                <MarkButton format="bold" icon="BoldEditor"/> 
+                <MarkButton format="italic" icon="ItalicEditor"/>
+                <MarkButton format="underline" icon="UnderlineEditor"/>
+                <MarkButton format="strike" icon="StrikeThroghEditor"/>
+                <MarkButton format="highlight" icon="HighlightEditor"/>
+              </div>
+                <div className="toolbar-box">
+                  <MarkButton format="list-numbered" icon="ListNumberedEditor"/>
+                  <MarkButton format="list-bullet" icon="ListBulletedEditor"/> 
+                </div>
+                  <div className="toolbar-box">
+                    <MarkButton format="list-numbered" icon="LinkEditor"/>
+                    <MarkButton format="list-bullet" icon="QuoteEditor"/>
+                    <MarkButton format="list-bullet" icon="ImageUploadEditor"/>
+                    <MarkButton format="list-bullet" icon="TableEditor"/>
+                    <MarkButton format="list-bullet" icon="MediaEditor"/>
+                  </div>
+                    <div className="toolbar-box">
+                      <MarkButton format="list-numbered" icon="UndoEditor"/>
+                      <MarkButton format="list-bullet" icon="RedoEditor"/> 
+                    </div>
+         {/* 
+           
+          <div className="toolbar-box">
+
+          </div> */}
+        </div>
+        
+        {/* <MarkButton format="italic" icon="format_italic" />
         <MarkButton format="underline" icon="format_underlined" />
         <MarkButton format="code" icon="code" />
         <BlockButton format="heading-one" icon="looks_one" />
         <BlockButton format="heading-two" icon="looks_two" />
         <BlockButton format="block-quote" icon="format_quote" />
         <BlockButton format="numbered-list" icon="format_list_numbered" />
-        <BlockButton format="bulleted-list" icon="format_list_bulleted" />
+        <BlockButton format="bulleted-list" icon="format_list_bulleted" /> */}
       </Toolbar>
-      <Editable
-        renderElement={renderElement}
-        renderLeaf={renderLeaf}
-        placeholder="Enter some rich text…"
-        readOnly={props.readOnly}
-        spellCheck
-        autoFocus
-        onKeyDown={event => {
-          for (const hotkey in HOTKEYS) {
-            if (isHotkey(hotkey, event)) {
-              event.preventDefault()
-              const mark = HOTKEYS[hotkey]
-              toggleMark(editor, mark)
-            }
-          }
-        }}
-      />
+      <div className="rte-editor-content">
+        <div className="editor-content">
+          <Editable
+            renderElement={renderElement}
+            renderLeaf={renderLeaf}
+            placeholder="Enter some rich text…"
+            readOnly={props.readOnly}
+            spellCheck
+            autoFocus
+            onKeyDown={event => {
+              for (const hotkey in HOTKEYS) {
+                if (isHotkey(hotkey, event)) {
+                  event.preventDefault()
+                  const mark = HOTKEYS[hotkey]
+                  toggleMark(editor, mark)
+                }
+              }
+            }}
+          />
+        </div>
+      </div>
+      
     </Slate>
   )
+}
+
+const getIcon = (iconType) => {
+  //console.log(iconType);
+  switch (iconType) {
+    case 'FontSizeEditor':
+      return <FontSizeEditor />
+    case 'FontFamilyEditor':
+      return <FontFamilyEditor />
+    case 'BoldEditor':
+      return <BoldEditor />
+    case 'ItalicEditor':
+      return <ItalicEditor />
+    case 'UnderlineEditor':
+      return <UnderlineEditor />
+    case 'StrikeThroghEditor':
+      return <StrikeThroghEditor />
+    case 'HighlightEditor':
+      return <HighlightEditor />
+    case 'ListNumberedEditor':
+      return <ListNumberedEditor />
+    case 'ListBulletedEditor':
+      return <ListBulletedEditor />
+    case 'LinkEditor':
+      return <LinkEditor />
+    case 'QuoteEditor':
+      return <QuoteEditor />
+    case 'ImageUploadEditor':
+      return <ImageUploadEditor />
+    case 'TableEditor':
+      return <TableEditor />
+    case 'MediaEditor':
+      return <MediaEditor />
+    case 'UndoEditor':
+      return <UndoEditor />  
+    case 'RedoEditor':
+      return <RedoEditor />    
+    default:
+      return <BoldEditor />
+  }
 }
 
 const toggleBlock = (editor, format) => {
@@ -166,15 +276,17 @@ const BlockButton = ({ format, icon }) => {
 
 const MarkButton = ({ format, icon }) => {
   const editor = useSlate()
+  const iconSvg = getIcon(icon)
   return (
     <Button
+      className="editor-icons"
       active={isMarkActive(editor, format)}
       onMouseDown={event => {
         event.preventDefault()
         toggleMark(editor, format)
       }}
     >
-      <Icon>{icon}</Icon>
+      <Icon>{iconSvg}</Icon>
     </Button>
   )
 }
