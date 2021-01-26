@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RichTextEditor from './rte';
 
 import {
@@ -28,6 +28,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
+import { createBlog } from '../../middleware/blog';
 import { blogValidate as validate } from '../../utils/validates';
 import profilePic from '../../public/images/media/media-4.jpg';
 import media1 from '../../public/images/media/media-1.jpg';
@@ -37,47 +38,59 @@ import media3 from '../../public/images/media/media-3.jpg';
 const BlogPage =(props) => {
   const dispatch = useDispatch();
   const blogForm = useSelector((state)=>state.form.blogForm)
-  const { handleSubmit } = props
-  const submitData = (data) => {
-    console.log("data", data);
+  const initialValue = [
+    {
+      type: 'paragraph',
+      children: [
+        { text: 'This is editable ' },
+        { text: 'rich', bold: true },
+        { text: ' text, ' },
+        { text: 'much', italic: true },
+        { text: ' better than a ' },
+        { text: '<textarea>', code: true },
+        { text: '!' },
+      ],
+    },
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text:
+            "Since it's rich text, you can do things like turn a selection of text ",
+        },
+        { text: 'bold', bold: true },
+        {
+          text:
+            ', or add a semantically rendered block quote in the middle of the page, like this:',
+        },
+      ],
+    },
+    {
+      type: 'block-quote',
+      children: [{ text: 'A wise quote.' }],
+    },
+    {
+      type: 'paragraph',
+      children: [{ text: 'Try it out for yourself!' }],
+    },
+  ]
+
+  const [rteData, setRTEData] = useState(initialValue)
+  const { handleSubmit } = props;
+
+  const submitData = () => {
+    const data = {
+      type:"blog",
+      content:{
+        title: 'Test Blog',
+        image: 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png',
+        data: rteData
+      }
+    }
+
+    dispatch(createBlog(data))
   }
 
-    const initialValue = [
-        {
-          type: 'paragraph',
-          children: [
-            { text: 'This is editable ' },
-            { text: 'rich', bold: true },
-            { text: ' text, ' },
-            { text: 'much', italic: true },
-            { text: ' better than a ' },
-            { text: '<textarea>', code: true },
-            { text: '!' },
-          ],
-        },
-        {
-          type: 'paragraph',
-          children: [
-            {
-              text:
-                "Since it's rich text, you can do things like turn a selection of text ",
-            },
-            { text: 'bold', bold: true },
-            {
-              text:
-                ', or add a semantically rendered block quote in the middle of the page, like this:',
-            },
-          ],
-        },
-        {
-          type: 'block-quote',
-          children: [{ text: 'A wise quote.' }],
-        },
-        {
-          type: 'paragraph',
-          children: [{ text: 'Try it out for yourself!' }],
-        },
-      ]
 
     return(
       <section className="dashboard-wrapper">
@@ -138,7 +151,7 @@ const BlogPage =(props) => {
         <main className="dashboard-data">
           <section className="dashboard-body">
             <div className="blog-creation">
-              <Form>
+              <Form onSubmit={handleSubmit(submitData)}>
                 <div className="blog-creation-head">
                   <div className="blog-creation-head-left">
                     <Form.Group className="blog-title-group">
@@ -206,7 +219,7 @@ const BlogPage =(props) => {
 
                   </div>
                   <div className="blog-editor">
-                  <RichTextEditor readOnly={false} initialValue={initialValue} />
+                  <RichTextEditor readOnly={false} setRTEData={setRTEData} initialValue={initialValue} />
                   </div>
                 </div>
                 <div className="blog-action">
@@ -370,7 +383,7 @@ const BlogPage =(props) => {
                         </Form.Group>
 
                         <div className="blog-btns">
-                          <Button variant="primary">Save</Button>
+                          <Button onClick={submitData} variant="primary">Save</Button>
                         </div>
                       </Col>
                     </Row>

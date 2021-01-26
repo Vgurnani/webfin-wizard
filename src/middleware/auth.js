@@ -45,6 +45,7 @@ export const logoutUser = () => {
     return (dispatch) => {
         dispatch(loginRequest())
         removeItem('user')
+        removeItem('sessionData')
         dispatch(logoutSuccess())
         history.push(ROUTES.LOGIN)
     };
@@ -136,6 +137,7 @@ export const getCurrentUser = () => {
     return (dispatch) => {
         axiosInstance.get(`/user`)
         .then((response) => {
+            setItem('sessionData', response)
             dispatch(getUserSuccess(response));
         })
         .catch((error) => {

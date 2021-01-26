@@ -30,7 +30,7 @@ import {
   RedoEditor,
 } from '../../utils/svg';
 
-import { 
+import {
   Form,
 } from 'react-bootstrap';
 
@@ -51,6 +51,7 @@ const RichTextEditor = (props) => {
 
   useEffect(() => {
     console.log("value", value);
+    props.setRTEData(value);
   }, [value])
 
   return (
@@ -71,7 +72,7 @@ const RichTextEditor = (props) => {
             <MarkButton format="font-family" icon="FontFamilyEditor"/>
           </div>
               <div className="toolbar-box">
-                <MarkButton format="bold" icon="BoldEditor"/> 
+                <MarkButton format="bold" icon="BoldEditor"/>
                 <MarkButton format="italic" icon="ItalicEditor"/>
                 <MarkButton format="underline" icon="UnderlineEditor"/>
                 <MarkButton format="strike" icon="StrikeThroghEditor"/>
@@ -79,7 +80,7 @@ const RichTextEditor = (props) => {
               </div>
                 <div className="toolbar-box">
                   <MarkButton format="list-numbered" icon="ListNumberedEditor"/>
-                  <MarkButton format="list-bullet" icon="ListBulletedEditor"/> 
+                  <MarkButton format="list-bullet" icon="ListBulletedEditor"/>
                 </div>
                   <div className="toolbar-box">
                     <MarkButton format="list-numbered" icon="LinkEditor"/>
@@ -90,15 +91,15 @@ const RichTextEditor = (props) => {
                   </div>
                     <div className="toolbar-box">
                       <MarkButton format="list-numbered" icon="UndoEditor"/>
-                      <MarkButton format="list-bullet" icon="RedoEditor"/> 
+                      <MarkButton format="list-bullet" icon="RedoEditor"/>
                     </div>
-         {/* 
-           
+         {/*
+
           <div className="toolbar-box">
 
           </div> */}
         </div>
-        
+
         {/* <MarkButton format="italic" icon="format_italic" />
         <MarkButton format="underline" icon="format_underlined" />
         <MarkButton format="code" icon="code" />
@@ -129,7 +130,7 @@ const RichTextEditor = (props) => {
           />
         </div>
       </div>
-      
+
     </Slate>
   )
 }
@@ -166,9 +167,9 @@ const getIcon = (iconType) => {
     case 'MediaEditor':
       return <MediaEditor />
     case 'UndoEditor':
-      return <UndoEditor />  
+      return <UndoEditor />
     case 'RedoEditor':
-      return <RedoEditor />    
+      return <RedoEditor />
     default:
       return <BoldEditor />
   }

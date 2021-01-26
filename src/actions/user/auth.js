@@ -1,7 +1,6 @@
 
 import { ActionTypes } from './actionTypes';
 
-import _ from 'lodash'
 export const loginRequest = () => {
     return {
         type: ActionTypes.LOGIN_REQUEST,
