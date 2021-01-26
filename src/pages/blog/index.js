@@ -1,63 +1,96 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RichTextEditor from './rte';
-import  Link from 'next/link'
-import { 
+
+import {
   DashboardMenuIcon,
   EditSiteMenuIcon,
   BlogMenuIcon,
   MarketingMenuIcon,
+  SubMenuIcon,
   Facebook,
   LinkedIn,
   Twitter,
   YouTube,
-  Instagram
+  Instagram,
+  CloseIcon,
+  SmallRadio,
+  SmallRadioChecked,
+  OpenArrow,
 } from '../../utils/svg'
 
-import { 
-  Form, 
+import {
+  Form,
   Row,
-  ProgressBar, 
+  Col,
+  ProgressBar,
+  Button,
 } from 'react-bootstrap';
-import profilePic from '../../public/images/media/media-1.jpg';
+import { useDispatch, useSelector } from 'react-redux';
+import { reduxForm } from 'redux-form';
+import PropTypes from 'prop-types';
+import { createBlog } from '../../middleware/blog';
+import { blogValidate as validate } from '../../utils/validates';
+import profilePic from '../../public/images/media/media-4.jpg';
+import media1 from '../../public/images/media/media-1.jpg';
+import media2 from '../../public/images/media/media-2.jpg';
+import media3 from '../../public/images/media/media-3.jpg';
 
 const BlogPage =(props) => {
+  const dispatch = useDispatch();
+  const blogForm = useSelector((state)=>state.form.blogForm)
+  const initialValue = [
+    {
+      type: 'paragraph',
+      children: [
+        { text: 'This is editable ' },
+        { text: 'rich', bold: true },
+        { text: ' text, ' },
+        { text: 'much', italic: true },
+        { text: ' better than a ' },
+        { text: '<textarea>', code: true },
+        { text: '!' },
+      ],
+    },
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text:
+            "Since it's rich text, you can do things like turn a selection of text ",
+        },
+        { text: 'bold', bold: true },
+        {
+          text:
+            ', or add a semantically rendered block quote in the middle of the page, like this:',
+        },
+      ],
+    },
+    {
+      type: 'block-quote',
+      children: [{ text: 'A wise quote.' }],
+    },
+    {
+      type: 'paragraph',
+      children: [{ text: 'Try it out for yourself!' }],
+    },
+  ]
 
-    const initialValue = [
-        {
-          type: 'paragraph',
-          children: [
-            { text: 'This is editable ' },
-            { text: 'rich', bold: true },
-            { text: ' text, ' },
-            { text: 'much', italic: true },
-            { text: ' better than a ' },
-            { text: '<textarea>', code: true },
-            { text: '!' },
-          ],
-        },
-        {
-          type: 'paragraph',
-          children: [
-            {
-              text:
-                "Since it's rich text, you can do things like turn a selection of text ",
-            },
-            { text: 'bold', bold: true },
-            {
-              text:
-                ', or add a semantically rendered block quote in the middle of the page, like this:',
-            },
-          ],
-        },
-        {
-          type: 'block-quote',
-          children: [{ text: 'A wise quote.' }],
-        },
-        {
-          type: 'paragraph',
-          children: [{ text: 'Try it out for yourself!' }],
-        },
-      ]
+  const [rteData, setRTEData] = useState(initialValue)
+  const { handleSubmit } = props;
+
+  const submitData = () => {
+    const data = {
+      type:"blog",
+      content:{
+        title: 'Test Blog',
+        image: 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png',
+        data: rteData
+      }
+    }
+
+    dispatch(createBlog(data))
+  }
+
 
     return(
       <section className="dashboard-wrapper">
@@ -75,11 +108,37 @@ const BlogPage =(props) => {
                 <EditSiteMenuIcon />
               </a>
             </li>
-            <li>
+            <li className="active">
               <a href="/">
               Blog
                 <BlogMenuIcon />
               </a>
+              <ul className="sub-menu">
+                <li>
+                  <a>
+                  All Posts
+                  <SubMenuIcon />
+                  </a>
+                </li>
+                <li>
+                  <a>
+                  Add new post
+                  <SubMenuIcon />
+                  </a>
+                </li>
+                <li>
+                  <a>
+                  Comments
+                  <SubMenuIcon />
+                  </a>
+                </li>
+                <li>
+                  <a>
+                  Import blog
+                  <SubMenuIcon />
+                  </a>
+                </li>
+              </ul>
             </li>
             <li>
               <a href="/">
@@ -92,13 +151,13 @@ const BlogPage =(props) => {
         <main className="dashboard-data">
           <section className="dashboard-body">
             <div className="blog-creation">
-              <Form>  
+              <Form onSubmit={handleSubmit(submitData)}>
                 <div className="blog-creation-head">
                   <div className="blog-creation-head-left">
-                  <Form.Group className="blog-title-group">
+                    <Form.Group className="blog-title-group">
                         <Form.Control  placeholder='Blog post title'/>
                         <Form.Text>
-                        March 25, 2020 / 4 min read / Author Name
+                          March 25, 2020 / 4 min read / Author Name
                         </Form.Text>
                     </Form.Group>
                     <div className="upload-feature-img-wrap">
@@ -157,10 +216,177 @@ const BlogPage =(props) => {
                       <label>Word Count: </label>
                     <ProgressBar now="72" label="357/500" />
                     </div>
-                  
+
                   </div>
                   <div className="blog-editor">
-                  <RichTextEditor readOnly={false} initialValue={initialValue} />
+                  <RichTextEditor readOnly={false} setRTEData={setRTEData} initialValue={initialValue} />
+                  </div>
+                </div>
+                <div className="blog-action">
+                  <div className="blog-action-box">
+                    <h5>
+                      <span>Blog actions</span>
+                      <a><CloseIcon /></a>
+                    </h5>
+                    <ul>
+                      <li>
+                        <SmallRadio />
+                        <span>Save Layout</span>
+                      </li>
+                      <li className="active">
+                      <SmallRadioChecked />
+                      <span>SEO Booster</span>
+                      </li>
+                      <li className="active">
+                        <SmallRadioChecked />
+                        <span>Social Media</span>
+                        <a>Edit</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="related-blog">
+                  <h3>Related</h3>
+                  <ul className="blog-list">
+                    <li>
+                      <div className="blog-box">
+                        <div className="blog-img">
+                          <img src={media1} alt="" />
+                        </div>
+                        <div className="blog-detail">
+
+                          <div className="blog-title">
+                          <h4>Top 10</h4>
+                            <span className="blog-date">5h</span>
+                          </div>
+                          <p>It’s a small world.</p>
+                          <a className="read-more">Read more</a>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="blog-box">
+                        <div className="blog-img">
+                          <img src={media2} alt="" />
+                        </div>
+                        <div className="blog-detail">
+                        <div className="blog-title">
+                          <h4>101</h4>
+                            <span className="blog-date">5h</span>
+                          </div>
+                          <p>It’s a small world.</p>
+                          <a className="read-more">Read more</a>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="blog-box">
+                        <div className="blog-img">
+                          <img src={media3} alt="" />
+                        </div>
+                        <div className="blog-detail">
+                          <div className="blog-title">
+                          <h4>Only for you</h4>
+                            <span className="blog-date">5h</span>
+                          </div>
+
+                          <p>It’s a small world.</p>
+                          <a className="read-more">Read more</a>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div className="blog-seo-booster">
+                  <h3 className="seo-heading">
+                    <span>SEO Booster</span>
+                    <span className="icon">
+                      <OpenArrow />
+                    </span>
+                  </h3>
+                  <div className="seo-content">
+                    <p><b>What’s this for?</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                    <Row className="seo-form">
+                      <Col className="col-6">
+                        <Form.Group className="focus-keyword">
+                          <Form.Label>Focus Keyword:</Form.Label>
+                          <Form.Control type="text" placeholder="Keyword" />
+                          <Form.Text >
+                            <div className="seo-progress-bar">
+
+                            </div>
+                          <span class="primary">Too short (13/180)</span>
+                          </Form.Text>
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>Page name:</Form.Label>
+                          <Form.Control type="text" placeholder="Page name" />
+                          <Form.Text>
+
+                          <div className="seo-progress-bar">
+                            <span className="success">
+                              Good
+                            </span>
+                            <div className="seo-strength">
+                          <ProgressBar now="72" className="success" />
+                          </div>
+                          </div>
+                          <span>(0/180)</span>
+                          </Form.Text>
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>SEO Site:</Form.Label>
+                          <Form.Control type="text" placeholder="Site name" />
+                          <Form.Text>
+                          <div className="seo-progress-bar">
+                            <span className="danger">
+                              Bad
+                            </span>
+                            <div className="seo-strength">
+                          <ProgressBar now="72" className="danger" />
+                          </div>
+                          </div>
+                          <span>(0/180)</span>
+                          </Form.Text>
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>SEO Description:</Form.Label>
+                          <Form.Control as="textarea" placeholder="Give a relevant description to your page" />
+                          <Form.Text>
+                          <div className="seo-progress-bar"></div>
+                          <span>(0/180)</span>
+                          </Form.Text>
+                        </Form.Group>
+                        <Form.Group className="url-control">
+                          <Form.Label>Page URL:</Form.Label>
+                          <Form.Control type="url" placeholder="URL" />
+                        </Form.Group>
+                      </Col>
+                      <Col className="col-6 seo-preview">
+                        <Form.Group className="focus-keyword">
+                            <Form.Label>Preview on Google:</Form.Label>
+                        </Form.Group>
+                        <div className="seo-meta-preview">
+                          <h4>
+                          Page name
+                          <span className="seprator"></span>
+                          Site name
+                          </h4>
+                          <a>http://jmason.webfin.com/blog1/blogpost</a>
+                          <p>Sample Copy Text</p>
+                        </div>
+                        <Form.Group className="index-site-toggle">
+                          <Form.Check
+                             type="switch"
+                             label="Let search engines index your main site pages"
+                          />
+                        </Form.Group>
+
+                        <div className="blog-btns">
+                          <Button onClick={submitData} variant="primary">Save</Button>
+                        </div>
+                      </Col>
+                    </Row>
                   </div>
                 </div>
               </Form>
@@ -171,4 +397,11 @@ const BlogPage =(props) => {
     )
 }
 
-export default BlogPage;
+BlogPage.propTypes = {
+  handleSubmit: PropTypes.func
+};
+
+export default reduxForm({
+  form: 'blogForm',
+  validate
+})(BlogPage);
