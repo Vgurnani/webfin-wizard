@@ -62,7 +62,7 @@ const AssessmentPage = (props) => {
     case 3:
         return <StepThree  assessmentData={assessmentData} saveData={saveData} prevPage={prevPage} onSubmit={nextPage} />
     case 4:
-        return <Preview  assessmentData={assessmentData} saveData={saveData} prevPage={prevPage} onSubmit={finalSubmit} />
+        return <Preview  colorPalette={colorPalette} assessmentData={assessmentData} saveData={saveData} prevPage={prevPage} onSubmit={finalSubmit} />
     default:
         return null
     }

@@ -1,5 +1,10 @@
 import React from 'react';
 import { Switch, Route,withRouter } from 'react-router-dom';
+import { ROUTES } from './constants/appRoutes';
+
+
+
+
 import HomePage from './components/homepage';
 import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
@@ -10,14 +15,14 @@ import Dashboard from './pages/dashboard'
 import RedirectAuth from './pages/oauth2/redirect'
 import AssessmentPage from './pages/assessment';
 import ForgetPasswordPage from './pages/forget-password';
-import { ROUTES } from './constants/appRoutes';
 import {PrivateRoute}  from './components/hoc/PrivateRoute'
 import {PublicRoute}  from './components/hoc/PublicRoute'
-import {RegisterRoute}  from './components/hoc/RegisterRoute'
+// import {RegisterRoute}  from './components/hoc/RegisterRoute'
 import ConfirmAccount from './pages/confirm-account'
 import {ConfirmAccountRoute} from './components/hoc/ConfirmAccountRoute'
 import Layout from './components/shared/Layout'
 import './components/all.sass'
+const RegisterRoute = React.lazy(() => import('./components/hoc/RegisterRoute'));
 
 const App = (props) => {
   return (

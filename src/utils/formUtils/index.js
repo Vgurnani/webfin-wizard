@@ -146,7 +146,7 @@ const renderStyleMultipleRadio = (props) => {
         <Form.Group>
    
                 { options.map((item,index) => {
-                    
+                    item['imageUrl'] = item.icon?.match('http') ? item.icon : item.imageUrl
                     return(
                         <div key={ index } className={ `  ${ className || 'styled-radio' }` }>
                             
@@ -165,7 +165,7 @@ const renderStyleMultipleRadio = (props) => {
                                         {isColors && <span className={`checkbox-colors ${item.label === 'Clean White' ? 'round-border' : null}`}>
                                             {item.colors && <span style={{backgroundColor: item.colors[0]}}></span>}
                                         </span>}
-                                        {isIcons && item.icon &&  <span className='emojiText mb-0 mt-1' dangerouslySetInnerHTML={ { __html:  item.icon  } } />}
+                                        {isIcons && item.icon && !item.imageUrl &&  <span className='emojiText mb-0 mt-1' dangerouslySetInnerHTML={ { __html:  item.icon  } } />}
                                         {item.imageUrl && <>
                                             <img src={ item.imageUrl } className='styled-radio-img'  alt={ item.label } style={ { width: imgWidth || 'auto' } } /></>}
                                         {fontStyled ? <p style={{fontStyle: item.value}} className="emojiText mb-0 mt-1" dangerouslySetInnerHTML={ { __html:  item.label  } } /> : 

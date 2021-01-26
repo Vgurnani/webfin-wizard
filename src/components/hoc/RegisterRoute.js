@@ -1,15 +1,14 @@
 import React, { useEffect } from "react"
-import { Route, Redirect } from "react-router-dom"
+import { Route, Redirect , withRouter} from "react-router-dom"
 import { NOTIFICATION_TYPES } from '../../constants/app'
 import {notification} from '../../services/notification'
 import { isLoggedIn, getUser } from '../../utils/helpers'
 
-export const RegisterRoute = ({ component: Component, ...rest }) => {
+ const RegisterRoute = ({ component: Component, ...rest }) => {
   const user = getUser()
   const assessment = localStorage.assessmentForm && JSON.parse(localStorage.assessmentForm);
   useEffect(() => {
-    if(assessment?.nicheId && assessment?.colourId && assessment?.websiteName){
-    }else{
+    if(rest.location.pathname === '/register' && !(assessment?.nicheId && assessment?.colourId && assessment?.websiteName)){
         notification(NOTIFICATION_TYPES.ERROR, 'Please fill first assessment')
     }
   },[])
@@ -47,7 +46,7 @@ export const RegisterRoute = ({ component: Component, ...rest }) => {
     />
   )
 }
-
+export default withRouter(RegisterRoute);
 
 
 
