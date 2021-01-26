@@ -74,10 +74,10 @@ const StepThree = (props) => {
 
 	const getDomains = () => {
 		const result = domains?.map((item) => ({label: item, value: item}))
-		return _.isEmpty(result) ? [{label: form.values.domain,value: form.values.domain}] : result
+		return _.isEmpty(result) ? form?.values?.websiteName && [{label: form.values.domain,value: form.values.domain}] : result
 	}
 
-	const domainsOptions = getDomains()
+	const domainsOptions = getDomains() || []
 return(
     <div className="assesment-step assesment-step-2">
       <Row  className="step-form">
