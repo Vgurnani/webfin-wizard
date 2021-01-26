@@ -21,6 +21,7 @@ const UploadImageModal = (props) => {
         const file = image && await createFileFromUrl(image.urls.regular,id)
         getFile(file)
     }
+    debugger
     return(
         <Modal show={openModal} onHide={handleToggleModal} className="logo-upload-modal">
         <Modal.Header closeButton>
@@ -50,7 +51,13 @@ const UploadImageModal = (props) => {
                         isDropText={'Drag your images'}
                     />
                      {previewFile && <div>
-                        {previewFile.name}-{bytesToSize(previewFile.size)}
+                         
+                        {typeof(previewFile) !== 'string' ? 
+                        <span>
+                          {previewFile.name}-{bytesToSize(previewFile.size)}
+                        </span> :
+                        <img src={previewFile} width='200px' />
+                        }
                         <span onClick={clearImage}>clear</span>
                     </div>}
                 </Col>

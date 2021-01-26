@@ -6,7 +6,8 @@ import unsplashClient from '../../services/unsplashClient';
 import { ROUTES } from '../../constants/appRoutes';
 import history  from '../../utils/history'
 import { removeItem } from '../../utils/cache';
-
+import { dataURLtoFile , uId } from '../../utils/helpers'
+import axios from 'axios';
 import {
     getAssessmentRequest,
     getAssessmentSuccess,
@@ -36,8 +37,15 @@ export const getAssessment = (data) => {
 
 
 export const createAssessment = (data) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(createAssessmentRequest())
+        if(data.logoUrl){
+            const file = dataURLtoFile(data.logoUrl,uId()+'.png')
+            const result =  await axiosInstance.get('/generate')
+            const formData = new FormData();
+            formData.append('file',file)
+            const finalResult = result.status === 200 ? await axios.put(result.data.url,formData) : null
+        }
         axiosInstance.post(`/assessment`, data).then((response)=>{
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CREATE_ASSESSMENT);
             removeItem('assessmentForm')

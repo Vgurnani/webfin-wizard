@@ -109,3 +109,23 @@ export const queryStringToObject = (queryString) => {
     });
     return Object.fromEntries(array);
 }
+
+export const dataURLtoFile = (dataurl,filename) => {
+    const arr = dataurl.split(',');
+    const mime = arr[ 0 ].match(/:(.*?);/)[ 1 ];
+    const bstr = atob(arr[ 1 ]);
+    let num = bstr.length;
+    const u8arr = new Uint8Array(num);
+    while(num --){
+        u8arr[ num ] = bstr.charCodeAt(num);
+    }
+
+    return new File([ u8arr ], filename, { type:mime });
+}
+
+export const uId = () => {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random()*16|0, v = c === 'x' ? r : ((r&(0x3))|(0x8));
+        return v.toString(16);
+    });
+}

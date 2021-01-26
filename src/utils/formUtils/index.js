@@ -213,9 +213,10 @@ const renderFileDrop = (props)=> {
             reader.onerror = () => console.log('file reading has failed')
             reader.onload = () => {
                 const base64 = reader.result
+                input.onChange(base64)
                 //setUrl(base64);
             }
-            input.onChange(file)
+           // input.onChange(file)
             reader.readAsDataURL(file);
         })
     }
