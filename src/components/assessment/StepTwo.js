@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { renderStyleMultipleRadio } from '../../utils/formUtils'
 import { assessmentSaved } from '../../utils/helpers'
 import { assessmentFormValidate as validate } from '../../utils/validates'
+import WebTemplates ,{Header, Home, Banner} from 'web-templates';
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import 
@@ -21,6 +22,14 @@ const StepTwo = (props) => {
     const [isSave, setSave ] = useState(false)
     const { handleSubmit,prevPage ,colorPalette, saveData} = props;
     const assessmentForm = useSelector((state) => state.form.assessmentForm)
+    const colorObject = colorPalette.filter((item) => item.value === assessmentForm.values.colourId)[0] || {}
+
+    const data = {
+        colors: colorObject?.colors || [],
+        logoUrl: '',
+        logoText: assessmentForm.values.websiteName,
+        readOnly: true
+      }
 
     useEffect(()=>{
         setSave(assessmentSaved('step2',assessmentForm?.values))
@@ -56,7 +65,18 @@ const StepTwo = (props) => {
                                 </Col>
                                 <Col className="col-6 color-palatte-preview">
                                     <div className="color-preview">
-                                        <img src={preview} alt="Preview" />
+                                    <WebTemplates data={data}>
+                                        <Header></Header>
+                                        <Home>
+                                        <Banner>
+                                            <h1>
+                                            <span>Simple Recipes for Healthier Families</span>
+                                            </h1>
+                                            <h5>Welcome to the most reliable source for healthy recipes!</h5>
+                                            
+                                        </Banner>
+                                        </Home>
+                                    </WebTemplates>
                                     </div>
                                 </Col>
                             </Row>

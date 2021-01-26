@@ -2,7 +2,8 @@ import { ActionTypes } from '../actions/assessments/actionTypes'
 const initialState = {
     assessmentData: {},
     loading: false,
-    unsplashImages: []
+    unsplashImages: [],
+    domains: []
 }
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -22,6 +23,8 @@ export default (state = initialState, action) => {
         return {...state, unsplashImages: action.payload || [], loading: false}
       case ActionTypes.GET_UNSPLASH_ERROR:
         return {...state, unsplashImages: [], loading: false}
+      case ActionTypes.GET_VERIFIED_DOMAIN:
+        return { ...state, domains: action.payload.domains }
       default:
         return state;
     }

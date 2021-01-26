@@ -42,14 +42,20 @@ const renderFieldWG = (props) => {
         validationError,
         meta: { touched, error, warning },
         maxLength,
+        handleKeyUp,
         rows,
         defaultWarning
     } = props;
 
+    const changeValue = (event) =>{
+        handleKeyUp && handleKeyUp(event.currentTarget.value)
+        //input.onChange(event.currentTarget.value)
+    }
+
     return (
         <Form.Group controlId={name}>
            { label &&  <Form.Label>{label || ''}</Form.Label> }
-            <Form.Control rows={ rows } { ...input }  maxLength={ maxLength } disabled={ disabled || false } type={ type } className={ validationError || (touched && error) ? 'validation-error' : '' } placeholder={ placeholder || '' } />
+            <Form.Control rows={ rows } { ...input } onKeyUp={changeValue}  maxLength={ maxLength } disabled={ disabled || false } type={ type } className={ validationError || (touched && error) ? 'validation-error' : '' } placeholder={ placeholder || '' } />
             {defaultWarning && !input.value && <span className="default-warning"><i className="fas fa-exclamation-triangle"></i> {defaultWarning}</span>}
             <Validations
                 props={ {

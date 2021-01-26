@@ -57,3 +57,11 @@ export const getUnsplashError = (error) => {
         error: error
     }
 }
+
+export const getVerifiedDomainSuccess = (data,name) => {
+    return {
+        type: ActionTypes.GET_VERIFIED_DOMAIN,
+        payload: data,
+        name: name
+    }
+}

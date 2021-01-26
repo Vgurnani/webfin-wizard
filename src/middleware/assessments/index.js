@@ -14,7 +14,8 @@ import {
     createAssessmentRequest,
     createAssessmentSuccess,
     createAssessmentFailure,
-    getUnsplashSuccess
+    getUnsplashSuccess,
+    getVerifiedDomainSuccess
 
 } from '../../actions/assessments'
 export const getAssessment = (data) => {
@@ -64,3 +65,11 @@ export const getUnsplash = (url,query) => {
 };
 
 
+export const getVerifiedDomain = (name) => {
+    return (dispatch) => {
+        axiosInstance.get(`/check-domain?name=${name}`).then((response)=>{
+            dispatch(getVerifiedDomainSuccess(response.data))
+        }).catch((error) => {
+        })
+    };
+}

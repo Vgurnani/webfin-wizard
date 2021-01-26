@@ -1,14 +1,15 @@
 import React,{ useState , useEffect } from 'react'
 import { Field } from 'redux-form';
-import { renderFieldWG  } from '../../utils/formUtils'
+import { renderFieldWG , renderStyleMultipleRadio } from '../../utils/formUtils'
 import { getLabel ,assessmentSaved } from '../../utils/helpers'
-import { getUnsplash } from '../../middleware/assessments'
+import { getUnsplash ,getVerifiedDomain} from '../../middleware/assessments'
 import PropTypes from 'prop-types';
 import { assessmentFormValidate as validate } from '../../utils/validates'
 import { reduxForm } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux'
 import { change as reduxChange } from 'redux-form'
-
+import WebTemplates ,{Header, Home, Banner} from 'web-templates';
+import _ from 'lodash';
 import 
   {
     Form,
@@ -26,11 +27,20 @@ const StepThree = (props) => {
 	const dispatch = useDispatch()
 	const [openModal, setModalOpen ] = useState(false)
 	const form  = useSelector((state) => state.form.assessmentForm)
+	const domains  = useSelector((state) => state.assessment.domains)
 	const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
-    const { handleSubmit ,prevPage ,assessmentData, saveData} = props;
+	const { handleSubmit ,prevPage ,assessmentData, colorPalette, saveData} = props;
+	const colorObject = colorPalette.filter((item) => item.value === form.values.colourId)[0] || {}
+	const data = {
+		colors: colorObject?.colors || [],
+		logoUrl: '',
+		logoText: form.values.websiteName,
+		readOnly: true
+	}
     const handleToggleModal = () => {
         setModalOpen(!openModal)
 	}
+	
 	
 	useEffect(()=>{
 		const query = form.values?.nicheId && getLabel(assessmentData.niches, form.values?.nicheId)
@@ -57,7 +67,17 @@ const StepThree = (props) => {
         setSave(true)
         saveData()
 	}
-		
+	
+	const handleChange = (value) => {
+		dispatch(getVerifiedDomain(value))
+	}
+
+	const getDomains = () => {
+		const result = domains?.map((item) => ({label: item, value: item}))
+		return _.isEmpty(result) ? [{label: form.values.domain,value: form.values.domain}] : result
+	}
+
+	const domainsOptions = getDomains()
 return(
     <div className="assesment-step assesment-step-2">
       <Row  className="step-form">
@@ -76,8 +96,20 @@ return(
 												<Field
 														name="websiteName"
 														component={ renderFieldWG }
+														handleKeyUp={handleChange}
 														placeholder={ 'Enter your website name' }
 														
+												/>
+												<span>domain</span>
+
+												<Field
+													name="domain"
+													options={ domainsOptions || []}
+													component={ renderStyleMultipleRadio }
+													defaultValue={ 'no' }
+													placeholder={ 'domain' }
+													className='styled-radio-btn'
+													isIcons={false}
 												/>
 										
 												<p className="logo-optional">Optional! if you have logo upload here</p>
@@ -99,7 +131,18 @@ return(
 								</Col>
 								<Col className="col-6 name-website-selector">
 										<div className="blog-preview">
-												<img src={preview} alt="Preview" />
+										<WebTemplates data={data}>
+                                        <Header></Header>
+                                        <Home>
+                                        <Banner>
+                                            <h1>
+                                            <span>Simple Recipes for Healthier Families</span>
+                                            </h1>
+                                            <h5>Welcome to the most reliable source for healthy recipes!</h5>
+                                            
+                                        </Banner>
+                                        </Home>
+                                    </WebTemplates>
 										</div>
 								</Col>
 							</Row>
@@ -149,7 +192,8 @@ StepThree.propTypes = {
     handleSubmit: PropTypes.func,
     submitData: PropTypes.func,
     assessmentData: PropTypes.object,
-    saveData: PropTypes.func
+	saveData: PropTypes.func,
+	colorPalette: PropTypes.object
 };
 export default reduxForm({
     form: 'assessmentForm',
