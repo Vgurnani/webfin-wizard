@@ -21,15 +21,14 @@ const Preview = (props) => {
     const {handleSubmit ,saveData, colorPalette} = props;
     const assessmentForm = useSelector((state) => state.form.assessmentForm)
     const colorObject = colorPalette.filter((item) => item.value === assessmentForm.values.colourId)[0] || {}
-
     const data = {
-        colors: colorObject?.colors,
-        logoUrl: '',
-        logoText: assessmentForm.values.websiteName,
+		colors: colorObject?.colors || [],
+		logoUrl: assessmentForm.values.logoUrl,
+		logoText: assessmentForm.values.websiteName,
         readOnly: true,
-        headerLinks: [{name: 'home', url: ''}],
-        footerLinks: [{provider: 'facebook', url: '/facebook'}]
-      }
+        headerLinks: [{name: 'home', url: '#'}],
+        footerLinks: [{provider: 'facebook', url: '#'}]
+	}
     return(
 
 

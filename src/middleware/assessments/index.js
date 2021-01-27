@@ -44,7 +44,7 @@ export const createAssessment = (data) => {
             const result =  await axiosInstance.get('/generate')
             const formData = new FormData();
             formData.append('file',file)
-            const finalResult = result.status === 200 ? await axios.put(result.data.url,formData) : null
+            const finalResult = result.status === 200 ? await axios.put(result.data.signedUrl,formData) : null
         }
         axiosInstance.post(`/assessment`, data).then((response)=>{
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CREATE_ASSESSMENT);
