@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import RichTextEditor from './rte';
-
+import { Field, change } from 'redux-form';
+import { renderFieldWG } from '../../utils/formUtils'
 import {
   DashboardMenuIcon,
   EditSiteMenuIcon,
@@ -78,17 +79,18 @@ const BlogPage =(props) => {
   const [rteData, setRTEData] = useState(initialValue)
   const { handleSubmit } = props;
 
-  const submitData = () => {
+  const submitData = (formData) => {
+    formData['image'] = 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png'
     const data = {
       type:"blog",
-      content:{
-        title: 'Test Blog',
-        image: 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png',
-        data: rteData
-      }
+      content: formData
     }
-
     dispatch(createBlog(data))
+  }
+
+  const handleRTEdata = (data) =>{
+    dispatch(change('blogForm', 'data', data))
+    setRTEData(data)
   }
 
 
@@ -155,7 +157,11 @@ const BlogPage =(props) => {
                 <div className="blog-creation-head">
                   <div className="blog-creation-head-left">
                     <Form.Group className="blog-title-group">
-                        <Form.Control  placeholder='Blog post title'/>
+                        <Field
+                              name="title"
+                              component={ renderFieldWG }
+                              placeholder={ 'Blog post title' }
+                            />
                         <Form.Text>
                           March 25, 2020 / 4 min read / Author Name
                         </Form.Text>
@@ -219,7 +225,7 @@ const BlogPage =(props) => {
 
                   </div>
                   <div className="blog-editor">
-                  <RichTextEditor readOnly={false} setRTEData={setRTEData} initialValue={initialValue} />
+                  <RichTextEditor readOnly={false} setRTEData={handleRTEdata} initialValue={initialValue} />
                   </div>
                 </div>
                 <div className="blog-action">
@@ -383,7 +389,7 @@ const BlogPage =(props) => {
                         </Form.Group>
 
                         <div className="blog-btns">
-                          <Button onClick={submitData} variant="primary">Save</Button>
+                          <Button type='submit' variant="primary">Save</Button>
                         </div>
                       </Col>
                     </Row>

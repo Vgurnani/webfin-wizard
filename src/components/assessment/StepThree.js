@@ -20,7 +20,6 @@ import
   }
 from 'react-bootstrap';
 import enterIcon from '../../public/images/enter-icon.png';
-import preview from '../../public/images/preview.png';
 import UploadImageModal from './shared/UploadImageModal'
 const StepThree = (props) => {
 	const [ isSave, setSave ] = useState(false)
@@ -29,11 +28,11 @@ const StepThree = (props) => {
 	const form  = useSelector((state) => state.form.assessmentForm)
 	const domains  = useSelector((state) => state.assessment.domains)
 	const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
-	const { handleSubmit ,prevPage ,assessmentData, colorPalette, saveData} = props;
+	const { handleSubmit ,prevPage ,assessmentData, colorPalette, saveData, setStep } = props;
 	const colorObject = colorPalette.filter((item) => item.value === form.values.colourId)[0] || {}
 	const data = {
 		colors: colorObject?.colors || [],
-		logoUrl: '',
+		logoUrl: form.values.logoUrl,
 		logoText: form.values.websiteName,
 		readOnly: true
 	}
@@ -56,8 +55,8 @@ const StepThree = (props) => {
 		dispatch(getUnsplash('/photos',query))
 	}
 
-	const getFile = (file) => {
-		dispatch(reduxChange('assessmentForm', 'logoUrl', file))
+	const getBase64 = (base64) => {
+		dispatch(reduxChange('assessmentForm', 'logoUrl', base64))
 	}
 
 	const clearImage = () => {
@@ -69,7 +68,10 @@ const StepThree = (props) => {
 	}
 	
 	const handleChange = (value) => {
-		dispatch(getVerifiedDomain(value))
+		if(value)
+			dispatch(getVerifiedDomain(value))
+		else
+			dispatch({type: 'CLEAR_DOMAINS'})
 	}
 
 	const getDomains = () => {
@@ -100,29 +102,35 @@ return(
 														placeholder={ 'Enter your website name' }
 														
 												/>
-												<span>domain</span>
-
-												<Field
-													name="domain"
-													options={ domainsOptions || []}
-													component={ renderStyleMultipleRadio }
-													defaultValue={ 'no' }
-													placeholder={ 'domain' }
-													className='styled-radio-btn'
-													isIcons={false}
-												/>
+												
+												{!_.isEmpty(domains) && 
+													<>
+														<span>domain</span>
+														<Field
+															name="domain"
+															options={ domainsOptions || []}
+															component={ renderStyleMultipleRadio }
+															defaultValue={ 'no' }
+															placeholder={ 'domain' }
+															className='styled-radio-btn'
+															isIcons={false}
+														/>
+													</>
+												}
 										
 												<p className="logo-optional">Optional! if you have logo upload here</p>
 												<div className="upload-media-btn">
 												<button type='button' onClick={handleToggleModal}>upload your logo</button>
+												
 												</div>
+												
 												
 											
 												<ul className="cat-list">
-														{form.values?.nicheId && <li>
+														{form.values?.nicheId && <li onClick={() => setStep(1)}>
 														{ getLabel(assessmentData.niches, form.values?.nicheId)}
 														</li>}
-														{form.values?.colourId &&<li>
+														{form.values?.colourId &&<li onClick={() => setStep(2)}>
 														{getLabel(assessmentData.colorPalette, form.values?.colourId)}
 														</li>}
 												</ul>
@@ -179,7 +187,7 @@ return(
 										</div>
 								</div>
 							</div>
-							<UploadImageModal  clearImage={clearImage} previewFile={form.values?.logoUrl} getFile={getFile} handleSearch={handleSearch} unsplashImages={unsplashImages} openModal={openModal} handleToggleModal={handleToggleModal} />
+							<UploadImageModal  clearImage={clearImage} previewFile={form.values?.logoUrl} getBase64={getBase64} handleSearch={handleSearch} unsplashImages={unsplashImages} openModal={openModal} handleToggleModal={handleToggleModal} />
 						</Form>
 					</Container>
 				</Col>
@@ -193,7 +201,8 @@ StepThree.propTypes = {
     submitData: PropTypes.func,
     assessmentData: PropTypes.object,
 	saveData: PropTypes.func,
-	colorPalette: PropTypes.object
+	colorPalette: PropTypes.object,
+	setStep: PropTypes.func
 };
 export default reduxForm({
     form: 'assessmentForm',

@@ -25,6 +25,8 @@ export default (state = initialState, action) => {
         return {...state, unsplashImages: [], loading: false}
       case ActionTypes.GET_VERIFIED_DOMAIN:
         return { ...state, domains: action.payload.domains }
+      case ActionTypes.CLEAR_DOMAINS:
+        return { ...state, domains: [] }
       default:
         return state;
     }

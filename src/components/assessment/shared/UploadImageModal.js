@@ -2,7 +2,7 @@ import React,{ useState } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { renderFileDrop } from '../../../utils/formUtils'
-import { createFileFromUrl, bytesToSize } from '../../../utils/helpers'
+import { dataUrlToBase64, bytesToSize } from '../../../utils/helpers'
 import 
   {
     Button,
@@ -13,15 +13,15 @@ import
   }
 from 'react-bootstrap';
 const UploadImageModal = (props) => {
-    const { openModal, handleToggleModal, unsplashImages ,getFile,clearImage, handleSearch, previewFile} = props
+    const { openModal, handleToggleModal, unsplashImages ,getBase64,clearImage, handleSearch, previewFile} = props
     const [selectedUnsplash, setSelectedUnsplash ] = useState(null);
     const handleSelect = async(id) => {
         setSelectedUnsplash(id)
         const image = unsplashImages.filter((item) => item.id == id)[0];
-        const file = image && await createFileFromUrl(image.urls.regular,id)
-        getFile(file)
+        image && dataUrlToBase64(image.urls.regular,function(result){
+            getBase64(result)
+        });
     }
-    debugger
     return(
         <Modal show={openModal} onHide={handleToggleModal} className="logo-upload-modal">
         <Modal.Header closeButton>
@@ -88,7 +88,7 @@ const UploadImageModal = (props) => {
         <Modal.Footer>
             <div className="modal-btns">
                 <Button variant="secondary">Unsplash</Button>
-                <Button variant="primary">Confirm</Button>
+                <Button variant="primary" onClick={handleToggleModal}>Confirm</Button>
             </div>
         </Modal.Footer>
     </Modal>
@@ -100,7 +100,7 @@ UploadImageModal.propTypes = {
     handleToggleModal: PropTypes.func,
     openModal: PropTypes.bool,
     handleSearch: PropTypes.func,
-    getFile: PropTypes.func,
+    getBase64: PropTypes.func,
     clearImage: PropTypes.func,
     previewImage: PropTypes.object
 

@@ -55,7 +55,7 @@ const renderFieldWG = (props) => {
     return (
         <Form.Group controlId={name}>
            { label &&  <Form.Label>{label || ''}</Form.Label> }
-            <Form.Control rows={ rows } { ...input } onKeyUp={changeValue}  maxLength={ maxLength } disabled={ disabled || false } type={ type } className={ validationError || (touched && error) ? 'validation-error' : '' } placeholder={ placeholder || '' } />
+            <Form.Control rows={ rows } { ...input } onBlur={changeValue}  maxLength={ maxLength } disabled={ disabled || false } type={ type } className={ validationError || (touched && error) ? 'validation-error' : '' } placeholder={ placeholder || '' } />
             {defaultWarning && !input.value && <span className="default-warning"><i className="fas fa-exclamation-triangle"></i> {defaultWarning}</span>}
             <Validations
                 props={ {
