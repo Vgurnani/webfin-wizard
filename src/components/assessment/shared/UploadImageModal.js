@@ -50,15 +50,15 @@ const UploadImageModal = (props) => {
                         placeholder={"<a><i className='fa fa-plus'/> upload your logo</a>"}
                         isDropText={'Drag your images'}
                     />
-                     {previewFile && <div>
+                     {previewFile && <div className="preview-logo">
                          
                         {typeof(previewFile) !== 'string' ? 
                         <span>
                           {previewFile.name}-{bytesToSize(previewFile.size)}
                         </span> :
-                        <img src={previewFile} width='200px' />
+                        <img src={previewFile} />
                         }
-                        <span onClick={clearImage}>clear</span>
+                        <span onClick={clearImage} className="clear-logo">clear</span>
                     </div>}
                 </Col>
                 <Col className="col-8">

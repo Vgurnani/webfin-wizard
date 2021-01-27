@@ -167,14 +167,14 @@ const renderStyleMultipleRadio = (props) => {
                                     id={ input.name } 
                                     className="styled-radio"
                                     />
-                                <div className='input-radio-label' style={ { width: width || 'auto' } }>
+                                <div className='input-radio-label'>
                                         {isColors && <span className={`checkbox-colors ${item.label === 'Clean White' ? 'round-border' : null}`}>
                                             {item.colors && <span style={{backgroundColor: item.colors[0]}}></span>}
                                         </span>}
                                         {isIcons && item.icon && !item.imageUrl &&  <span className='emojiText mb-0 mt-1' dangerouslySetInnerHTML={ { __html:  item.icon  } } />}
                                         {item.imageUrl && <>
-                                            <img src={ item.imageUrl } className='styled-radio-img'  alt={ item.label } style={ { width: imgWidth || 'auto' } } /></>}
-                                        {fontStyled ? <p style={{fontStyle: item.value}} className="emojiText mb-0 mt-1" dangerouslySetInnerHTML={ { __html:  item.label  } } /> : 
+                                            <img src={ item.imageUrl } className='styled-radio-img'  alt={ item.label } /></>}
+                                        {fontStyled ? <p  className="emojiText mb-0 mt-1" dangerouslySetInnerHTML={ { __html:  item.label  } } /> : 
                                         <span className="emojiText mb-0 mt-1" dangerouslySetInnerHTML={ { __html:  item.label  } } /> }
                                         
                                     

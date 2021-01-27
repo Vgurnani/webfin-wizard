@@ -1127,9 +1127,7 @@ ul
     &.active
       background: $optional-light-grey-color
 .styled-radio-btn
-  border: 1px solid $optional-light-grey-color
-  border-radius: 24px
-  padding: 10px 18px
+  
   margin: 16px 0 0
   position: relative
   label
@@ -1149,23 +1147,36 @@ ul
     opacity: 0
     &:checked + .input-radio-label
       background-image: url('/images/radio-checked.png')
+      border: 2px solid $primary-color
+      background-color: rgba(48, 50, 200, 0.1)
   .input-radio-label
     display: inline-block
     vertical-align: middle
     color: $dark-grey-color
     font-size: 16px
     line-height: 1.5
-    padding: 0 0 0 25px
+    padding: 10px 18px 10px 43px
     background-image: url('/images/radio.png')
     background-repeat: no-repeat
-    background-position: 0 4px
+    background-position: 18px center
+    border: 1px solid $optional-light-grey-color
+    border-radius: 24px
+    width: 100%
+    display: inline-block
     .emojiText 
       margin: 0 0 0 5px !important
+      display: inline-block
+      vertical-align: middle
+    img
+      width: auto !important
+      max-width: 25px
+      display: inline-block
+      vertical-align: middle
 .main-section      
   .step-banner
     background: linear-gradient(219.41deg, $primary-color 0%, $light-blue-color 100%)
     color: $white-color
-    padding: 22px 0
+    padding: 10px 0
     .back-to-home 
       a
         color: $white-color
@@ -1178,7 +1189,7 @@ ul
       line-height: 1
       letter-spacing: -1.5px
       font-weight: normal
-      margin: 5px 0 28px
+      margin: 5px 0 0
       @media (max-width: $breakpoint-mobile)
         font-size: 40px
         margin: 5px 0 0
@@ -1189,7 +1200,7 @@ ul
       color: $white-color
       margin: 0  
 .step-form
-  padding: 30px 0 60px
+  padding: 15px 0 60px
   .form-heading
     border-bottom: 1px solid $dark-grey-color
     padding: 18px 0
@@ -1207,7 +1218,7 @@ ul
     width: 100%
     display: flex
     justify-content: space-between
-    margin: 55px 0 0
+    margin: 25px 0 0
     @media (max-width: $breakpoint-mobile)
       margin: 30px 0 0
       display: inline-block
@@ -1252,9 +1263,6 @@ ul
       max-width: 100%
       margin-left: 25px
       float: left
-      border: none
-      border-radius: 0
-      padding: 0
       &:nth-child(2n+1)
         clear: left
         margin-left: 0
@@ -1265,11 +1273,9 @@ ul
       .styled-radio
         &:checked + .input-radio-label  
           background-image: none
-          border: 2px solid $primary-color
           .emojiText
             color: $primary-color
       .input-radio-label
-        border: 1px solid rgba(51, 51, 51, 0.3)
         border-radius: 10px
         padding: 9px 5px
         background-image: none
@@ -1407,13 +1413,16 @@ ul
 .drag-image-box 
   width: 100%
   height: 100px
-  background: #dddddd
-  border: 1px solid #cccccc
-  border-radius: 30px
-  align-items: center
+  background: $light-bg-color
+  border: 1px dashed #9E9E9E
+  border-radius: 24px
+  padding: 16px
+  margin: 7px 0 0
   p
-    color: #1d1a1a
-    text-align: center
+    color: #9E9E9E
+    font-size: 18px
+    line-height: 1.5
+    padding: 0
 
 .round-border 
   span
@@ -1509,9 +1518,24 @@ ul
               width: 92px
               height: 92px
               object-fit: cover
-            &.selected
+            &.active
               img
                 border: 5px solid $primary-color
+      .preview-logo
+        width: 100%
+        display: flex
+        align-items: center
+        img
+          //border: 5px solid #3032C8;
+          border-radius: 16px;
+          width: 92px;
+          height: 92px;   
+          object-fit: cover
+          margin-right: 15px
+        .clear-logo
+          text-transform: capitalize
+          color: $red-color
+          font-weight: 700       
       
 .category-wrapper
   width: 727px
