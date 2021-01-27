@@ -58,7 +58,7 @@ const RichTextEditor = (props) => {
     <Slate editor={editor} value={value} onChange={value => setValue(value)} className="custom-rte-editor">
       <Toolbar className="custom-rte-toolbar">
         <div className="toolbar-wrapper">
-          <div className="toolbar-box">
+          {/* <div className="toolbar-box">
             <Form.Control as="select" custom>
               <option>Paragraph</option>
               <option>2</option>
@@ -66,19 +66,19 @@ const RichTextEditor = (props) => {
               <option>4</option>
               <option>5</option>
             </Form.Control>
-          </div>
-          <div className="toolbar-box">
+          </div> */}
+          {/* <div className="toolbar-box">
             <MarkButton format="font-size" icon="FontSizeEditor"/>
             <MarkButton format="font-family" icon="FontFamilyEditor"/>
-          </div>
+          </div> */}
               <div className="toolbar-box">
                 <MarkButton format="bold" icon="BoldEditor"/>
                 <MarkButton format="italic" icon="ItalicEditor"/>
                 <MarkButton format="underline" icon="UnderlineEditor"/>
-                <MarkButton format="strike" icon="StrikeThroghEditor"/>
-                <MarkButton format="highlight" icon="HighlightEditor"/>
+                {/* <MarkButton format="strike" icon="StrikeThroghEditor"/> */}
+                {/* <MarkButton format="highlight" icon="HighlightEditor"/> */}
               </div>
-                <div className="toolbar-box">
+                {/* <div className="toolbar-box">
                   <MarkButton format="list-numbered" icon="ListNumberedEditor"/>
                   <MarkButton format="list-bullet" icon="ListBulletedEditor"/>
                 </div>
@@ -92,7 +92,7 @@ const RichTextEditor = (props) => {
                     <div className="toolbar-box">
                       <MarkButton format="list-numbered" icon="UndoEditor"/>
                       <MarkButton format="list-bullet" icon="RedoEditor"/>
-                    </div>
+                    </div> */}
          {/*
 
           <div className="toolbar-box">

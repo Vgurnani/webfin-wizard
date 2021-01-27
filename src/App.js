@@ -40,7 +40,7 @@ const App = (props) => {
       <ConfirmAccountRoute  path={ ROUTES.CONFIRM_ACCOUNT } component={ ConfirmAccount } />
       <Route exact path={ROUTES.TERMS_CONDITIONS} component={TermsCondition} />
       <Route exact path={ROUTES.PRIVACY_POLICY} component={PrivacyPolicy} />
-      <Route exact path={ROUTES.BLOG} component={BlogPage} />
+      <PrivateRoute exact path={ROUTES.BLOG} component={BlogPage} />
       </Layout>
       <Route exact component={NotFoundPage} />
     </Switch>);
