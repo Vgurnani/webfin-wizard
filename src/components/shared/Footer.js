@@ -21,7 +21,7 @@ const Footer = () => (
         <Col className="col-6 footer-social-icon-menu text-right">
           <ul>
             <li>
-              <Link to="/">
+              <Link to={ ROUTES.LOGIN }>
               Account
               </Link>
             </li>

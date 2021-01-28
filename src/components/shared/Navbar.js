@@ -16,6 +16,7 @@ import {
 const Navbar = (props) => {
   const dispatch  = useDispatch();
   const [ mobileHumberger, setMobileHumberger] = useState(false)
+  const [ activeProfileNav ,setActiveProfileNav ] = useState(false)
   const [navBarActiveClass , setNavBarActiveClass] = useState('')
   const btAction = (pathname) => {
     if(pathname === '/register'){
@@ -38,19 +39,19 @@ const Navbar = (props) => {
         return(
           <ul className="main-navigation">
             <li>
-              <a  href="">All Sites</a>
+              <a  href="#">All Sites</a>
             </li>
             <li>
-              <a  href="">Domains</a>
+              <a  href="#">Domains</a>
             </li>
             <li>
-              <a  href="">Support</a>
+              <a  href="#">Support</a>
             </li>
             <li>
-              <a  href=""><NotificationIcon /></a>
+              <a  href="#"><NotificationIcon /></a>
             </li>
-            <li className="header-profile-img">
-              <a href="">
+            <li className={`header-profile-img ${activeProfileNav ? 'active' : ''}`}>
+              <a href="javascript:void(0)" onClick={() => setActiveProfileNav(!activeProfileNav)}>
                 <span className="nav-profile-pic">
                   <img src={headerProfilePic} alt="John" />
                 </span>
@@ -58,7 +59,7 @@ const Navbar = (props) => {
               </a>
               <ul className="header-submenu">
                 <li>
-                <a onClick={logout} >logout</a>
+                <a href='javascript:void(0)' onClick={logout} >logout</a>
                 </li>
               </ul>
             </li>
@@ -66,8 +67,8 @@ const Navbar = (props) => {
         )
       } else if(pathname !== '/forget-password' &&  pathname !== '/confirm-account'){
         return(
-          <Link to="/login">
-          <a className="btn btn-secondary">login</a>
+          <Link to="/login" className='btn btn-secondary'>
+            login
           </Link>
         )
       }

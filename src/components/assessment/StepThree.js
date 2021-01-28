@@ -29,7 +29,7 @@ const StepThree = (props) => {
 	const domains  = useSelector((state) => state.assessment.domains)
 	const domainLoading  = useSelector((state) => state.assessment.domainLoading)
 	const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
-	const { handleSubmit ,prevPage ,assessmentData, colorPalette, saveData, setStep } = props;
+	const { handleSubmit ,prevPage ,onSubmit,assessmentData, colorPalette, saveData, setStep } = props;
 	const colorObject = colorPalette.filter((item) => item.value === form.values.colourId)[0] || {}
 	const data = {
 		colors: colorObject?.colors || [],
@@ -54,9 +54,9 @@ const StepThree = (props) => {
 	
 	useEffect(()=>{
 		if(!_.isEmpty(domains)){
-			dispatch(reduxChange('assessmentForm', 'domain', domains[0]))
+			!domainLoading && dispatch(reduxChange('assessmentForm', 'domain', domains[0]))
 		}
-	},[domains])
+	},[domains, domainLoading])
 
 	const handleSearch = (event) => {
 		let query  = form.values?.nicheId && getLabel(assessmentData.niches, form.values?.nicheId)
@@ -79,18 +79,21 @@ const StepThree = (props) => {
 	const handleChange = (value) => {
 		if(value){
 			dispatch(getVerifiedDomain(value))
-		} else {
-			dispatch({type: 'CLEAR_DOMAINS'})
-			dispatch(reduxChange('assessmentForm', 'domain', null))
-			
-		}
+		} 
+		dispatch({type: 'CLEAR_DOMAINS'})
+		dispatch(reduxChange('assessmentForm', 'domain', null))
 		
-			
 	}
 
 	const getDomains = () => {
 		const result = domains?.map((item) => ({label: item, value: item}))
 		return _.isEmpty(result) ? form?.values?.websiteName && [{label: form.values.domain,value: form.values.domain}] : result
+	}
+
+	const handleSubmitData = (data) => {
+		if(data.nicheId && data.colourId && data.websiteName && data.domain){
+			onSubmit(data)
+		}
 	}
 
 	const domainsOptions = getDomains() || []
@@ -99,7 +102,7 @@ return(
       <Row  className="step-form">
 				<Col className="col-12">
 					<Container>
-						<Form className="form" onSubmit={handleSubmit}>  
+						<Form className="form" onSubmit={handleSubmit(handleSubmitData)}>  
 							<div className="form-heading">   
 									<h2>
 									Name Your Website!

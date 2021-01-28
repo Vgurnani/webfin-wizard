@@ -16,9 +16,9 @@ const RedirectAuth = (props) => {
     useEffect(()=> {
         let queryData = queryStringToObject(props.history.location.search)
         if (queryData?.token?.length) {
-            const needFillAssessment = queryData.test === 'false'
-            setItem('user', {accessToken: queryData.token,enabled: true, needFillAssessment: needFillAssessment});
-            if(!needFillAssessment){
+            const test = queryData.test === 'true'
+            setItem('user', {accessToken: queryData.token,enabled: true, test: test});
+            if(test){
                 history.push(ROUTES.DASHBOARD)
                 notification(NOTIFICATION_TYPES.SUCCESS, 'Login Successfully');
             }else if(localStorage.getItem('assessmentForm') && checkValidAssessmentData()){

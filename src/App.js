@@ -17,6 +17,7 @@ import AssessmentPage from './pages/assessment';
 import ForgetPasswordPage from './pages/forget-password';
 import BlogPage from './pages/blog';
 import {PrivateRoute}  from './components/hoc/PrivateRoute'
+import { AssessmentRoute } from './components/hoc/AssessmentRoute'
 import {PublicRoute}  from './components/hoc/PublicRoute'
 // import {RegisterRoute}  from './components/hoc/RegisterRoute'
 import ConfirmAccount from './pages/confirm-account'
@@ -33,7 +34,7 @@ const App = (props) => {
       <PublicRoute exact path={ROUTES.ROOT} component={HomePage} />
       <PublicRoute path={ROUTES.LOGIN} name="Login Page" component={ LoginPage }/>
       <RegisterRoute path={ROUTES.REGISTER} name="Register Page" component={ RegisterPage }/>
-      <Route exact path={ROUTES.ASSESSMENT} component={AssessmentPage} />
+      <AssessmentRoute exact path={ROUTES.ASSESSMENT} component={AssessmentPage} />
       <PublicRoute path={ROUTES.FORGET_PASSWORD} name="Forget Password Page" component={ ForgetPasswordPage }/>
       <PublicRoute path={ROUTES.AUTH_REDIRECT} name="Auth" component={ RedirectAuth }/>
       <PrivateRoute path={ ROUTES.DASHBOARD } component={Dashboard} />

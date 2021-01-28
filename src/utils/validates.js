@@ -77,7 +77,7 @@ export const assessmentFormValidate = values => {
     if (!values.colourId) {
         errors.colourId = MESSAGE.REQUIRED;
     }
-    if(!values.domain){
+    if(!values.domain || values.domain === 'null'){
         errors.domain = MESSAGE.VALID_SELECT('domain');
     }
     return errors;

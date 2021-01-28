@@ -20,11 +20,11 @@ import preview from '../../public/images/preview.png';
 const Preview = (props) => {
     const {handleSubmit ,saveData, colorPalette} = props;
     const assessmentForm = useSelector((state) => state.form.assessmentForm)
-    const colorObject = colorPalette.filter((item) => item.value === assessmentForm.values.colourId)[0] || {}
+    const colorObject = colorPalette?.filter((item) => item.value === assessmentForm?.values?.colourId)[0] || {}
     const data = {
 		colors: colorObject?.colors || [],
-		logoUrl: assessmentForm.values.logoUrl,
-		logoText: assessmentForm.values.websiteName,
+		logoUrl: assessmentForm?.values?.logoUrl,
+		logoText: assessmentForm?.values?.websiteName,
         readOnly: true,
         headerLinks: [{name: 'Home', url: '#'},{name: 'Blog', url: '#'},{name: 'About', url: '#'},{name: 'Contact', url: '#'}],
 	}

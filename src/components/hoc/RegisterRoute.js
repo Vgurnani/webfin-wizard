@@ -8,14 +8,14 @@ import { isLoggedIn, getUser } from '../../utils/helpers'
   const user = getUser()
   const assessment = localStorage.assessmentForm && JSON.parse(localStorage.assessmentForm);
   useEffect(() => {
-    if(rest.location.pathname === '/register' && !(assessment?.nicheId && assessment?.colourId && assessment?.websiteName)){
+    if(rest.location.pathname === '/register' && !(assessment?.nicheId && assessment?.colourId && assessment?.websiteName && assessment?.domain)){
         notification(NOTIFICATION_TYPES.ERROR, 'Please fill first assessment')
     }
   },[])
 
   const isAssessmentSubmit = () => {
     const assessment = localStorage.assessmentForm && JSON.parse(localStorage.assessmentForm);
-    return (assessment?.nicheId && assessment?.colourId && assessment?.websiteName)
+    return (assessment?.nicheId && assessment?.colourId && assessment?.websiteName && assessment?.domain)
   }
 
   return (

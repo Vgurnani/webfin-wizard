@@ -23,7 +23,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
               }}
             />
           ) :  (
-            user.needFillAssessment ? 
+            !user.test ? 
             <Redirect
               to={{
                 pathname: '/assessment',
