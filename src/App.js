@@ -30,7 +30,7 @@ const App = (props) => {
   return (
     <Switch>
       <Layout className="main-layout">
-      <Route exact path={ROUTES.ROOT} component={HomePage} />
+      <PublicRoute exact path={ROUTES.ROOT} component={HomePage} />
       <PublicRoute path={ROUTES.LOGIN} name="Login Page" component={ LoginPage }/>
       <RegisterRoute path={ROUTES.REGISTER} name="Register Page" component={ RegisterPage }/>
       <Route exact path={ROUTES.ASSESSMENT} component={AssessmentPage} />

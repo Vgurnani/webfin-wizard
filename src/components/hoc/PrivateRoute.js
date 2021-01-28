@@ -22,7 +22,16 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
                 state: { from: props.location },
               }}
             />
-          ) :  <Component {...props} /> )
+          ) :  (
+            user.needFillAssessment ? 
+            <Redirect
+              to={{
+                pathname: '/assessment',
+                state: { from: props.location },
+              }}
+            />
+            :
+          <Component {...props} /> ))
         
       }
     />
