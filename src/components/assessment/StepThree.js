@@ -1,6 +1,6 @@
 import React,{ useState , useEffect } from 'react'
 import { Field } from 'redux-form';
-import { renderFieldWG , renderStyleMultipleRadio } from '../../utils/formUtils'
+import { renderFieldWG ,renderDebounceField, renderStyleMultipleRadio } from '../../utils/formUtils'
 import { getLabel ,assessmentSaved } from '../../utils/helpers'
 import { getUnsplash ,getVerifiedDomain} from '../../middleware/assessments'
 import PropTypes from 'prop-types';
@@ -27,6 +27,7 @@ const StepThree = (props) => {
 	const [openModal, setModalOpen ] = useState(false)
 	const form  = useSelector((state) => state.form.assessmentForm)
 	const domains  = useSelector((state) => state.assessment.domains)
+	const domainLoading  = useSelector((state) => state.assessment.domainLoading)
 	const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
 	const { handleSubmit ,prevPage ,assessmentData, colorPalette, saveData, setStep } = props;
 	const colorObject = colorPalette.filter((item) => item.value === form.values.colourId)[0] || {}
@@ -45,9 +46,16 @@ const StepThree = (props) => {
 		const query = form.values?.nicheId && getLabel(assessmentData.niches, form.values?.nicheId)
 		dispatch(getUnsplash('/photos',query))
 	},[])
+
 	useEffect(()=>{
         setSave(assessmentSaved('step3',form?.values))
-    },[form?.values])
+	},[form?.values])
+	
+	useEffect(()=>{
+		if(!_.isEmpty(domains)){
+			dispatch(reduxChange('assessmentForm', 'domain', domains[0]))
+		}
+	},[domains])
 
 	const handleSearch = (event) => {
 		let query  = form.values?.nicheId && getLabel(assessmentData.niches, form.values?.nicheId)
@@ -68,10 +76,15 @@ const StepThree = (props) => {
 	}
 	
 	const handleChange = (value) => {
-		if(value)
+		if(value){
 			dispatch(getVerifiedDomain(value))
-		else
+		} else {
 			dispatch({type: 'CLEAR_DOMAINS'})
+			dispatch(reduxChange('assessmentForm', 'domain', null))
+			
+		}
+		
+			
 	}
 
 	const getDomains = () => {
@@ -97,13 +110,16 @@ return(
 										<div className="small-wrapper">
 												<Field
 														name="websiteName"
-														component={ renderFieldWG }
-														handleKeyUp={handleChange}
+														component={ renderDebounceField }
+														defaultValue={ form?.values?.websiteName}
+														handleChange={handleChange}
+														minLength={1}
 														placeholder={ 'Enter your website name' }
 														
 												/>
+												{domainLoading && <span>loading...</span>}
 												
-												{!_.isEmpty(domains) && 
+												{!_.isEmpty(domainsOptions) && !domainLoading && form?.values?.websiteName &&
 													<>
 														<span>domain</span>
 														<Field
@@ -163,13 +179,13 @@ return(
 								</div> 
 								<div className="step-btn-right">
 										<div className="step-btn">
-												<Button type="button"  disabled={!props.valid} onClick={handleSave} variant="light" >
+												<Button type="button"  disabled={!props.valid || domainLoading} onClick={handleSave} variant="light" >
 												{ isSave ? 'Saved' : 'Save' }  
 												</Button>
 										</div>
 										<div className="step-btn">
 										<span>
-										{ props.valid  ? 
+										{ props.valid && form?.values?.domain && !domainLoading ?
                                          <Button type="submit" variant="primary">
                                          Next
                                          </Button>

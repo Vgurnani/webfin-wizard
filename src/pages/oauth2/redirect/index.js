@@ -29,7 +29,7 @@ const RedirectAuth = (props) => {
             }
 
 
-        } else if (queryData?.error?.length){
+        } else if (queryData?.error){
             let errorMessage = 'Login error: ' + queryData.error;
             history.push(ROUTES.LOGIN)
             notification(NOTIFICATION_TYPES.ERROR, 'Something went wrong please try again');

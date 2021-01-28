@@ -8,6 +8,7 @@ import React from 'react';
 import { Form, Row } from 'react-bootstrap';
 import OtpInput from 'react-otp-input';
 import Dropzone from 'react-dropzone'
+import { DebounceInput } from 'react-debounce-input';
 
 export const Validations = (props) => {
     const {
@@ -68,6 +69,52 @@ const renderFieldWG = (props) => {
         </Form.Group>
     );
 };
+
+
+const renderDebounceField = (props) => {
+    const {
+        input,
+        label,
+        name,
+        validationError,
+        meta: { touched, error, warning },
+        minLength,
+        placeholder,
+        handleChange,
+        defaultValue,
+        rows,
+        defaultWarning
+    } = props;
+    const changeValue = (event) =>{
+        input.onChange(event.target.value)
+        handleChange && handleChange(event.target.value)
+        
+        //input.onChange(event.currentTarget.value)
+    }
+
+    return (
+        <Form.Group controlId={name}>
+           { label &&  <Form.Label>{label || ''}</Form.Label> }
+           <DebounceInput
+          className={'form-control'}
+          minLength={minLength || 2}
+          debounceTimeout={300}
+          value={defaultValue}
+          placeholder={placeholder}
+          onChange={event => changeValue(event)} />
+            {defaultWarning && !input.value && <span className="default-warning"><i className="fas fa-exclamation-triangle"></i> {defaultWarning}</span>}
+            <Validations
+                props={ {
+                    touched,
+                    error,
+                    validationError,
+                    warning,
+                } }
+            />
+        </Form.Group>
+    );
+};
+
 
 const renderField = (props) => {
     const {
@@ -252,5 +299,6 @@ export {
     renderFieldWG,
     renderField,
     renderOTPField,
-    renderStyleMultipleRadio
+    renderStyleMultipleRadio,
+    renderDebounceField
 };

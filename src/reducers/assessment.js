@@ -2,6 +2,7 @@ import { ActionTypes } from '../actions/assessments/actionTypes'
 const initialState = {
     assessmentData: {},
     loading: false,
+    domainLoading: false,
     unsplashImages: [],
     domains: []
 }
@@ -24,7 +25,11 @@ export default (state = initialState, action) => {
       case ActionTypes.GET_UNSPLASH_ERROR:
         return {...state, unsplashImages: [], loading: false}
       case ActionTypes.GET_VERIFIED_DOMAIN:
-        return { ...state, domains: action.payload.domains }
+        return { ...state, domains: action.payload.domains, domainLoading: false }
+      case ActionTypes.GET_VERIFIED_DOMAIN_REQUEST:
+        return { ...state, domainLoading: true }
+      case ActionTypes.GET_VERIFIED_DOMAIN_ERROR:
+        return { ...state, domains: [], domainLoading: false }
       case ActionTypes.CLEAR_DOMAINS:
         return { ...state, domains: [] }
       default:
