@@ -63,8 +63,9 @@ const StepTwo = (props) => {
                                         imgWidth="30px"
                                     />
                                 </Col>
-                                <Col className="col-6 color-palatte-preview">
-                                    <div className="color-preview">
+                                <Col className="col-6 color-palatte-preview wizard-preview">
+                                    <h4>Preview</h4>
+                                    <div className="color-preview wizard-blog-preview">
                                     <WebTemplates data={data}>
                                         <Header></Header>
                                         <Home>
