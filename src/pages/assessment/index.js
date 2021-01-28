@@ -31,6 +31,7 @@ const AssessmentPage = (props) => {
   },[])
   const nextPage = (data) => {
     setStep(step+1)
+    saveData()
   }
 
   const prevPage = () =>  {
