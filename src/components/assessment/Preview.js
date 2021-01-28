@@ -43,8 +43,8 @@ const Preview = (props) => {
                                 </h2>
                             </div>
                             <Row className="color-palatte">
-                                <Col className="col-12 color-palatte-preview">
-                                    <div className="color-preview">
+                                <Col className="col-12 color-palatte-preview wizard-preview">
+                                    <div className="color-preview wizard-blog-preview">
                                     {/*<TemplateLayoutOne />*/}
                                     <WebTemplates data={data}>
                                         <Header></Header>
@@ -89,7 +89,8 @@ const Preview = (props) => {
                                     </div>
                                 </Col>
                             </Row>
-                                <div className="step-btns justify-content-center">
+                                <div className="step-btns">
+                                <div className="step-btn-left"></div>
                                 <div className="step-btn-right">
                                     <div className="step-btn">
                                     <Button className="btn btn-primary" type="submit">

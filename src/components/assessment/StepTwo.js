@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { renderStyleMultipleRadio } from '../../utils/formUtils'
 import { assessmentSaved } from '../../utils/helpers'
 import { assessmentFormValidate as validate } from '../../utils/validates'
-import WebTemplates ,{Header, Home, Banner} from 'web-templates';
+import WebTemplates ,{Header, Footer,Home, Banner,Blogs, Card} from 'web-templates';
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import 
@@ -71,11 +71,35 @@ const StepTwo = (props) => {
                                         <Home>
                                         <Banner>
                                             <h1>
-                                            <span>Simple Recipes for Healthier Families</span>
+                                                <span>Simple Recipes for Healthier Families</span>
+
                                             </h1>
                                             <h5>Welcome to the most reliable source for healthy recipes!</h5>
-                                            
+                                            <div className="form-wrapper">
+                                                <form className="newsletter">
+                                                <div className="form-group">
+                                                    <input className="form-control" placeholder="Enter your email" type="text" />
+                                                </div>
+                                                <button type="submit" className="btn btn-primary">Subscribe!</button>
+                                                </form>
+                                            </div>
                                         </Banner>
+                                        <Blogs>
+                                            <h2 className="section-heading">
+                                                Recent Blog Posts
+                                                <a href="">View All</a>
+                                                </h2>
+                                                <ul className="blog-list">
+                                                <li>
+                                                    <Card 
+                                                    image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}
+                                                    >
+                                                    <h3>The Joy of Cooking</h3>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
+                                                    </Card>       
+                                                </li>
+                                                </ul>
+                                        </Blogs>
                                         </Home>
                                     </WebTemplates>
                                     </div>
