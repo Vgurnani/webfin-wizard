@@ -77,12 +77,11 @@ const StepThree = (props) => {
 	}
 	
 	const handleChange = (value) => {
+		dispatch({type: 'CLEAR_DOMAINS'})
+		dispatch(reduxChange('assessmentForm', 'domain', null))
 		if(value){
 			dispatch(getVerifiedDomain(value))
 		} 
-		dispatch({type: 'CLEAR_DOMAINS'})
-		dispatch(reduxChange('assessmentForm', 'domain', null))
-		
 	}
 
 	const getDomains = () => {
