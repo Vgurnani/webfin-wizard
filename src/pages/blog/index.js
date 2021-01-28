@@ -228,6 +228,7 @@ const BlogPage =(props) => {
                   <RichTextEditor readOnly={false} setRTEData={handleRTEdata} initialValue={initialValue} />
                   </div>
                 </div>
+                {/* 
                 <div className="blog-action">
                   <div className="blog-action-box">
                     <h5>
@@ -386,15 +387,18 @@ const BlogPage =(props) => {
                              type="switch"
                              label="Let search engines index your main site pages"
                           />
-                        </Form.Group>
+                        </Form.Group> 
 
-                        <div className="blog-btns">
-                          <Button type='submit' variant="primary">Save</Button>
-                        </div>
+                        
                       </Col>
                     </Row>
                   </div>
                 </div>
+                
+                */}<div className="blog-btns">
+                  <Button type='submit' variant="primary">Save</Button>
+                </div>
+              
               </Form>
             </div>
           </section>

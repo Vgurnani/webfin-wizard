@@ -86,9 +86,9 @@ const renderDebounceField = (props) => {
         defaultWarning
     } = props;
     const changeValue = (event) =>{
-        input.onChange(event.target.value)
-        handleChange && handleChange(event.target.value)
-        
+        input.onChange(event.target.value?.replace(/[^\w\s]/gi, ''))
+        handleChange && handleChange(event.target.value?.replace(/[^\w\s]/gi, '') )
+
         //input.onChange(event.currentTarget.value)
     }
 

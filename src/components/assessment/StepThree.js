@@ -114,7 +114,7 @@ return(
 												<Field
 														name="websiteName"
 														component={ renderDebounceField }
-														defaultValue={ form?.values?.websiteName}
+														defaultValue={ form?.values?.websiteName?.replace(/[^\w\s]/gi, '')}
 														handleChange={handleChange}
 														minLength={1}
 														placeholder={ 'Enter your website name' }
