@@ -41,7 +41,7 @@ const AssessmentPage = (props) => {
   const saveData = () =>{
     const values = assessmentForm.values
     if(values){
-      localStorage.setItem('assessmentForm', JSON.stringify(values))
+      sessionStorage.setItem('assessmentForm', JSON.stringify(values))
     }
   }
 
@@ -49,7 +49,7 @@ const AssessmentPage = (props) => {
     if(isLoggedIn()){
       dispatch(createAssessment(data))
     }else{
-      localStorage.setItem('assessmentForm', JSON.stringify(data))
+      sessionStorage.setItem('assessmentForm', JSON.stringify(data))
       history.push(ROUTES.REGISTER)
     }
   }

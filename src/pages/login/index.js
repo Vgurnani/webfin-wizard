@@ -36,7 +36,7 @@ const LoginPage = (props) => {
     dispatch(loginUser(data))
   }
   useEffect(() => {
-    if(!localStorage.assessmentForm){
+    if(!sessionStorage.assessmentForm){
       setRedirectToAssessment(true)
     }
   },[])
@@ -102,7 +102,9 @@ const LoginPage = (props) => {
                 </span>
                 </div>
                 <Form.Text>
-                Don't remember your password?
+                  <Link to={ROUTES.FORGET_PASSWORD}>
+                    Don't remember your password?
+                </Link>
                 </Form.Text>
               </Form.Group>
               <Button type="submit">

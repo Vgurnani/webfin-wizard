@@ -21,8 +21,8 @@ const RedirectAuth = (props) => {
             if(test){
                 history.push(ROUTES.DASHBOARD)
                 notification(NOTIFICATION_TYPES.SUCCESS, 'Login Successfully');
-            }else if(localStorage.getItem('assessmentForm') && checkValidAssessmentData()){
-                dispatch(createAssessment(JSON.parse(localStorage.assessmentForm)))
+            }else if(sessionStorage.getItem('assessmentForm') && checkValidAssessmentData()){
+                dispatch(createAssessment(JSON.parse(sessionStorage.assessmentForm)))
             }else{
                 history.push(ROUTES.ASSESSMENT)
                 notification(NOTIFICATION_TYPES.SUCCESS, 'Please fill assessment');
@@ -37,7 +37,7 @@ const RedirectAuth = (props) => {
     },[props.history.location.search]);
 
     const checkValidAssessmentData = () =>{
-        const assessmentForm = JSON.parse(localStorage.getItem('assessmentForm'))
+        const assessmentForm = JSON.parse(sessionStorage.getItem('assessmentForm'))
         return assessmentForm.nicheId && assessmentForm.colourId && assessmentForm.websiteName
     }
 

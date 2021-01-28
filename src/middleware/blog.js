@@ -9,9 +9,7 @@ export const createBlog = (data) => {
         dispatch(blogCreateRequest())
         const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
         strapiAxiosInstance.post(route, data).then((response)=>{
-            console.log(response, "response")
         }).catch((error) => {
-            console.log("Error", error)
         })
     };
 };

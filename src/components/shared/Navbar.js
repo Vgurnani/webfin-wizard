@@ -79,9 +79,9 @@ const Navbar = (props) => {
           <Row className="header-top">
             <Col className="header-logo">
               <div className="navbar-brand">
-                <a href="/" className="navbar-item" title="Logo">
+                <Link to={"/"} className="navbar-item" title="Logo">
                   <img src={webFinLogo} alt="WebFin" />                               
-                </a>           
+                </Link>           
               </div>                                     
             </Col>
             <Col className="header-menu">

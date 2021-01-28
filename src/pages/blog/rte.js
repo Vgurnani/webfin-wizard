@@ -50,7 +50,6 @@ const RichTextEditor = (props) => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
 
   useEffect(() => {
-    console.log("value", value);
     props.setRTEData(value);
   }, [value])
 
@@ -136,7 +135,6 @@ const RichTextEditor = (props) => {
 }
 
 const getIcon = (iconType) => {
-  //console.log(iconType);
   switch (iconType) {
     case 'FontSizeEditor':
       return <FontSizeEditor />

@@ -49,7 +49,7 @@ export const isLoading = (state) => {
 }
 
 export const assessmentIntialValues = () =>{
-    const result = localStorage.getItem('assessmentForm')
+    const result = sessionStorage.getItem('assessmentForm')
     return result ? JSON.parse(result) : {}
 }
 
@@ -86,7 +86,7 @@ export const bytesToSize = (bytes) =>  {
 }
 
 export const assessmentSaved = (step,values) => {
-    let assessment = localStorage.getItem('assessmentForm')
+    let assessment = sessionStorage.getItem('assessmentForm')
     assessment =  assessment ? JSON.parse(assessment) : {}
     switch(step){
         case 'step1':

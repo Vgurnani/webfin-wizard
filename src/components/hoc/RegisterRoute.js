@@ -6,7 +6,7 @@ import { isLoggedIn, getUser } from '../../utils/helpers'
 
  const RegisterRoute = ({ component: Component, ...rest }) => {
   const user = getUser()
-  const assessment = localStorage.assessmentForm && JSON.parse(localStorage.assessmentForm);
+  const assessment = sessionStorage.assessmentForm && JSON.parse(sessionStorage.assessmentForm);
   useEffect(() => {
     if(rest.location.pathname === '/register' && !(assessment?.nicheId && assessment?.colourId && assessment?.websiteName && assessment?.domain)){
         notification(NOTIFICATION_TYPES.ERROR, 'Please fill first assessment')
@@ -14,7 +14,7 @@ import { isLoggedIn, getUser } from '../../utils/helpers'
   },[])
 
   const isAssessmentSubmit = () => {
-    const assessment = localStorage.assessmentForm && JSON.parse(localStorage.assessmentForm);
+    const assessment = sessionStorage.assessmentForm && JSON.parse(sessionStorage.assessmentForm);
     return (assessment?.nicheId && assessment?.colourId && assessment?.websiteName && assessment?.domain)
   }
 
