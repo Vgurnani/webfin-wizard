@@ -28,6 +28,7 @@ const StepTwo = (props) => {
         colors: colorObject?.colors || [],
         logoUrl: '',
         logoText: assessmentForm.values.websiteName,
+        headerLinks: [{name: 'Home', url: '#'},{name: 'Blog', url: '#'},{name: 'About', url: '#'},{name: 'Contact', url: '#'}],
         readOnly: true
       }
 
@@ -90,14 +91,30 @@ const StepTwo = (props) => {
                                                 <a href="">View All</a>
                                                 </h2>
                                                 <ul className="blog-list">
-                                                <li>
-                                                    <Card 
-                                                    image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}
-                                                    >
-                                                    <h3>The Joy of Cooking</h3>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
-                                                    </Card>       
-                                                </li>
+                                                    <li>
+                                                        <Card 
+                                                        image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}
+                                                        >
+                                                        <h3>The Joy of Cooking</h3>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
+                                                        </Card>       
+                                                    </li>
+                                                    <li>
+                                                        <Card 
+                                                        image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}
+                                                        >
+                                                        <h3>The Joy of Cooking</h3>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
+                                                        </Card>       
+                                                    </li>
+                                                    <li>
+                                                        <Card 
+                                                        image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}
+                                                        >
+                                                        <h3>The Joy of Cooking</h3>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
+                                                        </Card>       
+                                                    </li>
                                                 </ul>
                                         </Blogs>
                                         </Home>

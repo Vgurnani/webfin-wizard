@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 import { useSelector } from 'react-redux'
 import { assessmentFormValidate as validate } from '../../utils/validates'
 import TemplateLayoutOne from './shared/TemplateLayoutOne'
-import WebTemplates ,{Header, Footer,Home, Banner,Blogs, Card} from 'web-templates';
+import WebTemplates ,{Header,Home, Banner,Blogs, Card} from 'web-templates';
 
 import 
   {
@@ -26,8 +26,7 @@ const Preview = (props) => {
 		logoUrl: assessmentForm.values.logoUrl,
 		logoText: assessmentForm.values.websiteName,
         readOnly: true,
-        headerLinks: [{name: 'home', url: '#'}],
-        footerLinks: [{provider: 'facebook', url: '#'}]
+        headerLinks: [{name: 'Home', url: '#'},{name: 'Blog', url: '#'},{name: 'About', url: '#'},{name: 'Contact', url: '#'}],
 	}
     return(
 
@@ -51,14 +50,18 @@ const Preview = (props) => {
                                         <Home>
                                         <Banner>
                                             <h1>
-                                            <span>Simple Recipes for Healthier Families</span>
+                                                <span>Simple Recipes for Healthier Families</span>
+
                                             </h1>
                                             <h5>Welcome to the most reliable source for healthy recipes!</h5>
-                                            <form>
-                                            <div className="form-group">
-                                                <input className="form-control" placeholder="Enter your email" type="text" />
+                                            <div className="form-wrapper">
+                                                <form className="newsletter">
+                                                <div className="form-group">
+                                                    <input className="form-control" placeholder="Enter your email" type="text" />
+                                                </div>
+                                                <button type="submit" className="btn btn-primary">Subscribe!</button>
+                                                </form>
                                             </div>
-                                            </form>
                                         </Banner>
                                         <Blogs>
                                             <h2 className="section-heading">
@@ -66,24 +69,32 @@ const Preview = (props) => {
                                                 <a href="">View All</a>
                                                 </h2>
                                                 <ul className="blog-list">
-                                                <li>
-                                                    <Card 
-                                                    image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}
-                                                    >
-                                                    <h3>The Joy of Cooking</h3>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
-                                                    </Card>       
-                                                </li>
+                                                    <li>
+                                                        <Card 
+                                                        image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}
+                                                        >
+                                                        <h3>The Joy of Cooking</h3>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
+                                                        </Card>       
+                                                    </li>
+                                                    <li>
+                                                        <Card 
+                                                        image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}
+                                                        >
+                                                        <h3>The Joy of Cooking</h3>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
+                                                        </Card>       
+                                                    </li>
+                                                    <li>
+                                                        <Card 
+                                                        image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}
+                                                        >
+                                                        <h3>The Joy of Cooking</h3>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
+                                                        </Card>       
+                                                    </li>
                                                 </ul>
                                         </Blogs>
-                                        <Footer>
-                                            <form className="footer-newsletter">
-                                                <div className="form-group">
-                                                <input type="text" placeholder="Enter your email" className="form-control" />
-                                                </div>
-                                                <button type="submit" className="btn btn-primary">Subscribe!</button>
-                                            </form>
-                                        </Footer>
                                         </Home>
                                     </WebTemplates>
                                     </div>
