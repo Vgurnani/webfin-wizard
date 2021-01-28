@@ -86,12 +86,11 @@ const renderDebounceField = (props) => {
         defaultWarning
     } = props;
     const changeValue = (event) =>{
-        input.onChange(event.target.value?.replace(/[^\w\s]/gi, ''))
-        handleChange && handleChange(event.target.value?.replace(/[^\w\s]/gi, '') )
+        input.onChange(event.target.value?.replace(/[^a-zA-Z]/gi, ''))
+        handleChange && handleChange(event.target.value?.replace(/[^a-zA-Z]/gi, '') )
 
         //input.onChange(event.currentTarget.value)
     }
-
     return (
         <Form.Group controlId={name}>
            { label &&  <Form.Label>{label || ''}</Form.Label> }
@@ -99,6 +98,7 @@ const renderDebounceField = (props) => {
           className={'form-control'}
           minLength={minLength || 2}
           debounceTimeout={300}
+          key={defaultValue}
           value={defaultValue}
           placeholder={placeholder}
           onChange={event => changeValue(event)} />

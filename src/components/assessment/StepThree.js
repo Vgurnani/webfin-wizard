@@ -1,6 +1,6 @@
 import React,{ useState , useEffect } from 'react'
 import { Field } from 'redux-form';
-import { renderFieldWG ,renderDebounceField, renderStyleMultipleRadio } from '../../utils/formUtils'
+import { renderDebounceField, renderStyleMultipleRadio } from '../../utils/formUtils'
 import { getLabel ,assessmentSaved } from '../../utils/helpers'
 import { getUnsplash ,getVerifiedDomain} from '../../middleware/assessments'
 import PropTypes from 'prop-types';
@@ -114,7 +114,8 @@ return(
 												<Field
 														name="websiteName"
 														component={ renderDebounceField }
-														defaultValue={ form?.values?.websiteName?.replace(/[^\w\s]/gi, '')}
+														key={form?.values?.websiteName?.replace(/[^a-zA-Z]/g, '')}
+														defaultValue={ form?.values?.websiteName?.replace(/[^a-zA-Z]/g, '')}
 														handleChange={handleChange}
 														minLength={1}
 														placeholder={ 'Enter your website name' }
