@@ -118,7 +118,9 @@ return(
 														placeholder={ 'Enter your website name' }
 														
 												/>
-												{domainLoading && <span>loading...</span>}
+												{domainLoading && <div className="small-loader">
+												<div class="lds-facebook"><div></div><div></div><div></div></div>
+												</div>}
 												
 												{!_.isEmpty(domainsOptions) && !domainLoading && form?.values?.websiteName &&
 													<>
@@ -154,7 +156,7 @@ return(
 										
 										</div>
 								</Col>
-								<Col className="col-6 name-website-selector wizard-preview">
+								<Col className="col-6 name-website-selector-preview wizard-preview">
 									<h4>Preview</h4>
 										<div className="blog-preview wizard-blog-preview ">
 										<WebTemplates data={data}>
@@ -175,38 +177,7 @@ return(
                                                 </form>
                                             </div>
                                         </Banner>
-                                        <Blogs>
-                                            <h2 className="section-heading">
-                                                Recent Blog Posts
-                                                <a href="">View All</a>
-                                                </h2>
-                                                <ul className="blog-list">
-                                                    <li>
-                                                        <Card 
-                                                        image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}
-                                                        >
-                                                        <h3>The Joy of Cooking</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
-                                                        </Card>       
-                                                    </li>
-                                                    <li>
-                                                        <Card 
-                                                        image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}
-                                                        >
-                                                        <h3>The Joy of Cooking</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
-                                                        </Card>       
-                                                    </li>
-                                                    <li>
-                                                        <Card 
-                                                        image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}
-                                                        >
-                                                        <h3>The Joy of Cooking</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
-                                                        </Card>       
-                                                    </li>
-                                                </ul>
-                                        </Blogs>
+                                        
                                         </Home>
                                     </WebTemplates>
 										</div>

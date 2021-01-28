@@ -31,7 +31,7 @@ const Preview = (props) => {
     return(
 
 
-        <div className="assesment-step assesment-step-2">
+        <div className="assesment-step assesment-step-final">
             <Row  className="step-form">
                 <Col className="col-12">
                     <Container>
