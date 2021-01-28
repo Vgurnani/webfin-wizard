@@ -137,20 +137,20 @@ return(
 										
 										</div>
 								</Col>
-								<Col className="col-6 name-website-selector">
-										<div className="blog-preview">
-										<WebTemplates data={data}>
-                                        <Header></Header>
-                                        <Home>
-                                        <Banner>
-                                            <h1>
-                                            <span>Simple Recipes for Healthier Families</span>
-                                            </h1>
-                                            <h5>Welcome to the most reliable source for healthy recipes!</h5>
-                                            
-                                        </Banner>
-                                        </Home>
-                                    </WebTemplates>
+								<Col className="col-6 name-website-selector wizard-preview">
+									<h4>Preview</h4>
+										<div className="blog-preview wizard-blog-preview ">
+											<WebTemplates data={data}>
+												<Header></Header>
+												<Home>
+												<Banner>
+													<h1>
+													<span>Simple Recipes for Healthier Families</span>
+													</h1>
+													<h5>Welcome to the most reliable source for healthy recipes!</h5>
+												</Banner>
+												</Home>
+											</WebTemplates>
 										</div>
 								</Col>
 							</Row>
