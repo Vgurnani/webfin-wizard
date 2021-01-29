@@ -8,7 +8,6 @@ import React from 'react';
 import { Form, Row } from 'react-bootstrap';
 import OtpInput from 'react-otp-input';
 import Dropzone from 'react-dropzone'
-import { DebounceInput } from 'react-debounce-input';
 
 export const Validations = (props) => {
     const {
@@ -71,37 +70,36 @@ const renderFieldWG = (props) => {
 };
 
 
-const renderDebounceField = (props) => {
+
+const renderFieldChangeWG = (props) => {
     const {
         input,
         label,
         name,
-        validationError,
-        meta: { touched, error, warning },
-        minLength,
+        type,
         placeholder,
         handleChange,
-        defaultValue,
+        disabled,
+        validationError,
+        meta: { touched, error, warning },
+        maxLength,
+        handleKeyUp,
         rows,
         defaultWarning
     } = props;
-    const changeValue = (event) =>{
-        input.onChange(event.target.value?.replace(/[^a-zA-Z]/gi, ''))
-        handleChange && handleChange(event.target.value?.replace(/[^a-zA-Z]/gi, '') )
 
-        //input.onChange(event.currentTarget.value)
+    const changeValue = (event) =>{
+        if(!event.target.value[event.target?.value?.length-1].match(/[^a-zA-Z0-9 ]/gi)){
+            input.onChange(event.target?.value?.replace(/[^a-zA-Z0-9 ]/gi, ''))
+            handleChange && handleChange(event.target?.value?.replace(/[^a-zA-Z0-9 ]/gi, ''))
+        }
+        
     }
+
     return (
         <Form.Group controlId={name}>
            { label &&  <Form.Label>{label || ''}</Form.Label> }
-           <DebounceInput
-          className={'form-control'}
-          minLength={minLength || 2}
-          debounceTimeout={300}
-          key={defaultValue}
-          value={defaultValue}
-          placeholder={placeholder}
-          onChange={event => changeValue(event)} />
+            <Form.Control rows={ rows } { ...input } onChange={changeValue}  maxLength={ maxLength } disabled={ disabled || false } type={ type } className={ validationError || (touched && error) ? 'validation-error' : '' } placeholder={ placeholder || '' } />
             {defaultWarning && !input.value && <span className="default-warning"><i className="fas fa-exclamation-triangle"></i> {defaultWarning}</span>}
             <Validations
                 props={ {
@@ -114,7 +112,6 @@ const renderDebounceField = (props) => {
         </Form.Group>
     );
 };
-
 
 const renderField = (props) => {
     const {
@@ -300,5 +297,5 @@ export {
     renderField,
     renderOTPField,
     renderStyleMultipleRadio,
-    renderDebounceField
+    renderFieldChangeWG,
 };

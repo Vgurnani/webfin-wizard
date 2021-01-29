@@ -70,10 +70,10 @@ export const assessmentFormValidate = values => {
     const errors = {};
 
 
-    const letter = /^[a-zA-Z][a-zA-Z\s]*$/;
+    const letter = /[^a-zA-Z0-9 ]/gi;
     if (!values.websiteName) {
         errors.websiteName = MESSAGE.REQUIRED;
-    } else if(values.websiteName && !(values.websiteName.match(letter))) {
+    } else if(values.websiteName && (values.websiteName.match(letter))) {
         errors.websiteName = MESSAGE.REQUIRED;
     }
     if (!values.nicheId) {

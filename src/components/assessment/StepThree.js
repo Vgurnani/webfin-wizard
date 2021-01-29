@@ -1,6 +1,6 @@
 import React,{ useState , useEffect } from 'react'
 import { Field } from 'redux-form';
-import { renderDebounceField, renderStyleMultipleRadio } from '../../utils/formUtils'
+import { renderFieldChangeWG, renderStyleMultipleRadio } from '../../utils/formUtils'
 import { getLabel ,assessmentSaved } from '../../utils/helpers'
 import { getUnsplash ,getVerifiedDomain} from '../../middleware/assessments'
 import PropTypes from 'prop-types';
@@ -48,6 +48,7 @@ const StepThree = (props) => {
 		dispatch(getUnsplash('/photos',query))
 	},[])
 
+
 	useEffect(()=>{
         setSave(assessmentSaved('step3',form?.values))
 	},[form?.values])
@@ -77,10 +78,14 @@ const StepThree = (props) => {
 	}
 	
 	const handleChange = (value) => {
-		dispatch({type: 'CLEAR_DOMAINS'})
-		dispatch(reduxChange('assessmentForm', 'domain', null))
+		
 		if(value){
-			dispatch(getVerifiedDomain(value))
+			setTimeout(function(){
+				dispatch({type: 'CLEAR_DOMAINS'})
+				dispatch(reduxChange('assessmentForm', 'domain', null))
+				dispatch(getVerifiedDomain(value))
+			},600)
+			
 		} 
 	}
 
@@ -112,13 +117,11 @@ return(
 								<Col className="col-6 name-website-selector">
 										<div className="small-wrapper">
 												<Field
-														name="websiteName"
-														component={ renderDebounceField }
-														key={form?.values?.websiteName?.replace(/[^a-zA-Z]/g, '')}
-														defaultValue={ form?.values?.websiteName?.replace(/[^a-zA-Z]/g, '')}
-														handleChange={handleChange}
-														minLength={1}
-														placeholder={ 'Enter your website name' }
+													name="websiteName"
+													component={ renderFieldChangeWG }
+													handleChange={handleChange}
+													minLength={1}
+													placeholder={ 'Enter your website name' }
 														
 												/>
 												{domainLoading && <div className="small-loader">
