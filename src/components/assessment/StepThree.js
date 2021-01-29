@@ -81,17 +81,16 @@ const StepThree = (props) => {
 		
 		if(value){
 			setTimeout(function(){
-				dispatch({type: 'CLEAR_DOMAINS'})
 				dispatch(reduxChange('assessmentForm', 'domain', null))
 				dispatch(getVerifiedDomain(value))
 			},600)
 			
-		} 
+		}else{dispatch({type: 'CLEAR_DOMAINS'})}
 	}
 
 	const getDomains = () => {
 		const result = domains?.map((item) => ({label: item, value: item}))
-		return _.isEmpty(result) ? form?.values?.websiteName && [{label: form.values.domain,value: form.values.domain}] : result
+		return _.isEmpty(result) ? form?.values?.websiteName && form.values?.domain && [{label: form.values?.domain,value: form.values?.domain}] : result
 	}
 
 	const handleSubmitData = (data) => {
@@ -127,8 +126,7 @@ return(
 												{domainLoading && <div className="small-loader">
 												<div class="lds-facebook"><div></div><div></div><div></div></div>
 												</div>}
-												
-												{!_.isEmpty(domainsOptions) && !domainLoading && form?.values?.websiteName &&
+													{ form.values.websiteName &&
 													<>
 														<span>domain</span>
 														<Field
@@ -141,7 +139,8 @@ return(
 															isIcons={false}
 														/>
 													</>
-												}
+													}						
+												
 										
 												<p className="logo-optional">Optional! if you have logo upload here</p>
 												<div className="upload-media-btn">
