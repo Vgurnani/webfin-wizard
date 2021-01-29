@@ -89,11 +89,8 @@ const renderFieldChangeWG = (props) => {
     } = props;
 
     const changeValue = (event) =>{
-        if(!event.target.value[event.target?.value?.length-1].match(/[^a-zA-Z0-9 ]/gi)){
-            input.onChange(event.target?.value?.replace(/[^a-zA-Z0-9 ]/gi, ''))
-            handleChange && handleChange(event.target?.value?.replace(/[^a-zA-Z0-9 ]/gi, ''))
-        }
-        
+        input.onChange(event.target?.value?.replace(/[^a-zA-Z0-9 ]/gi, ''))
+        handleChange && handleChange(event.target?.value?.replace(/[^a-zA-Z0-9 ]/gi, ''))
     }
 
     return (
