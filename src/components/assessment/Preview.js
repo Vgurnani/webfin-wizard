@@ -42,8 +42,8 @@ const Preview = (props) => {
                                 </h2>
                             </div>
                             <Row className="color-palatte">
-                                <Col className="col-12 color-palatte-preview wizard-preview">
-                                    <div className="color-preview wizard-blog-preview">
+                                <Col className="col-12 final-blog-preview wizard-preview">
+                                    <div className="color-preview  wizrd-blog-preview final-preview">
                                     {/*<TemplateLayoutOne />*/}
                                     <WebTemplates data={data}>
                                         <Header></Header>
@@ -54,21 +54,21 @@ const Preview = (props) => {
 
                                             </h1>
                                             <h5>Welcome to the most reliable source for healthy recipes!</h5>
-                                            <div className="form-wrapper">
-                                                <form className="newsletter">
-                                                <div className="form-group">
+                                            <div className="wizrd-form-wrapper">
+                                                <form className="wizrd-newsletter">
+                                                    <div className="form-group">
                                                     <input className="form-control" placeholder="Enter your email" type="text" />
-                                                </div>
-                                                <button type="submit" className="btn btn-primary">Subscribe!</button>
+                                                    </div>
+                                                    <button type="submit" className="btn btn-primary">Subscribe!</button>
                                                 </form>
-                                            </div>
+                                                </div>
                                         </Banner>
                                         <Blogs>
-                                            <h2 className="section-heading">
+                                            <h2 className="wizrd-section-heading">
                                                 Recent Blog Posts
                                                 <a href="">View All</a>
                                                 </h2>
-                                                <ul className="blog-list">
+                                                <ul className="wizrd-blog-list">
                                                     <li>
                                                         <Card 
                                                         image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}

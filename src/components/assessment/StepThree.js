@@ -163,7 +163,7 @@ return(
 								</Col>
 								<Col className="col-6 name-website-selector-preview wizard-preview">
 									<h4>Preview</h4>
-										<div className="blog-preview wizard-blog-preview ">
+										<div className="blog-preview wizrd-blog-preview color-palate-preview ">
 										<WebTemplates data={data}>
                                         <Header></Header>
                                         <Home>
@@ -173,14 +173,14 @@ return(
 
                                             </h1>
                                             <h5>Welcome to the most reliable source for healthy recipes!</h5>
-                                            <div className="form-wrapper">
-                                                <form className="newsletter">
-                                                <div className="form-group">
-                                                    <input className="form-control" placeholder="Enter your email" type="text" />
-                                                </div>
-                                                <button type="submit" className="btn btn-primary">Subscribe!</button>
-                                                </form>
-                                            </div>
+                                            <div className="wizrd-form-wrapper">
+											<form className="wizrd-newsletter">
+												<div className="form-group">
+												<input className="form-control" placeholder="Enter your email" type="text" />
+												</div>
+												<button type="submit" className="btn btn-primary">Subscribe!</button>
+											</form>
+											</div>
                                         </Banner>
                                         
                                         </Home>

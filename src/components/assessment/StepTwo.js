@@ -66,7 +66,7 @@ const StepTwo = (props) => {
                                 </Col>
                                 <Col className="col-6 color-palatte-preview wizard-preview">
                                     <h4>Preview</h4>
-                                    <div className="color-preview wizard-blog-preview">
+                                    <div className="color-preview wizrd-blog-preview color-palate-preview">
                                     <WebTemplates data={data}>
                                         <Header></Header>
                                         <Home>
@@ -76,21 +76,21 @@ const StepTwo = (props) => {
 
                                             </h1>
                                             <h5>Welcome to the most reliable source for healthy recipes!</h5>
-                                            <div className="form-wrapper">
-                                                <form className="newsletter">
+                                            <div className="wizrd-form-wrapper">
+                                            <form className="wizrd-newsletter">
                                                 <div className="form-group">
-                                                    <input className="form-control" placeholder="Enter your email" type="text" />
+                                                <input className="form-control" placeholder="Enter your email" type="text" />
                                                 </div>
                                                 <button type="submit" className="btn btn-primary">Subscribe!</button>
-                                                </form>
+                                            </form>
                                             </div>
                                         </Banner>
                                         <Blogs>
-                                            <h2 className="section-heading">
+                                            <h2 className="wizrd-section-heading">
                                                 Recent Blog Posts
                                                 <a href="">View All</a>
                                                 </h2>
-                                                <ul className="blog-list">
+                                                <ul className="wizrd-blog-list">
                                                     <li>
                                                         <Card 
                                                         image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}
