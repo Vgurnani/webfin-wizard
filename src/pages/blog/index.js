@@ -228,7 +228,7 @@ const BlogPage =(props) => {
                   <RichTextEditor readOnly={false} setRTEData={handleRTEdata} initialValue={initialValue} />
                   </div>
                 </div>
-                {/* 
+               
                 <div className="blog-action">
                   <div className="blog-action-box">
                     <h5>
@@ -395,7 +395,7 @@ const BlogPage =(props) => {
                   </div>
                 </div>
                 
-                */}<div className="blog-btns">
+              <div className="blog-btns">
                   <Button type='submit' variant="primary">Save</Button>
                 </div>
               

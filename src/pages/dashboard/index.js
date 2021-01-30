@@ -4,6 +4,22 @@ import { getCurrentUser } from '../../middleware/auth'
 import { removeItem } from '../../utils/cache'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import {
+  DashboardMenuIcon,
+  EditSiteMenuIcon,
+  BlogMenuIcon,
+  MarketingMenuIcon,
+  SubMenuIcon,
+  Facebook,
+  LinkedIn,
+  Twitter,
+  YouTube,
+  Instagram,
+  CloseIcon,
+  SmallRadio,
+  SmallRadioChecked,
+  OpenArrow,
+} from '../../utils/svg'
  const Dashboard =(props) => {
     const dispatch = useDispatch();
     const [status, setStatus ] = useState(false)
@@ -43,10 +59,89 @@ import axios from 'axios'
 
 
     return(
-        <section className="main-section">
-            <section className="page-section">Dashboard: <a href={`https://${data?.site?.domain}`} target='_blank'>{ data?.site?.domain }</a>{status ? "Done" : 'In progress'}</section>
-            <Link to={'/blog'} className='btn btn-primary'>Create Blog</Link>
-        </section>
+      <section className="dashboard-wrapper">
+        <aside className="dashboard-menu">
+          <ul>
+            <li>
+              <a href="/">
+              Dashboard
+                <DashboardMenuIcon />
+              </a>
+            </li>
+            <li>
+              <a href="/">
+              Edit Site
+                <EditSiteMenuIcon />
+              </a>
+            </li>
+            <li className="active">
+              <a href="/">
+              Blog
+                <BlogMenuIcon />
+              </a>
+              <ul className="sub-menu">
+                <li>
+                  <a>
+                  All Posts
+                  <SubMenuIcon />
+                  </a>
+                </li>
+                <li>
+                  <a>
+                  Add new post
+                  <SubMenuIcon />
+                  </a>
+                </li>
+                <li>
+                  <a>
+                  Comments
+                  <SubMenuIcon />
+                  </a>
+                </li>
+                <li>
+                  <a>
+                  Import blog
+                  <SubMenuIcon />
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="/">
+              Marketing
+                <MarketingMenuIcon />
+              </a>
+            </li>
+          </ul>
+        </aside>
+        <main className="dashboard-data">
+          <section className="dashboard-body">
+            <div className="dashboard-header">
+              <div className="dashboard-title">
+                <h1>Dashboard</h1>
+                <h5>
+                  Domain:  
+                  <a href={`https://${data?.site?.domain}`} target='_blank'>
+                    { data?.site?.domain }
+                  </a> 
+                  <span className='in-progress'> - 
+                    {status ? "Done" : "In Progress"}
+                  </span>
+                </h5>
+              </div>
+              <div className="dashboard-btns">
+                <Link to={'/blog'} className='btn btn-primary'>Create Blog</Link>
+              </div>
+              
+            </div>
+          
+            
+          
+            
+          </section>
+        </main>
+      </section>
+        
     )
 }
 
