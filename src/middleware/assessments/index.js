@@ -37,23 +37,35 @@ export const getAssessment = (data) => {
     };
 };
 
+export const imageUpload = async(file) => { 
+    const result =  await axiosInstance.get('/generate')
+    if([200,203].includes(result.status)){
+       try{
+        const finalResult = await axios.put(result.data.signedUrl,file,{
+            headers: {
+                'Content-Type': file.type,
+                'Access-Control-Allow-Origin': '*'
+            }})
+         if([200,203].includes(finalResult.status)){
+            return result.data.path
+         }
+       }catch(error){
+          return null
+       }
+    }
+    return null
+}
+
 
 export const createAssessment = (data) => {
     return async (dispatch) => {
         dispatch(createAssessmentRequest())
         if(data.logoUrl){
             const file = dataURLtoFile(data.logoUrl,uId()+'.png')
-            const result =  await axiosInstance.get('/generate')
-            const finalResult = result.status === 200 ? await axios.put(result.data.signedUrl,file,{
-                headers: {
-                    'Content-Type': file.type,
-                    'Access-Control-Allow-Origin': '*'
-                }}) : null
-            data['logoUrl'] = result.data.path
+            data['logoUrl'] = await imageUpload(file);
         }
-
         axiosInstance.post(`/assessment`, data).then((response)=>{
-            notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CREATE_ASSESSMENT);
+            //notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CREATE_ASSESSMENT);
             const user= getUser();
             user['test'] = true
             setItem('user', user)

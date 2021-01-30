@@ -7,6 +7,8 @@ export const NOTIFICATION_TYPES = {
 export const MESSAGE = {
     REGISTRATION_SUCCESS: 'Registration Successfully',
     LOGIN_SUCCESS: 'Login Successfully',
+    BLOG_SUCCESS: 'Blog Created!',
+    BLOG_FAILD: 'Something went wrong',
     EMAIL_ACTIVATE: 'Email is activate Successfully',
     CODE_SEND: 'Code Send Successfully',
     CREATE_ASSESSMENT: 'Create Assessment Successfully',

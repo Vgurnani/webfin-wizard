@@ -6,3 +6,17 @@ export const blogCreateRequest = (data) => {
         payload: data
     };
 };
+
+export const blogCreateSuccess = (data) => {
+    return {
+        type: ActionTypes.BLOG_CREATE_SUCCESS,
+        payload: data
+    };
+};
+
+export const blogCreateFailed = (error) => {
+    return {
+        type: ActionTypes.BLOG_CREATE_FAILURE,
+        error: error
+    };
+};
