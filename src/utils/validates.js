@@ -103,10 +103,10 @@ export const assessmentFormValidate = values => {
 export const blogValidate = values => {
     const errors = {};
     if (!values.title) {
-        errors.email = 'Please enter title';
+        errors.title = 'Please enter title';
     }
     if (!values.description) {
-        errors.password = 'Please enter description';
+        errors.description = 'Please enter description';
     }
 
     return errors;

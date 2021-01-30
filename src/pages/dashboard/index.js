@@ -62,55 +62,41 @@ import {
       <section className="dashboard-wrapper">
         <aside className="dashboard-menu">
           <ul>
-            <li>
-              <a href="/">
+            <li className="active">
+              <Link to="/dashboard">
               Dashboard
                 <DashboardMenuIcon />
-              </a>
+              </Link>
             </li>
-            <li>
-              <a href="/">
-              Edit Site
-                <EditSiteMenuIcon />
-              </a>
-            </li>
-            <li className="active">
-              <a href="/">
+            <li >
+              <Link to="/blog">
               Blog
                 <BlogMenuIcon />
-              </a>
-              <ul className="sub-menu">
-                <li>
-                  <a>
-                  All Posts
-                  <SubMenuIcon />
-                  </a>
-                </li>
-                <li>
-                  <a>
-                  Add new post
-                  <SubMenuIcon />
-                  </a>
-                </li>
-                <li>
-                  <a>
-                  Comments
-                  <SubMenuIcon />
-                  </a>
-                </li>
-                <li>
-                  <a>
-                  Import blog
-                  <SubMenuIcon />
-                  </a>
-                </li>
-              </ul>
+              </Link>
             </li>
             <li>
-              <a href="/">
-              Marketing
-                <MarketingMenuIcon />
-              </a>
+              <Link to="#">
+              Test
+                <DashboardMenuIcon />
+              </Link>
+            </li>
+            <li>
+              <Link to="#">
+              Test
+                <DashboardMenuIcon />
+              </Link>
+            </li>
+            <li>
+              <Link to="#">
+              Test
+                <DashboardMenuIcon />
+              </Link>
+            </li>
+            <li>
+              <Link to="#">
+              Test
+                <DashboardMenuIcon />
+              </Link>
             </li>
           </ul>
         </aside>

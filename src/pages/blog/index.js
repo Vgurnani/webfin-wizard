@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RichTextEditor from './rte';
+import { Link } from 'react-router-dom'
 import { Field, change } from 'redux-form';
 import { renderFieldWG } from '../../utils/formUtils'
 import {
@@ -29,16 +30,22 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
+import { getCurrentUser } from '../../middleware/auth'
 import { createBlog } from '../../middleware/blog';
+import { getUnsplash} from '../../middleware/assessments'
+import { change as reduxChange } from 'redux-form'
 import { blogValidate as validate } from '../../utils/validates';
 import profilePic from '../../public/images/media/media-4.jpg';
 import media1 from '../../public/images/media/media-1.jpg';
 import media2 from '../../public/images/media/media-2.jpg';
 import media3 from '../../public/images/media/media-3.jpg';
-
+import UploadImageModal from '../../components/assessment/shared/UploadImageModal'
 const BlogPage =(props) => {
   const dispatch = useDispatch();
+  const [ openModal, setModalOpen ]  = useState(false);
   const blogForm = useSelector((state)=>state.form.blogForm)
+  const userData = useSelector(state => state.user.sessionData?.data?.data)
+  const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
   const initialValue = [
     {
       type: 'paragraph',
@@ -80,7 +87,7 @@ const BlogPage =(props) => {
   const { handleSubmit } = props;
 
   const submitData = (formData) => {
-    formData['image'] = 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png'
+    formData['image'] = formData.blogUrl
     const data = {
       type:"blog",
       content: formData
@@ -88,65 +95,73 @@ const BlogPage =(props) => {
     dispatch(createBlog(data))
   }
 
+    useEffect(()=>{
+      const query = 'blogs'
+      dispatch(getUnsplash('/photos',query))
+      dispatch(getCurrentUser())
+    },[])
+
+
   const handleRTEdata = (data) =>{
     dispatch(change('blogForm', 'data', data))
     setRTEData(data)
   }
+  const handleToggleModal = () => {
+    setModalOpen(!openModal)
+  }
+  const handleSearch = (event) => {
+	  const query = event.currentTarget.value || 'cat'
+		dispatch(getUnsplash('/photos',query))
+	}
+
+	const getBase64 = (base64) => {
+		dispatch(reduxChange('blogForm', 'blogUrl', base64))
+	}
+
+	const clearImage = () => {
+		dispatch(reduxChange('blogForm', 'blogUrl', null))
+	}
 
 
     return(
       <section className="dashboard-wrapper">
         <aside className="dashboard-menu">
-          <ul>
-            <li>
-              <a href="/">
+        <ul>
+            <li >
+              <Link to="/dashboard">
               Dashboard
                 <DashboardMenuIcon />
-              </a>
-            </li>
-            <li>
-              <a href="/">
-              Edit Site
-                <EditSiteMenuIcon />
-              </a>
+              </Link>
             </li>
             <li className="active">
-              <a href="/">
+              <Link to="/blog">
               Blog
                 <BlogMenuIcon />
-              </a>
-              <ul className="sub-menu">
-                <li>
-                  <a>
-                  All Posts
-                  <SubMenuIcon />
-                  </a>
-                </li>
-                <li>
-                  <a>
-                  Add new post
-                  <SubMenuIcon />
-                  </a>
-                </li>
-                <li>
-                  <a>
-                  Comments
-                  <SubMenuIcon />
-                  </a>
-                </li>
-                <li>
-                  <a>
-                  Import blog
-                  <SubMenuIcon />
-                  </a>
-                </li>
-              </ul>
+              </Link>
             </li>
             <li>
-              <a href="/">
-              Marketing
-                <MarketingMenuIcon />
-              </a>
+              <Link to="#">
+              Test
+                <DashboardMenuIcon />
+              </Link>
+            </li>
+            <li>
+              <Link to="#">
+              Test
+                <DashboardMenuIcon />
+              </Link>
+            </li>
+            <li>
+              <Link to="#">
+              Test
+                <DashboardMenuIcon />
+              </Link>
+            </li>
+            <li>
+              <Link to="#">
+              Test
+                <DashboardMenuIcon />
+              </Link>
             </li>
           </ul>
         </aside>
@@ -167,8 +182,8 @@ const BlogPage =(props) => {
                         </Form.Text>
                     </Form.Group>
                     <div className="upload-feature-img-wrap">
-                    <div className="upload-feature-img">
-                      Click here to edit feature image
+                    <div className="upload-feature-img" onClick={handleToggleModal}>
+                      {blogForm?.values?.blogUrl ? <img src={blogForm?.values?.blogUrl} /> : 'Click here to edit feature image'}
                       </div>
                     </div>
                   </div>
@@ -179,8 +194,8 @@ const BlogPage =(props) => {
                         <img src={profilePic} alt="Jason Miller" />
                       </div>
                       <div className="author-name">
-                          <span>Jason Miller</span>
-                          <a>+ Add Jason</a>
+                          <span>{userData && `${userData.user?.firstName} ${userData.user?.lastName}`}</span>
+                          
                       </div>
                     </div>
                     <div className="author-bio">
@@ -395,6 +410,18 @@ const BlogPage =(props) => {
                   </div>
                 </div>
               */}  
+
+              <UploadImageModal 
+                fieldName={'blogUrl'} 
+                clearImage={clearImage} 
+                previewFile={blogForm.values?.blogUrl} 
+                getBase64={getBase64} 
+                handleSearch={handleSearch} 
+                unsplashImages={unsplashImages} 
+                openModal={openModal} 
+                handleToggleModal={handleToggleModal} 
+              />
+
               <div className="blog-btns">
                   <Button type='submit' variant="primary">Save</Button>
                 </div>

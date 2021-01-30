@@ -13,7 +13,7 @@ import
   }
 from 'react-bootstrap';
 const UploadImageModal = (props) => {
-    const { openModal, handleToggleModal, unsplashImages ,getBase64,clearImage, handleSearch, previewFile} = props
+    const { openModal, handleToggleModal, fieldName,unsplashImages ,getBase64,clearImage, handleSearch, previewFile} = props
     const [selectedUnsplash, setSelectedUnsplash ] = useState(null);
     const handleSelect = async(id) => {
         setSelectedUnsplash(id)
@@ -45,7 +45,7 @@ const UploadImageModal = (props) => {
             <Row>
                 <Col className="col-4">
                     <Field
-                        name="logoUrl"
+                        name={ fieldName }
                         component={ renderFileDrop }
                         placeholder={"<a><i className='fa fa-plus'/> upload your logo</a>"}
                         isDropText={'Drag your images'}
@@ -102,7 +102,8 @@ UploadImageModal.propTypes = {
     handleSearch: PropTypes.func,
     getBase64: PropTypes.func,
     clearImage: PropTypes.func,
-    previewImage: PropTypes.object
+    previewImage: PropTypes.object,
+    fieldName: PropTypes.string
 
 };
 

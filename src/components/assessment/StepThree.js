@@ -221,7 +221,7 @@ return(
 										</div>
 								</div>
 							</div>
-							<UploadImageModal  clearImage={clearImage} previewFile={form.values?.logoUrl} getBase64={getBase64} handleSearch={handleSearch} unsplashImages={unsplashImages} openModal={openModal} handleToggleModal={handleToggleModal} />
+							<UploadImageModal fieldName={'logoUrl'} clearImage={clearImage} previewFile={form.values?.logoUrl} getBase64={getBase64} handleSearch={handleSearch} unsplashImages={unsplashImages} openModal={openModal} handleToggleModal={handleToggleModal} />
 						</Form>
 					</Container>
 				</Col>
