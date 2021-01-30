@@ -18,5 +18,6 @@ export const MESSAGE = {
     SHOULD_CHAR: 'should be character only',
     INVALID_EMAIL: 'Invalid email',
     VALID_ENTER: (value) => `Please enter ${value}`,
-    VALID_SELECT: (value) => `Please select ${value}`
+    VALID_SELECT: (value) => `Please select ${value}`,
+    SHOULD_BE_LENGTH: (value, number) => `${value} should be ${number} character`
 }

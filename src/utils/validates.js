@@ -36,8 +36,14 @@ export const registerValidate = values => {
     if (!values.password) {
         errors.password = MESSAGE.VALID_ENTER('password');
     }
+    if (values.password && values.password.length < 8 ) {
+        errors.password = MESSAGE.SHOULD_BE_LENGTH('password',8);
+    }
     if (!values.confirmPassword) {
         errors.confirmPassword = MESSAGE.VALID_ENTER('confirm password');
+    }
+    if (values.confirmPassword && values.confirmPassword.length < 8 ) {
+        errors.confirmPassword = MESSAGE.SHOULD_BE_LENGTH('confirm password',8);
     }
 
     if( values.password !== values.confirmPassword){
@@ -57,8 +63,14 @@ export const forgetPasswordValidate = values => {
     if (!values.password) {
         errors.password = MESSAGE.VALID_ENTER('password');
     }
+    if (values.password && values.password.length < 8 ) {
+        errors.password = MESSAGE.SHOULD_BE_LENGTH('password',8);
+    }
     if (!values.confirmPassword) {
         errors.confirmPassword = MESSAGE.VALID_ENTER('confirm password');
+    }
+    if (values.confirmPassword && values.confirmPassword.length < 8 ) {
+        errors.confirmPassword = MESSAGE.SHOULD_BE_LENGTH('confirm password',8);
     }
     if (values.password !== values.confirmPassword) {
         errors.confirmPassword = MESSAGE.PASSWORD_MATCH

@@ -22,7 +22,7 @@ import ResetPasswordForm from '../../components/forget-password/ResetPasswordFor
 
 const ForgetPasswordPage = (props) => {
   const dispatch = useDispatch()
-  const [ step, setStep ] = useState(1)
+  const [ step, setStep ] = useState(3)
   const { handleSubmit } = props
   const submitData = (data) => {
     dispatch(forgetPassword(step, setStep,data))
