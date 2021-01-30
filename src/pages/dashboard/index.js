@@ -124,7 +124,7 @@ import {
                   <a href={`https://${data?.site?.domain}`} target='_blank'>
                     { data?.site?.domain }
                   </a> 
-                  <span className='in-progress'> - 
+                  <span className={`${status ? 'success' : 'in-progress'}`}> - 
                     {status ? "Done" : "In Progress"}
                   </span>
                 </h5>
