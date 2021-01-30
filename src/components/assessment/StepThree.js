@@ -173,14 +173,14 @@ return(
 
                                             </h1>
                                             <h5>Welcome to the most reliable source for healthy recipes!</h5>
-                                            <div className="form-wrapper">
-                                                <form className="newsletter">
-                                                <div className="form-group">
-                                                    <input className="form-control" placeholder="Enter your email" type="text" />
-                                                </div>
-                                                <button type="submit" className="btn btn-primary">Subscribe!</button>
-                                                </form>
-                                            </div>
+                                            <div className="wizrd-form-wrapper">
+											<form className="wizrd-newsletter">
+												<div className="form-group">
+												<input className="form-control" placeholder="Enter your email" type="text" />
+												</div>
+												<button type="submit" className="btn btn-primary">Subscribe!</button>
+											</form>
+											</div>
                                         </Banner>
                                         
                                         </Home>
