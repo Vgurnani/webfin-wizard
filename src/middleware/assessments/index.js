@@ -44,14 +44,14 @@ export const createAssessment = (data) => {
         if(data.logoUrl){
             const file = dataURLtoFile(data.logoUrl,uId()+'.png')
             const result =  await axiosInstance.get('/generate')
-            const formData = new FormData();
-            formData.append('file',file)
             const finalResult = result.status === 200 ? await axios.put(result.data.signedUrl,file,{
                 headers: {
                     'Content-Type': file.type,
                     'Access-Control-Allow-Origin': '*'
                 }}) : null
+            data['logoUrl'] = result.data.path
         }
+
         axiosInstance.post(`/assessment`, data).then((response)=>{
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CREATE_ASSESSMENT);
             const user= getUser();

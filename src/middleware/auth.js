@@ -57,6 +57,7 @@ export const registrationUser = (data, assessmentData) => {
         axiosInstance.post(`/auth/signup`, data)
             .then((response) => {
                 response.data.data['accessToken'] = response.data.accessToken
+                response.data.data['test'] = false
                 setItem('user', response.data.data)
                 notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.REGISTRATION_SUCCESS);
                 dispatch(registrationSuccess(response.data.data))
