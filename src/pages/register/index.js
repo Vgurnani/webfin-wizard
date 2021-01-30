@@ -31,7 +31,7 @@ const RegisterPage = (props) => {
   const assessmentForm = useSelector((state)=>state.form.assessmentForm)
   const { handleSubmit } = props
   const submitData = (data) => {
-    const assessmentFormData = assessmentForm?.values || assessmentIntialValues();
+    const assessmentFormData = assessmentIntialValues() || assessmentForm?.values;
     dispatch(registrationUser(data, assessmentFormData))
   }
 
