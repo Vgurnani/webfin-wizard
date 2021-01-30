@@ -15,7 +15,7 @@ const PrivacyPolicyPage = (props) => {
             At as in understood an remarkably solicitude. Mean them very seen she she. Use totally written the observe pressed justice. Instantly cordially far intention recommend estimable yet her his. Ladies stairs enough esteem add fat all enable. Needed its design number winter see. Oh be me sure wise sons no. 
             </p>     
             <p>We use your information to:</p>
-            <ul>
+            <ul className="styled-ul">
                 <li>Him these are visit front end for seven walls. </li>
                 <li>Money eat scale now ask law learn. </li>
                 <li>Side its they just any upon see last. </li>

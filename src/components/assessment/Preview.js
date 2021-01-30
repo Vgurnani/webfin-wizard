@@ -42,8 +42,8 @@ const Preview = (props) => {
                                 </h2>
                             </div>
                             <Row className="color-palatte">
-                                <Col className="col-12 color-palatte-preview wizard-preview">
-                                    <div className="color-preview wizard-blog-preview">
+                                <Col className="col-12 final-blog-preview wizard-preview">
+                                    <div className="color-preview  wizrd-blog-preview final-preview">
                                     {/*<TemplateLayoutOne />*/}
                                     <WebTemplates data={data}>
                                         <Header></Header>

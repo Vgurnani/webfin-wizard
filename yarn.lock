@@ -7446,11 +7446,6 @@ lodash._reinterpolate@^3.0.0:
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
   integrity sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0=
 
-lodash.debounce@^4:
-  version "4.0.8"
-  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
-  integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
-
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
@@ -9706,14 +9701,6 @@ react-bootstrap@^1.4.0, react-bootstrap@^1.4.3:
     react-transition-group "^4.4.1"
     uncontrollable "^7.0.0"
     warning "^4.0.3"
-
-react-debounce-input@^3.2.3:
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/react-debounce-input/-/react-debounce-input-3.2.3.tgz#9e8c69771a621c81e8fe36b45ade49a95059cd87"
-  integrity sha512-7Bfjm9sxrtgB+IsSrdXoo4CVqKg7CbWC68dNhr8q7ZmY6C0AqtR524//SenHQWT+eeSG9DmSLWNWCUFSyaaWSQ==
-  dependencies:
-    lodash.debounce "^4"
-    prop-types "^15.7.2"
 
 react-dev-utils@^11.0.1:
   version "11.0.1"
@@ -12114,10 +12101,10 @@ wbuf@^1.1.0, wbuf@^1.7.3:
   dependencies:
     minimalistic-assert "^1.0.0"
 
-web-templates@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/web-templates/-/web-templates-1.0.9.tgz#5b31cb3b3207e5f99f60402d731bb290df2c963d"
-  integrity sha512-1iYLzsgqruqoxczxG/FOH4bSgY6Sh3XGyMeQ8jkwqOjiL/A8xPJj0SgrCIyyR4k4a+4v7NYo4YC6y0rVfdphnA==
+web-templates@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/web-templates/-/web-templates-1.0.10.tgz#cd5155d4311c6cf08c442c74e0b425a4368f6551"
+  integrity sha512-Bd2mrLzQDk9/kLOQKK8ufJGk7409TGjRzJ3nPmUv7h+1Hf1IbFHEztOYwLJzvWQlXSgmRstiZ2IjHy0L8VHvWw==
   dependencies:
     "@babel/cli" "^7.12.10"
     "@babel/core" "^7.12.10"
