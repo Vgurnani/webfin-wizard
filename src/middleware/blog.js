@@ -15,9 +15,9 @@ import { dataURLtoFile , uId } from '../utils/helpers'
 export const createBlog = (data) => {
     return async(dispatch) => {
         dispatch(blogCreateRequest())
-        if(data.content.image){
-            const file = dataURLtoFile(data.content.image,uId()+'.png')
-            data.content['image'] = await imageUpload(file);
+        if(data.imageUrl){
+            const file = dataURLtoFile(data.imageUrl,uId()+'.png')
+            data['imageUrl'] = await imageUpload(file);
         }
         const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
         strapiAxiosInstance.post(route, data).then((response)=>{

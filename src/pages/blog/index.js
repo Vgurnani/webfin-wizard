@@ -87,10 +87,12 @@ const BlogPage =(props) => {
   const { handleSubmit } = props;
 
   const submitData = (formData) => {
-    formData['image'] = formData.blogUrl
+    //formData['image'] = formData.blogUrl
     const data = {
       type:"blog",
-      content: formData
+      content: formData.data,
+      imageUrl: formData.blogUrl,
+      title: formData.title
     }
     dispatch(createBlog(data))
   }
