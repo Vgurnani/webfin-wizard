@@ -426,10 +426,11 @@ const BlogPage =(props) => {
               />
 
               <div className="blog-btns">
-                  {!isReadyPublish ? <Button type='submit' variant="primary">Save</Button> : <Button type='button' disabled={true} variant="primary">Save</Button>}
-                  {isReadyPublish ? <a href='javascript:void(0)' className='btn btn-success' onClick={() => dispatch(callPublish())}>Publish</a> : 
+                <Button type='submit' variant="primary">Save</Button>
+                  {/*!isReadyPublish ? <Button type='submit' variant="primary">Save</Button> : <Button type='button' disabled={true} variant="primary">Save</Button>*/}
+                  {/*isReadyPublish ? <a href='javascript:void(0)' className='btn btn-success' onClick={() => dispatch(callPublish())}>Publish</a> : 
                   <a href='javascript:void(0)' className='btn'>Publish</a>
-                  }
+                  */}
                 </div>
               
               </Form>

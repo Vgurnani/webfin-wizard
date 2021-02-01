@@ -24,7 +24,7 @@ export const createBlog = (data) => {
         }
         const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
         strapiAxiosInstance.post(route, data).then((response)=>{
-            //history.push(ROUTES.DASHBOARD)
+            history.push(ROUTES.DASHBOARD)
             dispatch(blogCreateSuccess(response))
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.BLOG_SUCCESS);
         }).catch((error) => {
