@@ -38,6 +38,7 @@ export const callPublish = () => {
     return(dispatch) => {
         dispatch(publishRequest())
         axiosInstance.post('/user/site/publish').then((response)=>{
+            history.push(ROUTES.DASHBOARD)
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.PUBLISH_SUCCESS);
             dispatch(publishSuccess(response.data))
         }).catch((error)=>{
