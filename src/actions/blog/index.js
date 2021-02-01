@@ -20,3 +20,24 @@ export const blogCreateFailed = (error) => {
         error: error
     };
 };
+
+
+export const publishRequest = (data) => {
+    return {
+        type: ActionTypes.PUBLISH_REQUEST,
+    };
+};
+
+export const publishSuccess = (data) => {
+    return {
+        type: ActionTypes.PUBLISH_SUCCESS,
+        payload: data
+    };
+};
+
+export const publishFailed = (error) => {
+    return {
+        type: ActionTypes.PUBLISH_FAILURE,
+        error: error
+    };
+};

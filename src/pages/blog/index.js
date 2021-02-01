@@ -31,7 +31,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import { getCurrentUser } from '../../middleware/auth'
-import { createBlog } from '../../middleware/blog';
+import { createBlog ,callPublish } from '../../middleware/blog';
 import { getUnsplash} from '../../middleware/assessments'
 import { change as reduxChange } from 'redux-form'
 import { blogValidate as validate } from '../../utils/validates';
@@ -46,6 +46,7 @@ const BlogPage =(props) => {
   const blogForm = useSelector((state)=>state.form.blogForm)
   const userData = useSelector(state => state.user.sessionData?.data?.data)
   const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
+  const isReadyPublish = useSelector((state) => state.blog.isReadyPublish)
   const initialValue = [
     {
       type: 'paragraph',
@@ -425,7 +426,10 @@ const BlogPage =(props) => {
               />
 
               <div className="blog-btns">
-                  <Button type='submit' variant="primary">Save</Button>
+                  {!isReadyPublish ? <Button type='submit' variant="primary">Save</Button> : <Button type='button' disabled={true} variant="primary">Save</Button>}
+                  {isReadyPublish ? <a href='javascript:void(0)' className='btn btn-success' onClick={() => dispatch(callPublish())}>Publish</a> : 
+                  <a href='javascript:void(0)' className='btn'>Publish</a>
+                  }
                 </div>
               
               </Form>

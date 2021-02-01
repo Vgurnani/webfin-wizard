@@ -1,7 +1,10 @@
 import {
     blogCreateRequest,
     blogCreateSuccess,
-    blogCreateFailed
+    blogCreateFailed,
+    publishRequest,
+    publishSuccess,
+    publishFailed
 } from '../actions/blog';
 import strapiAxiosInstance from '../services/strapiApi';
 import { getItem } from '../utils/cache';
@@ -11,7 +14,7 @@ import { notification } from '../services/notification';
 import history from '../utils/history'
 import { imageUpload } from './assessments'
 import { dataURLtoFile , uId } from '../utils/helpers'
-
+import axiosInstance from '../services/api';
 export const createBlog = (data) => {
     return async(dispatch) => {
         dispatch(blogCreateRequest())
@@ -21,7 +24,7 @@ export const createBlog = (data) => {
         }
         const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
         strapiAxiosInstance.post(route, data).then((response)=>{
-            history.push(ROUTES.DASHBOARD)
+            //history.push(ROUTES.DASHBOARD)
             dispatch(blogCreateSuccess(response))
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.BLOG_SUCCESS);
         }).catch((error) => {
@@ -30,3 +33,15 @@ export const createBlog = (data) => {
         })
     };
 };
+
+export const callPublish = () => {
+    return(dispatch) => {
+        dispatch(publishRequest())
+        axiosInstance.post('/user/site/publish').then((response)=>{
+            notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.PUBLISH_SUCCESS);
+            dispatch(publishSuccess(response.data))
+        }).catch((error)=>{
+            dispatch(publishFailed(error))
+        })
+    }
+}
