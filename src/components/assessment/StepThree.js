@@ -128,7 +128,7 @@ return(
 												</div>}
 													{ form.values.websiteName &&
 													<>
-														<span>domain</span>
+														<span>Choose an available domain</span>
 														<Field
 															name="domain"
 															options={ domainsOptions || []}

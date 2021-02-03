@@ -1,11 +1,12 @@
 import React,{ useEffect ,useState} from 'react'
 import { Field } from 'redux-form';
-import { useSelector } from 'react-redux'
+import { useSelector ,useDispatch} from 'react-redux'
 import { renderStyleMultipleRadio } from '../../utils/formUtils'
 import { assessmentSaved } from '../../utils/helpers'
 import { assessmentFormValidate as validate } from '../../utils/validates'
 import WebTemplates ,{Header, Footer,Home, Banner,Blogs, Card} from 'web-templates';
 import { reduxForm } from 'redux-form';
+import { change as reduxChange } from 'redux-form'
 import PropTypes from 'prop-types';
 import 
   {
@@ -20,6 +21,7 @@ import enterIcon from '../../public/images/enter-icon.png';
 import preview from '../../public/images/preview.png';
 const StepTwo = (props) => {
     const [isSave, setSave ] = useState(false)
+    const dispatch = useDispatch()
     const { handleSubmit,prevPage ,colorPalette, saveData} = props;
     const assessmentForm = useSelector((state) => state.form.assessmentForm)
     const colorObject = colorPalette.filter((item) => item.value === assessmentForm.values.colourId)[0] || {}
@@ -34,6 +36,9 @@ const StepTwo = (props) => {
 
     useEffect(()=>{
         setSave(assessmentSaved('step2',assessmentForm?.values))
+        if(!assessmentForm?.values?.colourId){
+            dispatch(reduxChange('assessmentForm','colourId',colorPalette?.filter((item)=> item.label === 'Clean White')[0]?.value))
+        }
     },[assessmentForm?.values])
 
     const handleSave = () => {
