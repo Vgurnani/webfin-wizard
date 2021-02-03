@@ -12101,10 +12101,10 @@ wbuf@^1.1.0, wbuf@^1.7.3:
   dependencies:
     minimalistic-assert "^1.0.0"
 
-web-templates@^1.0.10:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/web-templates/-/web-templates-1.0.10.tgz#cd5155d4311c6cf08c442c74e0b425a4368f6551"
-  integrity sha512-Bd2mrLzQDk9/kLOQKK8ufJGk7409TGjRzJ3nPmUv7h+1Hf1IbFHEztOYwLJzvWQlXSgmRstiZ2IjHy0L8VHvWw==
+web-templates@^1.0.11:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/web-templates/-/web-templates-1.0.13.tgz#9f6c266d8acb744abc8622cf6acb1d248b301a30"
+  integrity sha512-8OdMrRsixYXYGWpkR+udCVQYM+FBmyZoedHlm/EaWDJ6DqOnYE489Pl7JmVilXauBY9UkVUEgohUZvnkv7Y6vA==
   dependencies:
     "@babel/cli" "^7.12.10"
     "@babel/core" "^7.12.10"

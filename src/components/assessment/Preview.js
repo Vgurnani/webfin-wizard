@@ -18,7 +18,7 @@ from 'react-bootstrap';
 import preview from '../../public/images/preview.png';
 
 const Preview = (props) => {
-    const {handleSubmit ,saveData, colorPalette} = props;
+    const {handleSubmit ,saveData,prevPage, colorPalette} = props;
     const assessmentForm = useSelector((state) => state.form.assessmentForm)
     const colorObject = colorPalette?.filter((item) => item.value === assessmentForm?.values?.colourId)[0] || {}
     const data = {
@@ -38,7 +38,7 @@ const Preview = (props) => {
                         <Form className="form" onSubmit={handleSubmit}>  
                         <div className="form-heading">   
                                 <h2>
-                                Congratulation! Here is your NEW website
+                                Congratulations! Here is your NEW website
                                 </h2>
                             </div>
                             <Row className="color-palatte">
@@ -101,9 +101,16 @@ const Preview = (props) => {
                                 </Col>
                             </Row>
                                 <div className="step-btns">
-                                <div className="step-btn-left"></div>
+                                <div className="step-btn-left">
+                                    <div className="step-btn">
+                                        <Button type="button" onClick={prevPage} variant="secondary" >
+                                        Back  
+                                        </Button>
+                                    </div>
+                                </div>
                                 <div className="step-btn-right">
                                     <div className="step-btn">
+                                    
                                     <Button className="btn btn-primary" type="submit">
                                     Save your work!
                                     </Button>
