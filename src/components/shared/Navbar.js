@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import {Link }  from 'react-router-dom'
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import {
+  Container,
+  Row,
+  Col,
+  Dropdown
+}
+from 'react-bootstrap';
 import webFinLogo from '../../images/header/webFin-logo.svg';
 import headerProfilePic from '../../images/media/media-1.jpg';
 import { isLoggedIn } from '../../utils/helpers'
@@ -50,7 +54,22 @@ const Navbar = (props) => {
             <li>
               <a  href="#"><NotificationIcon /></a>
             </li>
-            <li className={`header-profile-img ${activeProfileNav ? 'active' : ''}`}>
+            <li className="header-profile-img">
+         
+              <Dropdown >
+                <Dropdown.Toggle>
+                <span className="nav-profile-pic">
+                      <img src={headerProfilePic} alt="John" />
+                    </span>
+                    <ChevronRight />
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu  menuAlign="right">
+                  <Dropdown.Item onClick={logout} >logout</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </li>
+            {/* <li className={`header-profile-img ${activeProfileNav ? 'active' : ''}`}>
               <a href="javascript:void(0)" onClick={() => setActiveProfileNav(!activeProfileNav)}>
                 <span className="nav-profile-pic">
                   <img src={headerProfilePic} alt="John" />
@@ -62,7 +81,7 @@ const Navbar = (props) => {
                 <a href='javascript:void(0)' onClick={logout} >logout</a>
                 </li>
               </ul>
-            </li>
+            </li> */}
           </ul>
         )
       } else if(pathname !== '/forget-password' &&  pathname !== '/confirm-account'){
