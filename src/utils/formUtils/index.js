@@ -242,6 +242,7 @@ const renderFileDrop = (props)=> {
         url,
         formClass,
         isDropText,
+        isDrop,
         placeholder,
         meta: { touched, error, warning },
     } = props;
@@ -255,6 +256,7 @@ const renderFileDrop = (props)=> {
             reader.onload = () => {
                 const base64 = reader.result
                 input.onChange(base64)
+                isDrop && isDrop()
                 //setUrl(base64);
             }
            // input.onChange(file)

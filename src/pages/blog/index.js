@@ -44,6 +44,7 @@ import media3 from '../../public/images/media/media-3.jpg';
 import UploadImageModal from '../../components/assessment/shared/UploadImageModal'
 const BlogPage =(props) => {
   const dispatch = useDispatch();
+  const [errorMessageUrl, setErrorMessageUrl] = useState(false)
   const [ openModal, setModalOpen ]  = useState(false);
   const blogForm = useSelector((state)=>state.form.blogForm)
   const userData = useSelector(state => state.user.sessionData?.data?.data)
@@ -90,14 +91,18 @@ const BlogPage =(props) => {
   const { handleSubmit } = props;
 
   const submitData = (formData) => {
-    //formData['image'] = formData.blogUrl
-    const data = {
-      type:"blog",
-      content: formData.data,
-      imageUrl: formData.blogUrl,
-      title: formData.title
+    if(formData.blogUrl){
+      const data = {
+        type:"blog",
+        content: formData.data,
+        imageUrl: formData.blogUrl,
+        title: formData.title
+      }
+      dispatch(createBlog(data))
+    }else{
+      setErrorMessageUrl(true)
     }
-    dispatch(createBlog(data))
+   
   }
 
     useEffect(()=>{
@@ -120,14 +125,17 @@ const BlogPage =(props) => {
 	}
 
 	const getBase64 = (base64) => {
+    setErrorMessageUrl(false)
 		dispatch(reduxChange('blogForm', 'blogUrl', base64))
 	}
 
 	const clearImage = () => {
+    setErrorMessageUrl(false)
 		dispatch(reduxChange('blogForm', 'blogUrl', null))
-	}
+  }
 
-
+  const capitalize = value => value.charAt(0).toUpperCase() + value.slice(1)
+  
     return(
       <section className="dashboard-wrapper">
         <aside className="dashboard-menu">
@@ -181,6 +189,7 @@ const BlogPage =(props) => {
                               name="title"
                               component={ renderFieldWG }
                               placeholder={ 'Blog post title' }
+                              normalize={ capitalize }
                             />
                         <Form.Text>
                           March 25, 2020 / 4 min read / Author Name
@@ -190,6 +199,7 @@ const BlogPage =(props) => {
                     <div className="upload-feature-img" onClick={handleToggleModal}>
                       {blogForm?.values?.blogUrl ? <img src={blogForm?.values?.blogUrl} /> : 'Click here to edit feature image'}
                       </div>
+                      {errorMessageUrl && <p><span class="field_error">Please insert image</span></p>}
                     </div>
                   </div>
                   <div className="blog-creation-author-box">
@@ -236,7 +246,7 @@ const BlogPage =(props) => {
                     </ul>
                   </div>
                 </div>
-                <div className="blog-creation-content">
+               <div className="blog-creation-content">
                   <div className="word-count">
                     <div className="word-count-progressbar">
                       <label>Word Count: </label>
@@ -248,7 +258,7 @@ const BlogPage =(props) => {
                   <RichTextEditor readOnly={false} setRTEData={handleRTEdata} initialValue={initialValue} />
                   </div>
                 </div>
-               
+                {/*
                 <div className="blog-action">
                   <div className="blog-action-box">
                     <h5>
@@ -422,7 +432,7 @@ const BlogPage =(props) => {
                     </Card>
                   </Accordion>
                   
-                </div>
+    </div>*/}
               
 
               <UploadImageModal 

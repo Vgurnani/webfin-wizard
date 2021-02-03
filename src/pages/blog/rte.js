@@ -8,7 +8,6 @@ import {
   Element as SlateElement,
 } from 'slate'
 import { withHistory } from 'slate-history'
-
 import { Button, Icon, Toolbar } from './components'
 
 import {

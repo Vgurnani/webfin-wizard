@@ -22,6 +22,11 @@ const UploadImageModal = (props) => {
             getBase64(result)
         });
     }
+
+    const clearImageFun = (event) => {
+        setSelectedUnsplash(null)
+        clearImage(event)
+    }
     return(
         <Modal show={openModal} onHide={handleToggleModal} className="logo-upload-modal">
         <Modal.Header closeButton>
@@ -47,6 +52,7 @@ const UploadImageModal = (props) => {
                     <Field
                         name={ fieldName }
                         component={ renderFileDrop }
+                        isDrop={()=> { setSelectedUnsplash(null)}}
                         placeholder={"<a><i className='fa fa-plus'/> upload your logo</a>"}
                         isDropText={'Drag your images'}
                     />
@@ -58,7 +64,7 @@ const UploadImageModal = (props) => {
                         </span> :
                         <img src={previewFile} />
                         }
-                        <span onClick={clearImage} className="clear-logo">clear</span>
+                        <span onClick={clearImageFun} className="clear-logo">clear</span>
                     </div>}
                 </Col>
                 <Col className="col-8">
