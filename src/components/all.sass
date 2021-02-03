@@ -907,15 +907,21 @@ ul
       display: inline-block
       vertical-align: middle
       padding-right: 20px
+      @media (max-width: $breakpoint-mobile)
+        padding-right: 10px
     img
       display: inline-block
       vertical-align: middle
       padding-right: 20px
+      @media (max-width: $breakpoint-mobile)
+        padding-right: 10px
     span
       display: inline-block
       vertical-align: middle  
   .btn.btn-primary
     padding: 14px 30px    
+    @media (max-width: $breakpoint-mobile)
+      padding: 14px 20px
   .btn.btn-primary.btn-facebook
     background-color: $facebook-color
     border-color: $facebook-color
@@ -1317,7 +1323,7 @@ ul
     padding: 10px 0
     .back-to-home 
       a
-        color: $white-color
+        color: $white-color !important
         svg
           display: inline-block
           vertical-align: middle
