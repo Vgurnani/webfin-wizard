@@ -12,11 +12,20 @@
         justify-content: center
         align-items: center
         width: 289px
+        max-width: 100%
         height: 178px
         margin: 0 auto
         font-size: 18px
         line-height: 1.5
         color: $body-color
+        @media (max-width: $breakpoint-mobile)
+            font-size: 14px
+            height: 140px
+        img
+            width: 100%
+            height: 100%
+            object-fit: cover
+            border-radius: 8px
 .url-control
     .form-control
         background-image: url('/images/link.png')
@@ -80,17 +89,32 @@
                     a
                         padding: 8px   
         &.expand-menu
-            width: 200px
+            width: auto
+            padding: 55px 10px
             ul
                 li
                     a
-                        font-size: 0                           
+                        font-size: 0    
+                        padding: 5px 
+        @media (max-width: $breakpoint-ipad)    
+            width: auto
+            padding: 55px 10px
+            ul
+                li
+                    a
+                        font-size: 0    
+                        padding: 5px                                  
     .dashboard-data
         width: 80%
         width: calc(100% - 265px)
         display: inline-block
         vertical-align: top  
-        padding: 30px 80px 30px 25px  
+        padding: 30px 80px 100px 25px  
+        @media (max-width: $breakpoint-ipad)
+            width: calc(100% - 65px)
+            padding: 30px 30px 50px
+        @media (max-width: $breakpoint-mobile)
+            padding: 20px 10px 50px
         .dashboard-body
             width: 100%
             display: inline-block
@@ -99,6 +123,8 @@
                 width: 100%
                 justify-content: space-between
                 align-items: top
+                @media (max-width: $breakpoint-mobile)
+                    flex-direction: column
                 .dashboard-title
                     h1
                         color: $dark-grey-color
@@ -128,6 +154,9 @@
             vertical-align: top
             width: 75%
             width: calc(100% - 290px)
+            @media (max-width: $breakpoint-mobile)
+                width: 100%
+                margin: 0 0 25px
             .blog-title-group
                 &.form-group
                     margin: 0
@@ -137,11 +166,18 @@
                         line-height: 1.3
                         color: $black-color
                         border: 1px solid rgba(51, 51, 51, 0.3)
+                        @media (max-width: $breakpoint-ipad) 
+                            font-size: 22px
+                        @media (max-width: $breakpoint-mobile)
+                            font-size: 18px    
         .blog-creation-author-box
             width: 245px
             margin: 0 0 0 45px
             display: inline-block
             vertical-align: top
+            @media (max-width: $breakpoint-mobile)
+                width: 100%
+                margin: 0 0 40px
             h5
                 font-size: 16px
                 line-height: 1.4
@@ -162,6 +198,8 @@
                     display: inline-block
                     vertical-align: bottom
                     margin: 0 0 5px
+                    width: 40%
+                    width: calc(100% - 95px)
                     span
                         display: block
                         font-size: 20px
@@ -171,6 +209,8 @@
                         color: $dark-grey-color
                         text-transform: capitalize
                         margin: 0 0 9px
+                        @media (max-width: $breakpoint-ipad) 
+                            font-size: 18px
                     a
                         display: block
                         font-size: 16px
@@ -181,6 +221,8 @@
                         text-transform: capitalize
                         text-decoration: underline
                 .author-bio
+                    @media (max-width: $breakpoint-mobile)
+                        margin: 10px 0 0
                     h6
                         font-size: 16px
                         line-height: 1.4
@@ -197,6 +239,8 @@
                 margin: 37px 0 0
                 padding: 0
                 list-style: none
+                @media (max-width: $breakpoint-mobile)
+                    margin: 10px 0 0
                 li
                     display: inline-block
                     vertical-align: top
@@ -213,12 +257,15 @@
                         text-align: center
     .blog-creation-content
         margin-top: -30px
+        @media (max-width: $breakpoint-mobile)
+            margin-top: 0
         .word-count
             width: 100%
             display: inline-block
             margin: 0 0 5px
             .word-count-progressbar      
                 width: 245px
+                max-width: 100%
                 display: inline-block  
                 label
                     color: $black-color
@@ -227,6 +274,13 @@
                     font-weight: bold
                     letter-spacing: 0.5px
                     margin: 0
+                    @media (max-width: $breakpoint-mobile)
+                        font-size: 14px
+                .progress
+                    .progress-bar
+                        @media (max-width: $breakpoint-mobile)
+                            font-size: 14px
+
     .blog-editor
         background-color: $optional-light-grey-color                
     .blog-action
@@ -239,6 +293,8 @@
             border: 1px solid $optional-light-grey-color
             border-radius: 24px
             padding: 24px 16px 10px
+            @media (max-width: $breakpoint-mobile)
+                padding: 15px
             h5
                 font-size: 16px
                 line-height: 1.4
@@ -263,23 +319,32 @@
                     padding: 10px 16px
                     margin: 10px 0 0
                     text-transform: capitalize
+                    @media (max-width: $breakpoint-mobile)
+                        font-size: 12px
+                        padding: 8px 10px
                     &.active
                         border: 2px solid $primary-color
                         background: rgba(48, 50, 200, 0.1)
                         color: $primary-color  
                     span
-                        margin: 0 16px                      
+                        margin: 0 16px       
+                        @media (max-width: $breakpoint-mobile)
+                            margin: 0 5px               
                     a
                         float: right
                         font-weight: 900
                         color: $primary-color
                         text-decoration: underline
-                        font-size: 16px    
+                        font-size: 16px   
+                        @media (max-width: $breakpoint-mobile)
+                            font-size: 12px 
 .related-blog
     width: 100%
     display: inline-block
     padding: 70px 0 60px
     border-bottom: 1px solid $optional-light-grey-color
+    @media (max-width: $breakpoint-mobile)
+        padding: 30px 0
     h3
         font-weight: 700
         font-size: 20px
@@ -295,6 +360,9 @@
             width: 31.2%
             display: inline-block
             vertical-align: top
+            @media (max-width: $breakpoint-mobile)
+                width: 100%
+                margin: 0 0 20px
             &:nth-child(3n+1)
                 margin-left: 0
                 clear: left
@@ -344,6 +412,43 @@
     display: inline-block
     padding: 16px 0
     border-bottom: 1px solid $optional-light-grey-color    
+    .accordion
+        .card
+            border: none
+            box-shadow: none
+            background-color: transparent
+            .card-header
+                padding: 0
+                margin: 0 0 10px
+                border: none
+                box-shadow: none
+                background-color: transparent
+                .btn.btn-link
+                    color: $body-color
+                    font-size: 20px
+                    line-height: 1.3
+                    letter-spacing: 0.18px
+                    font-weight: 700
+                    background-color: transparent
+                    border: none
+                    padding: 0
+                    width: 100%
+                    display: flex
+                    justify-content: space-between
+                    align-items: center
+                    &:hover,
+                    &:active,
+                    &:focus
+                        outline: none
+                        background-color: transparent
+                        border: none
+                        text-decoration: none
+            .card-body
+                border: none
+                box-shadow: none
+                background-color: transparent
+                margin: 0
+                padding: 0    
     .seo-heading
         width: 100%
         display: flex
@@ -373,6 +478,7 @@
             span.primary
                 color: $primary-color    
         .seo-progress-bar
+            max-width: 75%
             span
                 display: inline-block
                 vertical-align: middle
@@ -402,6 +508,10 @@
                             background-color: $red-color    
         .seo-form
             padding: 24px 0 0
+            .col
+                @media (max-width: $breakpoint-mobile)
+                    flex: 0 0 100%
+                    max-width: 100%
         .seo-preview
             .seo-meta-preview
                 width: 100%
@@ -411,6 +521,7 @@
                 border-radius: 24px
                 padding: 24px
                 margin: 0 0 6px
+                word-break: break-word
                 h4
                     color: $primary-color
                     font-size: 16px
@@ -436,7 +547,9 @@
 .blog-btns
     width: 100%
     display: inline-block       
-    margin: 25px 0 0     
+    margin: 25px 0 0   
+    @media (max-width: $breakpoint-mobile)
+        text-align: center  
 
 .custom-control.custom-switch    
     .custom-control-label
@@ -487,7 +600,12 @@
     background-color: $optional-light-grey-color
     border: 1px solid $optional-light-grey-color
     padding: 48px 52px 0
+    @media (max-width: $breakpoint-mobile)
+        padding: 4px
     .editor-content
         background-color: $white-color
         padding: 56px    
-        min-height: 570px                  
+        min-height: 570px      
+        @media (max-width: $breakpoint-mobile)
+            padding: 8px      
+            min-height: 400px      

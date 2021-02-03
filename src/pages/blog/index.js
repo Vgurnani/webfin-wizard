@@ -26,6 +26,8 @@ import {
   Col,
   ProgressBar,
   Button,
+  Accordion,
+  Card,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -246,7 +248,7 @@ const BlogPage =(props) => {
                   <RichTextEditor readOnly={false} setRTEData={handleRTEdata} initialValue={initialValue} />
                   </div>
                 </div>
-               {/*
+               
                 <div className="blog-action">
                   <div className="blog-action-box">
                     <h5>
@@ -323,13 +325,17 @@ const BlogPage =(props) => {
                   </ul>
                 </div>
                 <div className="blog-seo-booster">
-                  <h3 className="seo-heading">
-                    <span>SEO Booster</span>
-                    <span className="icon">
-                      <OpenArrow />
-                    </span>
-                  </h3>
-                  <div className="seo-content">
+                  <Accordion defaultActiveKey="0">
+                    <Card>
+                      <Card.Header>
+                        <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                        SEO Booster
+                        <OpenArrow />
+                        </Accordion.Toggle>
+                      </Card.Header>
+                      <Accordion.Collapse eventKey="0">
+                        <Card.Body>
+                        <div className="seo-content">
                     <p><b>What’s this for?</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                     <Row className="seo-form">
                       <Col className="col-6">
@@ -411,8 +417,13 @@ const BlogPage =(props) => {
                       </Col>
                     </Row>
                   </div>
+                        </Card.Body>
+                      </Accordion.Collapse>
+                    </Card>
+                  </Accordion>
+                  
                 </div>
-              */}  
+              
 
               <UploadImageModal 
                 fieldName={'blogUrl'} 

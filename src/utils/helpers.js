@@ -27,6 +27,12 @@ export const addBodyClass = (pathname) =>{
     } else if(path === ROUTES.CONFIRM_ACCOUNT){
         document.body.classList.add('blue-left');
         document.body.classList.add('no-footer');
+    } else if(path === ROUTES.BLOG){
+        document.body.classList.add('full-width-header');
+        document.body.classList.add('no-footer');
+    } else if(path === ROUTES.DASHBOARD){
+        document.body.classList.add('full-width-header');
+        document.body.classList.add('no-footer');
     }
 }
 

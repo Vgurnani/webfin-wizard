@@ -335,11 +335,13 @@ ul
 .main-header
   .header-top
     padding: 12px 0
+    align-items: center
     .header-logo
       text-align: left
       .navbar-brand
         margin: 0
         padding: 0
+        min-height: 0
         .navbar-item
           padding: 0
         img
@@ -1691,9 +1693,12 @@ ul
     text-align: left
 .full-width-header
   .main-header 
+    background-color: $white-color
     .container
       max-width: unset !important
       padding: 0 78px
+      @media (max-width: $breakpoint-mobile)
+        padding: 0 10px
 .forgot-password-section
   .form-side
     @media (max-width: $breakpoint-mobile)
