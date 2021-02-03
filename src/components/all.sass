@@ -404,6 +404,24 @@ ul
             &.header-profile-img
               a
                 padding-right: 0
+            button.dropdown-toggle.btn.btn-primary
+              background-color: transparent
+              padding: 11px 24px
+              border: none
+              &::after
+                display: none
+              &:focus,
+              &:hover,
+              &:active
+                box-shadow: none
+            .dropdown-item
+              &:focus,
+              &:hover,
+              &:active
+                background-color: transparent
+            .dropdown-menu
+              padding: 0
+              transform: translate(-80px,48px) !important       
             a
               color: $dark-grey-color
               font-size: 16px
