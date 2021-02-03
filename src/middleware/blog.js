@@ -15,6 +15,24 @@ import history from '../utils/history'
 import { imageUpload } from './assessments'
 import { dataURLtoFile , uId } from '../utils/helpers'
 import axiosInstance from '../services/api';
+
+
+export const checkAvailbleSlug = async(route,data) => {
+    const requestData = {
+        contentTypeUID: `application::${route}.${route}`,
+        data: data,
+        field: "slug"
+    }
+    try{
+        const result = await strapiAxiosInstance.post('/content-manager/uid/generate', requestData)
+        if([200,203].includes(result.status)){
+            return result.data.data
+        }
+    }catch(error){
+        return null
+    }
+}
+
 export const createBlog = (data) => {
     return async(dispatch) => {
         dispatch(blogCreateRequest())
@@ -23,6 +41,7 @@ export const createBlog = (data) => {
             data['imageUrl'] = await imageUpload(file);
         }
         const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
+        data['slug'] = await checkAvailbleSlug(route,data)
         strapiAxiosInstance.post(route, data).then((response)=>{
             history.push(ROUTES.DASHBOARD)
             dispatch(blogCreateSuccess(response))
