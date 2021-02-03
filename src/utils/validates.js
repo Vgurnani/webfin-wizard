@@ -103,7 +103,10 @@ export const assessmentFormValidate = values => {
 export const blogValidate = values => {
     const errors = {};
     if (!values.title) {
-        errors.title = 'Please enter title';
+        errors.title = MESSAGE.VALID_ENTER('title');
+    }
+    if (!values.blogUrl) {
+        errors.blogUrl = 'Please add image';
     }
     if (!values.description) {
         errors.description = 'Please enter description';

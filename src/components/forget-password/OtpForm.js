@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { Field } from 'redux-form';
 import { renderOTPField } from '../../utils/formUtils'
 import PropTypes from 'prop-types';
-
+import { passwordResendCode } from '../../middleware/auth'
+import { useDispatch, useSelector } from 'react-redux'
 import 
   {
     Form,
@@ -12,6 +13,11 @@ import
 from 'react-bootstrap';
 const OtpForm = (props) => {
     const { handleSubmit, submitData } = props;
+    const form  = useSelector((state) => state.form.forgetPassword)
+    const dispatch = useDispatch()
+    const resendCode = () => {
+        dispatch(passwordResendCode(form.values.email))
+    }
     return(
         <div className="forget-forms signup-forms">
         <Form onSubmit={handleSubmit(submitData)}>  
@@ -46,7 +52,7 @@ const OtpForm = (props) => {
                     Continue
                     </Button>   
                     <p className="heading-detail">
-                        Didn't receive code?  <Link to="/register">Send again</Link>
+                        Didn't receive code?  <Link to="#" onClick={resendCode}>Send again</Link>
                     </p>
                     </div>
                 </div>   

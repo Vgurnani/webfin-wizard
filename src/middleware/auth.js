@@ -111,6 +111,22 @@ export const resendCode = (data) => {
     };
 };
 
+export const passwordResendCode = (email) => {
+    return (dispatch) => {
+        dispatch(registrationRequest())
+        axiosInstance.post(`/password/resend`, {email: email})
+        .then((response) => {
+            dispatch(resentCodeSuccess(response))
+            notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CODE_SEND);
+        })
+        .catch((error) => {
+            notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)
+            dispatch(resendCodeFailure(error?.response?.data?.message));
+        });
+
+    };
+};
+
 
 export const forgetPassword = (step, setStep, data) =>{
     return(dispatch) => {
