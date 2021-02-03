@@ -77,7 +77,7 @@ const StepOne = (props) => {
                         <Form className="form" onSubmit={handleSubmit}>
                             <div className="form-heading">
                                 <h2>
-                                What kind you blog are you looking to build ?
+                                What kind of blog do you want?
                                 </h2>
                             </div>
                             <div className="category-wrapper">

@@ -86,9 +86,13 @@ const Navbar = (props) => {
         )
       } else if(pathname !== '/forget-password' &&  pathname !== '/confirm-account'){
         return(
+          <ul className="main-navigation">
+            <li>
           <Link to="/login" className='btn btn-secondary'>
             login
           </Link>
+          </li>
+          </ul>
         )
       }
     }

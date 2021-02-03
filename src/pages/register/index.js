@@ -46,8 +46,8 @@ const RegisterPage = (props) => {
              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.
              </p>
              <ul>
-               <li>Lorem ipsum dolor sit amet.</li>
-               <li>Lorem ipsum dolor sit amet.</li>
+               <li>Out of the box website</li>
+               <li>SEO Tools focused on results </li>
                <li>Lorem ipsum dolor sit amet.</li>
                <li>Lorem ipsum dolor sit amet.</li>
              </ul>

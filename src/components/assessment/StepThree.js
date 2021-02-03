@@ -101,7 +101,7 @@ const StepThree = (props) => {
 
 	const domainsOptions = getDomains() || []
 return(
-    <div className="assesment-step assesment-step-2">
+    <div className="assesment-step assesment-step-3">
       <Row  className="step-form">
 				<Col className="col-12">
 					<Container>
@@ -142,7 +142,7 @@ return(
 													}						
 												
 										
-												<p className="logo-optional">Optional! if you have logo upload here</p>
+												<p className="logo-optional">Optional: If you have a logo upload it here</p>
 												<div className="upload-media-btn">
 												<button type='button' onClick={handleToggleModal}>upload your logo</button>
 												
