@@ -17,7 +17,7 @@ const TemplateWrapper = (props) => {
 
     const isSideBar = () => {
         if(isLoggedIn()){
-            return pathname !== '/assessment' || pathname !== '/confirm-account'
+            return pathname !== '/assessment' &&  pathname !== '/confirm-account'
         }
         return false
     }
