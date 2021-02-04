@@ -139,9 +139,11 @@ export const forgetPassword = (step, setStep, data) =>{
             url: url,
             data: data
         }).then((response) => {
-            dispatch(forgetPasswordSuccess(response))
+            dispatch(forgetPasswordSuccess(response, step))
             notification(NOTIFICATION_TYPES.SUCCESS, message);
-            step === 3 ? history.push(ROUTES.LOGIN) : setStep(step+1)
+            if(step !== 3){
+                setStep(step+1);
+            }
         })
         .catch((error) => {
             notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)

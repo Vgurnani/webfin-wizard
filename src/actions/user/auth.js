@@ -88,10 +88,11 @@ export const forgetPasswordRequest = () => {
     };
 };
 
-export const forgetPasswordSuccess = (data) => {
+export const forgetPasswordSuccess = (data, step) => {
     return {
         type: ActionTypes.FORGET_PASSWORD_SUCCESS,
         payload: data,
+        openfpmodal: step === 3
     };
 };
 

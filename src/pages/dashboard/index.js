@@ -4,29 +4,18 @@ import { getCurrentUser } from '../../middleware/auth'
 import { removeItem } from '../../utils/cache'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import {
-  DashboardMenuIcon,
-  EditSiteMenuIcon,
-  BlogMenuIcon,
-  MarketingMenuIcon,
-  SubMenuIcon,
-  Facebook,
-  LinkedIn,
-  Twitter,
-  YouTube,
-  Instagram,
-  CloseIcon,
-  SmallRadio,
-  SmallRadioChecked,
-  OpenArrow,
-} from '../../utils/svg'
- const Dashboard =(props) => {
+
+ const DashboardPage =(props) => {
     const dispatch = useDispatch();
     const [status, setStatus ] = useState(false)
     const data = useSelector(state => state.user.sessionData?.data?.data)
     var timeoutData = null;
     useEffect(() => {
         removeItem('assessmentForm')
+        dispatch({
+          type: 'SET_ACTIVE_SIDEBAR',
+          payload: 'dashboard'
+        })
         dispatch(getCurrentUser());
         return () =>{
           clearInterval(timeoutData)
@@ -59,47 +48,6 @@ import {
 
 
     return(
-      <section className="dashboard-wrapper">
-        <aside className="dashboard-menu">
-          <ul>
-            <li className="active">
-              <Link to="/dashboard">
-              Dashboard
-                <DashboardMenuIcon />
-              </Link>
-            </li>
-            <li >
-              <Link to="/blog">
-              Blog
-                <BlogMenuIcon />
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-              Test
-                <DashboardMenuIcon />
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-              Test
-                <DashboardMenuIcon />
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-              Test
-                <DashboardMenuIcon />
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-              Test
-                <DashboardMenuIcon />
-              </Link>
-            </li>
-          </ul>
-        </aside>
         <main className="dashboard-data">
           <section className="dashboard-body">
             <div className="dashboard-header">
@@ -126,9 +74,8 @@ import {
             
           </section>
         </main>
-      </section>
         
     )
 }
 
-export default Dashboard
+export default DashboardPage

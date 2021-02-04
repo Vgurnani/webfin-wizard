@@ -2,6 +2,7 @@ import {ActionTypes} from '../actions/user/actionTypes'
 const initialState = {
     user: {},
     sessionData: {},
+    openfpmodal: false,
     loading: false
 }
 export default (state = initialState, action) => {
@@ -31,7 +32,7 @@ export default (state = initialState, action) => {
       case ActionTypes.FORGET_PASSWORD_REQUEST:
         return { ...state, loading: true };
       case ActionTypes.FORGET_PASSWORD_SUCCESS:
-        return { ...state, success: action.payload, loading: false };
+        return { ...state, success: action.payload, loading: false, openfpmodal: action.openfpmodal };
       case ActionTypes.FORGET_PASSWORD_FAILURE:
         return { ...state, error: action?.payload, loading: false };
       case ActionTypes.GET_USER_SUCCESS:

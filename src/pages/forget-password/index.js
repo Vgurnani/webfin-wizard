@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { forgetPasswordValidate as validate } from '../../utils/validates'
 import { reduxForm } from 'redux-form';
-import { useDispatch } from 'react-redux'
+import { useDispatch , useSelector } from 'react-redux'
 import PropTypes from 'prop-types';
 import accountSlider1 from '../../public/images/account-slider-1.png';
 import { Link } from "react-router-dom";
@@ -12,6 +12,7 @@ import
     Container,
     Row,
     Col,
+    Modal,
     Carousel
 
   }
@@ -23,6 +24,7 @@ import ResetPasswordForm from '../../components/forget-password/ResetPasswordFor
 
 const ForgetPasswordPage = (props) => {
   const dispatch = useDispatch()
+  const openfpmodal = useSelector((state) => state.user.openfpmodal)
   const [ step, setStep ] = useState(1)
   const { handleSubmit } = props
   const submitData = (data) => {
@@ -78,6 +80,16 @@ const ForgetPasswordPage = (props) => {
             </Col>
           </Row>
         </Container>
+        <Modal show={openfpmodal} className="logo-upload-modal"> 
+          <Modal.Body>	
+            fsafdsaff
+          </Modal.Body>
+          <Modal.Footer>
+              <div className="modal-btns">
+                  <Link to='/login' className='btn btn-secondary'>Login</Link>
+              </div>
+          </Modal.Footer>
+        </Modal>
     </section>)
 }
 ForgetPasswordPage.propTypes = {

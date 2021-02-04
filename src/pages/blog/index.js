@@ -109,6 +109,10 @@ const BlogPage =(props) => {
       const query = 'blogs'
       dispatch(getUnsplash('/photos',query))
       dispatch(getCurrentUser())
+      dispatch({
+        type: 'SET_ACTIVE_SIDEBAR',
+        payload: 'blog'
+      })
     },[])
 
 
@@ -137,47 +141,6 @@ const BlogPage =(props) => {
   const capitalize = value => value.charAt(0).toUpperCase() + value.slice(1)
   
     return(
-      <section className="dashboard-wrapper">
-        <aside className="dashboard-menu">
-        <ul>
-            <li >
-              <Link to="/dashboard">
-              Dashboard
-                <DashboardMenuIcon />
-              </Link>
-            </li>
-            <li className="active">
-              <Link to="/blog">
-              Blog
-                <BlogMenuIcon />
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-              Test
-                <DashboardMenuIcon />
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-              Test
-                <DashboardMenuIcon />
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-              Test
-                <DashboardMenuIcon />
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-              Test
-                <DashboardMenuIcon />
-              </Link>
-            </li>
-          </ul>
-        </aside>
         <main className="dashboard-data">
           <section className="dashboard-body">
             <div className="blog-creation">
@@ -458,7 +421,6 @@ const BlogPage =(props) => {
             </div>
           </section>
         </main>
-      </section>
     )
 }
 
