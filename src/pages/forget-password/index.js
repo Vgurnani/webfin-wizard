@@ -17,7 +17,9 @@ import
 
   }
 from 'react-bootstrap';
-
+import {
+  LockOverturning,
+} from '../../utils/svg'
 import ForgetPasswordForm from  '../../components/forget-password/ForgetPasswordForm';
 import OtpForm from '../../components/forget-password/OtpForm';
 import ResetPasswordForm from '../../components/forget-password/ResetPasswordForm';
@@ -81,14 +83,12 @@ const ForgetPasswordPage = (props) => {
           </Row>
         </Container>
         <Modal show={openfpmodal} className="logo-upload-modal"> 
+        {/* <Modal show={true} className="password-reset-modal">  */}
           <Modal.Body>	
-            fsafdsaff
+            <LockOverturning />
+            <h2>Your password <br />has been reset</h2>
+            <Link to='/login' className='btn btn-primary'>Login</Link>
           </Modal.Body>
-          <Modal.Footer>
-              <div className="modal-btns">
-                  <Link to='/login' className='btn btn-secondary'>Login</Link>
-              </div>
-          </Modal.Footer>
         </Modal>
     </section>)
 }
