@@ -5,7 +5,7 @@ import { removeItem } from '../../utils/cache'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-const DashboardPage =() => {
+const DashboardPage =()f => {
     const dispatch = useDispatch();
     const [ status, setStatus ] = useState(false)
     const data = useSelector(state => state.user.sessionData?.data?.data)
