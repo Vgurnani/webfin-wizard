@@ -8,31 +8,31 @@ const initialState = {
 }
 export default (state = initialState, action) => {
     switch (action.type) {
-      case ActionTypes.GET_ASSESSMENT_REQUEST:
+    case ActionTypes.GET_ASSESSMENT_REQUEST:
         return { ...state, loading: true };
-      case ActionTypes.GET_ASSESSMENT_SUCCESS:
+    case ActionTypes.GET_ASSESSMENT_SUCCESS:
         return { ...state, assessmentData: action.payload, loading: false };
-      case ActionTypes.GET_ASSESSMENT_FAILURE:
+    case ActionTypes.GET_ASSESSMENT_FAILURE:
         return { ...state, error: action.error, loading: false };
-      case ActionTypes.CREATE_ASSESSMENT_REQUEST:
+    case ActionTypes.CREATE_ASSESSMENT_REQUEST:
         return { ...state, loading: true };
-      case ActionTypes.CREATE_ASSESSMENT_SUCCESS:
+    case ActionTypes.CREATE_ASSESSMENT_SUCCESS:
         return { ...state, assessmentData: action.payload, loading: false };
-      case ActionTypes.CREATE_ASSESSMENT_FAILURE:
+    case ActionTypes.CREATE_ASSESSMENT_FAILURE:
         return { ...state, error: action.error, loading: false };
-      case ActionTypes.GET_UNSPLASH_SUCCESS:
-        return {...state, unsplashImages: action.payload || [], loading: false}
-      case ActionTypes.GET_UNSPLASH_ERROR:
-        return {...state, unsplashImages: [], loading: false}
-      case ActionTypes.GET_VERIFIED_DOMAIN:
+    case ActionTypes.GET_UNSPLASH_SUCCESS:
+        return { ...state, unsplashImages: action.payload || [], loading: false }
+    case ActionTypes.GET_UNSPLASH_ERROR:
+        return { ...state, unsplashImages: [], loading: false }
+    case ActionTypes.GET_VERIFIED_DOMAIN:
         return { ...state, domains: action.payload.domains, domainLoading: false }
-      case ActionTypes.GET_VERIFIED_DOMAIN_REQUEST:
+    case ActionTypes.GET_VERIFIED_DOMAIN_REQUEST:
         return { ...state, domainLoading: true }
-      case ActionTypes.GET_VERIFIED_DOMAIN_ERROR:
+    case ActionTypes.GET_VERIFIED_DOMAIN_ERROR:
         return { ...state, domains: [], domainLoading: false }
-      case ActionTypes.CLEAR_DOMAINS:
+    case ActionTypes.CLEAR_DOMAINS:
         return { ...state, domains: [] }
-      default:
+    default:
         return state;
     }
-  };
+};

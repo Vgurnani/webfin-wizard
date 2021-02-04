@@ -6,19 +6,19 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-      case ActionTypes.BLOG_CREATE:
-        return { ...state, loading: true ,isReadyPublish: false};
-      case ActionTypes.BLOG_CREATE_SUCCESS:
+    case ActionTypes.BLOG_CREATE:
+        return { ...state, loading: true ,isReadyPublish: false };
+    case ActionTypes.BLOG_CREATE_SUCCESS:
         return { ...state,loading: false, isReadyPublish: true };
-      case ActionTypes.BLOG_CREATE_FAILURE:
+    case ActionTypes.BLOG_CREATE_FAILURE:
         return { ...state, loading: false, isReadyPublish: false };
-      case ActionTypes.PUBLISH_REQUEST:
-        return {...state, loading: true, isReadyPublish: false}
-      case ActionTypes.PUBLISH_SUCCESS:
-        return {...state, loading: false, isReadyPublish: false}
-      case ActionTypes.PUBLISH_FAILURE:
-        return {...state, loading: false, isReadyPublish: true}
-      default:
+    case ActionTypes.PUBLISH_REQUEST:
+        return { ...state, loading: true, isReadyPublish: false }
+    case ActionTypes.PUBLISH_SUCCESS:
+        return { ...state, loading: false, isReadyPublish: false }
+    case ActionTypes.PUBLISH_FAILURE:
+        return { ...state, loading: false, isReadyPublish: true }
+    default:
         return state;
     }
-  };
+};

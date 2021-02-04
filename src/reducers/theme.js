@@ -4,9 +4,9 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-      case 'SET_ACTIVE_SIDEBAR':
+    case 'SET_ACTIVE_SIDEBAR':
         return { ...state, sidebarActive: action.payload };
-      default:
+    default:
         return state;
     }
 };

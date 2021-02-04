@@ -3,7 +3,7 @@ import axios from 'axios'
 import { NOTIFICATION_TYPES } from '../constants/app';
 import { notification } from './notification';
 import { getUser } from '../utils/helpers';
-const baseUrl = `${process.env.REACT_APP_STRAPI_API_URL}/`;
+const baseUrl = `${ process.env.REACT_APP_STRAPI_API_URL }/`;
 
 const strapiAxiosInstance =  axios.create({
     baseURL: baseUrl,

@@ -46,11 +46,11 @@ export const isLoggedIn = () => {
 }
 
 export const getLabel = (data,value) => {
-    return data.filter((item)=> item.value === value)[0]?.label
+    return data.filter((item)=> item.value === value)[ 0 ]?.label
 }
 
 export const isLoading = (state) => {
-    const result = Object.keys(state)?.filter((item) => state[item].loading)
+    const result = Object.keys(state)?.filter((item) => state[ item ].loading)
     return result?.length > 0
 }
 
@@ -73,36 +73,35 @@ export const togglePassword = (event) => {
 
 }
 
-
 export const createFileFromUrl = async(url,id) => {
-    let response = await fetch(url);
-    let data = await response.blob();
-    let metadata = {
-      type: 'image/jpeg'
+    const response = await fetch(url);
+    const data = await response.blob();
+    const metadata = {
+        type: 'image/jpeg'
     };
-    let file = new File([data], `${id}.jpg`, metadata);
+    const file = new File([ data ], `${ id }.jpg`, metadata);
     return file
 }
 
 export const bytesToSize = (bytes) =>  {
-    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    var sizes = [ 'Bytes', 'KB', 'MB', 'GB', 'TB' ];
     if (bytes == 0) return '0 Byte';
     var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-    return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[ i ];
 }
 
 export const assessmentSaved = (step,values) => {
     let assessment = sessionStorage.getItem('assessmentForm')
     assessment =  assessment ? JSON.parse(assessment) : {}
     switch(step){
-        case 'step1':
-            return !_.isEmpty(assessment?.nicheId) && assessment.nicheId === values?.nicheId
-        case 'step2':
-            return !_.isEmpty(assessment?.colourId) && assessment.colourId === values?.colourId
-        case 'step3':
-            return !_.isEmpty(assessment?.websiteName) && assessment.websiteName === values?.websiteName
-        default:
-            return false
+    case 'step1':
+        return !_.isEmpty(assessment?.nicheId) && assessment.nicheId === values?.nicheId
+    case 'step2':
+        return !_.isEmpty(assessment?.colourId) && assessment.colourId === values?.colourId
+    case 'step3':
+        return !_.isEmpty(assessment?.websiteName) && assessment.websiteName === values?.websiteName
+    default:
+        return false
     }
 
 }
@@ -110,8 +109,8 @@ export const assessmentSaved = (step,values) => {
 export const queryStringToObject = (queryString) => {
     const pairs = queryString.substring(1).split('&');
     var array = pairs.map((el) => {
-      const parts = el.split('=');
-      return parts;
+        const parts = el.split('=');
+        return parts;
     });
     return Object.fromEntries(array);
 }

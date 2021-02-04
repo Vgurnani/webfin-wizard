@@ -1,5 +1,5 @@
-import { getItem } from "../utils/cache";
-import StringService from "../service/string-service";
+import { getItem } from '../utils/cache';
+import StringService from '../service/string-service';
 
 export const getToken = (field) => {
     let token = null;
@@ -20,11 +20,11 @@ export const getStoreData = (field) => {
 }
 
 export const handleHartIcon = (data, id, action) => {
-    let updatedPosts = { ...data };
+    const updatedPosts = { ...data };
     if (updatedPosts?.result) {
-        updatedPosts.result = [...updatedPosts?.result].map(post => {
+        updatedPosts.result = [ ...updatedPosts?.result ].map(post => {
             if (+post.id === +id) {
-                post.is_following = action === "follow";
+                post.isFollowing = action === 'follow';
             }
             return post
         })
@@ -35,15 +35,15 @@ export const handleHartIcon = (data, id, action) => {
 export const handleBoostIcon = (data, id, action) => {
     const updatedComments = { ...data };
     if (updatedComments?.result) {
-        updatedComments.result = [...updatedComments?.result].map(comment => {
+        updatedComments.result = [ ...updatedComments?.result ].map(comment => {
             if (+comment.id === +id) {
-                if (action === "boost") {
-                    comment.is_boosting = true
-                    comment.boost_count += 1;
+                if (action === 'boost') {
+                    comment.isBoosting = true
+                    comment.boostCount += 1;
                 }
-                if (action === "unboost") {
-                    comment.is_boosting = false
-                    comment.boost_count -= 1;
+                if (action === 'unboost') {
+                    comment.isBoosting = false
+                    comment.boostCount -= 1;
                 }
 
             }
@@ -55,18 +55,17 @@ export const handleBoostIcon = (data, id, action) => {
 
 export const getFormatedName = (text) => {
     if (!text || !text.length) {
-        return "";
+        return '';
     }
-    const names = text.split(" ");
+    const names = text.split(' ');
     let fullName = null
-    const firstName = names && names[0];
-    const lastName = names && names[1] && names[1][0];
+    const firstName = names && names[ 0 ];
+    const lastName = names && names[ 1 ] && names[ 1 ][ 0 ];
     if (firstName) {
-        fullName = `${StringService.getCapitalizedFirstCharacterString(firstName)}`;
+        fullName = `${ StringService.getCapitalizedFirstCharacterString(firstName) }`;
     }
     if (lastName) {
-        fullName = `${fullName} ${StringService.getCapitalised(lastName)}`;
+        fullName = `${ fullName } ${ StringService.getCapitalised(lastName) }`;
     }
-    return `${fullName}.`
+    return `${ fullName }.`
 }
-

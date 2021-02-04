@@ -27,8 +27,8 @@ import {
 export const loginUser = (data) => {
     return (dispatch) => {
         dispatch(loginRequest())
-        axiosInstance.post(`/auth/login`, data).then((response)=>{
-            response.data.data['accessToken'] = response.data.accessToken
+        axiosInstance.post('/auth/login', data).then((response)=>{
+            response.data.data[ 'accessToken' ] = response.data.accessToken
             setItem('user', response.data.data)
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.LOGIN_SUCCESS);
             dispatch(loginSuccess(response.data.data))
@@ -54,10 +54,10 @@ export const logoutUser = () => {
 export const registrationUser = (data, assessmentData) => {
     return (dispatch) => {
         dispatch(registrationRequest())
-        axiosInstance.post(`/auth/signup`, data)
+        axiosInstance.post('/auth/signup', data)
             .then((response) => {
-                response.data.data['accessToken'] = response.data.accessToken
-                response.data.data['test'] = false
+                response.data.data[ 'accessToken' ] = response.data.accessToken
+                response.data.data[ 'test' ] = false
                 setItem('user', response.data.data)
                 notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.REGISTRATION_SUCCESS);
                 dispatch(registrationSuccess(response.data.data))
@@ -75,11 +75,11 @@ export const registrationUser = (data, assessmentData) => {
 export const emailVerification = (data) => {
     return (dispatch) => {
         dispatch(registrationRequest())
-        axiosInstance.get(`/user/verify?code=${data.code}`)
+        axiosInstance.get(`/user/verify?code=${ data.code }`)
             .then((response) => {
                 let  user = getItem('user');
                 user = JSON.parse(user)
-                user['enabled'] = true
+                user[ 'enabled' ] = true
                 setItem('user', user)
                 history.push(ROUTES.DASHBOARD)
                 dispatch(emailVerificationSuccess(response))
@@ -94,19 +94,18 @@ export const emailVerification = (data) => {
     };
 };
 
-
 export const resendCode = (data) => {
     return (dispatch) => {
         dispatch(registrationRequest())
-        axiosInstance.get(`/user/verify/resend`, data)
-        .then((response) => {
-            dispatch(resentCodeSuccess(response))
-            notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CODE_SEND);
-        })
-        .catch((error) => {
-            notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)
-            dispatch(resendCodeFailure(error?.response?.data?.message));
-        });
+        axiosInstance.get('/user/verify/resend', data)
+            .then((response) => {
+                dispatch(resentCodeSuccess(response))
+                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CODE_SEND);
+            })
+            .catch((error) => {
+                notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)
+                dispatch(resendCodeFailure(error?.response?.data?.message));
+            });
 
     };
 };
@@ -114,19 +113,18 @@ export const resendCode = (data) => {
 export const passwordResendCode = (email) => {
     return (dispatch) => {
         dispatch(registrationRequest())
-        axiosInstance.post(`/password/resend`, {email: email})
-        .then((response) => {
-            dispatch(resentCodeSuccess(response))
-            notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CODE_SEND);
-        })
-        .catch((error) => {
-            notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)
-            dispatch(resendCodeFailure(error?.response?.data?.message));
-        });
+        axiosInstance.post('/password/resend', { email: email })
+            .then((response) => {
+                dispatch(resentCodeSuccess(response))
+                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CODE_SEND);
+            })
+            .catch((error) => {
+                notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)
+                dispatch(resendCodeFailure(error?.response?.data?.message));
+            });
 
     };
 };
-
 
 export const forgetPassword = (step, setStep, data) =>{
     return(dispatch) => {
@@ -145,23 +143,23 @@ export const forgetPassword = (step, setStep, data) =>{
                 setStep(step+1);
             }
         })
-        .catch((error) => {
-            notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)
-            dispatch(forgetPasswordFailure(error?.response?.data?.message));
-        });
+            .catch((error) => {
+                notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)
+                dispatch(forgetPasswordFailure(error?.response?.data?.message));
+            });
     }
 }
 
 export const getCurrentUser = () => {
     return (dispatch) => {
-        axiosInstance.get(`/user`)
-        .then((response) => {
-            setItem('sessionData', response)
-            dispatch(getUserSuccess(response));
-        })
-        .catch((error) => {
-            notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message);
-        });
+        axiosInstance.get('/user')
+            .then((response) => {
+                setItem('sessionData', response)
+                dispatch(getUserSuccess(response));
+            })
+            .catch((error) => {
+                notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message);
+            });
 
     };
 };

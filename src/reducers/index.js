@@ -11,4 +11,4 @@ export default combineReducers({
     theme: theme,
     assessment: assessment,
     form: formReducer
- });
+});

@@ -76,9 +76,7 @@ import EditIcon from '../../images/edit.png';
       }catch(err){
       }
     }
-
-
-
+  
     return(
         <main className="dashboard-data">
           <section className="dashboard-body">

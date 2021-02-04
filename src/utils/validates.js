@@ -81,7 +81,6 @@ export const forgetPasswordValidate = values => {
 export const assessmentFormValidate = values => {
     const errors = {};
 
-
     const letter = /[^a-zA-Z0-9 ]/gi;
     if (!values.websiteName) {
         errors.websiteName = MESSAGE.REQUIRED;
