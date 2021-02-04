@@ -28,7 +28,9 @@ import
     Row,
     Col,
     Form,
-    Button
+    Button,
+    Accordion,
+    Card,
   }
 from 'react-bootstrap';
 import searchIcon from '../../images/search.png';
@@ -183,9 +185,110 @@ import EditIcon from '../../images/edit.png';
                         <td>
                           <Form.Check 
                             type="switch"
-                            id="custom-switch"
-                            label="The Joy of Cooking"
+                            id="custom-switch-1"
+                            label=""
                           /> 
+                          <span className="table-post-title">The Joy of Cooking</span>
+                        </td>
+                        <td>
+                        132 
+                        <span className="view-tags">★ Best Performance</span>
+                        </td>
+                        <td>
+                        32
+                        </td>
+                        <td>
+                        dd/mm/yyyy
+                        </td>
+                        <td>
+                          <a className="table-action-btns">
+                            <img src={EditIcon} />
+                            <span>Edit</span>
+                          </a>
+                          <a className="table-action-btns">
+                            <DeleteIcon />
+                            <span>Delete</span>
+                          </a>
+                          <a className="table-action-btns">
+                            <CloneIcon />
+                            <span>Clone</span>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                        <Form.Check 
+                            type="switch"
+                            id="custom-switch-2"
+                            label=""
+                          /> 
+                          <span className="table-post-title">The Joy of Cooking</span>
+                        </td>
+                        <td>
+                        132 
+                        </td>
+                        <td>
+                        32
+                        </td>
+                        <td>
+                        dd/mm/yyyy
+                        </td>
+                        <td>
+                          <a className="table-action-btns">
+                            <img src={EditIcon} />
+                            <span>Edit</span>
+                          </a>
+                          <a className="table-action-btns">
+                            <DeleteIcon />
+                            <span>Delete</span>
+                          </a>
+                          <a className="table-action-btns">
+                            <CloneIcon />
+                            <span>Clone</span>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <Form.Check 
+                            type="switch"
+                            id="custom-switch-3"
+                            label=""
+                          /> 
+                          <span className="table-post-title">The Joy of Cooking</span> 
+                        </td>
+                        <td>
+                        132 
+                        </td>
+                        <td>
+                        32
+                        </td>
+                        <td>
+                        dd/mm/yyyy
+                        </td>
+                        <td>
+                          <a className="table-action-btns">
+                            <img src={EditIcon} />
+                            <span>Edit</span>
+                          </a>
+                          <a className="table-action-btns">
+                            <DeleteIcon />
+                            <span>Delete</span>
+                          </a>
+                          <a className="table-action-btns">
+                            <CloneIcon />
+                            <span>Clone</span>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <Form.Check 
+                            type="switch"
+                            id="custom-switch-4"
+                            label=""
+                          /> 
+                          <span className="table-post-title">The Joy of Cooking</span> 
                         </td>
                         <td>
                         132 
@@ -216,9 +319,10 @@ import EditIcon from '../../images/edit.png';
                         <td>
                           <Form.Check 
                             type="switch"
-                            id="custom-switch"
-                            label="The Joy of Cooking"
+                            id="custom-switch-5"
+                            label=""
                           /> 
+                          <span className="table-post-title">The Joy of Cooking</span> 
                         </td>
                         <td>
                         132 
@@ -248,106 +352,10 @@ import EditIcon from '../../images/edit.png';
                         <td>
                           <Form.Check 
                             type="switch"
-                            id="custom-switch"
-                            label="The Joy of Cooking"
+                            id="custom-switch-6"
+                            label=""
                           /> 
-                        </td>
-                        <td>
-                        132 
-                        </td>
-                        <td>
-                        32
-                        </td>
-                        <td>
-                        dd/mm/yyyy
-                        </td>
-                        <td>
-                          <a className="table-action-btns">
-                            <img src={EditIcon} />
-                            <span>Edit</span>
-                          </a>
-                          <a className="table-action-btns">
-                            <DeleteIcon />
-                            <span>Delete</span>
-                          </a>
-                          <a className="table-action-btns">
-                            <CloneIcon />
-                            <span>Clone</span>
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <Form.Check 
-                            type="switch"
-                            id="custom-switch"
-                            label="The Joy of Cooking"
-                          /> 
-                        </td>
-                        <td>
-                        132 
-                        <span className="view-tags">★ Best Performance</span>
-                        </td>
-                        <td>
-                        32
-                        </td>
-                        <td>
-                        dd/mm/yyyy
-                        </td>
-                        <td>
-                          <a className="table-action-btns">
-                            <img src={EditIcon} />
-                            <span>Edit</span>
-                          </a>
-                          <a className="table-action-btns">
-                            <DeleteIcon />
-                            <span>Delete</span>
-                          </a>
-                          <a className="table-action-btns">
-                            <CloneIcon />
-                            <span>Clone</span>
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <Form.Check 
-                            type="switch"
-                            id="custom-switch"
-                            label="The Joy of Cooking"
-                          /> 
-                        </td>
-                        <td>
-                        132 
-                        </td>
-                        <td>
-                        32
-                        </td>
-                        <td>
-                        dd/mm/yyyy
-                        </td>
-                        <td>
-                          <a className="table-action-btns">
-                            <img src={EditIcon} />
-                            <span>Edit</span>
-                          </a>
-                          <a className="table-action-btns">
-                            <DeleteIcon />
-                            <span>Delete</span>
-                          </a>
-                          <a className="table-action-btns">
-                            <CloneIcon />
-                            <span>Clone</span>
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <Form.Check 
-                            type="switch"
-                            id="custom-switch"
-                            label="The Joy of Cooking"
-                          /> 
+                          <span className="table-post-title">The Joy of Cooking</span> 
                         </td>
                         <td>
                         132 
@@ -376,6 +384,160 @@ import EditIcon from '../../images/edit.png';
                     </tbody>
                   </table>
                 </div>
+              </div>
+              <div className="draft-posts">
+                <Accordion defaultActiveKey="0">
+                  <Card>
+                    <Card.Header>
+                      <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                      Drafts
+                      <OpenArrow />
+                      </Accordion.Toggle>
+                    </Card.Header>
+                    <Accordion.Collapse eventKey="0">
+                      <Card.Body>
+                      <div className="dashboard-table">
+                        <div className="table-responsive">
+                          <table>
+                            <thead>
+                              <tr>
+                                <th>Title</th>
+                                <th>Views</th>
+                                <th>Comments</th>
+                                <th>Date Created</th>
+                                <th>Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  
+                                  <span className="table-post-title">The Joy of Cooking</span>
+                                </td>
+                                <td>
+                               
+                                </td>
+                                <td>
+                              
+                                </td>
+                                <td>
+                             
+                                </td>
+                                <td>
+                                <Form.Check 
+                                    type="switch"
+                                    label="Publish"
+                                  /> 
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <span className="table-post-title">The Joy of Cooking</span>
+                                </td>
+                                <td>
+                                
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                <Form.Check 
+                                    type="switch"
+                                    label="Publish"
+                                  />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <span className="table-post-title">The Joy of Cooking</span> 
+                                </td>
+                                <td>
+                                
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                <Form.Check 
+                                    type="switch"
+                                    label="Publish"
+                                  />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <span className="table-post-title">The Joy of Cooking</span> 
+                                </td>
+                                <td>
+                            
+                                </td>
+                                <td>
+                              
+                                </td>
+                                <td>
+                               
+                                </td>
+                                <td>
+                                <Form.Check 
+                                    type="switch"
+                                    label="Publish"
+                                  />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td> 
+                                  <span className="table-post-title">The Joy of Cooking</span> 
+                                </td>
+                                <td>
+                                
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                <Form.Check 
+                                    type="switch"
+                                    label="Publish"
+                                  />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <span className="table-post-title">The Joy of Cooking</span> 
+                                </td>
+                                <td>
+                                
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                <Form.Check 
+                                    type="switch"
+                                    label="Publish"
+                                  />
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                </Accordion>
               </div>
             </section>
           </section>
