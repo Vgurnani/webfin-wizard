@@ -4,6 +4,38 @@ import { getCurrentUser } from '../../middleware/auth'
 import { removeItem } from '../../utils/cache'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import {
+  DashboardMenuIcon,
+  EditSiteMenuIcon,
+  BlogMenuIcon,
+  MarketingMenuIcon,
+  SubMenuIcon,
+  Facebook,
+  LinkedIn,
+  Twitter,
+  YouTube,
+  Instagram,
+  CloseIcon,
+  SmallRadio,
+  SmallRadioChecked,
+  OpenArrow,
+  DeleteIcon,
+  CloneIcon,
+} from '../../utils/svg';
+import
+  {
+    Container,
+    Row,
+    Col,
+    Form,
+    Button,
+    Accordion,
+    Card,
+  }
+from 'react-bootstrap';
+import searchIcon from '../../images/search.png';
+import filterIcon from '../../images/filter.png';
+import EditIcon from '../../images/edit.png';
 
  const DashboardPage =(props) => {
     const dispatch = useDispatch();
