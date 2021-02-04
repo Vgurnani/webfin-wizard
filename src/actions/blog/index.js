@@ -21,8 +21,7 @@ export const blogCreateFailed = (error) => {
     };
 };
 
-
-export const publishRequest = (data) => {
+export const publishRequest = () => {
     return {
         type: ActionTypes.PUBLISH_REQUEST,
     };

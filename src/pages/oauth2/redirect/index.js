@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -12,12 +13,15 @@ import { queryStringToObject } from '../../../utils/helpers'
 
 const RedirectAuth = (props) => {
     const dispatch  = useDispatch();
-
+    const checkValidAssessmentData = () =>{
+        const assessmentForm = JSON.parse(sessionStorage.getItem('assessmentForm'))
+        return assessmentForm.nicheId && assessmentForm.colourId && assessmentForm.websiteName
+    }
     useEffect(()=> {
-        let queryData = queryStringToObject(props.history.location.search)
+        const queryData = queryStringToObject(props.history.location.search)
         if (queryData?.token?.length) {
             const test = queryData.test === 'true'
-            setItem('user', {accessToken: queryData.token,enabled: true, test: test});
+            setItem('user', { accessToken: queryData.token,enabled: true, test: test });
             if(test){
                 history.push(ROUTES.DASHBOARD)
                 notification(NOTIFICATION_TYPES.SUCCESS, 'Login Successfully');
@@ -28,18 +32,11 @@ const RedirectAuth = (props) => {
                 notification(NOTIFICATION_TYPES.SUCCESS, 'Please fill assessment');
             }
 
-
         } else if (queryData?.error){
-            let errorMessage = 'Login error: ' + queryData.error;
             history.push(ROUTES.LOGIN)
             notification(NOTIFICATION_TYPES.ERROR, 'Something went wrong please try again');
         }
-    },[props.history.location.search]);
-
-    const checkValidAssessmentData = () =>{
-        const assessmentForm = JSON.parse(sessionStorage.getItem('assessmentForm'))
-        return assessmentForm.nicheId && assessmentForm.colourId && assessmentForm.websiteName
-    }
+    },[ props.history.location.search ]);
 
     return(
         <section className="login-section main-section">

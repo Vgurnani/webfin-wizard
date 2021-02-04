@@ -5,7 +5,7 @@
 */
 
 import React from 'react';
-import { Form, Row } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import OtpInput from 'react-otp-input';
 import Dropzone from 'react-dropzone'
 
@@ -53,9 +53,9 @@ const renderFieldWG = (props) => {
     }
 
     return (
-        <Form.Group controlId={name}>
-           { label &&  <Form.Label>{label || ''}</Form.Label> }
-            <Form.Control rows={ rows } { ...input } onBlur={changeValue}  maxLength={ maxLength } disabled={ disabled || false } type={ type } className={ validationError || (touched && error) ? 'validation-error' : '' } placeholder={ placeholder || '' } />
+        <Form.Group controlId={ name }>
+            { label &&  <Form.Label>{label || ''}</Form.Label> }
+            <Form.Control rows={ rows } { ...input } onBlur={ changeValue }  maxLength={ maxLength } disabled={ disabled || false } type={ type } className={ validationError || (touched && error) ? 'validation-error' : '' } placeholder={ placeholder || '' } />
             {defaultWarning && !input.value && <span className="default-warning"><i className="fas fa-exclamation-triangle"></i> {defaultWarning}</span>}
             <Validations
                 props={ {
@@ -69,8 +69,6 @@ const renderFieldWG = (props) => {
     );
 };
 
-
-
 const renderFieldChangeWG = (props) => {
     const {
         input,
@@ -83,7 +81,6 @@ const renderFieldChangeWG = (props) => {
         validationError,
         meta: { touched, error, warning },
         maxLength,
-        handleKeyUp,
         rows,
         defaultWarning
     } = props;
@@ -94,9 +91,9 @@ const renderFieldChangeWG = (props) => {
     }
 
     return (
-        <Form.Group controlId={name}>
-           { label &&  <Form.Label>{label || ''}</Form.Label> }
-            <Form.Control rows={ rows } { ...input } onChange={changeValue}  maxLength={ maxLength } disabled={ disabled || false } type={ type } className={ validationError || (touched && error) ? 'validation-error' : '' } placeholder={ placeholder || '' } />
+        <Form.Group controlId={ name }>
+            { label &&  <Form.Label>{label || ''}</Form.Label> }
+            <Form.Control rows={ rows } { ...input } onChange={ changeValue }  maxLength={ maxLength } disabled={ disabled || false } type={ type } className={ validationError || (touched && error) ? 'validation-error' : '' } placeholder={ placeholder || '' } />
             {defaultWarning && !input.value && <span className="default-warning"><i className="fas fa-exclamation-triangle"></i> {defaultWarning}</span>}
             <Validations
                 props={ {
@@ -139,8 +136,6 @@ const renderField = (props) => {
     );
 };
 
-
-
 const renderOTPField = (props) => {
     const {
         input,
@@ -173,7 +168,6 @@ const renderOTPField = (props) => {
     );
 };
 
-
 const renderStyleMultipleRadio = (props) => {
     const {
         input,
@@ -181,8 +175,6 @@ const renderStyleMultipleRadio = (props) => {
         options,
         className,
         defaultValue,
-        width,
-        imgWidth,
         isIcons,
         isColors,
         fontStyled,
@@ -191,39 +183,37 @@ const renderStyleMultipleRadio = (props) => {
     return (
 
         <Form.Group>
-   
-                { options.map((item,index) => {
-                    item['imageUrl'] = item.icon?.match('http') ? item.icon : item.imageUrl
-                    return(
-                        <div key={ index } className={ `  ${ className || 'styled-radio' }` }>
-                            
-                                <input { ...input }
-                                    onChange={ (value) => {
-                                        const elm = value.currentTarget;
-                                        input.onChange(value || elm?.value)
-                                    } }
-                                    type="radio"
-                                    value={ item.value }
-                                    checked={ item.value === (input.value || defaultValue) }
-                                    id={ input.name } 
-                                    className="styled-radio"
-                                    />
-                                <div className='input-radio-label'>
-                                        {isColors && <span className={`checkbox-colors ${item.label === 'Clean White' ? 'round-border' : null}`}>
-                                            {item.colors && <span style={{backgroundColor: item.colors[0]}}></span>}
-                                        </span>}
-                                        {isIcons && item.icon && !item.imageUrl &&  <span className='emojiText mb-0 mt-1' dangerouslySetInnerHTML={ { __html:  item.icon  } } />}
-                                        {item.imageUrl && <>
-                                            <img src={ item.imageUrl } className='styled-radio-img'  alt={ item.label } /></>}
-                                        {fontStyled ? <p  className="emojiText mb-0 mt-1" dangerouslySetInnerHTML={ { __html:  item.label  } } /> : 
-                                        <span className="emojiText mb-0 mt-1" dangerouslySetInnerHTML={ { __html:  item.label  } } /> }
-                                        
-                                    
-                                </div>
-                            
-                        </div>)
 
-                })}
+            { options.map((item,index) => {
+                item[ 'imageUrl' ] = item.icon?.match('http') ? item.icon : item.imageUrl
+                return(
+                    <div key={ index } className={ `  ${ className || 'styled-radio' }` }>
+
+                        <input { ...input }
+                            onChange={ (value) => {
+                                const elm = value.currentTarget;
+                                input.onChange(value || elm?.value)
+                            } }
+                            type="radio"
+                            value={ item.value }
+                            checked={ item.value === (input.value || defaultValue) }
+                            id={ input.name }
+                            className="styled-radio"
+                        />
+                        <div className='input-radio-label'>
+                            {isColors && <span className={ `checkbox-colors ${ item.label === 'Clean White' ? 'round-border' : null }` }>
+                                {item.colors && <span style={ { backgroundColor: item.colors[ 0 ] } }></span>}
+                            </span>}
+                            {isIcons && item.icon && !item.imageUrl &&  <span className='emojiText mb-0 mt-1' dangerouslySetInnerHTML={ { __html:  item.icon  } } />}
+                            {item.imageUrl && <>
+                                <img src={ item.imageUrl } className='styled-radio-img'  alt={ item.label } /></>}
+                            {fontStyled ? <p  className="emojiText mb-0 mt-1" dangerouslySetInnerHTML={ { __html:  item.label  } } /> : <span className="emojiText mb-0 mt-1" dangerouslySetInnerHTML={ { __html:  item.label  } } /> }
+
+                        </div>
+
+                    </div>)
+
+            })}
 
             <Validations
                 props={ {
@@ -259,7 +249,7 @@ const renderFileDrop = (props)=> {
                 isDrop && isDrop()
                 //setUrl(base64);
             }
-           // input.onChange(file)
+            // input.onChange(file)
             reader.readAsDataURL(file);
         })
     }
@@ -269,16 +259,16 @@ const renderFileDrop = (props)=> {
             <Dropzone accept="image/jpeg, image/png" multiple={ false } onDrop={ acceptedFiles => handleDrop(acceptedFiles) } >
                 {({ getRootProps, getInputProps }) => {
                     return(
-                        
-                            <div { ...getRootProps() } className={ formClass + ' avatar-user' }>
-                                <div className="c-avatar cursor-pointer upload-file"
-                                    style={ {  backgroundImage: url ? `url(${ url })`: null } } >
-                                    <input  name={ input.name } { ...getInputProps()  } />
-                                    <p className='' dangerouslySetInnerHTML={{__html: placeholder}}/>
-                                    {isDropText ? <div className='drag-image-box'><p>{isDropText}</p></div> : null }
-                                </div>
+
+                        <div { ...getRootProps() } className={ formClass + ' avatar-user' }>
+                            <div className="c-avatar cursor-pointer upload-file"
+                                style={ {  backgroundImage: url ? `url(${ url })`: null } } >
+                                <input  name={ input.name } { ...getInputProps()  } />
+                                <p className='' dangerouslySetInnerHTML={ { __html: placeholder } }/>
+                                {isDropText ? <div className='drag-image-box'><p>{isDropText}</p></div> : null }
                             </div>
-                        
+                        </div>
+
                     )}}
             </Dropzone>
             <Validations

@@ -1,18 +1,17 @@
 import React from 'react';
 import PrivacyPolicyPage from '../../components/PrivacyPolicy';
-import 
-  {
+import
+{
     Container
-  }
-from 'react-bootstrap';
-
+}
+    from 'react-bootstrap';
 
 const PrivacyPolicy = () => {
     return(
         <section className="login-section main-section">
-        <Container>
-            <PrivacyPolicyPage />
-        </Container>
+            <Container>
+                <PrivacyPolicyPage />
+            </Container>
         </section>
     )
 }

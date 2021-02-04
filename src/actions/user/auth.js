@@ -1,4 +1,3 @@
-
 import { ActionTypes } from './actionTypes';
 
 export const loginRequest = () => {
@@ -20,7 +19,6 @@ export const loginFailure = (error) => {
         payload: error,
     };
 };
-
 
 export const logoutSuccess = (data) => {
     return {
@@ -50,8 +48,6 @@ export const registrationFailure = (error) => {
     };
 };
 
-
-
 export const emailVerificationSuccess = (response) => {
     return {
         type: ActionTypes.EMAIL_VERIFICATION_SUCCESS,
@@ -65,8 +61,6 @@ export const emailVerificationFailure = (error) => {
     };
 };
 
-
-
 export const resentCodeSuccess = (response) => {
     return {
         type: ActionTypes.RESEND_CODE_SUCCESS,
@@ -79,8 +73,6 @@ export const resendCodeFailure = (error) => {
         error: error,
     };
 };
-
-
 
 export const forgetPasswordRequest = () => {
     return {

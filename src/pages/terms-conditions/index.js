@@ -1,20 +1,19 @@
 import React from 'react';
 import TermsConditionPage from '../../components/TermsCondition';
 
-import 
-  {
+import
+{
     Container
-  }
-from 'react-bootstrap';
+}
+    from 'react-bootstrap';
 
-
-const TermsCondition = (props) => {
+const TermsCondition = () => {
     return(
-        
+
         <section className="login-section main-section">
-        <Container>
-            <TermsConditionPage />
-        </Container>
+            <Container>
+                <TermsConditionPage />
+            </Container>
         </section>
     )
 }

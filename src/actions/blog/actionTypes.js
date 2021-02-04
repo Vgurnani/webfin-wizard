@@ -6,4 +6,3 @@ export const ActionTypes = {
     PUBLISH_SUCCESS: 'PUBLISH_SUCCESS',
     PUBLISH_FAILURE: 'PUBLISH_FAILURE'
 }
-

@@ -1,227 +1,210 @@
 import React, { useState, useEffect } from 'react';
 import RichTextEditor from './rte';
-import { Link } from 'react-router-dom'
 import { Field, change } from 'redux-form';
 import { renderFieldWG } from '../../utils/formUtils'
 import {
-  DashboardMenuIcon,
-  EditSiteMenuIcon,
-  BlogMenuIcon,
-  MarketingMenuIcon,
-  SubMenuIcon,
-  Facebook,
-  LinkedIn,
-  Twitter,
-  YouTube,
-  Instagram,
-  CloseIcon,
-  SmallRadio,
-  SmallRadioChecked,
-  OpenArrow,
+    Facebook,
+    LinkedIn,
+    Twitter,
+    YouTube,
+    Instagram,
 } from '../../utils/svg'
 
 import {
-  Form,
-  Row,
-  Col,
-  ProgressBar,
-  Button,
-  Accordion,
-  Card,
+    Form,
+    ProgressBar,
+    Button
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import { getCurrentUser } from '../../middleware/auth'
-import { createBlog ,callPublish } from '../../middleware/blog';
-import { getUnsplash} from '../../middleware/assessments'
+import { createBlog } from '../../middleware/blog';
+import { getUnsplash } from '../../middleware/assessments'
 import { change as reduxChange } from 'redux-form'
 import { blogValidate as validate } from '../../utils/validates';
 import profilePic from '../../public/images/media/media-4.jpg';
-import media1 from '../../public/images/media/media-1.jpg';
-import media2 from '../../public/images/media/media-2.jpg';
-import media3 from '../../public/images/media/media-3.jpg';
 import UploadImageModal from '../../components/assessment/shared/UploadImageModal'
 const BlogPage =(props) => {
-  const dispatch = useDispatch();
-  const [errorMessageUrl, setErrorMessageUrl] = useState(false)
-  const [ openModal, setModalOpen ]  = useState(false);
-  const blogForm = useSelector((state)=>state.form.blogForm)
-  const userData = useSelector(state => state.user.sessionData?.data?.data)
-  const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
-  const isReadyPublish = useSelector((state) => state.blog.isReadyPublish)
-  const initialValue = [
-    {
-      type: 'paragraph',
-      children: [
-        { text: 'This is editable ' },
-        { text: 'rich', bold: true },
-        { text: ' text, ' },
-        { text: 'much', italic: true },
-        { text: ' better than a ' },
-        { text: '<textarea>', code: true },
-        { text: '!' },
-      ],
-    },
-    {
-      type: 'paragraph',
-      children: [
+    const dispatch = useDispatch();
+    const [ errorMessageUrl, setErrorMessageUrl ] = useState(false)
+    const [ openModal, setModalOpen ]  = useState(false);
+    const blogForm = useSelector((state)=>state.form.blogForm)
+    const userData = useSelector(state => state.user.sessionData?.data?.data)
+    const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
+    //const isReadyPublish = useSelector((state) => state.blog.isReadyPublish)
+    const initialValue = [
         {
-          text:
+            type: 'paragraph',
+            children: [
+                { text: 'This is editable ' },
+                { text: 'rich', bold: true },
+                { text: ' text, ' },
+                { text: 'much', italic: true },
+                { text: ' better than a ' },
+                { text: '<textarea>', code: true },
+                { text: '!' },
+            ],
+        },
+        {
+            type: 'paragraph',
+            children: [
+                {
+                    text:
             "Since it's rich text, you can do things like turn a selection of text ",
-        },
-        { text: 'bold', bold: true },
-        {
-          text:
+                },
+                { text: 'bold', bold: true },
+                {
+                    text:
             ', or add a semantically rendered block quote in the middle of the page, like this:',
+                },
+            ],
         },
-      ],
-    },
-    {
-      type: 'block-quote',
-      children: [{ text: 'A wise quote.' }],
-    },
-    {
-      type: 'paragraph',
-      children: [{ text: 'Try it out for yourself!' }],
-    },
-  ]
+        {
+            type: 'block-quote',
+            children: [ { text: 'A wise quote.' } ],
+        },
+        {
+            type: 'paragraph',
+            children: [ { text: 'Try it out for yourself!' } ],
+        },
+    ]
 
-  const [rteData, setRTEData] = useState(initialValue)
-  const { handleSubmit } = props;
+    const [ rteData, setRTEData ] = useState(initialValue)
+    console.log(rteData)
+    const { handleSubmit } = props;
 
-  const submitData = (formData) => {
-    if(formData.blogUrl){
-      const data = {
-        type:"blog",
-        content: formData.data,
-        imageUrl: formData.blogUrl,
-        title: formData.title
-      }
-      dispatch(createBlog(data))
-    }else{
-      setErrorMessageUrl(true)
+    const submitData = (formData) => {
+        if(formData.blogUrl){
+            const data = {
+                type:'blog',
+                content: formData.data,
+                imageUrl: formData.blogUrl,
+                title: formData.title
+            }
+            dispatch(createBlog(data))
+        }else{
+            setErrorMessageUrl(true)
+        }
+
     }
-   
-  }
 
     useEffect(()=>{
-      const query = 'blogs'
-      dispatch(getUnsplash('/photos',query))
-      dispatch(getCurrentUser())
-      dispatch({
-        type: 'SET_ACTIVE_SIDEBAR',
-        payload: 'blog'
-      })
+        const query = 'blogs'
+        dispatch(getUnsplash('/photos',query))
+        dispatch(getCurrentUser())
+        dispatch({
+            type: 'SET_ACTIVE_SIDEBAR',
+            payload: 'blog'
+        })
     },[])
 
+    const handleRTEdata = (data) =>{
+        dispatch(change('blogForm', 'data', data))
+        setRTEData(data)
+    }
+    const handleToggleModal = () => {
+        setModalOpen(!openModal)
+    }
+    const handleSearch = (event) => {
+        const query = event.currentTarget.value || 'cat'
+        dispatch(getUnsplash('/photos',query))
+    }
 
-  const handleRTEdata = (data) =>{
-    dispatch(change('blogForm', 'data', data))
-    setRTEData(data)
-  }
-  const handleToggleModal = () => {
-    setModalOpen(!openModal)
-  }
-  const handleSearch = (event) => {
-	  const query = event.currentTarget.value || 'cat'
-		dispatch(getUnsplash('/photos',query))
-	}
+    const getBase64 = (base64) => {
+        setErrorMessageUrl(false)
+        dispatch(reduxChange('blogForm', 'blogUrl', base64))
+    }
 
-	const getBase64 = (base64) => {
-    setErrorMessageUrl(false)
-		dispatch(reduxChange('blogForm', 'blogUrl', base64))
-	}
+    const clearImage = () => {
+        setErrorMessageUrl(false)
+        dispatch(reduxChange('blogForm', 'blogUrl', null))
+    }
 
-	const clearImage = () => {
-    setErrorMessageUrl(false)
-		dispatch(reduxChange('blogForm', 'blogUrl', null))
-  }
+    const capitalize = value => value.charAt(0).toUpperCase() + value.slice(1)
 
-  const capitalize = value => value.charAt(0).toUpperCase() + value.slice(1)
-  
     return(
         <main className="dashboard-data">
-          <section className="dashboard-body">
-            <div className="blog-creation">
-              <Form onSubmit={handleSubmit(submitData)}>
-                <div className="blog-creation-head">
-                  <div className="blog-creation-head-left">
-                    <Form.Group className="blog-title-group">
-                        <Field
-                              name="title"
-                              component={ renderFieldWG }
-                              placeholder={ 'Blog post title' }
-                              normalize={ capitalize }
-                            />
-                        <Form.Text>
-                          March 25, 2020 / 4 min read / Author Name
-                        </Form.Text>
-                    </Form.Group>
-                    <div className="upload-feature-img-wrap">
-                    <div className="upload-feature-img" onClick={handleToggleModal}>
-                      {blogForm?.values?.blogUrl ? <img src={blogForm?.values?.blogUrl} /> : 'Click here to edit feature image'}
-                      </div>
-                      {errorMessageUrl && <p><span class="field_error">Please insert image</span></p>}
-                    </div>
-                  </div>
-                  <div className="blog-creation-author-box">
-                    <h5>Author Box</h5>
-                    <div className="author-info">
-                      <div className="author-img">
-                        <img src={profilePic} alt="Jason Miller" />
-                      </div>
-                      <div className="author-name">
-                          <span>{userData && `${userData.user?.firstName} ${userData.user?.lastName}`}</span>
-                          
-                      </div>
-                    </div>
-                    <div className="author-bio">
-                      <h6>About</h6>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    <ul className="author-social-links">
-                      <li className="facebook">
-                        <a>
-                          <Facebook />
-                        </a>
-                      </li>
-                      <li className="linkedin">
-                        <a>
-                          <LinkedIn />
-                        </a>
-                      </li>
-                      <li className="twitter">
-                        <a>
-                          <Twitter />
-                        </a>
-                      </li>
-                      <li className="youtube">
-                        <a>
-                          <YouTube />
-                        </a>
-                      </li>
-                      <li className="instagram">
-                        <a>
-                          <Instagram />
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-               <div className="blog-creation-content">
-                  <div className="word-count">
-                    <div className="word-count-progressbar">
-                      <label>Word Count: </label>
-                    <ProgressBar now="72" label="357/500" />
-                    </div>
+            <section className="dashboard-body">
+                <div className="blog-creation">
+                    <Form onSubmit={ handleSubmit(submitData) }>
+                        <div className="blog-creation-head">
+                            <div className="blog-creation-head-left">
+                                <Form.Group className="blog-title-group">
+                                    <Field
+                                        name="title"
+                                        component={ renderFieldWG }
+                                        placeholder={ 'Blog post title' }
+                                        normalize={ capitalize }
+                                    />
+                                    <Form.Text>
+                                        March 25, 2020 / 4 min read / Author Name
+                                    </Form.Text>
+                                </Form.Group>
+                                <div className="upload-feature-img-wrap">
+                                    <div className="upload-feature-img" onClick={ handleToggleModal }>
+                                        {blogForm?.values?.blogUrl ? <img src={ blogForm?.values?.blogUrl } /> : 'Click here to edit feature image'}
+                                    </div>
+                                    {errorMessageUrl && <p><span className="field_error">Please insert image</span></p>}
+                                </div>
+                            </div>
+                            <div className="blog-creation-author-box">
+                                <h5>Author Box</h5>
+                                <div className="author-info">
+                                    <div className="author-img">
+                                        <img src={ profilePic } alt="Jason Miller" />
+                                    </div>
+                                    <div className="author-name">
+                                        <span>{userData && `${ userData.user?.firstName } ${ userData.user?.lastName }`}</span>
 
-                  </div>
-                  <div className="blog-editor">
-                  <RichTextEditor readOnly={false} setRTEData={handleRTEdata} initialValue={initialValue} />
-                  </div>
-                </div>
-                {/*
+                                    </div>
+                                </div>
+                                <div className="author-bio">
+                                    <h6>About</h6>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                </div>
+                                <ul className="author-social-links">
+                                    <li className="facebook">
+                                        <a>
+                                            <Facebook />
+                                        </a>
+                                    </li>
+                                    <li className="linkedin">
+                                        <a>
+                                            <LinkedIn />
+                                        </a>
+                                    </li>
+                                    <li className="twitter">
+                                        <a>
+                                            <Twitter />
+                                        </a>
+                                    </li>
+                                    <li className="youtube">
+                                        <a>
+                                            <YouTube />
+                                        </a>
+                                    </li>
+                                    <li className="instagram">
+                                        <a>
+                                            <Instagram />
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="blog-creation-content">
+                            <div className="word-count">
+                                <div className="word-count-progressbar">
+                                    <label>Word Count: </label>
+                                    <ProgressBar now="72" label="357/500" />
+                                </div>
+
+                            </div>
+                            <div className="blog-editor">
+                                <RichTextEditor readOnly={ false } setRTEData={ handleRTEdata } initialValue={ initialValue } />
+                            </div>
+                        </div>
+                        {/*
                 <div className="blog-action">
                   <div className="blog-action-box">
                     <h5>
@@ -384,9 +367,8 @@ const BlogPage =(props) => {
                              type="switch"
                              label="Let search engines index your main site pages"
                           />
-                        </Form.Group> 
+                        </Form.Group>
 
-                        
                       </Col>
                     </Row>
                   </div>
@@ -394,41 +376,40 @@ const BlogPage =(props) => {
                       </Accordion.Collapse>
                     </Card>
                   </Accordion>
-                  
+
     </div>*/}
-              
 
-              <UploadImageModal 
-                fieldName={'blogUrl'} 
-                clearImage={clearImage} 
-                previewFile={blogForm.values?.blogUrl} 
-                getBase64={getBase64} 
-                handleSearch={handleSearch} 
-                unsplashImages={unsplashImages} 
-                openModal={openModal} 
-                handleToggleModal={handleToggleModal} 
-              />
+                        <UploadImageModal
+                            fieldName={ 'blogUrl' }
+                            clearImage={ clearImage }
+                            previewFile={ blogForm.values?.blogUrl }
+                            getBase64={ getBase64 }
+                            handleSearch={ handleSearch }
+                            unsplashImages={ unsplashImages }
+                            openModal={ openModal }
+                            handleToggleModal={ handleToggleModal }
+                        />
 
-              <div className="blog-btns">
-                <Button type='submit' variant="primary">Save</Button>
-                  {/*!isReadyPublish ? <Button type='submit' variant="primary">Save</Button> : <Button type='button' disabled={true} variant="primary">Save</Button>*/}
-                  {/*isReadyPublish ? <a href='javascript:void(0)' className='btn btn-success' onClick={() => dispatch(callPublish())}>Publish</a> : 
+                        <div className="blog-btns">
+                            <Button type='submit' variant="primary">Save</Button>
+                            {/*!isReadyPublish ? <Button type='submit' variant="primary">Save</Button> : <Button type='button' disabled={true} variant="primary">Save</Button>*/}
+                            {/*isReadyPublish ? <a href='javascript:void(0)' className='btn btn-success' onClick={() => dispatch(callPublish())}>Publish</a> :
                   <a href='javascript:void(0)' className='btn'>Publish</a>
                   */}
+                        </div>
+
+                    </Form>
                 </div>
-              
-              </Form>
-            </div>
-          </section>
+            </section>
         </main>
     )
 }
 
 BlogPage.propTypes = {
-  handleSubmit: PropTypes.func
+    handleSubmit: PropTypes.func
 };
 
 export default reduxForm({
-  form: 'blogForm',
-  validate
+    form: 'blogForm',
+    validate
 })(BlogPage);
