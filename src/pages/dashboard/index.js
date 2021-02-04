@@ -120,9 +120,8 @@ import EditIcon from '../../images/edit.png';
         </aside>
         <main className="dashboard-data">
           <section className="dashboard-body">
-            {/* <div className="dashboard-header">
+             <div className="dashboard-header">
               <div className="dashboard-title">
-                <h1>Dashboard</h1>
                 <h5>
                   Domain:  
                   <a href={`https://${data?.site?.domain}`} target='_blank'>
@@ -132,12 +131,14 @@ import EditIcon from '../../images/edit.png';
                     {status ? "Done" : "In Progress"}
                   </span>
                 </h5>
+                <h1>Dashboard</h1>
+                
               </div>
-              <div className="dashboard-btns">
+              <div className="dashboard-actions">
                 <Link to={'/blog'} className='btn btn-primary'>Create Blog</Link>
               </div>
               
-            </div> */}
+            </div> 
             <div className="dashboard-header">
               <div className="dashboard-title">
                 <h5>Site 1</h5>
