@@ -8,7 +8,7 @@ import WebTemplates ,{Header, Footer,Home, Banner,Blogs, Card} from 'web-templat
 import { reduxForm } from 'redux-form';
 import { change as reduxChange } from 'redux-form'
 import PropTypes from 'prop-types';
-import 
+import
   {
     Form,
     Button,
@@ -28,7 +28,7 @@ const StepTwo = (props) => {
 
     const data = {
         colors: colorObject?.colors || [],
-        logoUrl: '',
+        logoUrl: assessmentForm.values.logoUrl,
         logoText: assessmentForm.values.websiteName,
         headerLinks: [{name: 'Home', url: '#'},{name: 'Blog', url: '#'},{name: 'About', url: '#'},{name: 'Contact', url: '#'}],
         readOnly: true
@@ -50,8 +50,8 @@ const StepTwo = (props) => {
             <Row  className="step-form">
                 <Col className="col-12">
                     <Container>
-                        <Form className="form" onSubmit={handleSubmit}>  
-                        <div className="form-heading">   
+                        <Form className="form" onSubmit={handleSubmit}>
+                        <div className="form-heading">
                                 <h2>
                                 Choose Your Color Palette!
                                 </h2>
@@ -97,28 +97,28 @@ const StepTwo = (props) => {
                                                 </h2>
                                                 <ul className="wizrd-blog-list">
                                                     <li>
-                                                        <Card 
+                                                        <Card
                                                         image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}
                                                         >
                                                         <h3>The Joy of Cooking</h3>
                                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
-                                                        </Card>       
+                                                        </Card>
                                                     </li>
                                                     <li>
-                                                        <Card 
+                                                        <Card
                                                         image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}
                                                         >
                                                         <h3>The Joy of Cooking</h3>
                                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
-                                                        </Card>       
+                                                        </Card>
                                                     </li>
                                                     <li>
-                                                        <Card 
+                                                        <Card
                                                         image={'https://homepages.cae.wisc.edu/~ece533/images/boat.png'}
                                                         >
                                                         <h3>The Joy of Cooking</h3>
                                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
-                                                        </Card>       
+                                                        </Card>
                                                     </li>
                                                 </ul>
                                         </Blogs>
@@ -130,22 +130,22 @@ const StepTwo = (props) => {
                                 <div className="step-btns">
                                 <div className="step-btn-left">
                                 <Button onClick={prevPage} type="button" variant="secondary" >
-                                        Back  
+                                        Back
                                         </Button>
-                                </div> 
+                                </div>
                                 <div className="step-btn-right">
                                     <div className="step-btn">
                                         <Button type="button"  disabled={!props.valid} onClick={handleSave} variant="light" >
-                                        { isSave ? 'Saved' : 'Save'}   
+                                        { isSave ? 'Saved' : 'Save'}
                                         </Button>
                                     </div>
                                     <div className="step-btn">
                                     <span>
-                                    { props.valid  ? 
+                                    { props.valid  ?
                                          <Button type="submit" variant="primary">
                                          Next
                                          </Button>
-                                        : 
+                                        :
                                         <Button type="button" disabled={true} variant="primary">
                                         Next
                                         </Button>}
@@ -164,7 +164,7 @@ const StepTwo = (props) => {
                 </Col>
             </Row>
         </div>
-        
+
     )
 }
 StepTwo.propTypes = {
