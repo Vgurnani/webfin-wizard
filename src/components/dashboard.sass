@@ -122,27 +122,179 @@
                 display: flex
                 width: 100%
                 justify-content: space-between
-                align-items: top
+                align-items: flex-end
                 @media (max-width: $breakpoint-mobile)
                     flex-direction: column
                 .dashboard-title
+                    width: 45%
+                    display: inline-block
+                    vertical-align: top
+                    @media (max-width: $breakpoint-mobile)
+                        width: 100%
                     h1
+                        color: $primary-color
+                        font-size: 34px
+                        line-height: 1.3
+                        letter-spacing: 0.5px
+                        margin: 0
+                        @media (max-width: $breakpoint-ipad-pro)
+                            font-size: 28px
+                        @media (max-width: $breakpoint-mobile)
+                            letter-spacing: 0    
+                            font-size: 22px
+                    h5
                         color: $dark-grey-color
                         font-size: 16px
                         line-height: 1.4
-                        letter-spacing: 0.5px
-                    h5
-                        color: $dark-grey-color
-                        font-size: 14px
-                        line-height: 1.4
                         letter-spacing: 0.5px 
                         font-weight: 700
+                        margin: 0 0 8px
+                        @media (max-width: $breakpoint-mobile)
+                            font-size: 14px
                         a
                             padding: 0 2px  
                         .success
                             color: $green-color
                         .in-progress
-                            color: $primary-color       
+                            color: $primary-color    
+                .dashboard-actions
+                    width: 54%
+                    display: inline-block
+                    vertical-align: top
+                    text-align: right
+                    @media (max-width: $breakpoint-mobile)
+                        width: 100%
+                        text-align: center
+                        margin: 20px 0 0
+                    .search-form
+                        width: 297px
+                        max-width: 60%
+                        margin-right: 25px
+                        display: inline-block
+                        vertical-align: top
+                        position: relative
+                        @media (max-width: $breakpoint-mobile)
+                            max-width: calc(100% - 40px)
+                            margin-right: 5px
+                        .form-group
+                            margin: 0
+                            .form-control
+                                padding: 10px 15px 10px 45px
+                                @media (max-width: $breakpoint-mobile)
+                                    padding: 10px 10px 10px 35px
+                        .btn
+                            &.btn-primary
+                                &.btn-search
+                                    background-color: transparent
+                                    border: none
+                                    position: absolute
+                                    top: 13px
+                                    left: 15px
+                                    padding: 0
+                                    @media (max-width: $breakpoint-mobile)
+                                        top: 11px
+                                        left: 10px
+                                    img
+                                        @media (max-width: $breakpoint-mobile)
+                                            max-width: 18px    
+                    .btn-filter
+                        display: inline-block
+                        vertical-align: top   
+                        background-color: $white-color
+                        border-radius: 4px
+                        width: 48px
+                        height: 48px
+                        line-height: 48px
+                        text-align: center
+                        @media (max-width: $breakpoint-mobile)
+                            width: 35px
+                            height: 35px
+                            line-height: 27px
+                            padding: 4px
+                        img
+                            display: inline-block     
+            .dashboard-body-header
+                width: 100%
+                display: flex
+                justify-content: space-between
+                align-items: center
+                margin: 35px 0 15px
+                h2
+                    font-weight: 700
+                    font-size: 20px
+                    line-height: 1.3
+                    color: $dark-grey-color 
+                    margin: 0
+                    @media (max-width: $breakpoint-mobile)
+                        font-size: 18px
+                .btn.btn-primary
+                    @media (max-width: $breakpoint-mobile)
+                        padding: 11px 30px        
+            .dashboard-table
+                background-color: $white-color
+                border-radius: 24px
+                padding: 24px
+                margin: 0 0 30px
+                table
+                    width: 100%
+                    min-width: 1105px
+                    font-size: 16px
+                    line-height: 1.5
+                    letter-spacing: 0.5px
+                    color: $dark-grey-color
+                    @media (max-width: $breakpoint-small-desktop)
+                        min-width: 980px
+                    th
+                        color: $body-color
+                        font-size: 14px
+                        line-height: 1.4
+                        font-weight: normal
+                    th,
+                    td
+                        padding: 20px    
+                    a
+                        color: $dark-grey-color
+                        img
+                            width: 16px
+                    .view-tags
+                        color: $green-color
+                        margin-left: 8px      
+                    .table-action-btns
+                        margin-right: 8px
+                        display: inline-block
+                        vertical-align: middle
+                        span
+                            margin-left: 8px    
+                            display: inline-block
+                            vertical-align: middle
+                        img
+                            display: inline-block
+                            vertical-align: middle
+                        svg
+                            display: inline-block
+                            vertical-align: middle   
+                    .custom-control
+                        display: inline-block
+                        vertical-align: middle
+                        margin-right: 8px
+                        .custom-control-label
+                            font-weight: normal
+                            font-size: 14px
+                            line-height: 1.4
+                    .table-post-title
+                        font-weight: 700
+                        font-size: 14px
+                        line-height: 1.4
+                        letter-spacing: 0.5px     
+                        display: inline-block
+                        vertical-align: middle  
+                    tbody
+                        tr
+                            border-bottom: 1px solid $optional-light-grey-color
+                            &:last-child
+                                border-bottom: none  
+    .draft-posts
+        border-top: 1px solid $optional-light-grey-color                                                       
 .blog-creation
     width: 100%
     display: inline-block
@@ -166,6 +318,16 @@
                         line-height: 1.3
                         color: $black-color
                         border: 1px solid rgba(51, 51, 51, 0.3)
+                        &::-webkit-input-placeholder
+                            opacity: .2
+                        &:-moz-placeholder
+                            opacity: .2
+                        &::-moz-placeholder
+                            opacity: .2
+                        &:-ms-input-placeholder
+                            opacity: .2
+                        &::-ms-input-placeholder
+                            opacity: .2
                         @media (max-width: $breakpoint-ipad) 
                             font-size: 22px
                         @media (max-width: $breakpoint-mobile)
@@ -411,44 +573,7 @@
     width: 100%
     display: inline-block
     padding: 16px 0
-    border-bottom: 1px solid $optional-light-grey-color    
-    .accordion
-        .card
-            border: none
-            box-shadow: none
-            background-color: transparent
-            .card-header
-                padding: 0
-                margin: 0 0 10px
-                border: none
-                box-shadow: none
-                background-color: transparent
-                .btn.btn-link
-                    color: $body-color
-                    font-size: 20px
-                    line-height: 1.3
-                    letter-spacing: 0.18px
-                    font-weight: 700
-                    background-color: transparent
-                    border: none
-                    padding: 0
-                    width: 100%
-                    display: flex
-                    justify-content: space-between
-                    align-items: center
-                    &:hover,
-                    &:active,
-                    &:focus
-                        outline: none
-                        background-color: transparent
-                        border: none
-                        text-decoration: none
-            .card-body
-                border: none
-                box-shadow: none
-                background-color: transparent
-                margin: 0
-                padding: 0    
+    border-bottom: 1px solid $optional-light-grey-color      
     .seo-heading
         width: 100%
         display: flex
@@ -609,3 +734,40 @@
         @media (max-width: $breakpoint-mobile)
             padding: 8px      
             min-height: 400px      
+.accordion
+    .card
+        border: none
+        box-shadow: none
+        background-color: transparent
+        .card-header
+            padding: 15px 0
+            margin: 0 0 10px
+            border: none
+            box-shadow: none
+            background-color: transparent
+            .btn.btn-link
+                color: $body-color
+                font-size: 20px
+                line-height: 1.3
+                letter-spacing: 0.18px
+                font-weight: 700
+                background-color: transparent
+                border: none
+                padding: 0
+                width: 100%
+                display: flex
+                justify-content: space-between
+                align-items: center
+                &:hover,
+                &:active,
+                &:focus
+                    outline: none
+                    background-color: transparent
+                    border: none
+                    text-decoration: none
+        .card-body
+            border: none
+            box-shadow: none
+            background-color: transparent
+            margin: 0
+            padding: 0  
