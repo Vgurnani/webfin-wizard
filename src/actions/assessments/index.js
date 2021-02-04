@@ -1,6 +1,5 @@
 import { ActionTypes } from './actionTypes'
 
-
 export const getAssessmentRequest = () => {
     return {
         type: ActionTypes.GET_ASSESSMENT_REQUEST,
@@ -19,8 +18,6 @@ export const getAssessmentFailure = (error) => {
         error: error,
     };
 };
-
-
 
 export const createAssessmentRequest = () => {
     return {
@@ -50,7 +47,6 @@ export const getUnsplashSuccess = (data) => {
     }
 }
 
-
 export const getUnsplashError = (error) => {
     return {
         type:  ActionTypes.GET_UNSPLASH_ERROR,
@@ -63,7 +59,6 @@ export const getVerifiedDomainRequest = () => {
         type:  ActionTypes.GET_VERIFIED_DOMAIN_REQUEST,
     }
 }
-
 
 export const getVerifiedDomainSuccess = (data,name) => {
     return {

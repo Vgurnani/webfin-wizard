@@ -16,25 +16,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const store = configureStore();
 
 ReactDOM.render(
-  <Provider store={store}>
-     <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-    />
-    <Router history={browserHistory}>
-      <Suspense fallback={'Loading...'}>
-        <App />
-      </Suspense>
-    </Router>
-  </Provider>,
-  document.getElementById('root')
+    <Provider store={ store }>
+        <ToastContainer
+            position="top-right"
+            autoClose={ 5000 }
+            hideProgressBar={ false }
+            newestOnTop={ false }
+            closeOnClick
+            rtl={ false }
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+        />
+        <Router history={ browserHistory }>
+            <Suspense fallback={ 'Loading...' }>
+                <App />
+            </Suspense>
+        </Router>
+    </Provider>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
