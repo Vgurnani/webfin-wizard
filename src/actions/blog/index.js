@@ -40,3 +40,24 @@ export const publishFailed = (error) => {
         error: error
     };
 };
+
+export const getBlogListSuccess = (data) => {
+    return {
+        type: ActionTypes.GET_BLOG_LIST_SUCCESS,
+        payload: data
+    }
+}
+
+export const getBlogListFailed = (error) => {
+    return {
+        type: ActionTypes.GET_BLOG_LIST_FAILURE,
+        error: error
+    }
+}
+
+export const setEditBlog = (blog) => {
+    return {
+        type: ActionTypes.SET_EDIT_BLOG,
+        payload: blog
+    }
+}

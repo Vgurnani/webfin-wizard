@@ -4,7 +4,9 @@ import {
     blogCreateFailed,
     publishRequest,
     publishSuccess,
-    publishFailed
+    publishFailed,
+    getBlogListSuccess,
+    getBlogListFailed
 } from '../actions/blog';
 import strapiAxiosInstance from '../services/strapiApi';
 import { getItem } from '../utils/cache';
@@ -62,5 +64,30 @@ export const callPublish = () => {
         }).catch((error)=>{
             dispatch(publishFailed(error))
         })
+    }
+}
+
+export const getBlogs =  () => {
+    return async(dispatch) => {
+        try{
+            const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
+            const result = await strapiAxiosInstance.get(route)
+            if([ 200,203 ].includes(result.status)){
+                console.log(result.data);
+                const published = [];
+                const draft = [];
+                result.data.forEach(blog => {
+                    if (blog.published_at) {
+                        published.push(blog);
+                    } else {
+                        draft.push(blog);
+                    }
+                })
+                dispatch(getBlogListSuccess({ published, draft }));
+            }
+        }catch(error){
+            dispatch(getBlogListFailed(error))
+            notification(NOTIFICATION_TYPES.ERROR, MESSAGE.SOMETHING_WRONG);
+        }
     }
 }

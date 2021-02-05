@@ -9,5 +9,7 @@ export const ROUTES = {
     PRIVACY_POLICY: '/privacy-policy',
     CONFIRM_ACCOUNT: '/confirm-account',
     AUTH_REDIRECT: '/oauth2/redirect',
-    BLOG: '/blog'
+    BLOG: '/blog',
+    BLOGS: '/blogs',
+    EDIT_BLOG: '/blogs/:id'
 }

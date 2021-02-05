@@ -33,6 +33,8 @@ const BlogPage =(props) => {
     const userData = useSelector(state => state.user.sessionData?.data?.data)
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
     //const isReadyPublish = useSelector((state) => state.blog.isReadyPublish)
+    const blog = useSelector(state => state.blog.blog);
+
     const initialValue = [
         {
             type: 'paragraph',
@@ -90,6 +92,11 @@ const BlogPage =(props) => {
     }
 
     useEffect(()=>{
+        if (blog) {
+            dispatch(reduxChange('blogForm', 'title', blog.title))
+            dispatch(reduxChange('blogForm', 'blogUrl', blog.imageUrl))
+            dispatch(reduxChange('blogForm', 'data', blog.content))
+        }
         const query = 'blogs'
         dispatch(getUnsplash('/photos',query))
         dispatch(getCurrentUser())
