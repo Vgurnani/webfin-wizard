@@ -8,7 +8,7 @@ import
     Card,
 }
     from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { getBlogs } from '../../middleware/blog';
 import { ROUTES } from '../../constants/appRoutes';
@@ -68,9 +68,7 @@ const BlogsPage = () => {
                             <h2>Posts</h2>
                         </div>
                         <div className="dashboard-body-actions">
-                            <a className="btn btn-primary" href="/">
-                                Add New+
-                            </a>
+                            <Link to={ ROUTES.BLOG } className='btn btn-primary'>Add New+</Link>
                         </div>
                     </div>
                     { !!blogs?.published?.length && <div className="dashboard-table">

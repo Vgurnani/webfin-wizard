@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentUser } from '../../middleware/auth'
-import { removeItem } from '../../utils/cache'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
+import { getCurrentUser } from '../../middleware/auth';
+import { removeItem } from '../../utils/cache';
+import axios from 'axios';
 
 const DashboardPage =() => {
     const dispatch = useDispatch();
@@ -60,10 +59,6 @@ const DashboardPage =() => {
                         <h1>Dashboard</h1>
 
                     </div>
-                    <div className="dashboard-actions">
-                        <Link to={ '/blog' } className='btn btn-primary'>Create Blog</Link>
-                    </div>
-
                 </div>
             </section>
         </main>

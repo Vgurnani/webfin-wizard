@@ -6,7 +6,12 @@ import {
     publishSuccess,
     publishFailed,
     getBlogListSuccess,
-    getBlogListFailed
+    getBlogListFailed,
+    getBlogsRequest,
+    deleteBlogSuccess,
+    deleteBlogRequest,
+    editBlogRequest,
+    cloneBlogRequest
 } from '../actions/blog';
 import strapiAxiosInstance from '../services/strapiApi';
 import { getItem } from '../utils/cache';
@@ -70,6 +75,7 @@ export const callPublish = () => {
 export const getBlogs =  () => {
     return async(dispatch) => {
         try{
+            dispatch(getBlogsRequest())
             const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
             const result = await strapiAxiosInstance.get(route)
             if([ 200,203 ].includes(result.status)){
@@ -84,6 +90,55 @@ export const getBlogs =  () => {
                     }
                 })
                 dispatch(getBlogListSuccess({ published, draft }));
+            }
+        }catch(error){
+            dispatch(getBlogListFailed(error))
+            notification(NOTIFICATION_TYPES.ERROR, MESSAGE.SOMETHING_WRONG);
+        }
+    }
+}
+
+export const deleteBlog =  (data) => {
+    return async(dispatch) => {
+        try{
+            dispatch(deleteBlogRequest())
+            const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
+            const result = await strapiAxiosInstance.put(`${ route }/${ data.id }`, { deletedAt: new Date() })
+            if([ 200,203 ].includes(result.status)){
+                console.log(result.data);
+                dispatch(deleteBlogSuccess())
+            }
+        }catch(error){
+            dispatch(getBlogListFailed(error))
+            notification(NOTIFICATION_TYPES.ERROR, MESSAGE.SOMETHING_WRONG);
+        }
+    }
+}
+
+export const editBlog =  (data) => {
+    return async(dispatch) => {
+        try{
+            dispatch(editBlogRequest())
+            const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
+            const result = await strapiAxiosInstance.put(`${ route }/${ data.id }`, data.formData)
+            if([ 200,203 ].includes(result.status)){
+                console.log(result.data);
+            }
+        }catch(error){
+            dispatch(getBlogListFailed(error))
+            notification(NOTIFICATION_TYPES.ERROR, MESSAGE.SOMETHING_WRONG);
+        }
+    }
+}
+
+export const cloneBlog =  (data) => {
+    return async(dispatch) => {
+        try{
+            dispatch(cloneBlogRequest())
+            const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
+            const result = await strapiAxiosInstance.put(`${ route }/${ data.id }`, data.formData)
+            if([ 200,203 ].includes(result.status)){
+                console.log(result.data);
             }
         }catch(error){
             dispatch(getBlogListFailed(error))

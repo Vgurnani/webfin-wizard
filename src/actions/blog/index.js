@@ -41,6 +41,12 @@ export const publishFailed = (error) => {
     };
 };
 
+export const getBlogsRequest = () => {
+    return {
+        type: ActionTypes.GET_BLOG_LIST
+    }
+}
+
 export const getBlogListSuccess = (data) => {
     return {
         type: ActionTypes.GET_BLOG_LIST_SUCCESS,
@@ -59,5 +65,51 @@ export const setEditBlog = (blog) => {
     return {
         type: ActionTypes.SET_EDIT_BLOG,
         payload: blog
+    }
+}
+
+export const deleteBlogRequest = () => {
+    return {
+        type: ActionTypes.DELETE_BLOG
+    }
+}
+
+export const deleteBlogSuccess = (data) => {
+    return {
+        type: ActionTypes.DELETE_BLOG_SUCCESS,
+        payload: data
+    }
+}
+
+export const deleteBlogFailed = (error) => {
+    return {
+        type: ActionTypes.DELETE_BLOG_FAILURE,
+        error: error
+    }
+}
+
+export const editBlogRequest = () => {
+    return {
+        type: ActionTypes.EDIT_BLOG
+    }
+}
+
+export const editBlogSuccess = (data) => {
+    return {
+        type: ActionTypes.EDIT_BLOG_SUCCESS,
+        payload: data
+    }
+}
+
+export const editBlogFailed = (error) => {
+    return {
+        type: ActionTypes.EDIT_BLOG_FAILURE,
+        error: error
+    }
+}
+
+export const cloneBlogRequest = () => {
+    return {
+        type: ActionTypes.CLONE_BLOG
     }
 }
