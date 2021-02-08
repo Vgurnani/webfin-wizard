@@ -22,3 +22,12 @@ export const MESSAGE = {
     VALID_SELECT: (value) => `Please select ${ value }`,
     SHOULD_BE_LENGTH: (value, number) => `${ value } should be ${ number } character`
 }
+
+export const SOCIAL_MEDIA = [
+    { name: 'Facebook',value: 'facebook', imgUrl: '' },
+    { name: 'Linked in',value: 'linkedin', imgUrl: '' },
+    { name: 'Instagram',value: 'instagram', imgUrl: '' },
+    { name: 'Tweeter',value: 'tweeter', imgUrl: '' },
+    { name: 'Youtube',value: 'youtube', imgUrl: '' },
+    { name: 'Label',value: 'label', imgUrl: '' }
+]

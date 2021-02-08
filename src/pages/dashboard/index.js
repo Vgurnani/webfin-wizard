@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../../middleware/auth'
 import { removeItem } from '../../utils/cache'
 import { Link } from 'react-router-dom'
+import Dashboard from '../../components/dashboard'
 import axios from 'axios'
 
 const DashboardPage =() => {
@@ -42,29 +43,36 @@ const DashboardPage =() => {
             clearInterval(timeoutData)
         }
     },[ data?.site?.domain ])
-
+    const user = data?.user
     return(
         <main className="dashboard-data">
             <section className="dashboard-body">
                 <div className="dashboard-header">
                     <div className="dashboard-title">
                         <h5>
-                            Domain:
+                            Your website name<br/>
+
                             <a href={ `https://${ data?.site?.domain }` } rel="noreferrer" target='_blank'>
                                 { data?.site?.domain }
                             </a>
+
                             <span className={ `${ status ? 'success' : 'in-progress' }` }> -
                                 {status ? 'Done' : 'In Progress'}
                             </span>
+
                         </h5>
+
                         <h1>Dashboard</h1>
 
                     </div>
                     <div className="dashboard-actions">
+                        { user && <div>
+                            {user.firstName} {user.lastName}
+                        </div>}
                         <Link to={ '/blog' } className='btn btn-primary'>Create Blog</Link>
                     </div>
-
                 </div>
+                <Dashboard />
             </section>
         </main>
 

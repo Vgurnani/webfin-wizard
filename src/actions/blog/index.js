@@ -40,3 +40,43 @@ export const publishFailed = (error) => {
         error: error
     };
 };
+
+export const socialMediaRequest = () => {
+    return {
+        type: ActionTypes.SOCIAL_MEDIA_REQUEST,
+    };
+};
+
+export const socialMediaSuccess = (data) => {
+    return {
+        type: ActionTypes.SOCIAL_MEDIA_SUCCESS,
+        payload: data
+    };
+};
+
+export const socialMediaFailed = (error) => {
+    return {
+        type: ActionTypes.SOCIAL_MEDIA_FAILURE,
+        error: error
+    };
+};
+
+export const getSocialMediaRequest = () => {
+    return {
+        type: ActionTypes.GET_SOCIAL_MEDIA_REQUEST,
+    };
+};
+
+export const getSocialMediaSuccess = (data) => {
+    return {
+        type: ActionTypes.GET_SOCIAL_MEDIA_SUCCESS,
+        payload: data
+    };
+};
+
+export const getSocialMediaFailed = (error) => {
+    return {
+        type: ActionTypes.GET_SOCIAL_MEDIA_FAILURE,
+        error: error
+    };
+};
