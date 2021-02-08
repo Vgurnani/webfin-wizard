@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RichTextEditor from './rte';
 import { Field, change } from 'redux-form';
 import { renderFieldWG } from '../../utils/formUtils'
+import { getIdFromPath } from 'utils/helpers'
 import {
     Facebook,
     LinkedIn,
@@ -16,10 +17,11 @@ import {
     Button
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, reset } from 'redux-form';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { getCurrentUser } from '../../middleware/auth'
-import { createBlog } from '../../middleware/blog';
+import { createBlog , getBlogById } from '../../middleware/blog';
 import { getUnsplash } from '../../middleware/assessments'
 import { change as reduxChange } from 'redux-form'
 import { blogValidate as validate } from '../../utils/validates';
@@ -27,12 +29,17 @@ import profilePic from '../../public/images/media/media-4.jpg';
 import UploadImageModal from '../../components/assessment/shared/UploadImageModal'
 const BlogPage =(props) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [ errorMessageUrl, setErrorMessageUrl ] = useState(false)
     const [ openModal, setModalOpen ]  = useState(false);
     const blogForm = useSelector((state)=>state.form.blogForm)
+    const blog = useSelector((state) => state.blog.blog)
     const userData = useSelector(state => state.user.sessionData?.data?.data)
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
+    const id = getIdFromPath(history.location.pathname)
+
     //const isReadyPublish = useSelector((state) => state.blog.isReadyPublish)
+
     const initialValue = [
         {
             type: 'paragraph',
@@ -70,9 +77,7 @@ const BlogPage =(props) => {
         },
     ]
 
-    const [ rteData, setRTEData ] = useState(initialValue)
-    console.log(rteData)
-    const { handleSubmit } = props;
+    const { handleSubmit, initialize } = props;
 
     const submitData = (formData) => {
         if(formData.blogUrl){
@@ -82,7 +87,7 @@ const BlogPage =(props) => {
                 imageUrl: formData.blogUrl,
                 title: formData.title
             }
-            dispatch(createBlog(data))
+            dispatch(createBlog(data,id))
         }else{
             setErrorMessageUrl(true)
         }
@@ -91,14 +96,33 @@ const BlogPage =(props) => {
 
     useEffect(()=>{
         const query = 'blogs'
+        if(id){
+            dispatch(getBlogById(id))
+        }
         dispatch(getUnsplash('/photos',query))
         dispatch(getCurrentUser())
         dispatch({
             type: 'SET_ACTIVE_SIDEBAR',
             payload: 'blog'
         })
+        return () => {
+            dispatch(reset('blogForm'))
+            dispatch({
+                type: 'CLEAR_BLOG_FORM'
+            })
+        }
     },[])
 
+    useEffect(() => {
+        if(blog){
+            blog[ 'blogUrl' ] = blog.imageUrl
+            delete blog.imageUrl
+            initialize(blog)
+        }
+    },[ blog ])
+
+    const [ rteData, setRTEData ] = useState(blog && blog.content || initialValue)
+    console.log(rteData)
     const handleRTEdata = (data) =>{
         dispatch(change('blogForm', 'data', data))
         setRTEData(data)
@@ -201,7 +225,8 @@ const BlogPage =(props) => {
 
                             </div>
                             <div className="blog-editor">
-                                <RichTextEditor readOnly={ false } setRTEData={ handleRTEdata } initialValue={ initialValue } />
+                                {id && blog && blog.content &&  <RichTextEditor readOnly={ false } setRTEData={ handleRTEdata } initialValue={ blog && blog.content || initialValue } /> }
+                                {!id && <RichTextEditor readOnly={ false } setRTEData={ handleRTEdata } initialValue={ initialValue } />}
                             </div>
                         </div>
                         {/*
@@ -406,7 +431,8 @@ const BlogPage =(props) => {
 }
 
 BlogPage.propTypes = {
-    handleSubmit: PropTypes.func
+    handleSubmit: PropTypes.func,
+    initialize: PropTypes.func
 };
 
 export default reduxForm({

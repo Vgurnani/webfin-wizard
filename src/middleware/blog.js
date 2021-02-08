@@ -10,7 +10,15 @@ import {
     publishFailed,
     getSocialMediaRequest,
     getSocialMediaSuccess,
-    getSocialMediaFailed
+    getSocialMediaFailed,
+    getBlogListSuccess,
+    getBlogListFailed,
+    getBlogsRequest,
+    deleteBlogSuccess,
+    deleteBlogRequest,
+    deleteBlogFailed,
+    getBlogRequest,
+    getBlogSuccess
 } from '../actions/blog';
 import strapiAxiosInstance from '../services/strapiApi';
 import { getItem } from '../utils/cache';
@@ -38,23 +46,35 @@ export const checkAvailbleSlug = async(route,data) => {
     }
 }
 
-export const createBlog = (data) => {
+export const createBlog = (data,id) => {
     return async(dispatch) => {
         dispatch(blogCreateRequest())
-        if(data.imageUrl){
+        if(data.imageUrl && !data.imageUrl.match('^(http|https)://')){
             const file = dataURLtoFile(data.imageUrl,uId()+'.png')
             data[ 'imageUrl' ] = await imageUpload(file);
         }
         const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
         data[ 'slug' ] = await checkAvailbleSlug(route,data)
-        strapiAxiosInstance.post(route, data).then((response)=>{
-            history.push(ROUTES.DASHBOARD)
-            dispatch(blogCreateSuccess(response))
-            notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.BLOG_SUCCESS);
-        }).catch((error) => {
-            dispatch(blogCreateFailed(error))
-            notification(NOTIFICATION_TYPES.ERROR, MESSAGE.BLOG_FAILD);
-        })
+        if(id){
+            strapiAxiosInstance.put(`${ route }/${ id }`, data).then((response)=>{
+                history.push(ROUTES.BLOGS)
+                dispatch(blogCreateSuccess(response))
+                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.BLOG_UPDATE);
+            }).catch((error) => {
+                dispatch(blogCreateFailed(error))
+                notification(NOTIFICATION_TYPES.ERROR, MESSAGE.BLOG_FAILD);
+            })
+        }else{
+            strapiAxiosInstance.post(route, data).then((response)=>{
+                history.push(ROUTES.BLOGS)
+                dispatch(blogCreateSuccess(response))
+                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.BLOG_SUCCESS);
+            }).catch((error) => {
+                dispatch(blogCreateFailed(error))
+                notification(NOTIFICATION_TYPES.ERROR, MESSAGE.BLOG_FAILD);
+            })
+
+        }
     };
 };
 
@@ -107,3 +127,59 @@ export const getSocialMedia = () => {
         })
     };
 };
+export const getBlogs =  () => {
+    return async(dispatch) => {
+        try{
+            dispatch(getBlogsRequest())
+            const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
+            const result = await strapiAxiosInstance.get(`${ route }?type=blog`)
+            if([ 200,203 ].includes(result.status)){
+                console.log(result.data);
+                const published = [];
+                const draft = [];
+                result.data.forEach(blog => {
+                    if (blog.published_at) {
+                        published.push(blog);
+                    } else {
+                        draft.push(blog);
+                    }
+                })
+                dispatch(getBlogListSuccess({ published, draft }));
+            }
+        }catch(error){
+            dispatch(getBlogListFailed(error))
+            notification(NOTIFICATION_TYPES.ERROR, MESSAGE.SOMETHING_WRONG);
+        }
+    }
+}
+
+export const deleteBlog =  (id) => {
+    return async(dispatch) => {
+        try{
+            dispatch(deleteBlogRequest())
+            const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
+            const result = await strapiAxiosInstance.put(`${ route }/${ id }`, { deletedAt: new Date() })
+            if([ 200,203 ].includes(result.status)){
+                dispatch(deleteBlogSuccess())
+                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.BLOG_DELETED);
+                history.push(ROUTES.BLOGS)
+            }
+        }catch(error){
+            dispatch(deleteBlogFailed(error))
+            notification(NOTIFICATION_TYPES.ERROR, MESSAGE.SOMETHING_WRONG);
+        }
+    }
+}
+
+export const getBlogById =  (id) => {
+    const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
+    return async(dispatch) => {
+        dispatch(getBlogRequest())
+        strapiAxiosInstance.get(route+'/'+id+'?type=blog').then((response) => {
+            dispatch(getBlogSuccess(response.data))
+        }).catch((error) => {
+            history.push(ROUTES.BLOGS)
+            console.log(error)
+        })
+    }
+}

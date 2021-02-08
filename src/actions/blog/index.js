@@ -80,3 +80,52 @@ export const getSocialMediaFailed = (error) => {
         error: error
     };
 };
+export const getBlogsRequest = () => {
+    return {
+        type: ActionTypes.GET_BLOG_LIST
+    }
+}
+
+export const getBlogListSuccess = (data) => {
+    return {
+        type: ActionTypes.GET_BLOG_LIST_SUCCESS,
+        payload: data
+    }
+}
+
+export const getBlogListFailed = (error) => {
+    return {
+        type: ActionTypes.GET_BLOG_LIST_FAILURE,
+        error: error
+    }
+}
+
+export const deleteBlogRequest = () => {
+    return {
+        type: ActionTypes.DELETE_BLOG_REQUEST
+    }
+}
+
+export const deleteBlogSuccess = (data) => {
+    return {
+        type: ActionTypes.DELETE_BLOG_SUCCESS,
+        payload: data
+    }
+}
+export const deleteBlogFailed = () => {
+    return {
+        type: ActionTypes.DELETE_BLOG_FAILURE
+    }
+}
+
+export const getBlogRequest = () => {
+    return {
+        type: ActionTypes.GET_BLOG_REQUEST
+    }
+}
+export const getBlogSuccess = (data) => {
+    return {
+        type: ActionTypes.GET_BLOG_SUCCESS,
+        payload: data
+    }
+}

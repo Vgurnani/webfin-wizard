@@ -148,3 +148,8 @@ export const dataUrlToBase64 = (url, callback) => {
     xhr.responseType = 'blob';
     xhr.send();
 }
+
+export const getIdFromPath = (path) => {
+    var regex = /\d+/g;
+    return  path.match(regex) && path.match(regex)[ 0 ];
+}

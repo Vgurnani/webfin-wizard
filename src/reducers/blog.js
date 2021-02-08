@@ -3,7 +3,9 @@ const initialState = {
     loading: false,
     isReadyPublish: false,
     connecting: false,
-    socialMediaLinks: {}
+    socialMediaLinks: {},
+    blogs: null,
+    blog: null
 }
 
 export default (state = initialState, action) => {
@@ -32,6 +34,24 @@ export default (state = initialState, action) => {
         return { ...state, loading: false, socialMediaLinks: action.payload?.data[ 0 ] && action.payload?.data[ 0 ].content || { } }
     case ActionTypes.GET_SOCIAL_MEDIA_FAILURE:
         return { ...state, loading: false }
+    case ActionTypes.GET_BLOG_LIST:
+        return { ...state, loading: true }
+    case ActionTypes.GET_BLOG_LIST_SUCCESS:
+        return { ...state, loading: false, blogs: action.payload }
+    case ActionTypes.GET_BLOG_LIST_FAILURE:
+        return { ...state, loading: false }
+    case ActionTypes.GET_BLOG_REQUEST:
+        return { ...state, blog: action.payload }
+    case ActionTypes.GET_BLOG_SUCCESS:
+        return { ...state, blog: action.payload }
+    case ActionTypes.DELETE_BLOG_REQUEST:
+        return { ...state, loading: true }
+    case ActionTypes.DELETE_BLOG_SUCCESS:
+        return { ...state, loading: false  }
+    case ActionTypes.DELETE_BLOG_FAILURE:
+        return { ...state, loading: false  }
+    case ActionTypes.CLEAR_BLOG_FORM:
+        return { ...state, blog: {} }
     default:
         return state;
     }

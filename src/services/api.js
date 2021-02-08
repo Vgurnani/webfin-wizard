@@ -34,4 +34,8 @@ axiosInstance.interceptors.response.use((response) => {
     return Promise.reject(error);
 });
 
+export const getDynamicURL = (url, data) => {
+    return url.split('/').map(urlPart => (urlPart[ 0 ] === ':' ? data[ urlPart.substring(1) ] : urlPart)).join('/')
+}
+
 export default axiosInstance;

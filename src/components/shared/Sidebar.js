@@ -17,7 +17,7 @@ const SideBar = () => {
                     </Link>
                 </li>
                 <li className={ `${ theme.sidebarActive === 'blog' ?  'active' : '' }` } >
-                    <Link to="/blog">
+                    <Link to="/blogs">
                         Blog
                         <BlogMenuIcon />
                     </Link>
