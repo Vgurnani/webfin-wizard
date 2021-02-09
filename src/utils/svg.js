@@ -265,3 +265,10 @@ export const TopRightArrow = () => (
         <path d="M14.2331 2.08545C14.2802 1.53518 13.8722 1.05094 13.322 1.00387L4.3547 0.236864C3.80442 0.189797 3.32018 0.597728 3.27312 1.148C3.22605 1.69828 3.63398 2.18252 4.18425 2.22959L12.1551 2.91137L11.4734 10.8823C11.4263 11.4325 11.8342 11.9168 12.3845 11.9639C12.9348 12.0109 13.419 11.603 13.4661 11.0527L14.2331 2.08545ZM1.64427 13.0734L13.881 2.76503L12.5925 1.23544L0.355727 11.5438L1.64427 13.0734Z" fill="#3032C8"/>
     </svg>
 )
+
+export const DrawerArrowIcon = () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 12H5.00002" stroke="#506BF0" strokeWidth="2" strokeLinejoin="round"/>
+        <path d="M12 5L5 12L12 19" stroke="#506BF0" strokeWidth="2" strokeLinejoin="round"/>
+    </svg>
+)

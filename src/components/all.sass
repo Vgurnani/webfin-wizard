@@ -1,6 +1,6 @@
 @import "~bulma/sass/utilities/initial-variables"
 @import "~bulma"
-@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap')  
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap')
 @import 'variables.sass'
 
 body
@@ -32,7 +32,7 @@ body
         display: none
   &.blue-left
     &::after
-      left: 0    
+      left: 0
   &.blue-right
     &::after
       right: 0
@@ -54,7 +54,7 @@ p
     margin-bottom: 0
 
 h1
-  font-family: 'Nunito Sans', sans-serif 
+  font-family: 'Nunito Sans', sans-serif
   font-weight: 400
   font-size: 72px
   line-height: 1
@@ -64,22 +64,22 @@ h2
   font-weight: 400
 
 h3
-  font-family: 'Nunito Sans', sans-serif 
+  font-family: 'Nunito Sans', sans-serif
   font-weight: 400
 
 h4
-  font-family: 'Nunito Sans', sans-serif 
+  font-family: 'Nunito Sans', sans-serif
   font-weight: 400
 
 h5
-  font-family: 'Nunito Sans', sans-serif 
+  font-family: 'Nunito Sans', sans-serif
   font-weight: 400
 
 h6
-  font-family: 'Nunito Sans', sans-serif 
-  font-weight: 400 
-           
-.link-button 
+  font-family: 'Nunito Sans', sans-serif
+  font-weight: 400
+
+.link-button
   background-color: transparent
   border: none
   cursor: pointer
@@ -90,18 +90,18 @@ h6
 
 
 .link-button:hover,
-.link-button:focus 
+.link-button:focus
   text-decoration: none
 
 .field_error
   color: red
   font-size: 14px
-  
+
 .container
   max-width: 1127px !important
 
 body .btn
-  font-family: 'Nunito Sans', sans-serif 
+  font-family: 'Nunito Sans', sans-serif
   font-weight: 900
   font-size: 14px
   border-radius: 32px
@@ -162,7 +162,7 @@ body .btn
   color: $primary-color
   font-size: 16px
   font-weight: 900
-  font-family: 'Nunito Sans', sans-serif 
+  font-family: 'Nunito Sans', sans-serif
   letter-spacing: 0.5px
   text-decoration: underline
   border: none !important
@@ -190,7 +190,7 @@ ul
     font-weight: 400
     font-size: 16px
     line-height: 1.5
-    color: $body-color 
+    color: $body-color
     letter-spacing: 0.5px
     @media (max-width: $breakpoint-mobile)
       font-size: 14px
@@ -202,13 +202,13 @@ ul
 ::-webkit-scrollbar-track
   background: $white-color
   border-radius: 16px
-::-webkit-scrollbar-thumb 
+::-webkit-scrollbar-thumb
   background: rgba(51, 51, 51, 0.3)
   opacity: .5
   border-radius: 16px
 ::-webkit-scrollbar-thumb:hover
   background: rgba(51, 51, 51, 0.3)
-  
+
 .content-side
   @media (max-width: $breakpoint-mobile)
     flex: 0 0 100% !important
@@ -242,7 +242,7 @@ ul
         &::after
           display: none
         @media (max-width: $breakpoint-mobile)
-          width: auto  
+          width: auto
           display: inline-block
     .btn
       padding-left: 25px
@@ -255,9 +255,9 @@ ul
       p
         color: $white-color
       li
-        color: $white-color      
+        color: $white-color
 
-.small-wrapper     
+.small-wrapper
   width: 343px
   max-width: 100%
   margin: 0 auto
@@ -312,8 +312,8 @@ ul
       min-height: 40px
     /* Change the white to any color ;) */
     &:-webkit-autofill,
-    &:-webkit-autofill:hover, 
-    &:-webkit-autofill:focus, 
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
     &:-webkit-autofill:active
       -webkit-box-shadow: 0 0 0 30px white inset !important
     &:-webkit-autofill
@@ -322,13 +322,13 @@ ul
       color: $dark-grey-color
       opacity: 1
     &:focus
-      box-shadow: none    
+      box-shadow: none
   .password-wrap
     position: relative
     .password-swap
       position: absolute
       top: 6px
-      right: 15px   
+      right: 15px
   .field_error
     color: $red-color
     font-size: 14px
@@ -368,25 +368,25 @@ ul
         cursor: pointer
         @media (max-width: $breakpoint-ipad)
           display: inline-block
-        .bar1, 
-        .bar2, 
-        .bar3 
+        .bar1,
+        .bar2,
+        .bar3
           width: 25px
           height: 3px
           background-color: $dark-grey-color
           margin: 3px 0
           transition: 0.4s
-        &.change 
+        &.change
           .bar1
             -webkit-transform: rotate(-45deg) translate(-2px, 6px)
             transform: rotate(-45deg) translate(-2px, 6px)
-          .bar2 
+          .bar2
             opacity: 0
-          .bar3 
+          .bar3
             -webkit-transform: rotate(45deg) translate(-2px, -8px)
-            transform: rotate(45deg) translate(-2px, -8px)   
+            transform: rotate(45deg) translate(-2px, -8px)
           & + .navbar
-            display: inline-block  
+            display: inline-block
       .navbar
         background: transparent
         @media (max-width: $breakpoint-ipad)
@@ -437,9 +437,9 @@ ul
                 background-color: transparent
             .dropdown-menu
               padding: 0
-              transform: translate(-80px,48px) !important    
-              @media (max-width: $breakpoint-ipad)   
-                transform: translate(21px,48px) !important    
+              transform: translate(-80px,48px) !important
+              @media (max-width: $breakpoint-ipad)
+                transform: translate(21px,48px) !important
             a
               color: $dark-grey-color
               font-size: 16px
@@ -460,14 +460,14 @@ ul
                 width: 24px
                 border-radius: 100%
                 display: inline-block
-                vertical-align: middle  
+                vertical-align: middle
             .header-submenu
               position: absolute
               top: 100%
               top: calc(100% + 31px)
               right: 0
               background: $white-color
-              box-shadow: 0 0px 20px rgba(0, 0, 0, 0.1) 
+              box-shadow: 0 0px 20px rgba(0, 0, 0, 0.1)
               padding: 15px 10px 20px
               opacity: 0
               visibility: hidden
@@ -478,14 +478,14 @@ ul
                 padding: 0 0 0 35px
                 display: none
               a
-                padding: 10px 
+                padding: 10px
             &.active
               .header-submenu
                 opacity: 1
-                visibility: visible   
+                visibility: visible
                 @media (max-width: $breakpoint-ipad)
                   display: block
-                 
+
   &.no-login
     .header-menu
       display: none
@@ -500,11 +500,11 @@ ul
           justify-content: flex-end
           @media (max-width: $breakpoint-mobile)
             justify-content: center
-         
+
 
 .home-banner
   padding: 55px 0
-  @media (max-width: $breakpoint-ipad)  
+  @media (max-width: $breakpoint-ipad)
     padding: 30px 0
   .text-side
     @media (max-width: $breakpoint-mobile)
@@ -520,21 +520,21 @@ ul
       color: $dark-grey-color
       @media (max-width: $breakpoint-ipad-pro)
         font-size: 65px
-      @media (max-width: $breakpoint-ipad)  
+      @media (max-width: $breakpoint-ipad)
         font-size: 50px
-      @media (max-width: $breakpoint-mobile)  
-        font-size: 38px  
+      @media (max-width: $breakpoint-mobile)
+        font-size: 38px
         line-height: 1.1
     p
       width: 280px
-      max-width: 100% 
+      max-width: 100%
       color: $body-color
       margin: 65px 0 25px
       @media (max-width: $breakpoint-ipad-pro)
         margin: 25px 0 25px
     .btn
       width: 340px
-      max-width: 100%  
+      max-width: 100%
   .img-side
     text-align: right
     @media (max-width: $breakpoint-mobile)
@@ -559,13 +559,13 @@ ul
           border-radius: 4px
         .carousel-item
           position: relative
-          z-index: 2  
+          z-index: 2
 
 .get-website
   padding: 50px 0
-  @media (max-width: $breakpoint-ipad)  
+  @media (max-width: $breakpoint-ipad)
     padding: 30px 0
-  .get-website-inner  
+  .get-website-inner
     width: 100%
     display: inline-block
     position: relative
@@ -577,12 +577,12 @@ ul
       bottom: 0
       width: 50%
       background-color: $light-blue-color
-      @media (max-width: $breakpoint-ipad)  
+      @media (max-width: $breakpoint-ipad)
         width: 55%
       @media (max-width: $breakpoint-mobile)
         width: 100%
         bottom: 50%
-        right: 0    
+        right: 0
   .heading-side
     position: relative
     z-index: 1
@@ -602,42 +602,42 @@ ul
       color: $white-color
       font-size: 34px
       line-height: 44.2px
-      @media (max-width: $breakpoint-ipad)  
+      @media (max-width: $breakpoint-ipad)
         font-size: 26px
         line-height: 1.3
         padding-right: 20px
       @media (max-width: $breakpoint-mobile)
         font-size: 22px
-        padding: 0  
+        padding: 0
 
 .website-building
   padding: 135px 0
-  @media (max-width: $breakpoint-ipad)  
+  @media (max-width: $breakpoint-ipad)
     padding: 30px 0
-  .website-build-img  
+  .website-build-img
     @media (max-width: $breakpoint-mobile)
       flex: 0 0 100%
       max-width: 100%
-      text-align: center  
+      text-align: center
       margin: 30px 0 0
 
 .website-comparison
   padding: 165px 0
-  @media (max-width: $breakpoint-ipad)  
+  @media (max-width: $breakpoint-ipad)
     padding: 30px 0
-  .website-compare-img  
+  .website-compare-img
     @media (max-width: $breakpoint-mobile)
       flex: 0 0 100%
       max-width: 100%
-      text-align: center  
+      text-align: center
       margin: 0 0 40px
 
 .website-plan
   text-align: center
   padding: 95px 0
-  @media (max-width: $breakpoint-ipad)  
+  @media (max-width: $breakpoint-ipad)
     padding: 30px 0
-  @media (max-width: $breakpoint-mobile)  
+  @media (max-width: $breakpoint-mobile)
     padding: 30px 0 0
   h3
     font-weight: 700
@@ -650,7 +650,7 @@ ul
     @media (max-width: $breakpoint-mobile)
       flex: 0 0 100%
       max-width: 100%
-      text-align: center  
+      text-align: center
   .plan-detail
     margin: 40px 0 0
     border: 1px solid rgba(0,0,0,.08)
@@ -660,15 +660,15 @@ ul
     text-align: left
     border-radius: 16px
     padding: 62px 72px
-    @media (max-width: $breakpoint-ipad-pro) 
+    @media (max-width: $breakpoint-ipad-pro)
       padding: 62px 30px
-    @media (max-width: $breakpoint-ipad) 
-      padding: 62px 20px  
+    @media (max-width: $breakpoint-ipad)
+      padding: 62px 20px
       margin: 0
     @media (max-width: $breakpoint-mobile)
       padding: 30px
-      margin: 0 0 30px 
-    .plan-detail-inner  
+      margin: 0 0 30px
+    .plan-detail-inner
       .plan-img
         text-align: center
       .plan-name
@@ -676,7 +676,7 @@ ul
         font-size: 20px
         line-height: 26px
         letter-spacing: 0.18px
-        font-weight: 700  
+        font-weight: 700
         margin: 25px 0 28px
       ul
         @media (max-width: $breakpoint-mobile)
@@ -698,9 +698,9 @@ ul
           font-size: 28px
         sub
           font-size: 20px
-          font-weight: 700  
+          font-weight: 700
       .plan-action
-        text-align: center      
+        text-align: center
 
 .website-faq
   background-color: $light-blue-color
@@ -717,7 +717,7 @@ ul
     .accordion-card-header
       padding: 25px 0
       border: none
-      background: transparent !important  
+      background: transparent !important
       box-shadow: none
       @media (max-width: $breakpoint-mobile)
         padding: 15px 0
@@ -740,16 +740,16 @@ ul
           text-decoration: none
         &:active
           outline: none
-          text-decoration: none    
+          text-decoration: none
     .accordion-card-body
       padding: 0 0 27px
-      color: $white-color  
+      color: $white-color
       @media (max-width: $breakpoint-mobile)
         padding: 0 0 15px
 
 .site-footer
   padding: 93px 0 58px
-  @media (max-width: $breakpoint-ipad)  
+  @media (max-width: $breakpoint-ipad)
     padding: 30px 0
   ul
     list-style: none
@@ -806,14 +806,14 @@ ul
         li
           padding-right: 27px
           &:last-child
-            padding-right: 0 
+            padding-right: 0
           a
             background-color: $light-bg-color
             width: 24px
             height: 24px
             text-align: center
             border-radius: 100%
-            display: inline-block  
+            display: inline-block
   .footer-menu
     li
       padding-right: 16px
@@ -835,7 +835,7 @@ ul
     color: $body-color !important
     font-weight: normal
     svg
-      padding-right: 3px     
+      padding-right: 3px
       display: inline-block
       vertical-align: middle
   span
@@ -865,7 +865,7 @@ ul
   @media (max-width: $breakpoint-mobile)
     margin: 25px 0 50px
   form
-    text-align: left 
+    text-align: left
     margin: 28px 0 0
     .btn
       width: 100%
@@ -884,7 +884,7 @@ ul
     padding: 0
 
 .signup-section
-  padding: 33px 0  
+  padding: 33px 0
   @media (max-width: $breakpoint-mobile)
     padding: 0 0 30px
   .content-side
@@ -919,9 +919,9 @@ ul
         padding-right: 10px
     span
       display: inline-block
-      vertical-align: middle  
+      vertical-align: middle
   .btn.btn-primary
-    padding: 14px 30px    
+    padding: 14px 30px
     @media (max-width: $breakpoint-mobile)
       padding: 14px 20px
   .btn.btn-primary.btn-facebook
@@ -957,12 +957,12 @@ ul
     .small-wrapper
       float: right
   @media (max-width: $breakpoint-mobile)
-    min-height: 0    
+    min-height: 0
 
 
 .forget-form-inner
   .small-wrapper
-    margin: 0    
+    margin: 0
 
 .positionUnset
   position: unset
@@ -982,7 +982,7 @@ ul
       background-color: $primary-color
       padding-top: 40px
       padding-bottom: 40px
-    .carousel 
+    .carousel
       position: absolute
       top: 50%
       transform: translate(-50%,-50%)
@@ -1010,7 +1010,7 @@ ul
     right: 0
     top: 0
     bottom: 0
-    .carousel 
+    .carousel
       position: absolute
       top: 50%
       transform: translate(-50%,-50%)
@@ -1031,7 +1031,7 @@ ul
     right: 0
     top: 0
     bottom: 0
-    .carousel 
+    .carousel
       position: absolute
       top: 50%
       transform: translate(-50%,-50%)
@@ -1069,8 +1069,8 @@ ul
 .forgot-btns
   margin: 30px 0 0
   .btn-primary
-    margin-bottom: 35px  
-    width: 100%      
+    margin-bottom: 35px
+    width: 100%
 .otpFieldsInput
   input
     width: 43px !important
@@ -1106,7 +1106,7 @@ ul
     &:hover,
     &:focus,
     &:active
-      text-decoration: none    
+      text-decoration: none
   h3
     font-weight: bold
     font-size: 25px
@@ -1114,7 +1114,7 @@ ul
     color: $dark-grey-color
     margin: 0 0 25px
     @media (max-width: $breakpoint-mobile)
-      font-size: 22px    
+      font-size: 22px
   h4
     font-weight: bold
     font-size: 20px
@@ -1144,11 +1144,11 @@ ul
     list-style: none
     @media (max-width: $breakpoint-mobile)
       font-size: 14px
-    &.styled-ul  
+    &.styled-ul
       li
         width: 100%
         display: inline-block
-        position: relative  
+        position: relative
         margin: 0 0 10px
         padding: 0 0 0 55px
         @media (max-width: $breakpoint-mobile)
@@ -1169,19 +1169,19 @@ ul
     tr, td, th
       border: 1px solid $light-grey-color
     td, th
-      padding: 15px  
+      padding: 15px
     thead
       background-color: $primary-color
       color: $white-color
       tr
         th
-          color: $white-color    
+          color: $white-color
 .table-responsive
   text-align: center
   table
     margin-left: auto
     margin-right: auto
-    text-align: left           
+    text-align: left
 .privacy-table
   width: 1000px
   td, th
@@ -1190,15 +1190,15 @@ ul
     &:nth-child(2)
       width: 550px
     &:nth-child(3)
-      width: 150px      
+      width: 150px
 .privacy-table-contents
-  border-bottom: 1px solid $light-grey-color     
-  margin-bottom: 45px              
+  border-bottom: 1px solid $light-grey-color
+  margin-bottom: 45px
 
-.styled-ol  
+.styled-ol
   width: 100%
   display: inline-block
-  list-style-position: inside   
+  list-style-position: inside
   font-weight: normal
   font-size: 16px
   line-height: 1.3
@@ -1210,7 +1210,7 @@ ul
   li
     margin: 0 0 10px
 .privacy-table-index
-  color: $primary-color    
+  color: $primary-color
   li
     margin: 0 0 18px
 
@@ -1222,7 +1222,7 @@ ul
     @media (max-width: $breakpoint-mobile)
       max-width: 100%
       flex: 0 0 100%
-      text-align: center  
+      text-align: center
   h1
     color: $dark-grey-color
     letter-spacing: -1.5px
@@ -1252,7 +1252,7 @@ ul
         width: 100%
         margin: 20px 0
 
-.carousel-indicators 
+.carousel-indicators
   text-align: left
   margin: 0
   top: 0
@@ -1272,12 +1272,12 @@ ul
     &.active
       background: $optional-light-grey-color
 .styled-radio-btn
-  
+
   margin: 16px 0 0
   position: relative
   label
     margin: 0
-  input  
+  input
     display: inline-block
     vertical-align: middle
   .styled-radio
@@ -1308,7 +1308,7 @@ ul
     border-radius: 24px
     width: 100%
     display: inline-block
-    .emojiText 
+    .emojiText
       margin: 0 0 0 5px !important
       display: inline-block
       vertical-align: middle
@@ -1318,12 +1318,12 @@ ul
       max-width: 25px
       display: inline-block
       vertical-align: middle
-.main-section      
+.main-section
   .step-banner
     background: linear-gradient(219.41deg, $primary-color 0%, $light-blue-color 100%)
     color: $white-color
     padding: 10px 0
-    .back-to-home 
+    .back-to-home
       a
         color: $white-color !important
         svg
@@ -1344,7 +1344,7 @@ ul
       font-size: 20px
       line-height: 1.3
       color: $white-color
-      margin: 0  
+      margin: 0
 .step-form
   padding: 15px 0 60px
   .form-heading
@@ -1377,7 +1377,7 @@ ul
       margin-left: 25px
       vertical-align: top
       text-align: center
-      
+
       &:first-child
         margin-left: 0
       span
@@ -1398,7 +1398,7 @@ ul
     @media (max-width: $breakpoint-mobile)
       max-width: 100%
       flex: 0 0 100%
-      text-align: center   
+      text-align: center
   .color-palatte-selector
     padding-top: 12px
     @media (max-width: $breakpoint-mobile)
@@ -1417,13 +1417,13 @@ ul
         width: 215px
       @media (max-width: $breakpoint-ipad)
         margin-left: 0
-        clear: both  
+        clear: both
       @media (max-width: $breakpoint-mobile)
         width: 100%
         margin-left: 0
-        text-align: left  
+        text-align: left
       .styled-radio
-        &:checked + .input-radio-label  
+        &:checked + .input-radio-label
           background-image: none
           .emojiText
             color: $primary-color
@@ -1455,7 +1455,7 @@ ul
           display: inline-block
           vertical-align: middle
           span
-            width: 100%  
+            width: 100%
             height: 100%
             border-radius: 100%
             display: inline-block
@@ -1500,7 +1500,7 @@ ul
     i
       font-style: unset
       font-weight: 700
-    a 
+    a
       font-weight: 700
       &:focus,
       &:active
@@ -1535,7 +1535,7 @@ ul
       background-repeat: no-repeat
       background-position: 0 0
       width: 24px
-      height: 24px    
+      height: 24px
 
 .assesment-step
   .form-control
@@ -1543,10 +1543,10 @@ ul
   .logo-optional
     margin: 0 0 3px
 .assesment-step-3
-  .step-form 
-    .step-btns    
+  .step-form
+    .step-btns
       margin: 110px 0 0
-    
+
 .cat-list
   margin: 0
   padding: 0
@@ -1574,7 +1574,7 @@ ul
   align-items: center
   .spinner-border
     color: $primary-color
-.drag-image-box 
+.drag-image-box
   width: 100%
   height: 100px
   background: $light-bg-color
@@ -1588,12 +1588,12 @@ ul
     line-height: 1.5
     padding: 0
 
-.round-border 
+.round-border
   span
     border: 1px solid #ccc !important
 .modal-backdrop
-  z-index: 39  
-.modal 
+  z-index: 39
+.modal
   right: 0
   padding: 0 !important
   .modal-dialog
@@ -1662,13 +1662,13 @@ ul
           @media (max-width: $breakpoint-mobile)
             max-width: 100%
             flex: 0 0 100%
-      .logo-upload-header  
+      .logo-upload-header
         width: 100%
         .col
           @media (max-width: $breakpoint-mobile)
             max-width: 100%
             flex: 0 0 100%
-        .search-wrapper 
+        .search-wrapper
           text-align: right
           .form-group
             margin: 0
@@ -1707,7 +1707,7 @@ ul
               clear: left
             &::after
               display: none
-            img 
+            img
               border: 2px solid 51,51,51,0.3
               border-radius: 16px
               width: 92px
@@ -1730,12 +1730,12 @@ ul
         .clear-logo
           text-transform: capitalize
           color: $red-color
-          font-weight: 700       
+          font-weight: 700
 .password-reset-modal
   .modal-dialog
     .modal-content
       padding: 65px
-      width: 616px    
+      width: 616px
       @media (max-width: $breakpoint-mobile)
         padding: 20px
       .modal-body
@@ -1779,8 +1779,10 @@ ul
     padding: 0 9px
     text-align: left
 .full-width-header
-  .main-header 
+  .main-header
     background-color: $white-color
+    position: relative
+    z-index: 11
     .container
       max-width: unset !important
       padding: 0 78px
@@ -1800,12 +1802,12 @@ ul
       max-width: 100%
       text-align: center
     .small-wrapper
-      position: relative  
-  .name-website-selector-preview     
+      position: relative
+  .name-website-selector-preview
     @media (max-width: $breakpoint-mobile)
       flex: 0 0 100%
       max-width: 100%
-      text-align: center   
+      text-align: center
 .wizard-preview
   h4
     color: #0A0A0A
@@ -1814,12 +1816,12 @@ ul
     text-align: center
     margin: 0 0 2px
 .final-blog-preview
-  text-align: center  
+  text-align: center
   .wizrd-blog-preview
     display: inline-block
 
 .small-loader
-  display: inline-block     
+  display: inline-block
   position: absolute
   right: -10px
   top: -28px
@@ -1833,7 +1835,7 @@ ul
   display: flex
   justify-content: center
   align-items: center
-  z-index: 9999  
+  z-index: 9999
   .lds-facebook
     div
       animation: lds-facebook-global 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite
@@ -1878,4 +1880,4 @@ ul
     height: 150px
   50%, 100%
     top: 24px
-    height: 50px    
+    height: 50px

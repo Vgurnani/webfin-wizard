@@ -37,16 +37,42 @@
     width: 100%
     display: inline-block
     background-color: $light-bg-color
+    .drawer-toggle
+        position: absolute
+        right: 0
+        width: 48px
+        height: 48px
+        background-color: $green-color
+        bottom: 10%
+        border-radius: 24px 0 0 24px
+        text-align: center
+        line-height: 46px
+        svg
+            transform: rotate(180deg)
     .dashboard-menu
         width: 265px
         display: inline-block
         vertical-align: top
         filter: drop-shadow(0px 4px 16px rgba(0, 0, 0, 0.18))
         background-color: $light-blue-color
-        padding: 55px 19px 55px 16px
+        // padding: 55px 19px 55px 16px
+        position: fixed
+        top: 0
+        transform: translateX(-211px)
+        height: 100%
+        overflow-x: hidden
+        overflow-y: auto
+        -webkit-overflow-scrolling: touch
+        padding: 140px 56px 55px 16px
+        z-index: 10
+        transition: all 500ms
+        @media (max-width: $breakpoint-ipad)
+            padding-top: 85px
         ul
             li
                 margin: 0 0 15px
+                @media (max-width: $breakpoint-ipad)
+                    margin: 0 0 5px
                 a
                     width: 100%
                     display: flex
@@ -58,6 +84,9 @@
                     color: $white-color
                     padding: 16px
                     border-radius: 16px
+                    @media (max-width: $breakpoint-ipad)
+                        padding: 10px 15px
+                        font-size: 14px
                     svg
                         path,
                         rect
@@ -89,28 +118,44 @@
                 li
                     a
                         padding: 8px
-        &.expand-menu
-            width: auto
-            padding: 55px 10px
-            ul
-                li
-                    a
-                        font-size: 0
-                        padding: 5px
-        @media (max-width: $breakpoint-ipad)
-            width: auto
-            padding: 55px 10px
-            ul
-                li
-                    a
-                        font-size: 0
-                        padding: 5px
+        // &.expand-menu
+        //     width: auto
+        //     padding: 55px 10px
+        //     ul
+        //         li
+        //             a
+        //                 font-size: 0
+        //                 padding: 5px
+        // @media (max-width: $breakpoint-ipad)
+        //     width: auto
+        //     padding: 55px 10px
+        //     ul
+        //         li
+        //             a
+        //                 font-size: 0
+        //                 padding: 5px
+        &.toggle-sidebar
+            transform: translateX(0)
+            padding-right: 16px
+            & + .dashboard-data
+                transform: translateX(265px)
+                width: calc(100% - 265px)
+                @media (max-width: $breakpoint-ipad)
+                    width: calc(100% - 56px)
+                    transform: translateX(56px)
+            .drawer-toggle
+                svg
+                    transform: rotate(0deg)
     .dashboard-data
         width: 80%
-        width: calc(100% - 265px)
+        //width: calc(100% - 265px)
+        width: calc(100% - 56px)
+        transform: translateX(56px)
+        position: relative
         display: inline-block
         vertical-align: top
         padding: 30px 80px 100px 25px
+        transition: all 500ms
         @media (max-width: $breakpoint-ipad)
             width: calc(100% - 65px)
             padding: 30px 30px 50px
@@ -449,6 +494,9 @@
         list-style: none
         margin: 0
         padding: 0
+        display: flex
+        @media (max-width: $breakpoint-mobile)
+            flex-direction: column
         li
             margin-left: 2.3%
             width: 31.8%
@@ -458,6 +506,7 @@
             text-align: center
             display: inline-block
             vertical-align: top
+            word-break: break-word
             @media (max-width: $breakpoint-mobile)
                 margin-left: 0
                 margin-bottom: 8px
