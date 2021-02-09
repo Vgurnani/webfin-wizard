@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../../middleware/auth'
 import { removeItem } from '../../utils/cache'
-import { Link } from 'react-router-dom'
 import Dashboard from '../../components/dashboard'
 import axios from 'axios'
-
+import {
+    TopRightArrow,
+} from '../../utils/svg'
+import profilePic from '../../public/images/media/media-4.jpg';
 const DashboardPage =() => {
     const dispatch = useDispatch();
     const [ status, setStatus ] = useState(false)
@@ -51,26 +53,31 @@ const DashboardPage =() => {
             <section className="dashboard-body">
                 <div className="dashboard-header">
                     <div className="dashboard-title">
+                        <h1>Your website name <a>Edit</a></h1>
                         <h5>
                             Domain:
-                            <a href={ `https://${ site?.domain }` } rel="noreferrer" target='_blank'>
-                                { site?.domain }
+                            <a href={ `https://${ site?.domain }` } rel="noreferrer" target='_blank' className={ `${ status ? 'success' : 'in-progress' }` }>
+                                { site?.domain } <TopRightArrow />
                             </a>
 
-                            <span className={ `${ status ? 'success' : 'in-progress' }` }> -
+                            {/* <span className={ `${ status ? 'success' : 'in-progress' }` }> -
                                 {status ? 'Done' : 'In Progress'}
-                            </span>
-
+                            </span> */}
                         </h5>
-
-                        <h1>Dashboard</h1>
-
+                        <div className="dashboard-btns">
+                            <a className="btn btn-primary">View Website</a>
+                        </div>
                     </div>
                     <div className="dashboard-actions">
-                        { user && <div>
-                            {user.firstName} {user.lastName}
-                        </div>}
-                        <Link to={ '/blog' } className='btn btn-primary'>Create Blog</Link>
+                        { user && <div className="author-info">
+                            <div className="author-img">
+                                <img src={ profilePic } alt="Jason Miller" />
+                            </div>
+                            <div className="author-name">
+                                <h6>Welcome back!</h6>
+                                <h5>{user.firstName} {user.lastName}</h5>
+                            </div>
+                        </div> }
                     </div>
                 </div>
                 <Dashboard />

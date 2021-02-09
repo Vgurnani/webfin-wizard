@@ -4,11 +4,16 @@ import { useSelector } from 'react-redux';
 import {
     DashboardMenuIcon,
     BlogMenuIcon,
+    DrawerArrowIcon,
 } from '../../utils/svg'
 const SideBar = () => {
+    const [ isSideBarActive, toggleSideBar ] = React.useState(false);
     const theme = useSelector((state) => state.theme)
     return(
-        <aside className="dashboard-menu">
+        <aside className={ `dashboard-menu ${ isSideBarActive ? 'toggle-sidebar' : '' }` }>
+            <div className="drawer-toggle" onClick={ () => toggleSideBar(!isSideBarActive) }>
+                <DrawerArrowIcon />
+            </div>
             <ul>
                 <li className={ `${ theme.sidebarActive === 'dashboard' ?  'active' : '' }` }>
                     <Link to="/dashboard">

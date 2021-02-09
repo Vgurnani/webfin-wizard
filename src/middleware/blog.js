@@ -29,7 +29,6 @@ import { notification } from '../services/notification';
 import history from '../utils/history'
 import { imageUpload } from './assessments'
 import { dataURLtoFile , uId, getRoute } from '../utils/helpers'
-import axiosInstance from '../services/api';
 import _ from 'lodash';
 
 export const checkAvailbleSlug = async(route,data) => {
@@ -80,19 +79,6 @@ export const createBlog = (data,id) => {
     };
 };
 
-export const callPublish = () => {
-    return(dispatch) => {
-        dispatch(publishRequest())
-        axiosInstance.post('/user/site/publish').then((response)=>{
-            history.push(ROUTES.DASHBOARD)
-            notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.PUBLISH_SUCCESS);
-            dispatch(publishSuccess(response.data))
-        }).catch((error)=>{
-            dispatch(publishFailed(error))
-        })
-    }
-}
-
 export const createSocialMedia = (data, setOpenModal) => {
     const route = getRoute();
     return async(dispatch) => {
@@ -133,9 +119,8 @@ export const getDraftBlogs =  () => {
         try{
             dispatch(getBlogsRequest())
             const route = getRoute();
-            const result = await strapiAxiosInstance.get(`/content-manager/collection-types/application::${ route }.${ route }?page=1&pageSize=10&_sort=type:ASC`)
+            const result = await strapiAxiosInstance.get(`${ route }?_publicationState=preview&published_at_null=true&deletedAt_null=true&type=blog`)
             if([ 200,203 ].includes(result.status)){
-                debugger
                 const data = result.data.filter((item) => item.published_at === null && item.type === 'blog')
                 dispatch(getDraftBlogListSuccess(data));
             }
@@ -151,7 +136,7 @@ export const getPublishedBlogs =  () => {
         try{
             dispatch(getBlogsRequest())
             const route = getRoute();
-            const result = await strapiAxiosInstance.get(`${ route }?type=blog`)
+            const result = await strapiAxiosInstance.get(`${ route }?_publicationState=live&deletedAt_null=true&type=blog`)
             if([ 200,203 ].includes(result.status)){
                 const data = result.data.filter((item) => item.published_at !== null)
                 dispatch(getPublishBlogListSuccess(data));
@@ -163,6 +148,23 @@ export const getPublishedBlogs =  () => {
     }
 }
 
+export const callPublish = (id,isPublish) => {
+    const route = getRoute();
+    return(dispatch) => {
+        // eslint-disable-next-line camelcase
+        const data = isPublish ? { published_at: new Date() } : { published_at: null }
+        dispatch(publishRequest())
+        strapiAxiosInstance.put(`${ route }/${ id }`, data).then((response)=>{
+            dispatch(getDraftBlogs())
+            dispatch(getPublishedBlogs())
+            dispatch(publishSuccess(response))
+        }).catch((error) => {
+            dispatch(publishFailed(error))
+            notification(NOTIFICATION_TYPES.ERROR, MESSAGE.BLOG_FAILD);
+        })
+    }
+}
+
 export const deleteBlog =  (id) => {
     return async(dispatch) => {
         try{
@@ -171,8 +173,9 @@ export const deleteBlog =  (id) => {
             const result = await strapiAxiosInstance.put(`${ route }/${ id }`, { deletedAt: new Date() })
             if([ 200,203 ].includes(result.status)){
                 dispatch(deleteBlogSuccess())
+                dispatch(getDraftBlogs())
+                dispatch(getPublishedBlogs())
                 notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.BLOG_DELETED);
-                history.push(ROUTES.BLOGS)
             }
         }catch(error){
             dispatch(deleteBlogFailed(error))

@@ -10,7 +10,7 @@ const CustomTable = (props) => {
 
                     <tr>
                         {headings.map((item, key) =>
-                            <th key={ key }>Title</th>)
+                            <th key={ key }>{ item }</th>)
                         }
                     </tr>
                 </thead>

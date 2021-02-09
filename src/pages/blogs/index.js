@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment'
 import CustomTable from 'components/core/table'
 import
 {
@@ -10,7 +11,7 @@ import
 }
     from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
-import { getPublishedBlogs, getBlogById, deleteBlog } from '../../middleware/blog';
+import { getDraftBlogs,callPublish, getPublishedBlogs, getBlogById, deleteBlog } from '../../middleware/blog';
 import { ROUTES } from '../../constants/appRoutes';
 import { getDynamicURL } from '../../services/api';
 
@@ -30,7 +31,11 @@ const BlogsPage = () => {
     const draftBlogs = useSelector(state => state.blog.draftBlogs)
 
     useEffect(() => {
-        //dispatch(getDraftBlogs());
+        dispatch({
+            type: 'SET_ACTIVE_SIDEBAR',
+            payload: 'blog'
+        })
+        dispatch(getDraftBlogs());
         dispatch(getPublishedBlogs());
     }, [ dispatch ]);
 
@@ -49,9 +54,13 @@ const BlogsPage = () => {
         event.preventDefault();
         dispatch(deleteBlog(blog.id))
     }
+    const handlePublish = (event, blog ) => {
+        event.preventDefault()
+        dispatch(callPublish(blog.id,event.target.checked))
+    }
 
     return(
-        <main className="dashboard-data">
+        <main className="dashboard-data blog-dashboard">
             <section className="dashboard-body">
                 <div className="dashboard-header">
                     <div className="dashboard-title">
@@ -83,12 +92,13 @@ const BlogsPage = () => {
                     </div>
                     { publishBlogs?.length > 0 && <div className="dashboard-table">
                         <CustomTable headings={ [ 'Title','Views','Comments','Date Created','Actions' ] }>
-                            {publishBlogs?.map(blog => (<tr key={ blog?.slug }>
-                                <td>
+                            {publishBlogs?.map((blog, index) => (<tr key={ blog?.slug }>
+                                <td key={ index }>
                                     <Form.Check
                                         type="switch"
-                                        id="custom-switch-1"
+                                        id={ 'custom-switch-'+blog.id  }
                                         label=""
+                                        onChange={ (e) => handlePublish(e, blog) }
                                         checked={ blog.published_at !== null }
                                     />
                                     <span className="table-post-title">{blog?.title}</span>
@@ -100,7 +110,7 @@ const BlogsPage = () => {
                                     -
                                 </td>
                                 <td>
-                                    dd/mm/yyyy
+                                    { blog.created_at && moment(blog.created_at).format('L')}
                                 </td>
                                 <td>
                                     <a onClick={ (e) => handleEdit(e, blog) } className="table-action-btns" href="/#">
@@ -134,27 +144,34 @@ const BlogsPage = () => {
                                         <div className="dashboard-table">
                                             <CustomTable headings={ [ 'Title','Views','Comments','Date Created','Actions' ] }>
 
-                                                {draftBlogs?.map(blog => (<tr key={ blog.slug }>
-                                                    <td>
-
-                                                        <span className="table-post-title">The Joy of Cooking</span>
-                                                    </td>
-                                                    <td>
-
-                                                    </td>
-                                                    <td>
-
-                                                    </td>
-                                                    <td>
-
-                                                    </td>
-                                                    <td>
-                                                        <Form.Check
-                                                            type="switch"
-                                                            label="Publish"
-                                                        />
-                                                    </td>
-                                                </tr>))}
+                                                {draftBlogs?.map(blog => (
+                                                    <tr key={ blog.slug }>
+                                                        <td>
+                                                            <span className="table-post-title">{blog.title}</span>
+                                                        </td>
+                                                        <td>
+                                                            -
+                                                        </td>
+                                                        <td>
+                                                            -
+                                                        </td>
+                                                        <td>
+                                                            { blog.created_at && moment(blog.created_at).format('L')}
+                                                        </td>
+                                                        <td>
+                                                            <Form.Check
+                                                                type="switch"
+                                                                id={ 'custom-switch-'+blog.id  }
+                                                                label=""
+                                                                onChange={ (e) => handlePublish(e, blog) }
+                                                                checked={ blog.published_at !== null }
+                                                            />
+                                                            <a onClick={ (e) => handleDelete(e, blog) } className="table-action-btns" href="/#">
+                                                                <DeleteIcon />
+                                                                <span>Delete</span>
+                                                            </a>
+                                                        </td>
+                                                    </tr>))}
                                             </CustomTable>
 
                                         </div>
