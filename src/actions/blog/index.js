@@ -86,9 +86,15 @@ export const getBlogsRequest = () => {
     }
 }
 
-export const getBlogListSuccess = (data) => {
+export const getDraftBlogListSuccess = (data) => {
     return {
-        type: ActionTypes.GET_BLOG_LIST_SUCCESS,
+        type: ActionTypes.GET_DRAFT_BLOG_LIST_SUCCESS,
+        payload: data
+    }
+}
+export const getPublishBlogListSuccess = (data) => {
+    return {
+        type: ActionTypes.GET_PUBLISH_BLOG_LIST_SUCCESS,
         payload: data
     }
 }

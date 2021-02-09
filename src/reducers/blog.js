@@ -36,7 +36,9 @@ export default (state = initialState, action) => {
         return { ...state, loading: false }
     case ActionTypes.GET_BLOG_LIST:
         return { ...state, loading: true }
-    case ActionTypes.GET_BLOG_LIST_SUCCESS:
+    case ActionTypes.GET_DRAFT_BLOG_LIST_SUCCESS:
+        return { ...state, loading: false, blogs: action.payload }
+    case ActionTypes.GET_PUBLISH_BLOG_LIST_SUCCESS:
         return { ...state, loading: false, blogs: action.payload }
     case ActionTypes.GET_BLOG_LIST_FAILURE:
         return { ...state, loading: false }

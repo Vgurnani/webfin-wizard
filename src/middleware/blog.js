@@ -11,7 +11,8 @@ import {
     getSocialMediaRequest,
     getSocialMediaSuccess,
     getSocialMediaFailed,
-    getBlogListSuccess,
+    getDraftBlogListSuccess,
+    getPublishBlogListSuccess,
     getBlogListFailed,
     getBlogsRequest,
     deleteBlogSuccess,
@@ -127,24 +128,30 @@ export const getSocialMedia = () => {
         })
     };
 };
-export const getBlogs =  () => {
+export const getDraftBlogs =  () => {
     return async(dispatch) => {
         try{
             dispatch(getBlogsRequest())
             const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
-            const result = await strapiAxiosInstance.get(`${ route }?type=blog`)
+            const result = await strapiAxiosInstance.get(`${ route }?type=blog&published_at=null`)
             if([ 200,203 ].includes(result.status)){
-                console.log(result.data);
-                const published = [];
-                const draft = [];
-                result.data.forEach(blog => {
-                    if (blog.published_at) {
-                        published.push(blog);
-                    } else {
-                        draft.push(blog);
-                    }
-                })
-                dispatch(getBlogListSuccess({ published, draft }));
+                dispatch(getDraftBlogListSuccess(result));
+            }
+        }catch(error){
+            dispatch(getBlogListFailed(error))
+            notification(NOTIFICATION_TYPES.ERROR, MESSAGE.SOMETHING_WRONG);
+        }
+    }
+}
+
+export const getPublishedBlogs =  () => {
+    return async(dispatch) => {
+        try{
+            dispatch(getBlogsRequest())
+            const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
+            const result = await strapiAxiosInstance.get(`${ route }?type=blog&published_at!=null`)
+            if([ 200,203 ].includes(result.status)){
+                dispatch(getPublishBlogListSuccess(result));
             }
         }catch(error){
             dispatch(getBlogListFailed(error))

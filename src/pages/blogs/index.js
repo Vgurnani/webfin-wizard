@@ -9,7 +9,7 @@ import
 }
     from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
-import { getBlogs, getBlogById, deleteBlog } from '../../middleware/blog';
+import { getDraftBlogs,getPublishedBlogs, getBlogById, deleteBlog } from '../../middleware/blog';
 import { ROUTES } from '../../constants/appRoutes';
 import { getDynamicURL } from '../../services/api';
 
@@ -28,7 +28,8 @@ const BlogsPage = () => {
     const blogs = useSelector(state => state.blog.blogs)
 
     useEffect(() => {
-        dispatch(getBlogs());
+        dispatch(getDraftBlogs());
+        dispatch(getPublishedBlogs());
     }, [ dispatch ]);
 
     const handleEdit = (event, blog) => {
