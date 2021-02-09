@@ -48,7 +48,7 @@ const BlogsPage = () => {
     }
 
     return(
-        <main className="dashboard-data">
+        <main className="dashboard-data blog-dashboard">
             <section className="dashboard-body">
                 <div className="dashboard-header">
                     <div className="dashboard-title">
