@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import CustomTable from 'components/core/table'
 import
 {
     Form,
@@ -9,7 +10,7 @@ import
 }
     from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
-import { getDraftBlogs,getPublishedBlogs, getBlogById, deleteBlog } from '../../middleware/blog';
+import { getPublishedBlogs, getBlogById, deleteBlog } from '../../middleware/blog';
 import { ROUTES } from '../../constants/appRoutes';
 import { getDynamicURL } from '../../services/api';
 
@@ -25,10 +26,11 @@ import EditIcon from '../../images/edit.png';
 const BlogsPage = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const blogs = useSelector(state => state.blog.blogs)
+    const publishBlogs = useSelector(state => state.blog.publishBlogs)
+    const draftBlogs = useSelector(state => state.blog.draftBlogs)
 
     useEffect(() => {
-        dispatch(getDraftBlogs());
+        //dispatch(getDraftBlogs());
         dispatch(getPublishedBlogs());
     }, [ dispatch ]);
 
@@ -79,58 +81,46 @@ const BlogsPage = () => {
                             <Link to={ ROUTES.BLOG } className='btn btn-primary'>Add New+</Link>
                         </div>
                     </div>
-                    { !!blogs?.published?.length && <div className="dashboard-table">
-                        <div className="table-responsive">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Views</th>
-                                        <th>Comments</th>
-                                        <th>Date Created</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {blogs?.published?.map(blog => (<tr key={ blog?.slug }>
-                                        <td>
-                                            <Form.Check
-                                                type="switch"
-                                                id="custom-switch-1"
-                                                label=""
-                                            />
-                                            <span className="table-post-title">{blog?.title}</span>
-                                        </td>
-                                        <td>
-                                            -
-                                        </td>
-                                        <td>
-                                            -
-                                        </td>
-                                        <td>
-                                            dd/mm/yyyy
-                                        </td>
-                                        <td>
-                                            <a onClick={ (e) => handleEdit(e, blog) } className="table-action-btns" href="/#">
-                                                <img src={ EditIcon } alt={ 'editIcon' } />
-                                                <span>Edit</span>
-                                            </a>
-                                            <a onClick={ (e) => handleDelete(e, blog) } className="table-action-btns" href="/#">
-                                                <DeleteIcon />
-                                                <span>Delete</span>
-                                            </a>
-                                            <a onClick={ (e) => handleClone(e, blog) } className="table-action-btns" href="/#">
-                                                <CloneIcon />
-                                                <span>Clone</span>
-                                            </a>
-                                        </td>
-                                    </tr>)
-                                    )}
-                                </tbody>
-                            </table>
-                        </div>
+                    { publishBlogs?.length > 0 && <div className="dashboard-table">
+                        <CustomTable headings={ [ 'Title','Views','Comments','Date Created','Actions' ] }>
+                            {publishBlogs?.map(blog => (<tr key={ blog?.slug }>
+                                <td>
+                                    <Form.Check
+                                        type="switch"
+                                        id="custom-switch-1"
+                                        label=""
+                                        checked={ blog.published_at !== null }
+                                    />
+                                    <span className="table-post-title">{blog?.title}</span>
+                                </td>
+                                <td>
+                                    -
+                                </td>
+                                <td>
+                                    -
+                                </td>
+                                <td>
+                                    dd/mm/yyyy
+                                </td>
+                                <td>
+                                    <a onClick={ (e) => handleEdit(e, blog) } className="table-action-btns" href="/#">
+                                        <img src={ EditIcon } alt={ 'editIcon' } />
+                                        <span>Edit</span>
+                                    </a>
+                                    <a onClick={ (e) => handleDelete(e, blog) } className="table-action-btns" href="/#">
+                                        <DeleteIcon />
+                                        <span>Delete</span>
+                                    </a>
+                                    <a onClick={ (e) => handleClone(e, blog) } className="table-action-btns" href="/#">
+                                        <CloneIcon />
+                                        <span>Clone</span>
+                                    </a>
+                                </td>
+                            </tr>)
+                            )}
+                        </CustomTable>
                     </div>}
-                    {!!blogs?.draft?.length && <div className="draft-posts">
+                    {draftBlogs?.length > 0 && <div className="draft-posts">
                         <Accordion defaultActiveKey="0">
                             <Card>
                                 <Card.Header>
@@ -142,42 +132,31 @@ const BlogsPage = () => {
                                 <Accordion.Collapse eventKey="0">
                                     <Card.Body>
                                         <div className="dashboard-table">
-                                            <div className="table-responsive">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Title</th>
-                                                            <th>Views</th>
-                                                            <th>Comments</th>
-                                                            <th>Date Created</th>
-                                                            <th>Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {blogs?.draft?.map(blog => (<tr key={ blog.slug }>
-                                                            <td>
+                                            <CustomTable headings={ [ 'Title','Views','Comments','Date Created','Actions' ] }>
 
-                                                                <span className="table-post-title">The Joy of Cooking</span>
-                                                            </td>
-                                                            <td>
+                                                {draftBlogs?.map(blog => (<tr key={ blog.slug }>
+                                                    <td>
 
-                                                            </td>
-                                                            <td>
+                                                        <span className="table-post-title">The Joy of Cooking</span>
+                                                    </td>
+                                                    <td>
 
-                                                            </td>
-                                                            <td>
+                                                    </td>
+                                                    <td>
 
-                                                            </td>
-                                                            <td>
-                                                                <Form.Check
-                                                                    type="switch"
-                                                                    label="Publish"
-                                                                />
-                                                            </td>
-                                                        </tr>))}
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    </td>
+                                                    <td>
+
+                                                    </td>
+                                                    <td>
+                                                        <Form.Check
+                                                            type="switch"
+                                                            label="Publish"
+                                                        />
+                                                    </td>
+                                                </tr>))}
+                                            </CustomTable>
+
                                         </div>
                                     </Card.Body>
                                 </Accordion.Collapse>

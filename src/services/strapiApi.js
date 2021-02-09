@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { NOTIFICATION_TYPES } from '../constants/app';
 import { notification } from './notification';
-import { getUser } from '../utils/helpers';
+//import { getUser } from '../utils/helpers';
 const baseUrl = `${ process.env.REACT_APP_STRAPI_API_URL }/`;
 
 const strapiAxiosInstance =  axios.create({
@@ -15,8 +15,8 @@ const strapiAxiosInstance =  axios.create({
     }
 })
 strapiAxiosInstance.interceptors.request.use(function (config) {
-    const token = getUser() && getUser().accessToken;
-    config.headers.Authorization =  token ? `Bearer ${ token }` :  null ;
+    //   const token = getUser() && getUser().accessToken;
+    // config.headers.Authorization =  token ? `Bearer ${ token }` :  null ;
     return config;
 });
 

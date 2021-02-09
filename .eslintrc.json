@@ -42,6 +42,7 @@
         "class-methods-use-this": [ 1 ],
         "no-debugger": "off",
         "no-undef": [ 1 ],
+        "no-debugger": "off",
         "no-case-declarations": [ 1 ],
         "no-return-assign": [ 1 ],
         "no-param-reassign": [ 1 ],

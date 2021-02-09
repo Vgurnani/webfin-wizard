@@ -28,9 +28,10 @@ import { NOTIFICATION_TYPES,MESSAGE } from '../constants/app';
 import { notification } from '../services/notification';
 import history from '../utils/history'
 import { imageUpload } from './assessments'
-import { dataURLtoFile , uId } from '../utils/helpers'
+import { dataURLtoFile , uId, getRoute } from '../utils/helpers'
 import axiosInstance from '../services/api';
 import _ from 'lodash';
+
 export const checkAvailbleSlug = async(route,data) => {
     const requestData = {
         contentTypeUID: `application::${ route }.${ route }`,
@@ -54,7 +55,7 @@ export const createBlog = (data,id) => {
             const file = dataURLtoFile(data.imageUrl,uId()+'.png')
             data[ 'imageUrl' ] = await imageUpload(file);
         }
-        const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
+        const route = JSON.parse(getItem('sessionData'))?.data?.data?.sites[ 0 ]?.route;
         data[ 'slug' ] = await checkAvailbleSlug(route,data)
         if(id){
             strapiAxiosInstance.put(`${ route }/${ id }`, data).then((response)=>{
@@ -93,8 +94,7 @@ export const callPublish = () => {
 }
 
 export const createSocialMedia = (data, setOpenModal) => {
-    const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
-    console.log(route,data)
+    const route = getRoute();
     return async(dispatch) => {
         dispatch(socialMediaRequest())
         const result = await strapiAxiosInstance.get(route+'?type=social-media-links')
@@ -118,7 +118,7 @@ export const createSocialMedia = (data, setOpenModal) => {
 };
 
 export const getSocialMedia = () => {
-    const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
+    const route = getRoute();
     return async(dispatch) => {
         dispatch(getSocialMediaRequest())
         strapiAxiosInstance.get(route+'?type=social-media-links').then((response)=>{
@@ -132,10 +132,12 @@ export const getDraftBlogs =  () => {
     return async(dispatch) => {
         try{
             dispatch(getBlogsRequest())
-            const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
-            const result = await strapiAxiosInstance.get(`${ route }?type=blog&published_at=null`)
+            const route = getRoute();
+            const result = await strapiAxiosInstance.get(`/content-manager/collection-types/application::${ route }.${ route }?page=1&pageSize=10&_sort=type:ASC`)
             if([ 200,203 ].includes(result.status)){
-                dispatch(getDraftBlogListSuccess(result));
+                debugger
+                const data = result.data.filter((item) => item.published_at === null && item.type === 'blog')
+                dispatch(getDraftBlogListSuccess(data));
             }
         }catch(error){
             dispatch(getBlogListFailed(error))
@@ -148,10 +150,11 @@ export const getPublishedBlogs =  () => {
     return async(dispatch) => {
         try{
             dispatch(getBlogsRequest())
-            const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
-            const result = await strapiAxiosInstance.get(`${ route }?type=blog&published_at!=null`)
+            const route = getRoute();
+            const result = await strapiAxiosInstance.get(`${ route }?type=blog`)
             if([ 200,203 ].includes(result.status)){
-                dispatch(getPublishBlogListSuccess(result));
+                const data = result.data.filter((item) => item.published_at !== null)
+                dispatch(getPublishBlogListSuccess(data));
             }
         }catch(error){
             dispatch(getBlogListFailed(error))
@@ -164,7 +167,7 @@ export const deleteBlog =  (id) => {
     return async(dispatch) => {
         try{
             dispatch(deleteBlogRequest())
-            const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
+            const route = getRoute();
             const result = await strapiAxiosInstance.put(`${ route }/${ id }`, { deletedAt: new Date() })
             if([ 200,203 ].includes(result.status)){
                 dispatch(deleteBlogSuccess())
@@ -179,7 +182,7 @@ export const deleteBlog =  (id) => {
 }
 
 export const getBlogById =  (id) => {
-    const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
+    const route = getRoute();
     return async(dispatch) => {
         dispatch(getBlogRequest())
         strapiAxiosInstance.get(route+'/'+id+'?type=blog').then((response) => {
