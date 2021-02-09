@@ -9,6 +9,7 @@ const DashboardPage =() => {
     const dispatch = useDispatch();
     const [ status, setStatus ] = useState(false)
     const data = useSelector(state => state.user.sessionData?.data?.data)
+    const site =  data?.sites[ 0 ]
     var timeoutData = null;
     useEffect(() => {
         removeItem('assessmentForm')
@@ -34,14 +35,14 @@ const DashboardPage =() => {
         }
     }
     useEffect(() =>{
-        data?.site?.domain && checkDomainStatus(`https://${ data?.site?.domain }`)
-        timeoutData = data?.site?.domain && setInterval(function(){
-            checkDomainStatus(`https://${ data?.site?.domain }`)
+        site?.domain && checkDomainStatus(`https://${ site?.domain }`)
+        timeoutData = site?.domain && setInterval(function(){
+            checkDomainStatus(`https://${ site?.domain }`)
         },30000)
         return () =>{
             clearInterval(timeoutData)
         }
-    },[ data?.site?.domain ])
+    },[ site?.domain ])
 
     return(
         <main className="dashboard-data">
@@ -50,8 +51,8 @@ const DashboardPage =() => {
                     <div className="dashboard-title">
                         <h5>
                             Domain:
-                            <a href={ `https://${ data?.site?.domain }` } rel="noreferrer" target='_blank'>
-                                { data?.site?.domain }
+                            <a href={ `https://${ site?.domain }` } rel="noreferrer" target='_blank'>
+                                { site?.domain }
                             </a>
                             <span className={ `${ status ? 'success' : 'in-progress' }` }> -
                                 {status ? 'Done' : 'In Progress'}

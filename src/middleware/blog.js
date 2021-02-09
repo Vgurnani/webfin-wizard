@@ -39,7 +39,7 @@ export const createBlog = (data) => {
             const file = dataURLtoFile(data.imageUrl,uId()+'.png')
             data[ 'imageUrl' ] = await imageUpload(file);
         }
-        const route = JSON.parse(getItem('sessionData'))?.data?.data?.site?.route;
+        const route = JSON.parse(getItem('sessionData'))?.data?.data?.sites[ 0 ]?.route;
         data[ 'slug' ] = await checkAvailbleSlug(route,data)
         strapiAxiosInstance.post(route, data).then((response)=>{
             history.push(ROUTES.DASHBOARD)

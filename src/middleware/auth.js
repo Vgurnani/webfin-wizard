@@ -58,6 +58,7 @@ export const registrationUser = (data, assessmentData) => {
             .then((response) => {
                 response.data.data[ 'accessToken' ] = response.data.accessToken
                 response.data.data[ 'test' ] = false
+                assessmentData[ 'route' ] = response.data.data.route
                 setItem('user', response.data.data)
                 notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.REGISTRATION_SUCCESS);
                 dispatch(registrationSuccess(response.data.data))
