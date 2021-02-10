@@ -47,13 +47,12 @@ const DashboardPage =() => {
             clearInterval(timeoutData)
         }
     },[ site?.domain ])
-
     return(
         <main className="dashboard-data">
             <section className="dashboard-body">
                 <div className="dashboard-header">
                     <div className="dashboard-title">
-                        <h1>Your website name <a>Edit</a></h1>
+                        <h1>{ site?.websiteName } <a>Edit</a></h1>
                         <h5>
                             Domain:
                             <a href={ `https://${ site?.domain }` } rel="noreferrer" target='_blank' className={ `${ status ? 'success' : 'in-progress' }` }>
@@ -65,7 +64,7 @@ const DashboardPage =() => {
                             </span> */}
                         </h5>
                         <div className="dashboard-btns">
-                            <a className="btn btn-primary">View Website</a>
+                            <a href={ `https://${ site?.domain }` } rel="noreferrer" target='_blank' className="btn btn-primary">View Website</a>
                         </div>
                     </div>
                     <div className="dashboard-actions">

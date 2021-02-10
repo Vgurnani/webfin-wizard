@@ -158,7 +158,7 @@ const StepThree = (props) => {
                                 </Col>
                                 <Col className="col-6 name-website-selector-preview wizard-preview">
                                     <h4>Preview</h4>
-                                    <div className="blog-preview wizrd-blog-preview color-palate-preview ">
+                                    <div className="blog-preview wizrd-blog-preview color-palate-preview wizard-home ">
                                         <WebTemplates data={ data }>
                                             <Header></Header>
                                             <Home>

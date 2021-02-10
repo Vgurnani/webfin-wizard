@@ -70,7 +70,7 @@ const StepTwo = (props) => {
                                 </Col>
                                 <Col className="col-6 color-palatte-preview wizard-preview">
                                     <h4>Preview</h4>
-                                    <div className="color-preview wizrd-blog-preview color-palate-preview">
+                                    <div className="color-preview wizard-home wizrd-blog-preview color-palate-preview">
                                         <WebTemplates data={ data }>
                                             <Header></Header>
                                             <Home>

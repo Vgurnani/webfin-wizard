@@ -1,7 +1,11 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment'
 import CustomTable from 'components/core/table'
+import ConfirmAlert from 'components/core/confirm-alert'
+import { confirmAlert } from 'react-confirm-alert';
+
 import
 {
     Form,
@@ -20,16 +24,18 @@ import {
     DeleteIcon,
     CloneIcon,
 } from '../../utils/svg';
+import { getSessionData } from 'utils/helpers'
 import searchIcon from '../../images/search.png';
 import filterIcon from '../../images/filter.png';
 import EditIcon from '../../images/edit.png';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const BlogsPage = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const publishBlogs = useSelector(state => state.blog.publishBlogs)
     const draftBlogs = useSelector(state => state.blog.draftBlogs)
-
+    const data = useSelector(state => state.user.sessionData?.data?.data) || getSessionData()
     useEffect(() => {
         dispatch({
             type: 'SET_ACTIVE_SIDEBAR',
@@ -52,11 +58,27 @@ const BlogsPage = () => {
 
     const handleDelete = (event, blog) => {
         event.preventDefault();
-        dispatch(deleteBlog(blog.id))
+        confirmAlert({
+            // eslint-disable-next-line react/display-name
+            customUI: ({ onClose }) => {
+                return(
+                    <ConfirmAlert key={ 'box' } onClose={ onClose } handleAction={ () => dispatch(deleteBlog(blog.id)) } />
+                );
+            }
+        });
     }
+
     const handlePublish = (event, blog ) => {
         event.preventDefault()
         dispatch(callPublish(blog.id,event.target.checked))
+    }
+
+    const redirectToBlog = (event,blog) => {
+        event.preventDefault();
+        window.open(
+            `https://${ data.sites[ 0 ].domain }/blog/${ blog.slug }`,
+            '_blank'
+        );
     }
 
     return(
@@ -65,7 +87,7 @@ const BlogsPage = () => {
                 <div className="dashboard-header">
                     <div className="dashboard-title">
                         <h5>Site 1</h5>
-                        <h1>My blog about food</h1>
+                        <h1>My blog about {data?.sites[ 0 ]?.niche?.label}</h1>
                     </div>
                     <div className="dashboard-actions">
                         <Form className="search-form">
@@ -93,7 +115,7 @@ const BlogsPage = () => {
                     { publishBlogs?.length > 0 && <div className="dashboard-table">
                         <CustomTable headings={ [ 'Title','Views','Comments','Date Created','Actions' ] }>
                             {publishBlogs?.map((blog, index) => (<tr key={ blog?.slug }>
-                                <td key={ index }>
+                                <td onClick={ (event) => redirectToBlog(event, blog) } style={ { cursor: 'pointer ' } } key={ index } >
                                     <Form.Check
                                         type="switch"
                                         id={ 'custom-switch-'+blog.id  }
@@ -103,13 +125,13 @@ const BlogsPage = () => {
                                     />
                                     <span className="table-post-title">{blog?.title}</span>
                                 </td>
-                                <td>
+                                <td onClick={ (event) => redirectToBlog(event, blog) } style={ { cursor: 'pointer ' } }>
                                     -
                                 </td>
-                                <td>
+                                <td onClick={ (event) => redirectToBlog(event, blog) } style={ { cursor: 'pointer ' } }>
                                     -
                                 </td>
-                                <td>
+                                <td onClick={ (event) => redirectToBlog(event, blog) } style={ { cursor: 'pointer ' } }>
                                     { blog.created_at && moment(blog.created_at).format('L')}
                                 </td>
                                 <td>
@@ -145,7 +167,7 @@ const BlogsPage = () => {
                                             <CustomTable headings={ [ 'Title','Views','Comments','Date Created','Actions' ] }>
 
                                                 {draftBlogs?.map(blog => (
-                                                    <tr key={ blog.slug }>
+                                                    <tr  key={ blog.slug }>
                                                         <td>
                                                             <span className="table-post-title">{blog.title}</span>
                                                         </td>
