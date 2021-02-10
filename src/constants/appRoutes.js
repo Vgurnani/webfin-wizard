@@ -11,5 +11,6 @@ export const ROUTES = {
     AUTH_REDIRECT: '/oauth2/redirect',
     BLOG: '/blog',
     BLOGS: '/blogs',
-    EDIT_BLOG: '/blogs/:id'
+    EDIT_BLOG: '/blogs/:id',
+    USER_PROFILE: '/user/:id'
 }
