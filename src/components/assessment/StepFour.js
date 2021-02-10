@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React,{ useState, useEffect } from 'react'
 import PropTypes from 'prop-types';
 import FontStyleModal from './shared/FontStyleModal'
 import { useSelector } from 'react-redux';
@@ -17,6 +17,11 @@ const StepFour = (props) => {
     const [ open, setOpen ] = useState(false)
     const form  = useSelector((state) => state.form.assessmentForm)
     const { handleSubmit ,prevPage, assessmentData } = props;
+
+    useEffect(()=>{
+        window.scrollTo(0, 0);
+    },[]);
+
     return(<Row>
         <Col className='col-md-6'>
             <div className="forget-forms signup-forms">

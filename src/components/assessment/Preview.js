@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import { useSelector } from 'react-redux'
@@ -26,6 +26,11 @@ const Preview = (props) => {
         readOnly: true,
         headerLinks: [ { name: 'Home', url: '#' },{ name: 'Blog', url: '#' },{ name: 'About', url: '#' },{ name: 'Contact', url: '#' } ],
     }
+
+    useEffect(()=>{
+        window.scrollTo(0, 0);
+    },[]);
+
     return(
 
         <div className="assesment-step assesment-step-final">
