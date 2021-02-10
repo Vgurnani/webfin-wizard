@@ -32,6 +32,12 @@ export const createAssessmentSuccess = (data) => {
         payload: data,
     };
 };
+export const updateAssessmentSuccess = (data) => {
+    return {
+        type: ActionTypes.UPDATE_ASSESSMENT_SUCCESS,
+        payload: data,
+    };
+};
 
 export const createAssessmentFailure = (error) => {
     return {

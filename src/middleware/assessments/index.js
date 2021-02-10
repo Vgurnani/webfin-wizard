@@ -4,6 +4,7 @@ import { notification } from '../../services/notification';
 import axiosInstance from '../../services/api';
 import unsplashClient from '../../services/unsplashClient';
 import { ROUTES } from '../../constants/appRoutes';
+import { getCurrentUser } from 'middleware/auth'
 import history  from '../../utils/history'
 import { removeItem, setItem } from '../../utils/cache';
 import { dataURLtoFile , uId, getUser } from '../../utils/helpers'
@@ -18,7 +19,8 @@ import {
     getUnsplashSuccess,
     getVerifiedDomainSuccess,
     getVerifiedDomainRequest,
-    getVerifiedDomainError
+    getVerifiedDomainError,
+    updateAssessmentSuccess
 
 } from '../../actions/assessments'
 export const getAssessment = () => {
@@ -76,6 +78,23 @@ export const createAssessment = (data) => {
             notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)
             dispatch(createAssessmentFailure(error?.response?.data?.message))
             history.push(ROUTES.ASSESSMENT)
+        })
+    };
+};
+
+export const updateAssessment = (id, data) => {
+    return async (dispatch) => {
+        dispatch(createAssessmentRequest())
+        if(data.logoUrl && !data.logoUrl.match('^(http|https)://')){
+            const file = dataURLtoFile(data.logoUrl,uId()+'.png')
+            data[ 'logoUrl' ] = await imageUpload(file);
+        }
+        axiosInstance.put(`/assessment/${ id }`, data).then((response)=>{
+            notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.UPDATE_ASSESSMENT);
+            dispatch(getCurrentUser())
+            dispatch(updateAssessmentSuccess(response.data))
+        }).catch((error) => {
+            notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)
         })
     };
 };

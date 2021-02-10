@@ -21,16 +21,16 @@ const SideBar = () => {
                         <DashboardMenuIcon />
                     </Link>
                 </li>
+                <li className={ `${ theme.sidebarActive === 'edit-site' ?  'active' : '' }` } >
+                    <Link to="/edit-site">
+                        Edit Site
+                        <BlogMenuIcon />
+                    </Link>
+                </li>
                 <li className={ `${ theme.sidebarActive === 'blog' ?  'active' : '' }` } >
                     <Link to="/blogs">
                         Blog
                         <BlogMenuIcon />
-                    </Link>
-                </li>
-                <li>
-                    <Link to="#">
-                        Test
-                        <DashboardMenuIcon />
                     </Link>
                 </li>
                 <li>

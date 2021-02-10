@@ -11,6 +11,7 @@ import Dashboard from './pages/dashboard'
 import RedirectAuth from './pages/oauth2/redirect'
 import AssessmentPage from './pages/assessment';
 import ForgetPasswordPage from './pages/forget-password';
+import EditSitePage from './pages/edit-site';
 import BlogPage from './pages/blog';
 import BlogsPage from './pages/blogs';
 import { PrivateRoute }  from './components/hoc/PrivateRoute'
@@ -39,6 +40,7 @@ const App = () => {
                 <Route exact path={ ROUTES.PRIVACY_POLICY } component={ PrivacyPolicy } />
                 <PrivateRoute exact path={ ROUTES.BLOG } component={ BlogPage } />
                 <PrivateRoute exact path={ ROUTES.BLOGS } component={ BlogsPage } />
+                <PrivateRoute exact path={ ROUTES.EDIT_SITE } component={ EditSitePage } />
                 <PrivateRoute exact path={ ROUTES.EDIT_BLOG } component={ BlogPage } />
             </Layout>
             <Route exact component={ NotFoundPage } />

@@ -28,6 +28,8 @@ export default (state = initialState, action) => {
         return { ...state, domains: action.payload.domains, domainLoading: false }
     case ActionTypes.GET_VERIFIED_DOMAIN_REQUEST:
         return { ...state, domainLoading: true }
+    case ActionTypes.UPDATE_ASSESSMENT_SUCCESS:
+        return { ...state, loading: false }
     case ActionTypes.GET_VERIFIED_DOMAIN_ERROR:
         return { ...state, domains: [], domainLoading: false }
     case ActionTypes.CLEAR_DOMAINS:
