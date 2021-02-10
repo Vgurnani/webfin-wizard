@@ -89,6 +89,10 @@ export const updateAssessment = (id, data) => {
             const file = dataURLtoFile(data.logoUrl,uId()+'.png')
             data[ 'logoUrl' ] = await imageUpload(file);
         }
+        if(data.faviconUrl && !data.faviconUrl.match('^(http|https)://')){
+            const file = dataURLtoFile(data.faviconUrl,uId()+'.png')
+            data[ 'faviconUrl' ] = await imageUpload(file);
+        }
         axiosInstance.put(`/assessment/${ id }`, data).then((response)=>{
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.UPDATE_ASSESSMENT);
             dispatch(getCurrentUser())

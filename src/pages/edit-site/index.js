@@ -115,11 +115,11 @@ const EditSitePage =(props) => {
                             </Col>
                             <Col className='col-md-2'>
                                 <span>Site logo</span>
-                                <div onClick={ (event) => handleModal(event,'logo') }>{site?.logoUrl ? <img src={ site?.logoUrl } width={ 20 } /> : site?.websiteName }</div>
+                                <div onClick={ (event) => handleModal(event,'logo') }>{form?.values?.logoUrl ||site?.logoUrl ? <img src={ form?.values?.logoUrl || site?.logoUrl } width={ 20 } /> : site?.websiteName }</div>
                             </Col>
                             <Col className='col-md-2'>
                                 <span>Site icon</span>
-                                <div onClick={ (event) => handleModal(event,'favicon') }>Select..</div>
+                                <div onClick={ (event) => handleModal(event,'favicon') }>Select..<img src={ form?.values?.faviconUrl || site?.faviconUrl } width={ 20 } /></div>
                             </Col>
                             <Col className='col-md-2'>
                                 <span>Header/Footer</span>
