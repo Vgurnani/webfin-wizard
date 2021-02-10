@@ -1,40 +1,76 @@
-import React, { useEffect } from 'react';
-import { reduxForm, Field } from 'redux-form';
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { reduxForm, Field, change as reduxChange } from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
+import { getUnsplash } from 'middleware/assessments';
 import { renderField, renderFieldWG } from '../../utils/formUtils';
-import { registerValidate as validate } from '../../utils/validates';
-import { togglePassword } from '../../utils/helpers'
+import { updateUserProfileValidate as validate } from '../../utils/validates';
+import { togglePassword, getUser } from '../../utils/helpers';
+import { updateCurrentUser } from '../../middleware/auth';
 import
 {
     Form,
     Button
 } from 'react-bootstrap';
+import { ROUTES } from 'constants/appRoutes';
+import UploadImageModal from 'components/assessment/shared/UploadImageModal';
 
-const UserProfilePage =() => {
+const UserProfilePage =(props) => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const [ openModal, setModalOpen ]  = useState(false);
     const userProfileForm = useSelector((state)=>state.form.userProfileForm);
+    const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
     const { handleSubmit } = props;
 
     useEffect(() => {
-        console.log('userProfileForm', userProfileForm);
-        // {
-        //     "firstName": "string",
-        //     "lastName": "string",
-        //     "password": "string",
-        //     "phone": "string",
-        //     "profileImageUrl": "string",
-        //     "userName": "string"
-        //   }
-    }, [ userProfileForm ])
+        dispatch(getUnsplash('/photos','bonsai'))
+        const user = getUser();
+        if (user && Object.keys(user).length) {
+            dispatch(reduxChange('userProfileForm', 'firstName', user.firstName || ''))
+            dispatch(reduxChange('userProfileForm', 'lastName', user.lastName || ''))
+            dispatch(reduxChange('userProfileForm', 'password', user.password || ''))
+            dispatch(reduxChange('userProfileForm', 'phone', user.phone || ''))
+            dispatch(reduxChange('userProfileForm', 'userName', user.userName || ''))
+            dispatch(reduxChange('userProfileForm', 'profileImageUrl', user.profileImageUrl || ''))
+        } else {
+            history.push(ROUTES.DASHBOARD)
+        }
+    }, [])
 
     const submitData = (data) => {
-        console.log()
+        Object.entries(data).forEach((k) => [ null, '', undefined ].includes(data[ k ]) && delete data[ k ]);
+        dispatch(updateCurrentUser(data))
+    }
+
+    const handleToggleModal = () => {
+        setModalOpen(!openModal)
+    }
+
+    const clearImage = () => {
+        dispatch(reduxChange('userProfileForm', 'profileImageUrl', null))
+    }
+
+    const getBase64 = (base64) => {
+        dispatch(reduxChange('userProfileForm', 'profileImageUrl', base64))
+    }
+
+    const handleSearch = (event) => {
+        const query = event.currentTarget.value || 'cat'
+        dispatch(getUnsplash('/photos',query))
     }
 
     return(
         <main className="dashboard-data">
             <section className="dashboard-body">
                 <Form className="form" onSubmit={ handleSubmit(submitData) }>
+                    <div className="upload-feature-img-wrap">
+                        <div className="upload-feature-img" onClick={ handleToggleModal }>
+                            {userProfileForm?.values?.profileImageUrl ? <img src={ userProfileForm?.values?.profileImageUrl } /> : 'Click here to edit feature image'}
+                        </div>
+                    </div>
                     <Field
                         name="firstName"
                         label="First Name:"
@@ -87,14 +123,28 @@ const UserProfilePage =() => {
                         maxLength="150"
                         placeholder='Enter your phone number'
                     />
+                    <UploadImageModal
+                        fieldName={ 'blogUrl' }
+                        clearImage={ clearImage }
+                        previewFile={ userProfileForm.values?.profileImageUrl }
+                        getBase64={ getBase64 }
+                        handleSearch={ handleSearch }
+                        unsplashImages={ unsplashImages }
+                        openModal={ openModal }
+                        handleToggleModal={ handleToggleModal }
+                    />
                     <Button className="btn btn-primary" type="submit">
-                        Sign Up
+                        Save
                     </Button>
                 </Form>
             </section>
         </main>
     )
 }
+
+UserProfilePage.propTypes = {
+    handleSubmit: PropTypes.func
+};
 
 export default reduxForm({
     form: 'userProfileForm',

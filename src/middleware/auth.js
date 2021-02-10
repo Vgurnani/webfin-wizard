@@ -1,7 +1,7 @@
 import { ROUTES } from '../constants/appRoutes';
 import { NOTIFICATION_TYPES,MESSAGE } from '../constants/app';
 import { notification } from '../services/notification';
-import { createAssessment } from './assessments/'
+import { createAssessment, imageUpload } from './assessments/'
 import axiosInstance from '../services/api';
 import { getItem, setItem, removeItem } from '../utils/cache';
 import history from '../utils/history'
@@ -21,8 +21,12 @@ import {
     forgetPasswordRequest,
     forgetPasswordSuccess,
     forgetPasswordFailure,
+    updateUserProfileRequest,
+    updateUserProfileFailure,
+    updateUserProfileSuccess,
     getUserSuccess
 } from '../actions/user/auth'
+import { dataURLtoFile, uId } from 'utils/helpers';
 
 export const loginUser = (data) => {
     return (dispatch) => {
@@ -162,5 +166,27 @@ export const getCurrentUser = () => {
                 notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message);
             });
 
+    };
+};
+
+export const updateCurrentUser = (data) => {
+    return async (dispatch) => {
+        dispatch(updateUserProfileRequest());
+        if(data.profileImageUrl && !data.profileImageUrl.match('^(http|https)://')){
+            const file = dataURLtoFile(data.profileImageUrl,uId()+'.png')
+            data[ 'profileImageUrl' ] = await imageUpload(file);
+        }
+        axiosInstance.put('/user', data)
+            .then((response) => {
+                const user = JSON.parse(getItem('user'));
+                setItem('user', { ...user, ...response.data })
+                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.USER_PROFILE_UPDATE_SUCCESS);
+                history.push(ROUTES.DASHBOARD)
+                dispatch(updateUserProfileSuccess(response.data));
+            })
+            .catch((error) => {
+                notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message);
+                dispatch(updateUserProfileFailure(error?.response?.data?.message));
+            });
     };
 };

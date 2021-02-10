@@ -14,15 +14,18 @@ import webFinLogo from '../../images/header/webFin-logo.svg';
 import headerProfilePic from '../../images/media/media-1.jpg';
 import { isLoggedIn } from '../../utils/helpers'
 import { logoutUser } from '../../middleware/auth';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
     NotificationIcon,
     ChevronRight,
 } from '../../utils/svg';
+import { ROUTES } from 'constants/appRoutes';
 
 const Navbar = (props) => {
     const dispatch  = useDispatch();
     const [ mobileHumberger, setMobileHumberger ] = useState(false)
+    const data = useSelector(state => state.user.sessionData?.data?.data)
+    const user =  data?.user
     const [ navBarActiveClass , setNavBarActiveClass ] = useState('')
     const btAction = (pathname) => {
         if(pathname === '/register'){
@@ -61,13 +64,14 @@ const Navbar = (props) => {
                         <Dropdown >
                             <Dropdown.Toggle>
                                 <span className="nav-profile-pic">
-                                    <img src={ headerProfilePic } alt="John" />
+                                    <img src={ user?.profileImageUrl || headerProfilePic } alt="John" />
                                 </span>
                                 <ChevronRight />
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu  menuAlign="right">
-                                <Dropdown.Item onClick={ logout } >logout</Dropdown.Item>
+                                <Dropdown.Item ><Link to={ ROUTES.USER_PROFILE }>My Account</Link></Dropdown.Item>
+                                <Dropdown.Item onClick={ logout } >Log out</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </li>
