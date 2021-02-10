@@ -45,7 +45,8 @@ const StepThree = (props) => {
     useEffect(()=>{
         const query = form.values?.nicheId && getLabel(assessmentData.niches, form.values?.nicheId)
         dispatch(getUnsplash('/photos',query))
-    },[])
+        window.scrollTo(0, 0);
+    },[]);
 
     useEffect(()=>{
         setSave(assessmentSaved('step3',form?.values))

@@ -33,6 +33,10 @@ const StepTwo = (props) => {
         readOnly: true
     }
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     useEffect(()=>{
         setSave(assessmentSaved('step2',assessmentForm?.values))
         if(!assessmentForm?.values?.colourId){

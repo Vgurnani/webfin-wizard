@@ -29,7 +29,8 @@ const StepOne = (props) => {
         if(!_.isEmpty(assessmentIntialValues())){
             initialize(assessmentIntialValues())
         }
-    },[])
+        window.scrollTo(0, 0);
+    },[]);
 
     useEffect(()=>{
         setSave(assessmentSaved('step1',assessmentForm?.values))
