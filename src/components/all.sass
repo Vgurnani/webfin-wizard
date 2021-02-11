@@ -1644,6 +1644,8 @@ ul
     .modal-content
       padding: 65px
       width: 888px
+      @media (max-width: $breakpoint-ipad)
+        padding: 40px
       @media (max-width: $breakpoint-mobile)
         padding: 20px
       .close
@@ -1747,6 +1749,54 @@ ul
           margin: 24px 0
           @media (max-width: $breakpoint-mobile)
             font-size: 25px
+.logo-upload-modal
+  &.social-connect-modal
+    .modal-dialog
+      .modal-content
+        width: 1037px
+.social-connect-modal
+  .styled-radio-btn
+    .input-radio-label
+      border-color: transparent
+      background-color: $light-bg-color
+    &#facebook
+      .input-radio-label
+        background-image: url('/images/facebook.png') !important
+    &#linkedin
+      .input-radio-label
+        background-image: url('/images/linkedin.png') !important
+    &#instagram
+      .input-radio-label
+        background-image: url('/images/instagram.png') !important
+    &#twitter
+      .input-radio-label
+        background-image: url('/images/twitter.png') !important
+    &#youtube
+      .input-radio-label
+        background-image: url('/images/youtube.png') !important
+  .social-url-form
+    .form-group
+      .form-control
+        border: 2px solid rgba(51, 51, 51, 0.3)
+    .social-url-title
+      width: 100%
+      display: inline-block
+      @media (max-width: $breakpoint-mobile)
+        margin: 20px 0 0
+      h4
+        font-size: 16px
+        line-height: 1.5
+        font-weight: normal
+        letter-spacing: 0.5px
+        text-decoration: underline
+        text-align: center
+        margin: 0 0 10px
+      .social-url-img
+        text-align: center
+    .modal-btns
+      margin: 85px 0 0
+      @media (max-width: $breakpoint-mobile)
+        margin: 30px 0 0
 .category-wrapper
   width: 727px
   max-width: 100%
