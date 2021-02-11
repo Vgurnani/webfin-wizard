@@ -4,24 +4,25 @@ import { ROUTES } from './constants/appRoutes';
 import HomePage from './components/homepage';
 import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
-import TermsCondition from './pages/terms-conditions'
-import PrivacyPolicy from './pages/privacy-policy'
-import NotFoundPage from './pages/404'
-import Dashboard from './pages/dashboard'
-import RedirectAuth from './pages/oauth2/redirect'
+import TermsCondition from './pages/terms-conditions';
+import PrivacyPolicy from './pages/privacy-policy';
+import NotFoundPage from './pages/404';
+import Dashboard from './pages/dashboard';
+import RedirectAuth from './pages/oauth2/redirect';
 import AssessmentPage from './pages/assessment';
 import ForgetPasswordPage from './pages/forget-password';
 import EditSitePage from './pages/edit-site';
 import BlogPage from './pages/blog';
 import BlogsPage from './pages/blogs';
-import { PrivateRoute }  from './components/hoc/PrivateRoute'
-import { AssessmentRoute } from './components/hoc/AssessmentRoute'
-import { PublicRoute }  from './components/hoc/PublicRoute'
-import ConfirmAccount from './pages/confirm-account'
-import { ConfirmAccountRoute } from './components/hoc/ConfirmAccountRoute'
-import Layout from './components/shared/Layout'
-import './components/all.sass'
-import './components/dashboard.sass'
+import UserProfilePage from './pages/user-profile';
+import { PrivateRoute }  from './components/hoc/PrivateRoute';
+import { AssessmentRoute } from './components/hoc/AssessmentRoute';
+import { PublicRoute }  from './components/hoc/PublicRoute';
+import ConfirmAccount from './pages/confirm-account';
+import { ConfirmAccountRoute } from './components/hoc/ConfirmAccountRoute';
+import Layout from './components/shared/Layout';
+import './components/all.sass';
+import './components/dashboard.sass';
 const RegisterRoute = React.lazy(() => import('./components/hoc/RegisterRoute'));
 
 const App = () => {
@@ -42,6 +43,7 @@ const App = () => {
                 <PrivateRoute exact path={ ROUTES.BLOGS } component={ BlogsPage } />
                 <PrivateRoute exact path={ ROUTES.EDIT_SITE } component={ EditSitePage } />
                 <PrivateRoute exact path={ ROUTES.EDIT_BLOG } component={ BlogPage } />
+                <Route exact path={ ROUTES.USER_PROFILE } component={ UserProfilePage } />
             </Layout>
             <Route exact component={ NotFoundPage } />
         </Switch>);

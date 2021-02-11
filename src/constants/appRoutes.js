@@ -12,5 +12,6 @@ export const ROUTES = {
     BLOG: '/blog',
     BLOGS: '/blogs',
     EDIT_BLOG: '/blogs/:id',
-    EDIT_SITE: '/edit-site'
+    EDIT_SITE: '/edit-site',
+    USER_PROFILE: '/user-profile'
 }

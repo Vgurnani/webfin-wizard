@@ -113,3 +113,21 @@ export const blogValidate = values => {
 
     return errors;
 }
+
+export const updateUserProfileValidate = values => {
+    const errors = {};
+    const letter = /^[a-zA-Z][a-zA-Z\s]*$/;
+    if(!values.firstName){
+        errors.firstName = MESSAGE.VALID_ENTER('first name');
+    }
+    if(!values.lastName){
+        errors.lastName = MESSAGE.VALID_ENTER('last name');
+    }
+    if(values.firstName && !values.firstName.match(letter)){
+        errors.firstName = MESSAGE.SHOULD_CHAR;
+    }
+    if(values.lastName && !values.lastName.match(letter)){
+        errors.lastName = MESSAGE.SHOULD_CHAR;
+    }
+    return errors;
+}

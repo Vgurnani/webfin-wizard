@@ -37,6 +37,12 @@ export default (state = initialState, action) => {
         return { ...state, error: action?.payload, loading: false };
     case ActionTypes.GET_USER_SUCCESS:
         return { ...state, sessionData: action.payload, loading: false };
+    case ActionTypes.UPDATE_USER_PROFILE_REQUEST:
+        return { ...state, loading: true };
+    case ActionTypes.UPDATE_USER_PROFILE_SUCCESS:
+        return { ...state, user: action.payload, loading: false };
+    case ActionTypes.UPDATE_USER_PROFILE_FAILURE:
+        return { ...state, error: action.payload, loading: false };
     default:
         return state;
     }

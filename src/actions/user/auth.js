@@ -101,3 +101,24 @@ export const getUserSuccess = (data) => {
         payload: data,
     };
 };
+
+export const updateUserProfileRequest = () => {
+    return {
+        type: ActionTypes.UPDATE_USER_PROFILE_REQUEST,
+
+    };
+};
+
+export const updateUserProfileSuccess = (data) => {
+    return {
+        type: ActionTypes.UPDATE_USER_PROFILE_SUCCESS,
+        payload: data,
+    };
+};
+
+export const updateUserProfileFailure = (error) => {
+    return {
+        type: ActionTypes.UPDATE_USER_PROFILE_FAILURE,
+        error: error,
+    };
+};

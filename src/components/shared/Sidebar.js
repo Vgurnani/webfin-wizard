@@ -33,24 +33,6 @@ const SideBar = () => {
                         <BlogMenuIcon />
                     </Link>
                 </li>
-                <li>
-                    <Link to="#">
-                        Test
-                        <DashboardMenuIcon />
-                    </Link>
-                </li>
-                <li>
-                    <Link to="#">
-                        Test
-                        <DashboardMenuIcon />
-                    </Link>
-                </li>
-                <li>
-                    <Link to="#">
-                        Test
-                        <DashboardMenuIcon />
-                    </Link>
-                </li>
             </ul>
         </aside>)
 }

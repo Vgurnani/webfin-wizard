@@ -70,7 +70,7 @@ const DashboardPage =() => {
                     <div className="dashboard-actions">
                         { user && <div className="author-info">
                             <div className="author-img">
-                                <img src={ profilePic } alt="Jason Miller" />
+                                <img src={ user?.profileImageUrl || profilePic } alt="Jason Miller" />
                             </div>
                             <div className="author-name">
                                 <h6>Welcome back!</h6>
