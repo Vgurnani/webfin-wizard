@@ -70,16 +70,15 @@ const EditSitePage =(props) => {
         dispatch(reduxChange('assessmentUpdateForm', field, null))
     }
     const renderModalView = () =>{
-        debugger
         switch(modalType){
         case 'niche':
             return <Niche  assessmentData={ assessmentData } onClose={ handleClose } />
         case 'colour':
             return <ColourPalette assessmentData={ assessmentData } onClose={ handleClose } />
         case 'logo':
-            return <UploadLogo fieldName='logoUrl' previewFile={ form?.values?.logoUrl || assessmentData?.logoUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } onClose={ handleClose } />
+            return <UploadLogo fieldName='logoUrl' previewFile={ form?.values?.logoUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } onClose={ handleClose } />
         case 'favicon':
-            return <UploadLogo fieldName='faviconUrl' previewFile={ form?.values?.faviconUrl || assessmentData?.faviconUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } onClose={ handleClose } />
+            return <UploadLogo fieldName='faviconUrl' previewFile={ form?.values?.faviconUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } onClose={ handleClose } />
         }
     }
     const submitData = (formData) => {
@@ -118,11 +117,11 @@ const EditSitePage =(props) => {
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>Site logo:</Form.Label>
-                                <div className="edit-site-btn no-arrow" onClick={ (event) => handleModal(event,'logo') }>{form?.values?.logoUrl ||site?.logoUrl ? <img src={ form?.values?.logoUrl || site?.logoUrl } width={ 20 } /> : site?.websiteName }</div>
+                                <div className="edit-site-btn no-arrow" onClick={ (event) => handleModal(event,'logo') }>{form?.values?.logoUrl  ? <img src={ form?.values?.logoUrl || site?.logoUrl } width={ 20 } /> : site?.websiteName }</div>
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>Site icon:</Form.Label>
-                                <div className="edit-site-btn  no-arrow" onClick={ (event) => handleModal(event,'favicon') }>{form?.values?.faviconUrl || site?.faviconUrl ?  <img src={ form?.values?.faviconUrl || site?.faviconUrl } width={ 20 } /> : 'Select..'}</div>
+                                <div className="edit-site-btn  no-arrow" onClick={ (event) => handleModal(event,'favicon') }>{form?.values?.faviconUrl ?  <img src={ form?.values?.faviconUrl || site?.faviconUrl } width={ 20 } /> : 'Select..'}</div>
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail" className="edit-header-footer">
                                 <Form.Label>Header/Footer:</Form.Label>
