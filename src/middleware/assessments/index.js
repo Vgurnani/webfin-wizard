@@ -23,6 +23,15 @@ import {
     updateAssessmentSuccess
 
 } from '../../actions/assessments'
+
+export const siteBuild = () => {
+    return() => {
+        axiosInstance.post('/user/site/publish').then(()=>{
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+}
 export const getAssessment = () => {
     return (dispatch) => {
         dispatch(getAssessmentRequest())
@@ -97,6 +106,7 @@ export const updateAssessment = (id, data) => {
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.UPDATE_ASSESSMENT);
             dispatch(getCurrentUser())
             dispatch(updateAssessmentSuccess(response.data))
+            dispatch(siteBuild())
         }).catch((error) => {
             notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)
         })

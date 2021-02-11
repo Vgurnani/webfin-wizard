@@ -1,3 +1,8 @@
+import twitter  from 'images/twitter-color.png'
+import facebook  from 'images/facebook-color.png'
+import youtube  from 'images/youtube-color.png'
+import instrgram  from 'images/instagram-color.png'
+import linkedin  from 'images/linkedin-color.png'
 export const NOTIFICATION_TYPES = {
     SUCCESS: 'success',
     ERROR: 'error',
@@ -26,10 +31,10 @@ export const MESSAGE = {
 }
 
 export const SOCIAL_MEDIA = [
-    { name: 'Facebook',value: 'facebook', imgUrl: '' },
-    { name: 'Linked in',value: 'linkedin', imgUrl: '' },
-    { name: 'Instagram',value: 'instagram', imgUrl: '' },
-    { name: 'Tweeter',value: 'tweeter', imgUrl: '' },
-    { name: 'Youtube',value: 'youtube', imgUrl: '' },
-    { name: 'Label',value: 'label', imgUrl: '' }
+    { name: 'Facebook',value: 'facebook', imgUrl: `<img width='110px' src=${ facebook } />` },
+    { name: 'Linked in',value: 'linkedin', imgUrl: `<img width='110px' src=${ linkedin } />` },
+    { name: 'Instagram',value: 'instagram', imgUrl: `<img width='110px' src=${ instrgram } />` },
+    { name: 'Twitter',value: 'twitter', imgUrl: `<img width='110px' src=${ twitter } />` },
+    { name: 'Youtube',value: 'youtube', imgUrl: `<img width='110px' src=${ youtube } />` },
+    { name: 'Label',value: 'label', imgUrl: `<img width='110px' src=${ facebook } />` }
 ]

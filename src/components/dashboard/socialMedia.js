@@ -1,8 +1,10 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types';
 import { Modal, Row, Col,Button,Form } from 'react-bootstrap'
 import { SOCIAL_MEDIA } from 'constants/app'
-import twitter  from './../../images/twitter-color.png'
+
 const SocialMedia =(props) => {
     const [ values, setValues ] = useState({})
     const [ inputRadio , setInputRadio ] = useState('facebook')
@@ -59,10 +61,8 @@ const SocialMedia =(props) => {
                     </Col>
                     <Col className="col-4 social-url-form">
                         <div className="social-url-title">
-                            <h4>Link To: Twitter</h4>
-                            <div className="social-url-img">
-                                <img src={ twitter } />
-                            </div>
+                            <h4>Link To: {inputRadio}</h4>
+                            <div className="social-url-img" dangerouslySetInnerHTML={ { __html: SOCIAL_MEDIA.filter((item)=> item.value === inputRadio)[ 0 ]?.imgUrl } }></div>
                             <div className="form-group">
                                 <Form.Label>URL:</Form.Label>
                                 {inputRadio &&
