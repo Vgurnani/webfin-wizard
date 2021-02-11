@@ -1017,3 +1017,63 @@
             background-color: transparent
             margin: 0
             padding: 0
+.edit-site-panel
+    width: 100%
+    display: inline-block
+    margin: 17px 0
+    .edit-site-btns
+        width: 100%
+        display: flex
+        justify-content: space-between
+        .form-group
+            width: auto
+            display: inline-block
+            margin-left: 13px
+            &:first-child
+                margin-left: 0
+            &.edit-header-footer
+                width: 166px
+                .btn
+                    width: 100%
+                    height: 40px
+            label
+                font-size: 14px
+                line-height: 1.4
+                font-weight: 700
+                color: $dark-grey-color
+            .edit-site-btn
+                background-color: $white-color
+                border-radius: 24px
+                padding: 7px 35px 7px 12px
+                display: inline-block
+                width: 100%
+                background-image: url('/images/chevron-down.png')
+                background-repeat: no-repeat
+                background-position: right 12px center
+                font-size: 16px
+                line-height: 1.5
+                color: $dark-grey-color
+                height: 40px
+                &.no-arrow
+                    background-image: none
+                    padding-right: 12px
+                    text-align: center
+                .checkbox-colors
+                    margin: 0
+                    padding: 0 10px 0
+                    line-height: 0
+                    span
+                        width: 24px
+                        height: 24px
+                        vertical-align: middle
+.color-palette-popup
+    .color-palatte
+        .color-palatte-selector
+            .styled-radio-btn
+                margin-left: 15px
+                &:nth-child(2n+1)
+                    margin-left: 15px
+                    clear: none
+                &:nth-child(3n+1)
+                    margin-left: 0
+                    clear: left

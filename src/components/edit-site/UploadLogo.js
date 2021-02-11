@@ -76,7 +76,7 @@ const UploadLogo = (props) => {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <div className="modal-btns">
+                <div className="modal-btns text-right">
                     <Button variant="primary" onClick={ onClose }>Confirm</Button>
                 </div>
             </Modal.Footer>

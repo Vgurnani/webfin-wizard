@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from 'middleware/auth'
-import { Row , Col ,Modal, Form, Button  } from 'react-bootstrap'
+import { Modal, Form, Button  } from 'react-bootstrap'
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import { getAssessment, updateAssessment  } from 'middleware/assessments'
@@ -94,38 +94,39 @@ const EditSitePage =(props) => {
                     </div>
                 </div>
                 <div className='edit-site-panel'>
-                    <Form className="form" onSubmit={ handleSubmit(submitData) }>
-                        <Row>
-                            <Col className='col-md-2'>
-                                <span>Blog/Niche</span><br/>
-                                <div onClick={ (event) => handleModal(event,'niche') }>
+                    <Form onSubmit={ handleSubmit(submitData) }>
+                        <div className="edit-site-btns">
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Label>Blog / Niche:</Form.Label>
+                                <div className="edit-site-btn" onClick={ (event) => handleModal(event,'niche') }>
                                     <img src={ niche?.icon } />{ niche?.label}
                                 </div>
-                            </Col>
-                            <Col className='col-md-2'>
-                                <span>Color palette</span>
-                                <div onClick={ (event) => handleModal(event,'colour') }>
+                            </Form.Group>
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Label>Color palette:</Form.Label>
+                                <div className="edit-site-btn" onClick={ (event) => handleModal(event,'colour') }>
                                     <span className="checkbox-colors round-border">
                                         <span style={ { backgroundColor: colour?.colours?.split(',')[ 1 ] } }></span>
-                                    </span>{ colour?.label }</div>
-                            </Col>
-                            <Col className='col-md-2'>
-                                <span>Menu</span>
-                                <div onClick={ (event) => handleModal(event,'menu') }>Select..</div>
-                            </Col>
-                            <Col className='col-md-2'>
-                                <span>Site logo</span>
-                                <div onClick={ (event) => handleModal(event,'logo') }>{form?.values?.logoUrl ||site?.logoUrl ? <img src={ form?.values?.logoUrl || site?.logoUrl } width={ 20 } /> : site?.websiteName }</div>
-                            </Col>
-                            <Col className='col-md-2'>
-                                <span>Site icon</span>
-                                <div onClick={ (event) => handleModal(event,'favicon') }>Select..<img src={ form?.values?.faviconUrl || site?.faviconUrl } width={ 20 } /></div>
-                            </Col>
-                            <Col className='col-md-2'>
-                                <span>Header/Footer</span>
+                                    </span>{ colour?.label }
+                                </div>
+                            </Form.Group>
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Label>Menu:</Form.Label>
+                                <div className="edit-site-btn" onClick={ (event) => handleModal(event,'menu') }>Select..</div>
+                            </Form.Group>
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Label>Site logo:</Form.Label>
+                                <div className="edit-site-btn no-arrow" onClick={ (event) => handleModal(event,'logo') }>{form?.values?.logoUrl ||site?.logoUrl ? <img src={ form?.values?.logoUrl || site?.logoUrl } width={ 20 } /> : site?.websiteName }</div>
+                            </Form.Group>
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Label>Site icon:</Form.Label>
+                                <div className="edit-site-btn  no-arrow" onClick={ (event) => handleModal(event,'favicon') }>Select..<img src={ form?.values?.faviconUrl || site?.faviconUrl } width={ 20 } /></div>
+                            </Form.Group>
+                            <Form.Group controlId="formBasicEmail" className="edit-header-footer">
+                                <Form.Label>Header/Footer:</Form.Label>
                                 <Button type='submit'>Edit</Button>
-                            </Col>
-                        </Row>
+                            </Form.Group>
+                        </div>
                         <Modal show={ open } onHide={ handleClose } className="logo-upload-modal">
                             {renderModalView()}
                         </Modal>

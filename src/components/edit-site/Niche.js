@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import{ Modal, Button } from 'react-bootstrap';
+import{ Modal, Button, Row, Col } from 'react-bootstrap';
 import { Field } from 'redux-form';
 import { renderStyleMultipleRadio } from 'utils/formUtils'
 const Niche = (props) => {
@@ -10,7 +10,11 @@ const Niche = (props) => {
         <div className="">
             <Modal.Header closeButton>
                 <div className="logo-upload-header">
-                    What kind of blog do you want?
+                    <Row>
+                        <Col className="col-12">
+                            <Modal.Title>Niche</Modal.Title>
+                        </Col>
+                    </Row>
                 </div>
             </Modal.Header>
             <Modal.Body>
@@ -28,8 +32,8 @@ const Niche = (props) => {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <div className="modal-btns">
-                    <Button onClick={ onClose } variant="secondary">confirm</Button>
+                <div className="modal-btns text-right">
+                    <Button onClick={ onClose } variant="primary">confirm</Button>
                 </div>
             </Modal.Footer>
         </div>
