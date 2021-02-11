@@ -106,7 +106,7 @@ const EditSitePage =(props) => {
                                 <Form.Label>Color palette:</Form.Label>
                                 <div className="edit-site-btn" onClick={ (event) => handleModal(event,'colour') }>
                                     <span className="checkbox-colors round-border">
-                                        <span style={ { backgroundColor: colour?.colours?.split(',')[ 1 ] } }></span>
+                                        <span style={ { backgroundColor: colour?.colours?.split(',')[ 1 ] || colour?.colors[ 1 ] } }></span>
                                     </span>{ colour?.label }
                                 </div>
                             </Form.Group>
@@ -120,7 +120,7 @@ const EditSitePage =(props) => {
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>Site icon:</Form.Label>
-                                <div className="edit-site-btn  no-arrow" onClick={ (event) => handleModal(event,'favicon') }>Select..<img src={ form?.values?.faviconUrl || site?.faviconUrl } width={ 20 } /></div>
+                                <div className="edit-site-btn  no-arrow" onClick={ (event) => handleModal(event,'favicon') }>{form?.values?.faviconUrl || site?.faviconUrl ?  <img src={ form?.values?.faviconUrl || site?.faviconUrl } width={ 20 } /> : 'Select..'}</div>
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail" className="edit-header-footer">
                                 <Form.Label>Header/Footer:</Form.Label>
