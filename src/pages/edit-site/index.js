@@ -38,7 +38,8 @@ const EditSitePage =(props) => {
             const formData = {
                 nicheId: site.niche.id.toString(),
                 colourId: site.colour.id.toString(),
-                logoUrl: site.logoUrl
+                logoUrl: site.logoUrl,
+                faviconUrl: site.faviconUrl
             }
             initialize(formData)
         }
@@ -69,6 +70,7 @@ const EditSitePage =(props) => {
         dispatch(reduxChange('assessmentUpdateForm', field, null))
     }
     const renderModalView = () =>{
+        debugger
         switch(modalType){
         case 'niche':
             return <Niche  assessmentData={ assessmentData } onClose={ handleClose } />
