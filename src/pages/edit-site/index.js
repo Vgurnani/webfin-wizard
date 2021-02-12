@@ -8,17 +8,21 @@ import { getAssessment, updateAssessment  } from 'middleware/assessments'
 import ColourPalette from 'components/edit-site/ColourPalette';
 import Niche from 'components/edit-site/Niche'
 import UploadLogo from 'components/edit-site/UploadLogo'
+import MenuLinks from 'components/edit-site/MenuLinks'
+import _ from 'lodash';
 import { change as reduxChange } from 'redux-form'
 
 const EditSitePage =(props) => {
     const dispatch = useDispatch();
     const { handleSubmit , initialize } = props
     const [ open, setOpen ] = useState(false)
+    const [ loadData, setLoadData ] = useState(false)
     const [ modalType, setModalType ] = useState(null)
     const { assessmentData } = useSelector((state) => state.assessment)
     const form  = useSelector((state) => state.form.assessmentUpdateForm)
     const data = useSelector(state => state.user.sessionData?.data?.data)
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
+    const [ menuLinks, setMenuLinks ] = useState(form?.values?.menuLinks)
 
     const user =  data?.user
     const site =  data?.sites[ 0 ]
@@ -34,12 +38,19 @@ const EditSitePage =(props) => {
     }, [  ]);
 
     useEffect(() => {
+        if(!_.isEmpty(form?.values?.menuLinks)){
+            setMenuLinks(form?.values?.menuLinks)
+        }
+    }, [ form?.values?.menuLinks ])
+
+    useEffect(() => {
         if(site){
             const formData = {
                 nicheId: site.niche.id.toString(),
                 colourId: site.colour.id.toString(),
                 logoUrl: site.logoUrl,
-                faviconUrl: site.faviconUrl
+                faviconUrl: site.faviconUrl,
+                menuLinks: _.isEmpty(site.menuLinks ) ? [ { name: 'home',url: '/' } ] : site.menuLinks
             }
             initialize(formData)
         }
@@ -51,6 +62,9 @@ const EditSitePage =(props) => {
         setOpen(!open)
     }
     const handleClose = () => {
+        const updatedMenuLinks = _.filter(menuLinks,v => _.keys(v).length !== 0);
+        setMenuLinks(updatedMenuLinks)
+        dispatch(reduxChange('assessmentUpdateForm', 'menuLinks', updatedMenuLinks))
         setModalType(null)
         setOpen(false)
     }
@@ -69,6 +83,29 @@ const EditSitePage =(props) => {
         event.preventDefault()
         dispatch(reduxChange('assessmentUpdateForm', field, null))
     }
+    const addMenuLinks = () =>{
+        const obj = {}
+        setLoadData(true)
+        menuLinks.push(obj)
+        setMenuLinks(menuLinks)
+        setTimeout(()=>{
+            setLoadData(false)
+        })
+    }
+
+    const generateUrl = (str) => {
+        return '/'+str.replace(/[^a-zA-Z ]/g, '').replace(/\s+/g, '-').toLowerCase();
+    }
+
+    const handleChangeMenuLink = (event, index) =>{
+        event.preventDefault();
+        setLoadData(true)
+        const obj = { name:  event.target.value.trim(),url: generateUrl(event.target.value.trim()) }
+        menuLinks[ index ] = obj
+        setMenuLinks(menuLinks)
+        dispatch(reduxChange('assessmentUpdateForm', 'menuLinks', menuLinks))
+        setTimeout(()=> setLoadData(false))
+    }
     const renderModalView = () =>{
         switch(modalType){
         case 'niche':
@@ -77,6 +114,8 @@ const EditSitePage =(props) => {
             return <ColourPalette assessmentData={ assessmentData } onClose={ handleClose } />
         case 'logo':
             return <UploadLogo fieldName='logoUrl' previewFile={ form?.values?.logoUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } onClose={ handleClose } />
+        case 'menulinks':
+            return  <MenuLinks handleChangeMenuLink={ handleChangeMenuLink } loadData={ loadData } menuLinks={ menuLinks } addMenuLinks={ addMenuLinks } onClose={ handleClose } />
         case 'favicon':
             return <UploadLogo fieldName='faviconUrl' previewFile={ form?.values?.faviconUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } onClose={ handleClose } />
         }
@@ -113,7 +152,7 @@ const EditSitePage =(props) => {
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>Menu:</Form.Label>
-                                <div className="edit-site-btn" onClick={ (event) => handleModal(event,'menu') }>Select..</div>
+                                <div className="edit-site-btn" onClick={ (event) => handleModal(event,'menulinks') }>Select..</div>
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>Site logo:</Form.Label>

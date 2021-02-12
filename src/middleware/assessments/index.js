@@ -74,6 +74,7 @@ export const createAssessment = (data) => {
             const file = dataURLtoFile(data.logoUrl,uId()+'.png')
             data[ 'logoUrl' ] = await imageUpload(file);
         }
+        data[ 'menuLinks' ] = [ { name: 'home',url: '/' } ]
         axiosInstance.post('/assessment', data).then((response)=>{
             //notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CREATE_ASSESSMENT);
             const user= getUser();
