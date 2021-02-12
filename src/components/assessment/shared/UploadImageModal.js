@@ -93,7 +93,6 @@ const UploadImageModal = (props) => {
             </Modal.Body>
             <Modal.Footer>
                 <div className="modal-btns">
-                    <Button variant="secondary">Unsplash</Button>
                     <Button variant="primary" onClick={ handleToggleModal }>Confirm</Button>
                 </div>
             </Modal.Footer>
