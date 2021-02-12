@@ -56,7 +56,7 @@ const MenuLinks = (props) => {
                                                     <span>{ item?.name ? item?.name?.uppercase() : '...' }</span>
                                                 </div>
                                                 <div className="">
-                                                    {index !== 0 &&<a className="menu-action" href='#' onClick={ () => setLinkTypeFun(index) }>edit</a>}&nbsp;
+                                                    <a className="menu-action" href='#' onClick={ () => setLinkTypeFun(index) }>edit</a>&nbsp;
                                                     {index !== 0 && <a className="menu-action" href='#' onClick={ () => removeLinkTypeFun(index) }>remove</a>}
                                                 </div>
                                             </div>
