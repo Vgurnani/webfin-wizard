@@ -272,3 +272,38 @@ export const DrawerArrowIcon = () => (
         <path d="M12 5L5 12L12 19" stroke="#506BF0" strokeWidth="2" strokeLinejoin="round"/>
     </svg>
 )
+
+export const PageDeleteIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2.5 5H4.16667H17.5" stroke="#FF0000" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M6.66675 4.99984V3.33317C6.66675 2.89114 6.84234 2.46722 7.1549 2.15466C7.46746 1.8421 7.89139 1.6665 8.33342 1.6665H11.6667C12.1088 1.6665 12.5327 1.8421 12.8453 2.15466C13.1578 2.46722 13.3334 2.89114 13.3334 3.33317V4.99984M15.8334 4.99984V16.6665C15.8334 17.1085 15.6578 17.5325 15.3453 17.845C15.0327 18.1576 14.6088 18.3332 14.1667 18.3332H5.83341C5.39139 18.3332 4.96746 18.1576 4.6549 17.845C4.34234 17.5325 4.16675 17.1085 4.16675 16.6665V4.99984H15.8334Z" stroke="#FF0000" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+)
+export const PageLayoutIcon = () => (
+    <svg width="268" height="179" viewBox="0 0 268 179" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0.214844" width="267.544" height="179" rx="8"/>
+        <rect x="15.5032" y="28.8042" width="236.967" height="65.8391" rx="8" fill="#E2E2E2"/>
+        <rect x="15.5032" y="12.3447" width="236.967" height="8.22989" rx="4.11494" fill="#E2E2E2"/>
+        <rect x="15.5032" y="102.874" width="90.7737" height="67.8965" rx="8" fill="#E2E2E2"/>
+        <rect x="112.806" y="103.078" width="139.903" height="67.6099" rx="8" fill="#E2E2E2"/>
+    </svg>
+)
+export const GreyDeleteIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 4H3.33333H14" stroke="#757575" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M5.33337 4.00016V2.66683C5.33337 2.31321 5.47385 1.97407 5.7239 1.72402C5.97395 1.47397 6.31309 1.3335 6.66671 1.3335H9.33337C9.687 1.3335 10.0261 1.47397 10.2762 1.72402C10.5262 1.97407 10.6667 2.31321 10.6667 2.66683V4.00016M12.6667 4.00016V13.3335C12.6667 13.6871 12.5262 14.0263 12.2762 14.2763C12.0261 14.5264 11.687 14.6668 11.3334 14.6668H4.66671C4.31309 14.6668 3.97395 14.5264 3.7239 14.2763C3.47385 14.0263 3.33337 13.6871 3.33337 13.3335V4.00016H12.6667Z" stroke="#757575" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+)
+export const EditMenuIcon = () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 7H4" stroke="#E2E2E2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M20 12H4" stroke="#E2E2E2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M20 17H4" stroke="#E2E2E2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+)
+
+export const PlusIcon = () => (
+    <svg width="16" height="16" fill="#3032C8" viewBox="0 0 426.66667 426.66667" xmlns="http://www.w3.org/2000/svg">
+        <path d="m405.332031 192h-170.664062v-170.667969c0-11.773437-9.558594-21.332031-21.335938-21.332031-11.773437 0-21.332031 9.558594-21.332031 21.332031v170.667969h-170.667969c-11.773437 0-21.332031 9.558594-21.332031 21.332031 0 11.777344 9.558594 21.335938 21.332031 21.335938h170.667969v170.664062c0 11.777344 9.558594 21.335938 21.332031 21.335938 11.777344 0 21.335938-9.558594 21.335938-21.335938v-170.664062h170.664062c11.777344 0 21.335938-9.558594 21.335938-21.335938 0-11.773437-9.558594-21.332031-21.335938-21.332031zm0 0"/>
+    </svg>
+)

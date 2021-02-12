@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from 'middleware/auth'
-import { Modal, Form, Button  } from 'react-bootstrap'
+import { Modal, Form, Button, Accordion, Card  } from 'react-bootstrap'
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import { getAssessment, updateAssessment  } from 'middleware/assessments'
@@ -11,6 +11,14 @@ import UploadLogo from 'components/edit-site/UploadLogo'
 import MenuLinks from 'components/edit-site/MenuLinks'
 import _ from 'lodash';
 import { change as reduxChange } from 'redux-form'
+import searchIcon from '../../images/search.png';
+import filterIcon from '../../images/filter.png';
+import {
+    PageDeleteIcon,
+    PageLayoutIcon,
+    OpenArrow,
+    GreyDeleteIcon,
+} from '../../utils/svg';
 
 const EditSitePage =(props) => {
     const dispatch = useDispatch();
@@ -126,7 +134,7 @@ const EditSitePage =(props) => {
     const niche = assessmentData?.niches?.filter((item) => item.value === form?.values?.nicheId.toString())[ 0 ] || site?.niche
     const colour = assessmentData?.colorPalette?.filter((item) => item.value === form?.values?.colourId.toString())[ 0 ] || site?.colour
     return(
-        <main className="dashboard-data">
+        <main className="dashboard-data dashboard-edit-site-wrap">
             <section className="dashboard-body">
                 <div className="dashboard-header">
                     <div className="dashboard-title">
@@ -171,6 +179,220 @@ const EditSitePage =(props) => {
                             {renderModalView()}
                         </Modal>
                     </Form>
+                </div>
+                <div className="dashboard-header site-filter-header">
+                    <div className="dashboard-title">
+                        {/* <h3>Pages</h3> */}
+                    </div>
+                    <div className="dashboard-actions">
+                        <Form className="search-form">
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Control className="form-control" placeholder="Search" />
+                            </Form.Group>
+                            <Button className="btn-search" type="submit">
+                                <img src={ searchIcon } alt={ 'searchIcon' } />
+                            </Button>
+                        </Form>
+                        <a className="btn-filter" href="/">
+                            <img src={ filterIcon } alt={ 'filterIcon' } />
+                        </a>
+                    </div>
+                </div>
+                <div className="pages-listing">
+                    <ul>
+                        <li className="add-new-page">
+                            <a className="btn">
+                                Add Page
+                            </a>
+                        </li>
+                        <li className="active">
+                            <div className="page-detail">
+                                <div className="page-name">
+                                    <h6>Home</h6>
+                                    <Form.Check
+                                        type="switch"
+                                        id="custom-switch"
+                                        label="Live"
+                                    />
+                                </div>
+                                <div className="page-layout">
+                                    <div className="page-layout-img">
+                                        <PageLayoutIcon />
+                                    </div>
+                                    <a>Edit</a>
+                                </div>
+                                <div className="page-action">
+                                    <div className="page-action-btns">
+                                        <a className="btn">View</a>
+                                        <a className="btn">Clone</a>
+                                    </div>
+                                    <div className="page-delete">
+                                        <a><PageDeleteIcon /></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div className="page-detail">
+                                <div className="page-name">
+                                    <h6>About</h6>
+                                    <Form.Check
+                                        type="switch"
+                                        id="custom-switch"
+                                        label="Live"
+                                    />
+                                </div>
+                                <div className="page-layout">
+                                    <div className="page-layout-img">
+                                        <PageLayoutIcon />
+                                    </div>
+                                    <a>Edit</a>
+                                </div>
+                                <div className="page-action">
+                                    <div className="page-action-btns">
+                                        <a className="btn">View</a>
+                                        <a className="btn">Clone</a>
+                                    </div>
+                                    <div className="page-delete">
+                                        <a><PageDeleteIcon /></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div className="page-detail">
+                                <div className="page-name">
+                                    <h6>Recipes</h6>
+                                    <Form.Check
+                                        type="switch"
+                                        id="custom-switch"
+                                        label="Live"
+                                    />
+                                </div>
+                                <div className="page-layout">
+                                    <div className="page-layout-img">
+                                        <PageLayoutIcon />
+                                    </div>
+                                    <a>Edit</a>
+                                </div>
+                                <div className="page-action">
+                                    <div className="page-action-btns">
+                                        <a className="btn">View</a>
+                                        <a className="btn">Clone</a>
+                                    </div>
+                                    <div className="page-delete">
+                                        <a><PageDeleteIcon /></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div className="page-detail">
+                                <div className="page-name">
+                                    <h6>Contact</h6>
+                                    <Form.Check
+                                        type="switch"
+                                        id="custom-switch"
+                                        label="Live"
+                                    />
+                                </div>
+                                <div className="page-layout">
+                                    <div className="page-layout-img">
+                                        <PageLayoutIcon />
+                                    </div>
+                                    <a>Edit</a>
+                                </div>
+                                <div className="page-action">
+                                    <div className="page-action-btns">
+                                        <a className="btn">View</a>
+                                        <a className="btn">Clone</a>
+                                    </div>
+                                    <div className="page-delete">
+                                        <a><PageDeleteIcon /></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div className="trash-listing">
+                    <Accordion defaultActiveKey="0">
+                        <Card>
+                            <Card.Header>
+                                <Accordion.Toggle as={ Button } variant="link" eventKey="0">
+                                    <span>
+                                        <span className="heading-icon"><GreyDeleteIcon /></span>
+                                        Trash
+                                    </span>
+                                    <OpenArrow />
+                                </Accordion.Toggle>
+                            </Card.Header>
+                            <Accordion.Collapse eventKey="0">
+                                <Card.Body>
+                                    <div className="pages-listing">
+                                        <ul>
+                                            <li>
+                                                <div className="page-detail">
+                                                    <div className="page-name">
+                                                        <h6>Recipes</h6>
+                                                        <Form.Check
+                                                            type="switch"
+                                                            id="custom-switch"
+                                                            label="Live"
+                                                        />
+                                                    </div>
+                                                    <div className="page-layout">
+                                                        <div className="page-layout-img">
+                                                            <PageLayoutIcon />
+                                                        </div>
+                                                        <a>Edit</a>
+                                                    </div>
+                                                    <div className="page-action">
+                                                        <div className="page-action-btns">
+                                                            <a className="btn">View</a>
+                                                            <a className="btn">Clone</a>
+                                                        </div>
+                                                        <div className="page-delete">
+                                                            <a><PageDeleteIcon /></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div className="page-detail">
+                                                    <div className="page-name">
+                                                        <h6>Contact</h6>
+                                                        <Form.Check
+                                                            type="switch"
+                                                            id="custom-switch"
+                                                            label="Live"
+                                                        />
+                                                    </div>
+                                                    <div className="page-layout">
+                                                        <div className="page-layout-img">
+                                                            <PageLayoutIcon />
+                                                        </div>
+                                                        <a>Edit</a>
+                                                    </div>
+                                                    <div className="page-action">
+                                                        <div className="page-action-btns">
+                                                            <a className="btn">View</a>
+                                                            <a className="btn">Clone</a>
+                                                        </div>
+                                                        <div className="page-delete">
+                                                            <a><PageDeleteIcon /></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </Card.Body>
+                            </Accordion.Collapse>
+                        </Card>
+                    </Accordion>
                 </div>
             </section>
         </main>

@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types';
 import{ Modal, Button, Row, Col, Form } from 'react-bootstrap';
+import {
+    EditMenuIcon,
+    PlusIcon
+} from '../../utils/svg';
 const MenuLinks = (props) => {
     const [ linkType, setLinkType ] = useState(0)
     const [ loadingtype , setLoadingType ] = useState(false)
@@ -23,32 +27,41 @@ const MenuLinks = (props) => {
             <Modal.Header closeButton>
                 <div className="logo-upload-header">
                     <Row>
-                        <Col className="col-12">
+                        <Col className="col-6">
                             <Modal.Title>Menu</Modal.Title>
                         </Col>
                     </Row>
                 </div>
             </Modal.Header>
             <Modal.Body>
-                <Row>
-                    <Col className="col-6">
-                        <div style={ { height: '200px' } }>
+                <div className="edit-menu-listing">
+                    <div className="menu-listing">
+                        <ol style={ { height: '230px' } }>
                             { !loadData && menuLinks.map((item,index) => {
                                 return(
-                                    <div key={ index }>
-                                        <span>{ index+1 }.</span>
-                                        <span>{ item?.name?.uppercase() }</span>
-                                        <span><a href='#' onClick={ () => setLinkTypeFun(index) }>edit</a></span>
-                                    </div>)
+                                    <li key={ index }>
+                                        <div className="menu-order">{ index+1 }.</div>
+                                        <div className="menu-detail">
+                                            <div className="menu-detail-inner">
+                                                <div className="menu-name">
+                                                    <EditMenuIcon />
+                                                    <span>{ item?.name?.uppercase() }</span>
+                                                </div>
+                                                <a className="menu-action" href='#' onClick={ () => setLinkTypeFun(index) }>edit</a>
+                                            </div>
+                                        </div>
+                                    </li>)
                             }) }
-                        </div>
-                        {menuLinks.length < 5 && <button onClick={ addLinks }>add</button>}
-                    </Col>
-                    <Col className="col-6">
+                        </ol>
+
+                        {menuLinks.length < 5 && <button className='add-icon-btn' onClick={ addLinks }><PlusIcon /></button>}
+                    </div>
+
+                    <div className="add-menu">
                         {!loadingtype &&
-                        <div>
+                        <Form>
                             <Form.Group>
-                                <Form.Label>Name:</Form.Label>
+                                <Form.Label>Name</Form.Label>
                                 <input type='text'
                                     name='name'
                                     disabled={ getData()?.name === 'home' }
@@ -58,21 +71,20 @@ const MenuLinks = (props) => {
 
                                 />
                             </Form.Group>
-                            <Form.Group>
-                                <Form.Label>link:</Form.Label>
-                                {<input type='text'
+                            <Form.Group className="url-control">
+                                <Form.Label>Link</Form.Label>
+                                <input type='text'
                                     name='url'
                                     disabled={ true }
                                     className='form-control'
                                     defaultValue={ getData()?.url }
 
-                                />}
+                                />
                             </Form.Group>
-
-                        </div>
+                        </Form>
                         }
-                    </Col>
-                </Row>
+                    </div>
+                </div>
             </Modal.Body>
             <Modal.Footer>
                 <div className="modal-btns text-right">
