@@ -1370,8 +1370,6 @@ ul
     margin: 25px 0 0
     @media (max-width: $breakpoint-mobile)
       margin: 30px 0 0
-      display: inline-block
-      text-align: center
     .step-btn-left
       @media (max-width: $breakpoint-mobile)
         margin: 0 0 15px
@@ -1380,7 +1378,8 @@ ul
       margin-left: 25px
       vertical-align: top
       text-align: center
-
+      @media (max-width: $breakpoint-mobile)
+        margin-left: 5px
       &:first-child
         margin-left: 0
       span
