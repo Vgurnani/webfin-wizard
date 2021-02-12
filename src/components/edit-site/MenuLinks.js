@@ -8,7 +8,7 @@ import {
 const MenuLinks = (props) => {
     const [ linkType, setLinkType ] = useState(0)
     const [ loadingtype , setLoadingType ] = useState(false)
-    const { onClose  ,menuLinks,loadData,handleChangeMenuLink, addMenuLinks } = props
+    const { onClose  ,menuLinks,loadData,handleChangeMenuLink, addMenuLinks ,removeMenuLink } = props
     const getData = () => {
         return menuLinks[ linkType ]
     }
@@ -18,6 +18,14 @@ const MenuLinks = (props) => {
     const setLinkTypeFun = (index) => {
         setLoadingType(true)
         setLinkType(index)
+        setTimeout(()=>{
+            setLoadingType(false)
+        },1)
+    }
+    const removeLinkTypeFun = (index) =>{
+        setLoadingType(true)
+        setLinkType(0)
+        removeMenuLink(index)
         setTimeout(()=>{
             setLoadingType(false)
         },1)
@@ -47,7 +55,10 @@ const MenuLinks = (props) => {
                                                     <EditMenuIcon />
                                                     <span>{ item?.name?.uppercase() }</span>
                                                 </div>
-                                                <a className="menu-action" href='#' onClick={ () => setLinkTypeFun(index) }>edit</a>
+                                                <div className="">
+                                                    <a className="menu-action" href='#' onClick={ () => setLinkTypeFun(index) }>edit</a>&nbsp;
+                                                    {index !== 0 && <a className="menu-action" href='#' onClick={ () => removeLinkTypeFun(index) }>remove</a>}
+                                                </div>
                                             </div>
                                         </div>
                                     </li>)
@@ -105,6 +116,7 @@ MenuLinks.propTypes = {
     loadData: PropTypes.bool,
     assessmentData: PropTypes.object,
     handleChangeMenuLink: PropTypes.func,
-    loadText: PropTypes.bool
+    loadText: PropTypes.bool,
+    removeMenuLink: PropTypes.func
 };
 export default MenuLinks;

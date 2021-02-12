@@ -101,6 +101,11 @@ const EditSitePage =(props) => {
         })
     }
 
+    const removeMenuLink = (index) => {
+        menuLinks.splice(index, 1);
+        setMenuLinks(menuLinks)
+    }
+
     const generateUrl = (str) => {
         return '/'+str.replace(/[^a-zA-Z ]/g, '').replace(/\s+/g, '-').toLowerCase();
     }
@@ -123,7 +128,7 @@ const EditSitePage =(props) => {
         case 'logo':
             return <UploadLogo fieldName='logoUrl' previewFile={ form?.values?.logoUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } onClose={ handleClose } />
         case 'menulinks':
-            return  <MenuLinks handleChangeMenuLink={ handleChangeMenuLink } loadData={ loadData } menuLinks={ menuLinks } addMenuLinks={ addMenuLinks } onClose={ handleClose } />
+            return  <MenuLinks removeMenuLink={ removeMenuLink } handleChangeMenuLink={ handleChangeMenuLink } loadData={ loadData } menuLinks={ menuLinks } addMenuLinks={ addMenuLinks } onClose={ handleClose } />
         case 'favicon':
             return <UploadLogo fieldName='faviconUrl' previewFile={ form?.values?.faviconUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } onClose={ handleClose } />
         }
