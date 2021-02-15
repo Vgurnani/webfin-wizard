@@ -1,3 +1,4 @@
+import React from 'react'
 import { ROUTES } from '../constants/appRoutes';
 import _ from 'lodash';
 import { getItem } from './cache';
@@ -165,4 +166,10 @@ export const getIdFromPath = (path) => {
 export const getDomain = (sites) =>{
     const site =  (sites && sites[ 0 ]) || JSON.parse(getItem('sessionData'))?.data?.data?.sites[ 0 ]
     return site?.domain
+}
+
+export const headerLinksTemplate = () => {
+    let links = [ { name: 'Home', url: '#' },{ name: 'Blog', url: '#' },{ name: 'About', url: '#' },{ name: 'Contact', url: '#' } ]
+    links = links.map((item, index) => <a key={ index } href='#'>{ item.name }</a>)
+    return links
 }
