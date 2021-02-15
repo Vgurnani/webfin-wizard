@@ -5,6 +5,7 @@ import { createAssessment, imageUpload } from './assessments/'
 import axiosInstance from '../services/api';
 import { getItem, setItem, removeItem } from '../utils/cache';
 import history from '../utils/history'
+import { getDomain } from 'utils/helpers'
 import _ from 'lodash';
 import {
     loginRequest,
@@ -170,11 +171,12 @@ export const getCurrentUser = () => {
 };
 
 export const updateCurrentUser = (data) => {
+
     return async (dispatch) => {
         dispatch(updateUserProfileRequest());
         if(data.profileImageUrl && !data.profileImageUrl.match('^(http|https)://')){
             const file = dataURLtoFile(data.profileImageUrl,uId()+'.png')
-            data[ 'profileImageUrl' ] = await imageUpload(file);
+            data[ 'profileImageUrl' ] = await imageUpload(getDomain(),'profile',file);
         }
         axiosInstance.put('/user', data)
             .then((response) => {

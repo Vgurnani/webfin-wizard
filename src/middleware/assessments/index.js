@@ -48,8 +48,8 @@ export const getAssessment = () => {
     };
 };
 
-export const imageUpload = async(file) => {
-    const result =  await axiosInstance.get('/generate')
+export const imageUpload = async(domain,type,file) => {
+    const result =  await axiosInstance.get(`/generate?domain=${ domain }&type=${ type }`)
     if([ 200,203 ].includes(result.status)){
         try{
             const finalResult = await axios.put(result.data.signedUrl,file,{
@@ -72,7 +72,7 @@ export const createAssessment = (data) => {
         dispatch(createAssessmentRequest())
         if(data.logoUrl){
             const file = dataURLtoFile(data.logoUrl,uId()+'.png')
-            data[ 'logoUrl' ] = await imageUpload(file);
+            data[ 'logoUrl' ] = await imageUpload(data.domain,'logo',file);
         }
         data[ 'menuLinks' ] = [ { name: 'home',url: '/' } ]
         axiosInstance.post('/assessment', data).then((response)=>{
@@ -97,11 +97,11 @@ export const updateAssessment = (id, data) => {
         dispatch(createAssessmentRequest())
         if(data.logoUrl && !data.logoUrl.match('^(http|https)://')){
             const file = dataURLtoFile(data.logoUrl,uId()+'.png')
-            data[ 'logoUrl' ] = await imageUpload(file);
+            data[ 'logoUrl' ] = await imageUpload(data.domain,'logo',file);
         }
         if(data.faviconUrl && !data.faviconUrl.match('^(http|https)://')){
             const file = dataURLtoFile(data.faviconUrl,uId()+'.png')
-            data[ 'faviconUrl' ] = await imageUpload(file);
+            data[ 'faviconUrl' ] = await imageUpload(data.domain,'logo',file);
         }
         axiosInstance.put(`/assessment/${ id }`, data).then((response)=>{
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.UPDATE_ASSESSMENT);

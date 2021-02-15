@@ -30,6 +30,8 @@ const MenuLinks = (props) => {
             setLoadingType(false)
         },1)
     }
+
+    console.log(getData())
     return(
         <div className="">
             <Modal.Header closeButton>
@@ -81,21 +83,21 @@ const MenuLinks = (props) => {
                                     defaultValue={ getData()?.name }
 
                                 />
-                                {!isValid && <p><span className='field_error'>Name and url should be unique </span></p>}
                             </Form.Group>
                             <Form.Group className="url-control">
                                 <Form.Label>Link</Form.Label>
-                                <input type='text'
+                                {!loadData &&<input type='text'
                                     name='url'
                                     disabled={ true }
                                     className='form-control'
                                     defaultValue={ getData()?.url }
 
-                                />
+                                />}
                             </Form.Group>
                         </Form>
                         }
                     </div>
+                    {!isValid && <p><span className='field_error'>Name and url should be unique </span></p>}
                 </div>
             </Modal.Body>
             <Modal.Footer>

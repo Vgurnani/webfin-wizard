@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RichTextEditor from './rte';
 import { Field, change } from 'redux-form';
 import { renderFieldWG } from '../../utils/formUtils'
-import { getIdFromPath } from 'utils/helpers'
+import { getIdFromPath , getDomain } from 'utils/helpers'
 import {
     Facebook,
     LinkedIn,
@@ -80,6 +80,7 @@ const BlogPage =(props) => {
     const { handleSubmit, initialize } = props;
 
     const submitData = (formData) => {
+        console.log(userData)
         if(formData.blogUrl){
             const data = {
                 type:'blog',
@@ -87,7 +88,7 @@ const BlogPage =(props) => {
                 imageUrl: formData.blogUrl,
                 title: formData.title
             }
-            dispatch(createBlog(data,id))
+            dispatch(createBlog(getDomain(userData.sites), data,id))
         }else{
             setErrorMessageUrl(true)
         }
