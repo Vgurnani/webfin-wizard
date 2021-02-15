@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from 'middleware/auth'
-import { Modal, Form, Button, Accordion, Card  } from 'react-bootstrap'
+import { Modal, Form, Button } from 'react-bootstrap'
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import { getAssessment, updateAssessment  } from 'middleware/assessments'
@@ -16,8 +16,8 @@ import filterIcon from '../../images/filter.png';
 import {
     PageDeleteIcon,
     PageLayoutIcon,
-    OpenArrow,
-    GreyDeleteIcon,
+    // OpenArrow,
+    // GreyDeleteIcon,
 } from '../../utils/svg';
 
 const EditSitePage =(props) => {
@@ -223,118 +223,13 @@ const EditSitePage =(props) => {
                                 Add Page
                             </a>
                         </li>
-                        <li className="active">
-                            <div className="page-detail">
-                                <div className="page-name">
-                                    <h6>Home</h6>
-                                    <Form.Check
-                                        type="switch"
-                                        id="custom-switch"
-                                        label="Live"
-                                    />
-                                </div>
-                                <div className="page-layout">
-                                    <div className="page-layout-img">
-                                        <PageLayoutIcon />
-                                    </div>
-                                    <a>Edit</a>
-                                </div>
-                                <div className="page-action">
-                                    <div className="page-action-btns">
-                                        <a className="btn">View</a>
-                                        <a className="btn">Clone</a>
-                                    </div>
-                                    <div className="page-delete">
-                                        <a><PageDeleteIcon /></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="page-detail">
-                                <div className="page-name">
-                                    <h6>About</h6>
-                                    <Form.Check
-                                        type="switch"
-                                        id="custom-switch"
-                                        label="Live"
-                                    />
-                                </div>
-                                <div className="page-layout">
-                                    <div className="page-layout-img">
-                                        <PageLayoutIcon />
-                                    </div>
-                                    <a>Edit</a>
-                                </div>
-                                <div className="page-action">
-                                    <div className="page-action-btns">
-                                        <a className="btn">View</a>
-                                        <a className="btn">Clone</a>
-                                    </div>
-                                    <div className="page-delete">
-                                        <a><PageDeleteIcon /></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="page-detail">
-                                <div className="page-name">
-                                    <h6>Recipes</h6>
-                                    <Form.Check
-                                        type="switch"
-                                        id="custom-switch"
-                                        label="Live"
-                                    />
-                                </div>
-                                <div className="page-layout">
-                                    <div className="page-layout-img">
-                                        <PageLayoutIcon />
-                                    </div>
-                                    <a>Edit</a>
-                                </div>
-                                <div className="page-action">
-                                    <div className="page-action-btns">
-                                        <a className="btn">View</a>
-                                        <a className="btn">Clone</a>
-                                    </div>
-                                    <div className="page-delete">
-                                        <a><PageDeleteIcon /></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="page-detail">
-                                <div className="page-name">
-                                    <h6>Contact</h6>
-                                    <Form.Check
-                                        type="switch"
-                                        id="custom-switch"
-                                        label="Live"
-                                    />
-                                </div>
-                                <div className="page-layout">
-                                    <div className="page-layout-img">
-                                        <PageLayoutIcon />
-                                    </div>
-                                    <a>Edit</a>
-                                </div>
-                                <div className="page-action">
-                                    <div className="page-action-btns">
-                                        <a className="btn">View</a>
-                                        <a className="btn">Clone</a>
-                                    </div>
-                                    <div className="page-delete">
-                                        <a><PageDeleteIcon /></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                        {site?.menuLinks?.map((item,index) => {
+                            return(<PageView item={ item } key={ index } index={ index } />)
+                        })}
 
                     </ul>
                 </div>
-                <div className="trash-listing">
+                {/*<div className="trash-listing">
                     <Accordion defaultActiveKey="0">
                         <Card>
                             <Card.Header>
@@ -411,7 +306,7 @@ const EditSitePage =(props) => {
                             </Accordion.Collapse>
                         </Card>
                     </Accordion>
-                </div>
+    </div>*/}
             </section>
         </main>
 
@@ -420,6 +315,48 @@ const EditSitePage =(props) => {
 EditSitePage.propTypes = {
     handleSubmit: PropTypes.func,
     initialize: PropTypes.func
+};
+
+export const PageView = ( props ) => {
+    const { item } = props
+    if(item.name){
+        return(
+            <li className="active">
+                <div className="page-detail">
+                    <div className="page-name">
+                        <h6>{ item?.name?.uppercase() }</h6>
+                        <Form.Check
+                            type="switch"
+                            id="custom-switch"
+                            label="Live"
+                            checked={ true }
+                        />
+                    </div>
+                    <div className="page-layout">
+                        <div className="page-layout-img">
+                            <PageLayoutIcon />
+                        </div>
+                        <a>Edit</a>
+                    </div>
+                    <div className="page-action">
+                        <div className="page-action-btns">
+                            <a className="btn">View</a>
+                            <a className="btn">Clone</a>
+                        </div>
+                        <div className="page-delete">
+                            <a><PageDeleteIcon /></a>
+                        </div>
+                    </div>
+                </div>
+            </li>)
+    }else{ return null }
+
+}
+PageView.propTypes = {
+    item: PropTypes.object,
+};
+String.prototype.uppercase = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1)
 };
 export default reduxForm({
     form: 'assessmentUpdateForm',
