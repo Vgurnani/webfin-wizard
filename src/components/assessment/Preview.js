@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import { useSelector } from 'react-redux'
+import { headerLinksTemplate } from 'utils/helpers'
 import { assessmentFormValidate as validate } from '../../utils/validates'
 import WebTemplates ,{ Header,Home, Banner,Blogs, Card } from 'web-templates';
 
@@ -24,7 +25,7 @@ const Preview = (props) => {
         logoUrl: assessmentForm?.values?.logoUrl,
         logoText: assessmentForm?.values?.websiteName,
         readOnly: true,
-        headerLinks: [ { name: 'Home', url: '#' },{ name: 'Blog', url: '#' },{ name: 'About', url: '#' },{ name: 'Contact', url: '#' } ],
+        headerLinks: headerLinksTemplate(),
     }
 
     useEffect(()=>{
@@ -48,7 +49,10 @@ const Preview = (props) => {
                                     <div className="color-preview wizard-home wizrd-blog-preview final-preview">
                                         {/*<TemplateLayoutOne />*/}
                                         <WebTemplates data={ data }>
-                                            <Header></Header>
+                                            <Header>
+                                                <Header.Left />
+                                                <Header.Right />
+                                            </Header>
                                             <Home>
                                                 <Banner>
                                                     <h1>
