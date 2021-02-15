@@ -11,7 +11,6 @@ import {
 }
     from 'react-bootstrap';
 import webFinLogo from '../../images/header/webFin-logo.svg';
-import headerProfilePic from '../../images/media/media-1.jpg';
 import { isLoggedIn } from '../../utils/helpers'
 import { logoutUser } from '../../middleware/auth';
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,6 +19,7 @@ import {
     ChevronRight,
 } from '../../utils/svg';
 import { ROUTES } from 'constants/appRoutes';
+import profilePic from 'images/user-avatar.png';
 
 const Navbar = (props) => {
     const dispatch  = useDispatch();
@@ -64,7 +64,7 @@ const Navbar = (props) => {
                         <Dropdown >
                             <Dropdown.Toggle>
                                 <span className="nav-profile-pic">
-                                    <img src={ user?.profileImageUrl || headerProfilePic } alt="John" />
+                                    <img src={ user?.profileImageUrl || profilePic } alt="John" />
                                 </span>
                                 <ChevronRight />
                             </Dropdown.Toggle>

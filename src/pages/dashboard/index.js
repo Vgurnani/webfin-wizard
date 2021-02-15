@@ -7,7 +7,7 @@ import axios from 'axios'
 import {
     TopRightArrow,
 } from '../../utils/svg'
-import profilePic from '../../public/images/media/media-4.jpg';
+import profilePic from 'images/user-avatar.png';
 const DashboardPage =() => {
     const dispatch = useDispatch();
     const [ status, setStatus ] = useState(false)
