@@ -83,7 +83,6 @@ const MenuLinks = (props) => {
                                     defaultValue={ getData()?.name }
 
                                 />
-                                {!isValid && <p><span className='field_error'>Name and url should be unique </span></p>}
                             </Form.Group>
                             <Form.Group className="url-control">
                                 <Form.Label>Link</Form.Label>
