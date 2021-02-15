@@ -14,7 +14,7 @@ import { change as reduxChange } from 'redux-form'
 import searchIcon from '../../images/search.png';
 import filterIcon from '../../images/filter.png';
 import {
-    PageDeleteIcon,
+    //PageDeleteIcon,
     PageLayoutIcon,
     // OpenArrow,
     // GreyDeleteIcon,
@@ -339,13 +339,13 @@ export const PageView = ( props ) => {
                         <a>Edit</a>
                     </div>
                     <div className="page-action">
-                        <div className="page-action-btns">
+                        {/*<div className="page-action-btns">
                             <a className="btn">View</a>
                             <a className="btn">Clone</a>
                         </div>
                         <div className="page-delete">
                             <a><PageDeleteIcon /></a>
-                        </div>
+                        </div>*/}
                     </div>
                 </div>
             </li>)
