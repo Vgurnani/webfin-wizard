@@ -112,7 +112,7 @@ const BlogsPage = () => {
                             <Link to={ ROUTES.BLOG } className='btn btn-primary'>Add New+</Link>
                         </div>
                     </div>
-                    { publishBlogs?.length > 0 && <div className="dashboard-table">
+                    { publishBlogs?.length > 0 && <div className="dashboard-table blogs-table">
                         <CustomTable headings={ [ 'Title','Views','Comments','Date Created','Actions' ] }>
                             {publishBlogs?.map((blog, index) => (<tr key={ blog?.slug }>
                                 <td onClick={ (event) => redirectToBlog(event, blog) } style={ { cursor: 'pointer ' } } key={ index } >
@@ -163,7 +163,7 @@ const BlogsPage = () => {
                                 </Card.Header>
                                 <Accordion.Collapse eventKey="0">
                                     <Card.Body>
-                                        <div className="dashboard-table">
+                                        <div className="dashboard-table blogs-table">
                                             <CustomTable headings={ [ 'Title','Views','Comments','Date Created','Actions' ] }>
 
                                                 {draftBlogs?.map(blog => (
