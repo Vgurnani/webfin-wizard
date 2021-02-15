@@ -2,7 +2,7 @@ import React,{ useEffect ,useState } from 'react'
 import { Field } from 'redux-form';
 import { useSelector ,useDispatch } from 'react-redux'
 import { renderStyleMultipleRadio } from '../../utils/formUtils'
-import { assessmentSaved } from '../../utils/helpers'
+import { assessmentSaved, headerLinksTemplate } from '../../utils/helpers'
 import { assessmentFormValidate as validate } from '../../utils/validates'
 import WebTemplates ,{ Header,Home, Banner,Blogs, Card } from 'web-templates';
 import { reduxForm } from 'redux-form';
@@ -18,6 +18,7 @@ import
 }
     from 'react-bootstrap';
 import enterIcon from '../../public/images/enter-icon.png';
+
 const StepTwo = (props) => {
     const [ isSave, setSave ] = useState(false)
     const dispatch = useDispatch()
@@ -29,7 +30,7 @@ const StepTwo = (props) => {
         colors: colorObject?.colors || [],
         logoUrl: assessmentForm.values.logoUrl,
         logoText: assessmentForm.values.websiteName,
-        headerLinks: [ { name: 'Home', url: '#' },{ name: 'Blog', url: '#' },{ name: 'About', url: '#' },{ name: 'Contact', url: '#' } ],
+        headerLinks: headerLinksTemplate(),
         readOnly: true
     }
 
@@ -76,7 +77,10 @@ const StepTwo = (props) => {
                                     <h4>Preview</h4>
                                     <div className="color-preview wizard-home wizrd-blog-preview color-palate-preview">
                                         <WebTemplates data={ data }>
-                                            <Header></Header>
+                                            <Header>
+                                                <Header.Left />
+                                                <Header.Right />
+                                            </Header>
                                             <Home>
                                                 <Banner>
                                                     <h1>

@@ -1,7 +1,7 @@
 import React,{ useState , useEffect } from 'react'
 import { Field } from 'redux-form';
 import { renderFieldChangeWG, renderStyleMultipleRadio } from '../../utils/formUtils'
-import { getLabel ,assessmentSaved } from '../../utils/helpers'
+import { getLabel ,assessmentSaved , headerLinksTemplate } from '../../utils/helpers'
 import { getUnsplash ,getVerifiedDomain } from '../../middleware/assessments'
 import PropTypes from 'prop-types';
 import { assessmentFormValidate as validate } from '../../utils/validates'
@@ -35,7 +35,7 @@ const StepThree = (props) => {
         colors: colorObject?.colors || [],
         logoUrl: form.values.logoUrl,
         logoText: form.values.websiteName,
-        headerLinks: [ { name: 'Home', url: '#' },{ name: 'Blog', url: '#' },{ name: 'About', url: '#' },{ name: 'Contact', url: '#' } ],
+        headerLinks: headerLinksTemplate(),
         readOnly: true
     }
     const handleToggleModal = () => {
@@ -161,7 +161,10 @@ const StepThree = (props) => {
                                     <h4>Preview</h4>
                                     <div className="blog-preview wizrd-blog-preview color-palate-preview wizard-home ">
                                         <WebTemplates data={ data }>
-                                            <Header></Header>
+                                            <Header>
+                                                <Header.Left />
+                                                <Header.Right />
+                                            </Header>
                                             <Home>
                                                 <Banner>
                                                     <h1>
