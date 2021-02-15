@@ -8,7 +8,7 @@ import {
 const MenuLinks = (props) => {
     const [ linkType, setLinkType ] = useState(0)
     const [ loadingtype , setLoadingType ] = useState(false)
-    const { onClose  ,menuLinks,loadData,handleChangeMenuLink, addMenuLinks ,removeMenuLink } = props
+    const { onClose  ,menuLinks,loadData,handleChangeMenuLink,isValid, addMenuLinks ,removeMenuLink } = props
     const getData = () => {
         return menuLinks[ linkType ]
     }
@@ -81,6 +81,7 @@ const MenuLinks = (props) => {
                                     defaultValue={ getData()?.name }
 
                                 />
+                                {!isValid && <p><span className='field_error'>Name and url should be unique </span></p>}
                             </Form.Group>
                             <Form.Group className="url-control">
                                 <Form.Label>Link</Form.Label>
@@ -99,7 +100,11 @@ const MenuLinks = (props) => {
             </Modal.Body>
             <Modal.Footer>
                 <div className="modal-btns text-right">
-                    <Button onClick={ onClose } variant="primary">confirm</Button>
+                    { isValid ?
+                        <Button onClick={ onClose } variant="primary">confirm</Button> :
+                        <Button disabled={ true } variant="primary">confirm</Button>
+                    }
+
                 </div>
             </Modal.Footer>
         </div>
@@ -117,6 +122,7 @@ MenuLinks.propTypes = {
     assessmentData: PropTypes.object,
     handleChangeMenuLink: PropTypes.func,
     loadText: PropTypes.bool,
-    removeMenuLink: PropTypes.func
+    removeMenuLink: PropTypes.func,
+    isValid: PropTypes.bool
 };
 export default MenuLinks;

@@ -24,6 +24,7 @@ const EditSitePage =(props) => {
     const dispatch = useDispatch();
     const { handleSubmit , initialize } = props
     const [ open, setOpen ] = useState(false)
+    const [ isValid, setIsValid ] = useState(true)
     const [ loadData, setLoadData ] = useState(false)
     const [ modalType, setModalType ] = useState(null)
     const { assessmentData } = useSelector((state) => state.assessment)
@@ -109,6 +110,17 @@ const EditSitePage =(props) => {
     const generateUrl = (str) => {
         return '/'+str.replace(/[^a-zA-Z ]/g, '').replace(/\s+/g, '-').toLowerCase();
     }
+    const validUrls = () => {
+        const names= menuLinks.map((item)=> item.name)
+        const isDuplicateName =  !_.isEmpty(names.filter((item, index) => names.indexOf(item) != index))
+        const urls= menuLinks.map((item)=> item.url)
+        const isDuplicateUrl =  !_.isEmpty(urls.filter((item, index) => urls.indexOf(item) != index))
+        if(isDuplicateName || isDuplicateUrl){
+            setIsValid(false)
+        }else{
+            setIsValid(true)
+        }
+    }
 
     const handleChangeMenuLink = (event, index) =>{
         event.preventDefault();
@@ -116,6 +128,7 @@ const EditSitePage =(props) => {
         const obj = { name:  event.target.value.trim(),url: generateUrl(event.target.value.trim()) }
         menuLinks[ index ] = obj
         setMenuLinks(menuLinks)
+        validUrls()
         dispatch(reduxChange('assessmentUpdateForm', 'menuLinks', menuLinks))
         setTimeout(()=> setLoadData(false))
     }
@@ -128,7 +141,7 @@ const EditSitePage =(props) => {
         case 'logo':
             return <UploadLogo fieldName='logoUrl' previewFile={ form?.values?.logoUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } onClose={ handleClose } />
         case 'menulinks':
-            return  <MenuLinks removeMenuLink={ removeMenuLink } handleChangeMenuLink={ handleChangeMenuLink } loadData={ loadData } menuLinks={ menuLinks } addMenuLinks={ addMenuLinks } onClose={ handleClose } />
+            return  <MenuLinks isValid={ isValid } removeMenuLink={ removeMenuLink } handleChangeMenuLink={ handleChangeMenuLink } loadData={ loadData } menuLinks={ menuLinks } addMenuLinks={ addMenuLinks } onClose={ handleClose } />
         case 'favicon':
             return <UploadLogo fieldName='faviconUrl' previewFile={ form?.values?.faviconUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } onClose={ handleClose } />
         }
@@ -177,7 +190,7 @@ const EditSitePage =(props) => {
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail" className="edit-header-footer">
                                 <Form.Label>Header/Footer:</Form.Label>
-                                <Button type='submit'>Edit</Button>
+                                {isValid ? <Button type='submit'>Edit</Button> : <Button type='button' disabled={ true } >Edit</Button> }
                             </Form.Group>
                         </div>
                         <Modal show={ open } onHide={ handleClose } className="logo-upload-modal">
