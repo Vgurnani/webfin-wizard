@@ -106,6 +106,7 @@ const BlogPage =(props) => {
             type: 'SET_ACTIVE_SIDEBAR',
             payload: 'blog'
         })
+        dispatch(change('blogForm', 'data', initialValue))
         return () => {
             dispatch(reset('blogForm'))
             dispatch({
