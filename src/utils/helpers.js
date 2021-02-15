@@ -161,3 +161,8 @@ export const getIdFromPath = (path) => {
     var regex = /\d+/g;
     return  path.match(regex) && path.match(regex)[ 0 ];
 }
+
+export const getDomain = (sites) =>{
+    const site =  (sites && sites[ 0 ]) || JSON.parse(getItem('sessionData'))?.data?.data?.sites[ 0 ]
+    return site?.domain
+}
