@@ -25,6 +25,7 @@ const UserProfilePage =(props) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [ openModal, setModalOpen ]  = useState(false);
+    const [ isEditMode, setEditMode ]  = useState(false);
     const userProfileForm = useSelector((state)=>state.form.userProfileForm);
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
     const { handleSubmit , initialize } = props;
@@ -73,7 +74,7 @@ const UserProfilePage =(props) => {
                         <h4>My Account</h4>
                     </div>
                 </div>
-                <Form onSubmit={ handleSubmit(submitData) } className="profile-edit-info">
+                <Form onSubmit={ handleSubmit(submitData) } className={ isEditMode ? 'profile-edit-info' : '' }>
                     <div className="profile-avtar-info">
                         <div className="profile-avtar">
                             <div className="upload-feature-img-wrap">
@@ -88,16 +89,16 @@ const UserProfilePage =(props) => {
                         <div className="profile-main-info">
                             <h6>Main info</h6>
                             <h5>Jason Miller</h5>
-                            <a className="edit-info-btn">Edit Info</a>
+                            <a onClick={ () => setEditMode(true) } className="edit-info-btn">Edit Info</a>
                             <Button className="btn btn-primary profile-save-btn" type="submit">
                                 Save
                             </Button>
                         </div>
-                        <div className="profile-delete-account">
+                        {/* <div className="profile-delete-account">
                             <Button className="btn btn-secondary">
                                 Delete Account
                             </Button>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="profile-personal-info">
                         <Field
@@ -105,6 +106,7 @@ const UserProfilePage =(props) => {
                             label="First Name:"
                             type="text"
                             component={ renderFieldWG }
+                            disabled={ !isEditMode }
                             maxLength="150"
                             placeholder='Enter your first name'
                         />
@@ -113,6 +115,7 @@ const UserProfilePage =(props) => {
                             label="Last Name:"
                             type="text"
                             component={ renderFieldWG }
+                            disabled={ !isEditMode }
                             maxLength="150"
                             placeholder='Enter your last name'
                         />
@@ -121,6 +124,7 @@ const UserProfilePage =(props) => {
                             label="User Name:"
                             type="text"
                             component={ renderFieldWG }
+                            disabled={ !isEditMode }
                             maxLength="150"
                             placeholder='Enter your user name'
                         />
@@ -131,6 +135,7 @@ const UserProfilePage =(props) => {
                                     name="password"
                                     label="password"
                                     type="password"
+                                    disabled={ !isEditMode }
                                     component={ renderField }
                                     maxLength="150"
                                     placeholder='Enter your password'
@@ -149,6 +154,7 @@ const UserProfilePage =(props) => {
                             label="Phone number:"
                             type="text"
                             component={ renderFieldWG }
+                            disabled={ !isEditMode }
                             maxLength="150"
                             placeholder='Enter your phone number'
                         />
