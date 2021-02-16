@@ -195,7 +195,7 @@ const HomePage = () => {
             </section>
             <section className="website-faq">
                 <Container>
-                    <Accordion defaultActiveKey="0" className="accordion-faq">
+                    <Accordion className="accordion-faq">
                         <Card className="accordion-card">
                             <Card.Header className="accordion-card-header">
                                 <Accordion.Toggle as={ Button } variant="link" eventKey="0" className="accordion-card-btn">
