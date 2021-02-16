@@ -70,7 +70,7 @@ const Navbar = (props) => {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu  menuAlign="right">
-                                <Dropdown.Item ><Link to={ ROUTES.USER_PROFILE }>My Account</Link></Dropdown.Item>
+                                <Link className="dropdown-item" to={ ROUTES.USER_PROFILE }>My Account</Link>
                                 <Dropdown.Item onClick={ logout } >Log out</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
