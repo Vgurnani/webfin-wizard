@@ -38,9 +38,7 @@ export const getAssessment = () => {
         axiosInstance.get('/assessment').then((response)=>{
             const result  = response.data.data
             const niches = result.niches.map((item) => ({ label: item.label,value: item.id.toString(),icon: item.icon }))
-            const colorPalette = result.pallete.map((item) => ({ label: item.label,value: item.id.toString(),colors: item.colours.split(',') }))
-            const fonts = result.fonts.map((item) => ({ label: item.label,value: item.id.toString() }))
-            dispatch(getAssessmentSuccess({ niches, colorPalette,fonts }))
+            dispatch(getAssessmentSuccess({ niches }))
         }).catch((error) => {
             notification(NOTIFICATION_TYPES.ERROR, MESSAGE.SOMETHING_WRONG)
             dispatch(getAssessmentFailure(error?.response?.data?.message))

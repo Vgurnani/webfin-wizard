@@ -11,7 +11,7 @@ import Preview from  '../../components/assessment/Preview';
 import { ROUTES } from '../../constants/appRoutes'
 import { getAssessment ,createAssessment } from '../../middleware/assessments';
 import { isLoggedIn } from '../../utils/helpers'
-
+import { AllColors } from 'constants/theme'
 const AssessmentPage = () => {
     const history = useHistory();
     const dispatch  = useDispatch()
@@ -20,7 +20,6 @@ const AssessmentPage = () => {
     const assessmentForm = useSelector((state) => state.form.assessmentForm)
     const {
         niches ,
-        colorPalette,
     } = assessmentData
 
     useEffect(() =>{
@@ -58,11 +57,11 @@ const AssessmentPage = () => {
         case 1:
             return <StepOne kindOfBuild={ niches } saveData={ saveData } onSubmit={ nextPage } />
         case 2:
-            return <StepTwo  colorPalette={ colorPalette } saveData={ saveData } prevPage={ prevPage } onSubmit={ nextPage } />
+            return <StepTwo  colorPalette={ AllColors() } saveData={ saveData } prevPage={ prevPage } onSubmit={ nextPage } />
         case 3:
-            return <StepThree setStep={ setStep }  colorPalette={ colorPalette } assessmentData={ assessmentData } saveData={ saveData } prevPage={ prevPage } onSubmit={ nextPage } />
+            return <StepThree setStep={ setStep }  assessmentData={ assessmentData } saveData={ saveData } prevPage={ prevPage } onSubmit={ nextPage } />
         case 4:
-            return <Preview  colorPalette={ colorPalette } assessmentData={ assessmentData } saveData={ saveData } prevPage={ prevPage } onSubmit={ finalSubmit } />
+            return <Preview   assessmentData={ assessmentData } saveData={ saveData } prevPage={ prevPage } onSubmit={ finalSubmit } />
         default:
             return null
         }

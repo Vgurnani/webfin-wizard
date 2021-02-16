@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import{ Modal, Button, Row, Col } from 'react-bootstrap';
 import { Field } from 'redux-form';
 import { renderStyleMultipleRadio } from 'utils/formUtils'
+import { AllColors } from 'constants/theme'
 const ColourPalette = (props) => {
-    const { onClose , assessmentData } = props
+    const { onClose  } = props
     return(
         <div className="color-palette-popup">
             <Modal.Header closeButton>
@@ -20,8 +21,8 @@ const ColourPalette = (props) => {
                 <div className="color-palatte">
                     <div className="color-palatte-selector">
                         <Field
-                            name="colourId"
-                            options={ assessmentData.colorPalette || []  }
+                            name="colors"
+                            options={ AllColors() || []  }
                             component={ renderStyleMultipleRadio }
                             defaultValue={ 'no' }
                             placeholder={ 'gaveCraving' }

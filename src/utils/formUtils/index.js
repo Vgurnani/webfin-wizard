@@ -181,9 +181,7 @@ const renderStyleMultipleRadio = (props) => {
         meta: { touched, error, warning },
     } = props;
     return (
-
         <Form.Group>
-
             { options.map((item,index) => {
                 item[ 'imageUrl' ] = item.icon?.match('http') ? item.icon : item.imageUrl
                 return(
@@ -195,14 +193,14 @@ const renderStyleMultipleRadio = (props) => {
                                 input.onChange(value || elm?.value)
                             } }
                             type="radio"
-                            value={ item.value }
-                            checked={ item.value === (input.value || defaultValue) }
+                            value={ isColors ? JSON.stringify(item.value) : item.value }
+                            checked={ isColors ? (JSON.stringify(item.value) === (input.value || defaultValue)) : (item.value === (input.value || defaultValue)) }
                             id={ input.name }
                             className="styled-radio"
                         />
                         <div className='input-radio-label'>
                             {isColors && <span className={ `checkbox-colors ${ item.label === 'Clean White' ? 'round-border' : null }` }>
-                                {item.colors && <span style={ { backgroundColor: item.colors[ 0 ] } }></span>}
+                                <span style={ { backgroundColor: item.value[ 'top-menu' ] } }></span>
                             </span>}
                             {isIcons && item.icon && !item.imageUrl &&  <span className='emojiText mb-0 mt-1' dangerouslySetInnerHTML={ { __html:  item.icon  } } />}
                             {item.imageUrl && <>

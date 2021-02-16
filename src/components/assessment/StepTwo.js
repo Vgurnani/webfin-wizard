@@ -24,10 +24,9 @@ const StepTwo = (props) => {
     const dispatch = useDispatch()
     const { handleSubmit,prevPage ,colorPalette, saveData } = props;
     const assessmentForm = useSelector((state) => state.form.assessmentForm)
-    const colorObject = colorPalette.filter((item) => item.value === assessmentForm.values.colourId)[ 0 ] || {}
 
     const data = {
-        colors: colorObject?.colors || [],
+        colors: assessmentForm?.values.colors,
         logoUrl: assessmentForm.values.logoUrl,
         logoText: assessmentForm.values.websiteName,
         headerLinks: headerLinksTemplate(),
@@ -40,8 +39,8 @@ const StepTwo = (props) => {
 
     useEffect(()=>{
         setSave(assessmentSaved('step2',assessmentForm?.values))
-        if(!assessmentForm?.values?.colourId){
-            dispatch(reduxChange('assessmentForm','colourId',colorPalette?.filter((item)=> item.label === 'Clean White')[ 0 ]?.value))
+        if(!assessmentForm?.values?.colors){
+            dispatch(reduxChange('assessmentForm','colors',JSON.stringify(colorPalette?.filter((item)=> item.label === 'Clean White')[ 0 ]?.value)))
         }
     },[ assessmentForm?.values ])
 
@@ -63,7 +62,7 @@ const StepTwo = (props) => {
                             <Row className="color-palatte">
                                 <Col className="col-6 color-palatte-selector">
                                     <Field
-                                        name="colourId"
+                                        name="colors"
                                         options={ colorPalette }
                                         component={ renderStyleMultipleRadio }
                                         defaultValue={ 'no' }

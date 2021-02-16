@@ -29,10 +29,9 @@ const StepThree = (props) => {
     const domains  = useSelector((state) => state.assessment.domains)
     const domainLoading  = useSelector((state) => state.assessment.domainLoading)
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
-    const { handleSubmit, valid ,prevPage ,onSubmit,assessmentData, colorPalette, saveData, setStep } = props;
-    const colorObject = colorPalette.filter((item) => item.value === form.values.colourId)[ 0 ] || {}
+    const { handleSubmit, valid ,prevPage ,onSubmit,assessmentData, saveData, setStep } = props;
     const data = {
-        colors: colorObject?.colors || [],
+        colors: form?.values?.colors,
         logoUrl: form.values.logoUrl,
         logoText: form.values.websiteName,
         headerLinks: headerLinksTemplate(),
@@ -93,7 +92,7 @@ const StepThree = (props) => {
     }
 
     const handleSubmitData = (formData) => {
-        if(formData.nicheId && formData.colourId && formData.websiteName && formData.domain){
+        if(formData.nicheId && formData.colors && formData.websiteName && formData.domain){
             onSubmit(formData)
         }
     }
@@ -150,8 +149,8 @@ const StepThree = (props) => {
                                             {form.values?.nicheId && <li onClick={ () => setStep(1) }>
                                                 { getLabel(assessmentData.niches, form.values?.nicheId)}
                                             </li>}
-                                            {form.values?.colourId &&<li onClick={ () => setStep(2) }>
-                                                {getLabel(assessmentData.colorPalette, form.values?.colourId)}
+                                            {form.values?.colors &&<li onClick={ () => setStep(2) }>
+                                                {form.values?.colors && JSON.parse(form.values.colors).name}
                                             </li>}
                                         </ul>
 

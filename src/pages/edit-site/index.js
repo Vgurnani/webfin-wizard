@@ -56,7 +56,7 @@ const EditSitePage =(props) => {
         if(site){
             const formData = {
                 nicheId: site.niche.id.toString(),
-                colourId: site.colour.id.toString(),
+                colors: site.colors,
                 logoUrl: site.logoUrl,
                 faviconUrl: site.faviconUrl,
                 menuLinks: _.isEmpty(site.menuLinks ) ? [ { name: 'home',url: '/' } ] : site.menuLinks
@@ -95,8 +95,9 @@ const EditSitePage =(props) => {
     const addMenuLinks = () =>{
         const obj = {}
         setLoadData(true)
-        menuLinks.push(obj)
-        setMenuLinks(menuLinks)
+        const menuLinksClone = Object.assign([],menuLinks)
+        menuLinksClone.push(obj)
+        setMenuLinks(menuLinksClone)
         setTimeout(()=>{
             setLoadData(false)
         })
@@ -137,7 +138,7 @@ const EditSitePage =(props) => {
         case 'niche':
             return <Niche  assessmentData={ assessmentData } onClose={ handleClose } />
         case 'colour':
-            return <ColourPalette assessmentData={ assessmentData } onClose={ handleClose } />
+            return <ColourPalette  onClose={ handleClose } />
         case 'logo':
             return <UploadLogo fieldName='logoUrl' previewFile={ form?.values?.logoUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } onClose={ handleClose } />
         case 'menulinks':
@@ -150,7 +151,6 @@ const EditSitePage =(props) => {
         dispatch(updateAssessment(site?.id, formData))
     }
     const niche = assessmentData?.niches?.filter((item) => item.value === form?.values?.nicheId.toString())[ 0 ] || site?.niche
-    const colour = assessmentData?.colorPalette?.filter((item) => item.value === form?.values?.colourId.toString())[ 0 ] || site?.colour
     return(
         <main className="dashboard-data dashboard-edit-site-wrap">
             <section className="dashboard-body">
@@ -172,8 +172,8 @@ const EditSitePage =(props) => {
                                 <Form.Label>Color palette:</Form.Label>
                                 <div className="edit-site-btn" onClick={ (event) => handleModal(event,'colour') }>
                                     <span className="checkbox-colors round-border">
-                                        <span style={ { backgroundColor: colour?.colours?.split(',')[ 1 ] || colour?.colors[ 1 ] } }></span>
-                                    </span>{ colour?.label }
+                                        <span style={ { backgroundColor: form?.values?.colors && JSON.parse(form?.values?.colors)[ 'top-menu' ] } }></span>
+                                    </span>{ form?.values?.colors && JSON.parse(form?.values?.colors)?.name }
                                 </div>
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail">
