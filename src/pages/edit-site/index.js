@@ -95,8 +95,9 @@ const EditSitePage =(props) => {
     const addMenuLinks = () =>{
         const obj = {}
         setLoadData(true)
-        menuLinks.push(obj)
-        setMenuLinks(menuLinks)
+        const menuLinksClone = Object.assign([],menuLinks)
+        menuLinksClone.push(obj)
+        setMenuLinks(menuLinksClone)
         setTimeout(()=>{
             setLoadData(false)
         })
