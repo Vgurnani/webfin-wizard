@@ -12,18 +12,20 @@ import { updateCurrentUser } from '../../middleware/auth';
 import
 {
     Form,
-    Button
+    Button,
 } from 'react-bootstrap';
 import { ROUTES } from 'constants/appRoutes';
 import UploadImageModal from 'components/assessment/shared/UploadImageModal';
 import {
     EditProfileIcon,
 } from '../../utils/svg';
+import masterCardIcon from '../../images/master-card-logo.png';
 
 const UserProfilePage =(props) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [ openModal, setModalOpen ]  = useState(false);
+    const [ isEditMode, setEditMode ]  = useState(false);
     const userProfileForm = useSelector((state)=>state.form.userProfileForm);
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
     const { handleSubmit , initialize } = props;
@@ -72,7 +74,7 @@ const UserProfilePage =(props) => {
                         <h4>My Account</h4>
                     </div>
                 </div>
-                <Form onSubmit={ handleSubmit(submitData) }>
+                <Form onSubmit={ handleSubmit(submitData) } className={ isEditMode ? 'profile-edit-info' : '' }>
                     <div className="profile-avtar-info">
                         <div className="profile-avtar">
                             <div className="upload-feature-img-wrap">
@@ -87,8 +89,16 @@ const UserProfilePage =(props) => {
                         <div className="profile-main-info">
                             <h6>Main info</h6>
                             <h5>Jason Miller</h5>
-                            <a>Edit Info</a>
+                            <a onClick={ () => setEditMode(true) } className="edit-info-btn">Edit Info</a>
+                            <Button className="btn btn-primary profile-save-btn" type="submit">
+                                Save
+                            </Button>
                         </div>
+                        {/* <div className="profile-delete-account">
+                            <Button className="btn btn-secondary">
+                                Delete Account
+                            </Button>
+                        </div> */}
                     </div>
                     <div className="profile-personal-info">
                         <Field
@@ -96,6 +106,7 @@ const UserProfilePage =(props) => {
                             label="First Name:"
                             type="text"
                             component={ renderFieldWG }
+                            disabled={ !isEditMode }
                             maxLength="150"
                             placeholder='Enter your first name'
                         />
@@ -104,6 +115,7 @@ const UserProfilePage =(props) => {
                             label="Last Name:"
                             type="text"
                             component={ renderFieldWG }
+                            disabled={ !isEditMode }
                             maxLength="150"
                             placeholder='Enter your last name'
                         />
@@ -112,6 +124,7 @@ const UserProfilePage =(props) => {
                             label="User Name:"
                             type="text"
                             component={ renderFieldWG }
+                            disabled={ !isEditMode }
                             maxLength="150"
                             placeholder='Enter your user name'
                         />
@@ -122,6 +135,7 @@ const UserProfilePage =(props) => {
                                     name="password"
                                     label="password"
                                     type="password"
+                                    disabled={ !isEditMode }
                                     component={ renderField }
                                     maxLength="150"
                                     placeholder='Enter your password'
@@ -140,14 +154,10 @@ const UserProfilePage =(props) => {
                             label="Phone number:"
                             type="text"
                             component={ renderFieldWG }
+                            disabled={ !isEditMode }
                             maxLength="150"
                             placeholder='Enter your phone number'
                         />
-                        <div className="text-right">
-                            <Button className="btn btn-primary" type="submit">
-                                Save
-                            </Button>
-                        </div>
                     </div>
                 </Form>
                 <div className="profile-subscription">
@@ -163,7 +173,7 @@ const UserProfilePage =(props) => {
                     </div>
                     <div className="profile-billing-info  profile-right">
                         <h4 className="profile-subhead">Billing</h4>
-                        <div className="dashboard-table">
+                        <div className="dashboard-table billing-detail-table">
                             <table>
                                 <thead>
                                     <tr>
@@ -241,7 +251,79 @@ const UserProfilePage =(props) => {
                         <h4 className="profile-subhead">My Cards</h4>
                         <ul>
                             <li>
+                                <Form.Check
+                                    name="card"
+                                    type="radio"
+                                    id="card-1"
+                                    className="card-radio"
+                                />
+                                <label htmlFor="card-1">
+                                    <div className="card-radio-btn">
 
+                                    </div>
+                                    <div className="card-icon">
+                                        <img src={ masterCardIcon } alt="Master Card" />
+                                    </div>
+                                    <div className="card-number">
+                                        **** 2491
+                                    </div>
+                                    <div className="card-exp-date">
+                                        12/24
+                                    </div>
+                                    <div className="card-holder">
+                                        Jason Miller
+                                    </div>
+                                </label>
+                            </li>
+                            <li className="active">
+                                <Form.Check
+                                    name="card"
+                                    type="radio"
+                                    id="card-1"
+                                    className="card-radio"
+                                />
+                                <label htmlFor="card-1">
+                                    <div className="card-radio-btn">
+
+                                    </div>
+                                    <div className="card-icon">
+                                        <img src={ masterCardIcon } alt="Master Card" />
+                                    </div>
+                                    <div className="card-number">
+                                        **** 2491
+                                    </div>
+                                    <div className="card-exp-date">
+                                        12/24
+                                    </div>
+                                    <div className="card-holder">
+                                        Jason Miller
+                                    </div>
+                                </label>
+                            </li>
+                            <li>
+                                <Form.Check
+                                    name="card"
+                                    type="radio"
+                                    id="card-1"
+                                    className="card-radio"
+                                />
+                                <label htmlFor="card-1">
+                                    <div className="card-radio-btn">
+
+                                    </div>
+                                    <div className="card-icon">
+                                        <img src={ masterCardIcon } alt="Master Card" />
+                                    </div>
+                                    <div className="card-number">
+                                        **** 2491
+                                    </div>
+                                    <div className="card-exp-date">
+                                        12/24
+                                    </div>
+                                    <div className="card-holder">
+                                        Jason Miller
+                                    </div>
+                                </label>
                             </li>
                         </ul>
                     </div>
