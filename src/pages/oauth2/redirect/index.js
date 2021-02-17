@@ -15,18 +15,20 @@ import { change as reduxChange } from 'redux-form'
 const RedirectAuth = (props) => {
     const dispatch  = useDispatch();
     const form = useSelector((state) => state.form )
-    console.log(form)
+    console.log('form----',form)
+
     const checkValidAssessmentData = () =>{
         const assessmentForm = JSON.parse(sessionStorage.getItem('assessmentForm'))
         return assessmentForm.nicheId && assessmentForm.colors && assessmentForm.websiteName
     }
+    debugger
     useEffect(()=> {
         const queryData = queryStringToObject(props.history.location.search)
         if (queryData?.token?.length) {
             const test = queryData.test === 'true'
             setItem('user', { accessToken: queryData.token,enabled: true, test: test });
-            console.log(sessionStorage.getItem('assessmentForm'), checkValidAssessmentData())
-            debugger
+            console.log('ddddddd---',sessionStorage.getItem('assessmentForm'), checkValidAssessmentData())
+
             if(test){
                 history.push(ROUTES.DASHBOARD)
                 notification(NOTIFICATION_TYPES.SUCCESS, 'Login Successfully');
