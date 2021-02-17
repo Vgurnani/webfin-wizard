@@ -41,8 +41,9 @@
     "slate-react": "^0.59.0",
     "unsplash-js": "^7.0.3",
     "url-loader": "^4.1.1",
-    "web-templates": "^1.0.27",
-    "web-vitals": "^0.2.4"
+    "web-templates": "^1.0.28",
+    "web-vitals": "^0.2.4",
+    "react-color": "2.19.3"
   },
   "devDependencies": {
     "eslint": "^7.2.0",

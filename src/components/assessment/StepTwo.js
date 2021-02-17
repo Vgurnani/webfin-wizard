@@ -50,9 +50,8 @@ const StepTwo = (props) => {
         setSave(true)
         saveData()
     }
-    const customColorToggle = () => {
-        setCustomColor(!customColorOpen)
-    }
+    console.log(setCustomColor)
+
     return(
         <div className="assesment-step assesment-step-2">
             <Row  className="step-form">
@@ -74,7 +73,6 @@ const StepTwo = (props) => {
                                             defaultValue={ 'no' }
                                             placeholder={ 'gaveCraving' }
                                             isColors={ true }
-                                            handleChange={ customColorToggle }
                                             className='styled-radio-btn btn-outline'
                                             imgWidth="30px"
                                         />

@@ -157,6 +157,6 @@ export const AllColors = () => {
         { label: 'Napa Red', value: NapaRed() },
         { label: 'Olive Green', value: OliveGreen() },
         { label: 'Royal Blue', value: RoyalBlue() },
-        { label: 'Custom Color', value: DefaultCustomColor() }
+        //{ label: 'Custom Color', value: DefaultCustomColor() }
     ])
 }
