@@ -10,6 +10,7 @@ import { notification } from '../../../services/notification';
 import { createAssessment } from '../../../middleware/assessments';
 import { setItem } from '../../../utils/cache';
 import { queryStringToObject } from '../../../utils/helpers'
+import { change as reduxChange } from 'redux-form'
 
 const RedirectAuth = (props) => {
     const dispatch  = useDispatch();
@@ -31,6 +32,7 @@ const RedirectAuth = (props) => {
                 dispatch(createAssessment(assessmentData))
             }else{
                 history.push(ROUTES.ASSESSMENT)
+                dispatch(reduxChange('assessmentForm','route', queryData.route))
                 notification(NOTIFICATION_TYPES.SUCCESS, 'Please fill assessment');
             }
 
