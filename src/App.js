@@ -43,7 +43,7 @@ const App = () => {
                 <PrivateRoute exact path={ ROUTES.BLOGS } component={ BlogsPage } />
                 <PrivateRoute exact path={ ROUTES.EDIT_SITE } component={ EditSitePage } />
                 <PrivateRoute exact path={ ROUTES.EDIT_BLOG } component={ BlogPage } />
-                <Route exact path={ ROUTES.USER_PROFILE } component={ UserProfilePage } />
+                <PrivateRoute exact path={ ROUTES.USER_PROFILE } component={ UserProfilePage } />
             </Layout>
             <Route exact component={ NotFoundPage } />
         </Switch>);
