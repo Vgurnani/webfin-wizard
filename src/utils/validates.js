@@ -90,8 +90,8 @@ export const assessmentFormValidate = values => {
     if (!values.nicheId) {
         errors.nicheId = MESSAGE.REQUIRED;
     }
-    if (!values.colourId) {
-        errors.colourId = MESSAGE.REQUIRED;
+    if (!values.colors) {
+        errors.colors = MESSAGE.REQUIRED;
     }
     if(!values.domain || values.domain === 'null'){
         errors.domain = MESSAGE.VALID_SELECT('domain');

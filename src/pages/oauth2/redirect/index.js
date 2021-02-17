@@ -16,7 +16,7 @@ const RedirectAuth = (props) => {
     const dispatch  = useDispatch();
     const checkValidAssessmentData = () =>{
         const assessmentForm = JSON.parse(sessionStorage.getItem('assessmentForm'))
-        return assessmentForm.nicheId && assessmentForm.colourId && assessmentForm.websiteName
+        return assessmentForm.nicheId && assessmentForm.colors && assessmentForm.websiteName
     }
     useEffect(()=> {
         const queryData = queryStringToObject(props.history.location.search)

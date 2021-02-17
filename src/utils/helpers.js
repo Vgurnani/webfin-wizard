@@ -102,7 +102,7 @@ export const assessmentSaved = (step,values) => {
     case 'step1':
         return !_.isEmpty(assessment?.nicheId) && assessment.nicheId === values?.nicheId
     case 'step2':
-        return !_.isEmpty(assessment?.colourId) && assessment.colourId === values?.colourId
+        return !_.isEmpty(assessment?.colors) && assessment.colors === values?.colors
     case 'step3':
         return !_.isEmpty(assessment?.websiteName) && assessment.websiteName === values?.websiteName
     default:
