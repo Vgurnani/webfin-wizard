@@ -6,6 +6,7 @@ import { isLoggedIn, getUser } from '../../utils/helpers'
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
     const user = getUser();
+    console.log('user-------', user)
     return (
         <Route
             { ...rest }
