@@ -27,7 +27,7 @@ const RedirectAuth = (props) => {
             if(test){
                 history.push(ROUTES.DASHBOARD)
                 notification(NOTIFICATION_TYPES.SUCCESS, 'Login Successfully');
-            }else if('sessionStorage.getItem', sessionStorage.getItem('assessmentForm') && checkValidAssessmentData()){
+            }else if(sessionStorage.getItem('assessmentForm') && checkValidAssessmentData()){
                 const assessmentData = JSON.parse(sessionStorage.assessmentForm)
                 assessmentData[ 'route' ] = queryData.route
                 dispatch(createAssessment(assessmentData))

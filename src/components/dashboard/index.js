@@ -1,18 +1,22 @@
 import React,{ useState , useEffect } from 'react'
 import SocialMedia from './socialMedia'
+import PropTypes  from 'prop-types'
 import { createSocialMedia, getSocialMedia } from 'middleware/blog'
 import { useDispatch , useSelector } from 'react-redux';
 import{
     Button,
 }from 'react-bootstrap';
-const Dashboard =() => {
+const Dashboard =(props) => {
+    const { site } = props
     const dispatch = useDispatch()
     const connecting = useSelector((state) => state.blog.connecting)
     const socialMediaLinks = useSelector((state) => state.blog.socialMediaLinks)
     const [ openModal ,setOpenModal ] = useState(false)
     useEffect(() => {
-        dispatch(getSocialMedia())
-    },[])
+        if(site){
+            dispatch(getSocialMedia())
+        }
+    },[ site ])
 
     const connectData = (values) => {
         const data = {
@@ -95,6 +99,10 @@ const Dashboard =() => {
             </div>
         </div>
     )
+}
+
+Dashboard.propTypes = {
+    site: PropTypes.object
 }
 
 export default Dashboard

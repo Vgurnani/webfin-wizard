@@ -103,14 +103,6 @@ const EditSitePage =(props) => {
         })
     }
 
-    const removeMenuLink = (index) => {
-        menuLinks.splice(index, 1);
-        setMenuLinks(menuLinks)
-    }
-
-    const generateUrl = (str) => {
-        return '/'+str.replace(/[^a-zA-Z ]/g, '').replace(/\s+/g, '-').toLowerCase();
-    }
     const validUrls = () => {
         const names= menuLinks.map((item)=> item.name)
         const isDuplicateName =  !_.isEmpty(names.filter((item, index) => names.indexOf(item) != index))
@@ -123,15 +115,28 @@ const EditSitePage =(props) => {
         }
     }
 
-    const handleChangeMenuLink = (event, index) =>{
-        event.preventDefault();
-        setLoadData(true)
-        const obj = { name:  event.target.value.trim(),url: generateUrl(event.target.value.trim()) }
-        menuLinks[ index ] = obj
+    const removeMenuLink = (index) => {
+        menuLinks.splice(index, 1);
         setMenuLinks(menuLinks)
         validUrls()
-        dispatch(reduxChange('assessmentUpdateForm', 'menuLinks', menuLinks))
-        setTimeout(()=> setLoadData(false))
+    }
+
+    const generateUrl = (str) => {
+        return '/'+str.replace(/[^a-zA-Z ]/g, '').replace(/\s+/g, '-').toLowerCase();
+    }
+
+    const handleChangeMenuLink = (event, index) =>{
+        event.preventDefault();
+        if(!event.target.value.match(/[&/\\#, +()@$~%.'":*?<>{}0-9]/g)){
+            setLoadData(true)
+            const name = event.target?.value?.toLowerCase()?.trim() && event.target?.value?.toLowerCase()?.trim().replace(/[&/\\#, +()@$~%.'":*?<>{}0-9]/g,'')
+            const obj = { name: name, url: generateUrl(event.target.value.trim()) }
+            menuLinks[ index ] = obj
+            setMenuLinks(menuLinks)
+            validUrls()
+            dispatch(reduxChange('assessmentUpdateForm', 'menuLinks', menuLinks))
+            setTimeout(()=> setLoadData(false))
+        }
     }
     const renderModalView = () =>{
         switch(modalType){
@@ -148,7 +153,7 @@ const EditSitePage =(props) => {
         }
     }
     const submitData = (formData) => {
-        dispatch(updateAssessment(site?.id, formData))
+        dispatch(updateAssessment(site?.id, formData, site.domain))
     }
     const niche = assessmentData?.niches?.filter((item) => item.value === form?.values?.nicheId.toString())[ 0 ] || site?.niche
     return(

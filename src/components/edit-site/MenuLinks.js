@@ -77,12 +77,14 @@ const MenuLinks = (props) => {
                                 <Form.Label>Name</Form.Label>
                                 <input type='text'
                                     name='name'
-                                    disabled={ getData()?.name === 'home' }
+                                    disabled={ getData()?.name === 'home' && linkType === 0 }
                                     onChange={ (event) => handleChangeMenuLink(event,linkType) }
                                     className='form-control'
                                     defaultValue={ getData()?.name }
+                                    value={ getData()?.name  }
 
                                 />
+                                {!isValid && <p><span className='field_error'>Name and url should be unique </span></p>}
                             </Form.Group>
                             <Form.Group className="url-control">
                                 <Form.Label>Link</Form.Label>
@@ -97,7 +99,6 @@ const MenuLinks = (props) => {
                         </Form>
                         }
                     </div>
-                    {!isValid && <p><span className='field_error'>Name and url should be unique </span></p>}
                 </div>
             </Modal.Body>
             <Modal.Footer>

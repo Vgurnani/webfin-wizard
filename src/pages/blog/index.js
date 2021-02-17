@@ -25,7 +25,7 @@ import { createBlog , getBlogById } from '../../middleware/blog';
 import { getUnsplash } from '../../middleware/assessments'
 import { change as reduxChange } from 'redux-form'
 import { blogValidate as validate } from '../../utils/validates';
-import profilePic from '../../public/images/media/media-4.jpg';
+import profilePic from 'images/user-avatar.png';
 import UploadImageModal from '../../components/assessment/shared/UploadImageModal'
 const BlogPage =(props) => {
     const dispatch = useDispatch();
@@ -178,7 +178,7 @@ const BlogPage =(props) => {
                                 <h5>Author Box</h5>
                                 <div className="author-info">
                                     <div className="author-img">
-                                        <img src={ profilePic } alt="Jason Miller" />
+                                        <img src={ userData && userData.user.profileImageUrl || profilePic } alt="Jason Miller" />
                                     </div>
                                     <div className="author-name">
                                         <span>{userData && `${ userData.user?.firstName } ${ userData.user?.lastName }`}</span>

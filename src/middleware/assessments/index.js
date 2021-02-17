@@ -90,16 +90,16 @@ export const createAssessment = (data) => {
     };
 };
 
-export const updateAssessment = (id, data) => {
+export const updateAssessment = (id,data, domain) => {
     return async (dispatch) => {
         dispatch(createAssessmentRequest())
         if(data.logoUrl && !data.logoUrl.match('^(http|https)://')){
             const file = dataURLtoFile(data.logoUrl,uId()+'.png')
-            data[ 'logoUrl' ] = await imageUpload(data.domain,'logo',file);
+            data[ 'logoUrl' ] = await imageUpload(domain,'logo',file);
         }
         if(data.faviconUrl && !data.faviconUrl.match('^(http|https)://')){
             const file = dataURLtoFile(data.faviconUrl,uId()+'.png')
-            data[ 'faviconUrl' ] = await imageUpload(data.domain,'logo',file);
+            data[ 'faviconUrl' ] = await imageUpload(domain,'logo',file);
         }
         axiosInstance.put(`/assessment/${ id }`, data).then((response)=>{
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.UPDATE_ASSESSMENT);

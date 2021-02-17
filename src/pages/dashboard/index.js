@@ -79,7 +79,7 @@ const DashboardPage =() => {
                         </div> }
                     </div>
                 </div>
-                <Dashboard />
+                <Dashboard site={ site }/>
             </section>
         </main>
 

@@ -88,7 +88,7 @@ const UserProfilePage =(props) => {
                         </div>
                         <div className="profile-main-info">
                             <h6>Main info</h6>
-                            <h5>Jason Miller</h5>
+                            <h5>{ userProfileForm?.values?.firstName } { userProfileForm?.values?.lastName } </h5>
                             <a onClick={ () => setEditMode(true) } className="edit-info-btn">Edit Info</a>
                             <Button className="btn btn-primary profile-save-btn" type="submit">
                                 Save

@@ -50,12 +50,12 @@ export const checkAvailbleSlug = async(route,data) => {
 export const createBlog = (domain,data,id) => {
     return async(dispatch) => {
         dispatch(blogCreateRequest())
-        if(data.imageUrl && !data.imageUrl.match('^(http|https)://')){
-            const file = dataURLtoFile(data.imageUrl,uId()+'.png')
-            data[ 'imageUrl' ] = await imageUpload(domain,'blogs',file);
-        }
         const route = JSON.parse(getItem('sessionData'))?.data?.data?.sites[ 0 ]?.route;
         data[ 'slug' ] = await checkAvailbleSlug(route,data)
+        if(data.imageUrl && !data.imageUrl.match('^(http|https)://')){
+            const file = dataURLtoFile(data.imageUrl,uId()+'.png')
+            data[ 'imageUrl' ] = await imageUpload(domain,`blogs/${ data.slug }`,file);
+        }
         if(id){
             strapiAxiosInstance.put(`${ route }/${ id }`, data).then((response)=>{
                 history.push(ROUTES.BLOGS)
