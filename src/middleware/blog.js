@@ -47,11 +47,11 @@ export const checkAvailbleSlug = async(route,data) => {
     }
 }
 
-export const createBlog = (domain,data,id) => {
+export const createBlog = (domain,data,id, slug) => {
     return async(dispatch) => {
         dispatch(blogCreateRequest())
         const route = JSON.parse(getItem('sessionData'))?.data?.data?.sites[ 0 ]?.route;
-        data[ 'slug' ] = await checkAvailbleSlug(route,data)
+        data[ 'slug' ] = (slug && id) ? slug :  await checkAvailbleSlug(route,data);
         if(data.imageUrl && !data.imageUrl.match('^(http|https)://')){
             const file = dataURLtoFile(data.imageUrl,uId()+'.png')
             data[ 'imageUrl' ] = await imageUpload(domain,`blogs/${ data.slug }`,file);

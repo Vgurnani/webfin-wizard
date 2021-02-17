@@ -37,7 +37,6 @@ const BlogPage =(props) => {
     const userData = useSelector(state => state.user.sessionData?.data?.data)
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
     const id = getIdFromPath(history.location.pathname)
-
     //const isReadyPublish = useSelector((state) => state.blog.isReadyPublish)
 
     const initialValue = [
@@ -88,7 +87,7 @@ const BlogPage =(props) => {
                 imageUrl: formData.blogUrl,
                 title: formData.title
             }
-            dispatch(createBlog(getDomain(userData.sites), data,id))
+            dispatch(createBlog(getDomain(userData.sites), data,id,blog?.slug))
         }else{
             setErrorMessageUrl(true)
         }
