@@ -16,12 +16,12 @@ const DashboardPage =() => {
     const site =  data?.sites[ 0 ]
     var timeoutData = null;
     useEffect(() => {
+        dispatch(getCurrentUser());
         removeItem('assessmentForm')
         dispatch({
             type: 'SET_ACTIVE_SIDEBAR',
             payload: 'dashboard'
         })
-        dispatch(getCurrentUser());
         return () =>{
             clearInterval(timeoutData)
         }
