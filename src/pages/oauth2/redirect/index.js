@@ -24,6 +24,7 @@ const RedirectAuth = (props) => {
             const test = queryData.test === 'true'
             setItem('user', { accessToken: queryData.token,enabled: true, test: test });
             console.log(sessionStorage.getItem('assessmentForm'), checkValidAssessmentData())
+            debugger
             if(test){
                 history.push(ROUTES.DASHBOARD)
                 notification(NOTIFICATION_TYPES.SUCCESS, 'Login Successfully');
