@@ -30,6 +30,7 @@ const RedirectAuth = (props) => {
                 const assessmentData = JSON.parse(sessionStorage.assessmentForm)
                 assessmentData[ 'route' ] = queryData.route
                 dispatch(createAssessment(assessmentData))
+                history.push(ROUTES.DASHBOARD);
             }else{
                 history.push(ROUTES.ASSESSMENT)
                 dispatch(reduxChange('assessmentForm','route', queryData.route))
