@@ -8,7 +8,7 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import OtpInput from 'react-otp-input';
 import Dropzone from 'react-dropzone'
-
+import ColorImage from 'images/color.png'
 export const Validations = (props) => {
     const {
         touched,
@@ -176,6 +176,7 @@ const renderStyleMultipleRadio = (props) => {
         className,
         defaultValue,
         isIcons,
+        handleChange,
         isColors,
         fontStyled,
         meta: { touched, error, warning },
@@ -191,6 +192,7 @@ const renderStyleMultipleRadio = (props) => {
                             onChange={ (value) => {
                                 const elm = value.currentTarget;
                                 input.onChange(value || elm?.value)
+                                handleChange && handleChange(value || elm?.value)
                             } }
                             type="radio"
                             value={ isColors ? JSON.stringify(item.value) : item.value }
@@ -200,7 +202,7 @@ const renderStyleMultipleRadio = (props) => {
                         />
                         <div className='input-radio-label'>
                             {isColors && <span className={ `checkbox-colors ${ item.label === 'Clean White' ? 'round-border' : null }` }>
-                                <span style={ { backgroundColor: item.value[ 'top-menu' ] } }></span>
+                                {item.label === 'Custom Color' ? <img src={  ColorImage } /> : <span style={ { backgroundColor: item.value[ 'top-menu' ] } }></span>}
                             </span>}
                             {isIcons && item.icon && !item.imageUrl &&  <span className='emojiText mb-0 mt-1' dangerouslySetInnerHTML={ { __html:  item.icon  } } />}
                             {item.imageUrl && <>
