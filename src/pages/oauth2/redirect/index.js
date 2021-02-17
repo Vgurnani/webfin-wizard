@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Container } from 'react-bootstrap';
 import history from '../../../utils/history'
@@ -14,6 +14,8 @@ import { change as reduxChange } from 'redux-form'
 
 const RedirectAuth = (props) => {
     const dispatch  = useDispatch();
+    const form = useSelector((state) => state.form )
+    console.log(form)
     const checkValidAssessmentData = () =>{
         const assessmentForm = JSON.parse(sessionStorage.getItem('assessmentForm'))
         return assessmentForm.nicheId && assessmentForm.colors && assessmentForm.websiteName
