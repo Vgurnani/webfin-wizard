@@ -121,7 +121,7 @@ export const getDraftBlogs =  () => {
             const route = getRoute();
             const result = await strapiAxiosInstance.get(`${ route }?_publicationState=preview&published_at_null=true&deletedAt_null=true&type=blog`)
             if([ 200,203 ].includes(result.status)){
-                const data = result.data.filter((item) => item.published_at === null && item.type === 'blog')
+                const data = result.data.filter((item) => item.published_at === null && item.type === 'blog' && item.slug !== 'wizrd-welcome-blog')
                 dispatch(getDraftBlogListSuccess(data));
             }
         }catch(error){
@@ -138,7 +138,7 @@ export const getPublishedBlogs =  () => {
             const route = getRoute();
             const result = await strapiAxiosInstance.get(`${ route }?_publicationState=live&deletedAt_null=true&type=blog`)
             if([ 200,203 ].includes(result.status)){
-                const data = result.data.filter((item) => item.published_at !== null)
+                const data = result.data.filter((item) => item.published_at !== null && item.slug !== 'wizrd-welcome-blog')
                 dispatch(getPublishBlogListSuccess(data));
             }
         }catch(error){
