@@ -5,7 +5,7 @@ import { createAssessment, imageUpload } from './assessments/'
 import axiosInstance from '../services/api';
 import { getItem, setItem, removeItem } from '../utils/cache';
 import history from '../utils/history'
-import { getDomain } from 'utils/helpers'
+import { getDomain, getUser } from 'utils/helpers'
 import _ from 'lodash';
 import {
     loginRequest,
@@ -161,6 +161,10 @@ export const getCurrentUser = () => {
         axiosInstance.get('/user')
             .then((response) => {
                 setItem('sessionData', response)
+                const user = getUser();
+                if (response?.data?.data?.user) {
+                    setItem('user', { ...user, ...response.data.data.user })
+                }
                 dispatch(getUserSuccess(response));
             })
             .catch((error) => {

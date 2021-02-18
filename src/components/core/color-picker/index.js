@@ -7,8 +7,7 @@ import {
 } from 'react-color/lib/components/common';
 
 export const MyPicker = (props) => {
-    const { onChange, colors , hsl,hsv } = props
-    console.log(colors)
+    const { onChange, colors, hsl, hsv } = props;
     const styles = {
         main: {
             padding: 20
@@ -54,6 +53,8 @@ export const MyPicker = (props) => {
 };
 MyPicker.propTypes = {
     onChange: PropTypes.func,
-    colors: PropTypes.object
+    colors: PropTypes.object,
+    hsl: PropTypes.any,
+    hsv: PropTypes.any
 }
 export default CustomPicker(MyPicker);

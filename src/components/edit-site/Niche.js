@@ -5,7 +5,7 @@ import { Field } from 'redux-form';
 import { renderStyleMultipleRadio } from 'utils/formUtils'
 const Niche = (props) => {
     const { onClose , assessmentData } = props
-    console.log(assessmentData)
+
     return(
         <div className="niche-edit-modal">
             <Modal.Header closeButton>

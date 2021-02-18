@@ -33,9 +33,8 @@ const EditSitePage =(props) => {
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
     const [ menuLinks, setMenuLinks ] = useState(form?.values?.menuLinks)
 
-    const user =  data?.user
     const site =  data?.sites[ 0 ]
-    console.log(user,site)
+
     useEffect(() => {
         dispatch({
             type: 'SET_ACTIVE_SIDEBAR',

@@ -31,7 +31,6 @@ const MenuLinks = (props) => {
         },1)
     }
 
-    console.log(getData())
     return(
         <div className="">
             <Modal.Header closeButton>

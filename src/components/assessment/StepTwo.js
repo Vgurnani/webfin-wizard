@@ -50,7 +50,6 @@ const StepTwo = (props) => {
         setSave(true)
         saveData()
     }
-    console.log(setCustomColor)
 
     return(
         <div className="assesment-step assesment-step-2">
