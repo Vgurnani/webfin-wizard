@@ -1094,7 +1094,7 @@
                 font-size: 16px
                 line-height: 1.5
                 color: $dark-grey-color
-                height: 40px
+                height: auto
                 img
                     padding: 0 10px 0 0
                 &.no-arrow
@@ -1110,6 +1110,7 @@
                         height: 24px
                         vertical-align: middle
                 &.logo-preview-btn
+                    height: 40px
                     img
                         width: auto
                         max-height: 100%
@@ -1373,6 +1374,7 @@
         width: calc(100% -  302px)
         display: inline-block
         vertical-align: middle
+        text-transform: capitalize
         @media (max-width: $breakpoint-mobile)
             width: 100%
             margin: 20px 0 0
