@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { getUnsplash } from 'middleware/assessments';
 import { renderField, renderFieldWG } from '../../utils/formUtils';
 import { updateUserProfileValidate as validate } from '../../utils/validates';
+import asyncValidate  from 'utils/asyncValidate';
 import { togglePassword, getUser } from '../../utils/helpers';
 import { updateCurrentUser } from '../../middleware/auth';
 import
@@ -351,5 +352,7 @@ UserProfilePage.propTypes = {
 
 export default reduxForm({
     form: 'userProfileForm',
-    validate
+    validate,
+    asyncValidate,
+    asyncChangeFields: [ 'userName' ]
 })(UserProfilePage);
