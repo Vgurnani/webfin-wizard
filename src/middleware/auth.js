@@ -162,7 +162,6 @@ export const getCurrentUser = () => {
             .then((response) => {
                 setItem('sessionData', response)
                 const user = getUser();
-                console.log('Response?.data', response, user)
                 if (response?.data?.data?.user) {
                     setItem('user', { ...user, ...response.data.data.user })
                 }
