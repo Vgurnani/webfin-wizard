@@ -5,6 +5,7 @@ import {
     DashboardMenuIcon,
     BlogMenuIcon,
     DrawerArrowIcon,
+    EditSiteMenuIcon,
 } from '../../utils/svg'
 const SideBar = () => {
     const [ isSideBarActive, toggleSideBar ] = React.useState(false);
@@ -24,7 +25,7 @@ const SideBar = () => {
                 <li className={ `${ theme.sidebarActive === 'edit-site' ?  'active' : '' }` } >
                     <Link to="/edit-site">
                         Edit Site
-                        <BlogMenuIcon />
+                        <EditSiteMenuIcon />
                     </Link>
                 </li>
                 <li className={ `${ theme.sidebarActive === 'blog' ?  'active' : '' }` } >
