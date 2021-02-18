@@ -19,6 +19,7 @@ import {
     deleteBlogRequest,
     deleteBlogFailed,
     getBlogRequest,
+    allBlogsCountSuccess,
     getBlogSuccess
 } from '../actions/blog';
 import strapiAxiosInstance from '../services/strapiApi';
@@ -131,12 +132,12 @@ export const getDraftBlogs =  () => {
     }
 }
 
-export const getPublishedBlogs =  () => {
+export const getPublishedBlogs =  (args) => {
     return async(dispatch) => {
         try{
             dispatch(getBlogsRequest())
             const route = getRoute();
-            const result = await strapiAxiosInstance.get(`${ route }?_publicationState=live&deletedAt_null=true&type=blog`)
+            const result = await strapiAxiosInstance.get(`${ route }?_publicationState=live&deletedAt_null=true&type=blog&${ args }`)
             if([ 200,203 ].includes(result.status)){
                 const data = result.data.filter((item) => item.published_at !== null)
                 dispatch(getPublishBlogListSuccess(data));
@@ -148,6 +149,24 @@ export const getPublishedBlogs =  () => {
     }
 }
 
+export const allBlogsCount = () => {
+    return async(dispatch) => {
+        try{
+            dispatch(getBlogsRequest())
+            const route = getRoute();
+            const publishBlogResult = await strapiAxiosInstance.get(`${ route }?_publicationState=live&deletedAt_null=true&type=blog`)
+            const publishBlogCount = publishBlogResult.data.length
+            const draftBlogResult =  await strapiAxiosInstance.get(`${ route }?_publicationState=preview&published_at_null=true&deletedAt_null=true&type=blog`)
+            const draftBlogCount = draftBlogResult.data.length
+
+            dispatch(allBlogsCountSuccess(publishBlogCount, draftBlogCount));
+
+        }catch(error){
+            dispatch(getBlogListFailed(error))
+            notification(NOTIFICATION_TYPES.ERROR, MESSAGE.SOMETHING_WRONG);
+        }
+    }
+}
 export const callPublish = (id,isPublish) => {
     const route = getRoute();
     return(dispatch) => {

@@ -53,6 +53,8 @@ export default (state = initialState, action) => {
         return { ...state, loading: false  }
     case ActionTypes.DELETE_BLOG_FAILURE:
         return { ...state, loading: false  }
+    case ActionTypes.TOTAL_BLOGS_COUNT:
+        return { ...state, blogsCount: action.payload }
     case ActionTypes.CLEAR_BLOG_FORM:
         return { ...state, blog: {} }
     default:

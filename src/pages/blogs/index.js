@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment'
 import CustomTable from 'components/core/table'
 import ConfirmAlert from 'components/core/confirm-alert'
 import { confirmAlert } from 'react-confirm-alert';
+import Pagination from 'react-js-pagination';
 
 import
 {
@@ -15,7 +16,7 @@ import
 }
     from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
-import { getDraftBlogs,callPublish, getPublishedBlogs, getBlogById, deleteBlog } from '../../middleware/blog';
+import { allBlogsCount, getDraftBlogs,callPublish, getPublishedBlogs, getBlogById, deleteBlog } from '../../middleware/blog';
 import { ROUTES } from '../../constants/appRoutes';
 import { getDynamicURL } from '../../services/api';
 
@@ -31,18 +32,24 @@ import EditIcon from '../../images/edit.png';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const BlogsPage = () => {
+    const limit = 6;
     const dispatch = useDispatch();
     const history = useHistory();
+    const [ activePagePublish, setActivePagePublish ] = useState(1);
+    const [ activePageDraft, setActivePageDraft ] = useState(1)
     const publishBlogs = useSelector(state => state.blog.publishBlogs)
+    const blogsCount = useSelector(state => state.blog.blogsCount)
     const draftBlogs = useSelector(state => state.blog.draftBlogs)
     const data = useSelector(state => state.user.sessionData?.data?.data) || getSessionData()
+    console.log(blogsCount)
     useEffect(() => {
         dispatch({
             type: 'SET_ACTIVE_SIDEBAR',
             payload: 'blog'
         })
+        dispatch(allBlogsCount())
         dispatch(getDraftBlogs());
-        dispatch(getPublishedBlogs());
+        dispatch(getPublishedBlogs(`_limit=${ limit }`));
     }, [ dispatch ]);
 
     const handleEdit = (event, blog) => {
@@ -54,6 +61,19 @@ const BlogsPage = () => {
         event.preventDefault();
         dispatch(getBlogById(blog.id))
         history.push(ROUTES.BLOG)
+    }
+
+    const handlePageChangePublish = (pageNumber) => {
+        const startWith = (pageNumber - 1) * limit
+        const args = `_start=${ startWith }&_limit=${ limit }`
+        dispatch(getPublishedBlogs(args));
+        setActivePagePublish(pageNumber);
+    }
+    const handlePageChangeDraft= (pageNumber) => {
+        const startWith = (pageNumber - 1) * limit
+        const args = `_start=${ startWith }&_limit=${ limit }`
+        dispatch(getDraftBlogs(args));
+        setActivePageDraft(pageNumber);
     }
 
     const handleDelete = (event, blog) => {
@@ -151,7 +171,18 @@ const BlogsPage = () => {
                             </tr>)
                             )}
                         </CustomTable>
+                        <div className='blogs-pagination'>
+                            { limit < blogsCount?.publishCount && <Pagination
+                                activePage={ activePagePublish }
+                                itemsCountPerPage={ limit }
+                                totalItemsCount={ blogsCount?.publishCount }
+                                pageRangeDisplayed={ 5 }
+                                onChange={ handlePageChangePublish }
+                            />
+                            }
+                        </div>
                     </div>}
+
                     {draftBlogs?.length > 0 && <div className="draft-posts">
                         <Accordion defaultActiveKey="0">
                             <Card>
@@ -195,12 +226,23 @@ const BlogsPage = () => {
                                                         </td>
                                                     </tr>))}
                                             </CustomTable>
+                                            <div className='blogs-pagination'>
+                                                { limit < blogsCount?.draftCount && <Pagination
+                                                    activePage={ activePageDraft }
+                                                    itemsCountPerPage={ limit }
+                                                    totalItemsCount={ blogsCount?.draftCount }
+                                                    pageRangeDisplayed={ 5 }
+                                                    onChange={ handlePageChangeDraft }
+                                                />
+                                                }
+                                            </div>
 
                                         </div>
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card>
                         </Accordion>
+
                     </div>}
                 </section>
             </section>

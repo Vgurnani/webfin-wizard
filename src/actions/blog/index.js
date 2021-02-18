@@ -135,3 +135,10 @@ export const getBlogSuccess = (data) => {
         payload: data
     }
 }
+
+export const allBlogsCountSuccess = (publishCount, draftCount ) => {
+    return {
+        type: ActionTypes.TOTAL_BLOGS_COUNT,
+        payload: { publishCount, draftCount }
+    }
+}

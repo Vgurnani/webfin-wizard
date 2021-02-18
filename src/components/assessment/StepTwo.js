@@ -26,7 +26,7 @@ const StepTwo = (props) => {
     const dispatch = useDispatch()
     const { handleSubmit,prevPage ,colorPalette, saveData } = props;
     const assessmentForm = useSelector((state) => state.form.assessmentForm)
-
+    console.log(setCustomColor)
     const data = {
         colors: assessmentForm?.values.colors,
         logoUrl: assessmentForm.values.logoUrl,
