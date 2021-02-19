@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
     case ActionTypes.SOCIAL_MEDIA_FAILURE:
         return { ...state, loading: false, connecting: false }
     case ActionTypes.GET_SOCIAL_MEDIA_REQUEST:
-        return { ...state, loading: true }
+        return { ...state }
     case ActionTypes.GET_SOCIAL_MEDIA_SUCCESS:
         return { ...state, loading: false, socialMediaLinks: action.payload?.data[ 0 ] && action.payload?.data[ 0 ].content || { } }
     case ActionTypes.GET_SOCIAL_MEDIA_FAILURE:

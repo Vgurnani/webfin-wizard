@@ -60,7 +60,6 @@ export const createBlog = (domain,data,id, slug) => {
             strapiAxiosInstance.put(`${ route }/${ id }`, data).then((response)=>{
                 history.push(ROUTES.BLOGS)
                 dispatch(blogCreateSuccess(response))
-                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.BLOG_UPDATE);
             }).catch((error) => {
                 dispatch(blogCreateFailed(error))
                 notification(NOTIFICATION_TYPES.ERROR, MESSAGE.BLOG_FAILD);
@@ -69,7 +68,6 @@ export const createBlog = (domain,data,id, slug) => {
             strapiAxiosInstance.post(route, data).then((response)=>{
                 history.push(ROUTES.BLOGS)
                 dispatch(blogCreateSuccess(response))
-                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.BLOG_SUCCESS);
             }).catch((error) => {
                 dispatch(blogCreateFailed(error))
                 notification(NOTIFICATION_TYPES.ERROR, MESSAGE.BLOG_FAILD);
@@ -175,7 +173,6 @@ export const deleteBlog =  (id) => {
                 dispatch(deleteBlogSuccess())
                 dispatch(getDraftBlogs())
                 dispatch(getPublishedBlogs())
-                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.BLOG_DELETED);
             }
         }catch(error){
             dispatch(deleteBlogFailed(error))

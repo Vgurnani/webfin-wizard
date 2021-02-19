@@ -124,9 +124,10 @@ const BlogPage =(props) => {
 
     useEffect(() => {
         if(blog){
-            blog[ 'blogUrl' ] = blog.imageUrl
-            delete blog.imageUrl
-            initialize(blog)
+            blog[ 'blogUrl' ] = blog.imageUrl;
+            blog[ 'data' ] = blog.content;
+            delete blog.imageUrl;
+            initialize(blog);
         }
     },[ blog ])
 

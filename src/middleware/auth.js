@@ -35,7 +35,6 @@ export const loginUser = (data) => {
         axiosInstance.post('/auth/login', data).then((response)=>{
             response.data.data[ 'accessToken' ] = response.data.accessToken
             setItem('user', response.data.data)
-            notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.LOGIN_SUCCESS);
             dispatch(loginSuccess(response.data.data))
             history.push(ROUTES.DASHBOARD)
             // assessmentData && dispatch(createAssessment(assessmentData))
@@ -65,7 +64,6 @@ export const registrationUser = (data, assessmentData) => {
                 response.data.data[ 'test' ] = false
                 assessmentData[ 'route' ] = response.data.data.route
                 setItem('user', response.data.data)
-                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.REGISTRATION_SUCCESS);
                 dispatch(registrationSuccess(response.data.data))
                 !_.isEmpty(assessmentData) && dispatch(createAssessment(assessmentData))
 
@@ -89,7 +87,6 @@ export const emailVerification = (data) => {
                 setItem('user', user)
                 history.push(ROUTES.DASHBOARD)
                 dispatch(emailVerificationSuccess(response))
-                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.EMAIL_ACTIVATE);
             })
             .catch((error) => {
 
@@ -106,7 +103,6 @@ export const resendCode = (data) => {
         axiosInstance.get('/user/verify/resend', data)
             .then((response) => {
                 dispatch(resentCodeSuccess(response))
-                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CODE_SEND);
             })
             .catch((error) => {
                 notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)
@@ -122,7 +118,6 @@ export const passwordResendCode = (email) => {
         axiosInstance.post('/password/resend', { email: email })
             .then((response) => {
                 dispatch(resentCodeSuccess(response))
-                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CODE_SEND);
             })
             .catch((error) => {
                 notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)
@@ -186,7 +181,6 @@ export const updateCurrentUser = (data) => {
             .then((response) => {
                 const user = JSON.parse(getItem('user'));
                 setItem('user', { ...user, ...response.data })
-                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.USER_PROFILE_UPDATE_SUCCESS);
                 history.push(ROUTES.DASHBOARD)
                 dispatch(updateUserProfileSuccess(response.data));
             })
