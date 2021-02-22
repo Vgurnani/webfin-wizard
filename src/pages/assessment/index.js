@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { reset } from 'redux-form';
 // import Router from 'next/router'
-import { useHistory } from 'react-router-dom';
+import { useHistory  } from 'react-router-dom';
 import { useDispatch , useSelector } from 'react-redux'
 // import withPublicRoute from '../../components/hoc/withPublicRoute'
 import StepOne from  '../../components/assessment/StepOne';
@@ -12,6 +12,7 @@ import { ROUTES } from '../../constants/appRoutes'
 import { getAssessment ,createAssessment } from '../../middleware/assessments';
 import { isLoggedIn } from '../../utils/helpers'
 import { AllColors } from 'constants/theme'
+
 const AssessmentPage = () => {
     const history = useHistory();
     const dispatch  = useDispatch()
@@ -67,9 +68,9 @@ const AssessmentPage = () => {
         }
     }
     return(
-        <section className="main-section">
+        <>
             {handleView()}
-        </section>
+        </>
     )
 }
 AssessmentPage.propTypes = {

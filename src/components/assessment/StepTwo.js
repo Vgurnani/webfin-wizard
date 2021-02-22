@@ -2,29 +2,28 @@ import React,{ useEffect ,useState } from 'react'
 import { Field } from 'redux-form';
 import { useSelector ,useDispatch } from 'react-redux'
 import { renderStyleMultipleRadio } from '../../utils/formUtils'
-import { assessmentSaved, headerLinksTemplate } from '../../utils/helpers'
+import {  headerLinksTemplate } from '../../utils/helpers'
 import { assessmentFormValidate as validate } from '../../utils/validates'
 import WebTemplates ,{ Header,Home, Banner,Blogs, Card } from 'web-templates';
 import { reduxForm } from 'redux-form';
 import { change as reduxChange } from 'redux-form'
 import PropTypes from 'prop-types';
 import CustomColor from 'components/assessment/shared/CustomColor'
+import AssessmentHeader from 'pages/assessment/header'
+
 import
 {
     Form,
-    Button,
     Container,
     Col,
     Row,
 }
     from 'react-bootstrap';
-import enterIcon from '../../public/images/enter-icon.png';
 
 const StepTwo = (props) => {
-    const [ isSave, setSave ] = useState(false)
     const [ customColorOpen, ] = useState(false)
     const dispatch = useDispatch()
-    const { handleSubmit,prevPage ,colorPalette, saveData } = props;
+    const { handleSubmit,prevPage ,colorPalette } = props;
     const assessmentForm = useSelector((state) => state.form.assessmentForm)
     const data = {
         colors: assessmentForm?.values.colors,
@@ -39,23 +38,19 @@ const StepTwo = (props) => {
     }, []);
 
     useEffect(()=>{
-        setSave(assessmentSaved('step2',assessmentForm?.values))
         if(!assessmentForm?.values?.colors){
             dispatch(reduxChange('assessmentForm','colors',JSON.stringify(colorPalette?.filter((item)=> item.label === 'Clean White')[ 0 ]?.value)))
         }
     },[ assessmentForm?.values ])
 
-    const handleSave = () => {
-        setSave(true)
-        saveData()
-    }
-
     return(
-        <div className="assesment-step assesment-step-2">
-            <Row  className="step-form">
-                <Col className="col-12">
-                    <Container>
-                        <Form className="form" onSubmit={ handleSubmit }>
+        <Form className="form" onSubmit={ handleSubmit(() => {}) }>
+            <AssessmentHeader  prevPage={ prevPage } { ...props } />
+            <div className="assesment-step assesment-step-2">
+                <Row  className="step-form">
+                    <Col className="col-12">
+                        <Container>
+
                             {customColorOpen ? <CustomColor data={ data } /> : <>
                                 <div className="form-heading">
                                     <h2>
@@ -136,45 +131,13 @@ const StepTwo = (props) => {
                                         </div>
                                     </Col>
                                 </Row>
-                                <div className="step-btns">
-                                    <div className="step-btn-left">
-                                        <Button onClick={ prevPage } type="button" variant="secondary" >
-                                            Back
-                                        </Button>
-                                    </div>
-                                    <div className="step-btn-right">
-                                        <div className="step-btn">
-                                            <Button type="button"  disabled={ !props.valid } onClick={ handleSave } variant="light" >
-                                                { isSave ? 'Saved' : 'Save'}
-                                            </Button>
-                                        </div>
-                                        <div className="step-btn">
-                                            <span>
-                                                { props.valid  ?
-                                                    <Button type="submit" variant="primary">
-                                                        Next
-                                                    </Button>
-                                                    :
-                                                    <Button type="button" disabled={ true } variant="primary">
-                                                        Next
-                                                    </Button>}
-                                            </span>
-                                            <span className="enter-btn">
-                                                <a>
-                                                    or Press Enter
-                                                    <img src={ enterIcon } alt="Enter" />
-                                                </a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
                             </>}
-                        </Form>
-                    </Container>
-                </Col>
-            </Row>
-        </div>
 
+                        </Container>
+                    </Col>
+                </Row>
+            </div>
+        </Form>
     )
 }
 StepTwo.propTypes = {

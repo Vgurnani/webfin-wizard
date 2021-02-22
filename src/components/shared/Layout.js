@@ -24,7 +24,7 @@ const TemplateWrapper = (props) => {
     return (
         <div>
             <Loader isLoading={ isLoading(stateData) } />
-            <Navbar pathname={ pathname } />
+            { pathname !== '/assessment' && <Navbar pathname={ pathname } />}
             { isSideBar() ?
                 <section className="dashboard-wrapper">
                     <SideBar />{props.children}

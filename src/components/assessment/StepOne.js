@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Field } from 'redux-form';
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 // import Link from 'next/link'
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux'
 import { renderStyleMultipleRadio } from '../../utils/formUtils'
 import { assessmentFormValidate as validate } from '../../utils/validates'
-import { assessmentIntialValues , assessmentSaved } from '../../utils/helpers'
-import enterIcon from '../../public/images/enter-icon.png';
+import { assessmentIntialValues  } from '../../utils/helpers'
 import _ from 'lodash'
+import AssessmentHeader from 'pages/assessment/header'
 import
 {
     Form,
-    Button,
     Container,
     Col,
     Row,
@@ -21,9 +18,7 @@ import
     from 'react-bootstrap';
 
 const StepOne = (props) => {
-    const [ isSave, setSave ] = useState(false)
-    const { handleSubmit, kindOfBuild, saveData, initialize ,valid  } = props;
-    const assessmentForm = useSelector((state) => state.form.assessmentForm)
+    const { handleSubmit, kindOfBuild, initialize  } = props;
 
     useEffect(()=>{
         if(!_.isEmpty(assessmentIntialValues())){
@@ -32,101 +27,74 @@ const StepOne = (props) => {
         window.scrollTo(0, 0);
     },[]);
 
-    useEffect(()=>{
-        setSave(assessmentSaved('step1',assessmentForm?.values))
-    },[ assessmentForm?.values ])
-
-    const handleSave = () => {
-        setSave(true)
-        saveData()
-    }
     return(
-        <div className="assesment-step assesment-step-1">
-            <Row className="step-banner">
-                <Col className="col-12">
-                    <Container>
-                        <Row className="back-to-home">
+        <>
+            <Form className="form" onSubmit={ handleSubmit(() => {}) }>
+                <AssessmentHeader { ...props } />
+                <section className="main-section">
+                    <div className="assesment-step assesment-step-1">
+                        {/* <Row className="step-banner">
                             <Col className="col-12">
-                                <Link to="/">
-                                    <span>
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M15.5 18L9.5 12L15.5 6" stroke="white" strokeLinejoin="round"/>
-                                        </svg>
-                                        Back to Home
-                                    </span>
-                                </Link>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col className="col-12">
-                                <h1>
-                                    Let’s start!
-                                </h1>
-                                {/* <p>
+                                <Container>
+                                    <Row className="back-to-home">
+                                        <Col className="col-12">
+                                            <Link to="/">
+                                                <span>
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M15.5 18L9.5 12L15.5 6" stroke="white" strokeLinejoin="round"/>
+                                                    </svg>
+                                                    Back to Home
+                                                </span>
+                                            </Link>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col className="col-12">
+                                            <h1>
+                                                Let’s start!
+                                            </h1>
+                                            {/* <p>
                                 Answer some questions for us and we’ll build a website for you.
-                                </p> */}
+                                </p>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </Col>
+                        </Row> */}
+                        <Row className="step-form">
+                            <Col className="col-12">
+                                <Container>
+
+                                    <div className="form-heading">
+                                        <h2>
+                                            What kind of blog do you want?
+                                        </h2>
+                                    </div>
+                                    <div className="category-wrapper">
+                                        <Field
+                                            name="nicheId"
+                                            options={ kindOfBuild || [] }
+                                            component={ renderStyleMultipleRadio }
+                                            defaultValue={ 'no' }
+                                            placeholder={ 'gaveCraving' }
+                                            className='styled-radio-btn'
+                                            imgWidth="30px"
+                                            isIcons={ true }
+                                        />
+                                    </div>
+                                    <div className="step-btns">
+                                        <div className="step-btn-left">
+
+                                        </div>
+                                    </div>
+                                </Container>
                             </Col>
                         </Row>
-                    </Container>
-                </Col>
-            </Row>
-            <Row className="step-form">
-                <Col className="col-12">
-                    <Container>
-                        <Form className="form" onSubmit={ handleSubmit }>
-                            <div className="form-heading">
-                                <h2>
-                                    What kind of blog do you want?
-                                </h2>
-                            </div>
-                            <div className="category-wrapper">
-                                <Field
-                                    name="nicheId"
-                                    options={ kindOfBuild || [] }
-                                    component={ renderStyleMultipleRadio }
-                                    defaultValue={ 'no' }
-                                    placeholder={ 'gaveCraving' }
-                                    className='styled-radio-btn'
-                                    imgWidth="30px"
-                                    isIcons={ true }
-                                />
-                            </div>
-                            <div className="step-btns">
-                                <div className="step-btn-left">
 
-                                </div>
-                                <div className="step-btn-right">
-                                    <div className="step-btn">
-                                        <Button type="button" disabled={ !valid } onClick={ handleSave } variant="light" >
-                                            {isSave ? 'Saved' : 'Save'}
-                                        </Button>
-                                    </div>
-                                    <div className="step-btn">
-                                        <span>
-                                            { valid  ?
-                                                <Button type="submit" variant="primary">
-                                                    Next
-                                                </Button>
-                                                :
-                                                <Button type="button" disabled={ true } variant="primary">
-                                                    Next
-                                                </Button>}
-                                        </span>
-                                        <span className="enter-btn">
-                                            <a>
-                                                or Press Enter
-                                                <img src={ enterIcon } alt="Enter" />
-                                            </a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </Form>
-                    </Container>
-                </Col>
-            </Row>
-
-        </div>
+                    </div>
+                </section>
+            </Form>
+        </>
 
     )
 }

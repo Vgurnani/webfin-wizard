@@ -5,14 +5,13 @@ import { useSelector } from 'react-redux'
 import { headerLinksTemplate } from 'utils/helpers'
 import { assessmentFormValidate as validate } from '../../utils/validates'
 import WebTemplates ,{ Header,Home, Banner,Blogs, Card } from 'web-templates';
-
+import AssessmentHeader from 'pages/assessment/header'
 import
 {
     Row,
     Col,
     Container,
     Form,
-    Button
 }
     from 'react-bootstrap';
 
@@ -32,12 +31,13 @@ const Preview = (props) => {
     },[]);
 
     return(
+        <Form className="form" onSubmit={ handleSubmit(() => {}) }>
+            <AssessmentHeader isFinalScreen={ true } prevPage={ prevPage } { ... props }/>
+            <div className="assesment-step assesment-step-final">
+                <Row  className="step-form">
+                    <Col className="col-12">
+                        <Container>
 
-        <div className="assesment-step assesment-step-final">
-            <Row  className="step-form">
-                <Col className="col-12">
-                    <Container>
-                        <Form className="form" onSubmit={ handleSubmit }>
                             <div className="form-heading">
                                 <h2>
                                     Congratulations! Here is your NEW website
@@ -105,29 +105,11 @@ const Preview = (props) => {
                                     </div>
                                 </Col>
                             </Row>
-                            <div className="step-btns">
-                                <div className="step-btn-left">
-                                    <div className="step-btn">
-                                        <Button type="button" onClick={ prevPage } variant="secondary" >
-                                            Back
-                                        </Button>
-                                    </div>
-                                </div>
-                                <div className="step-btn-right">
-                                    <div className="step-btn">
-
-                                        <Button className="btn btn-primary" type="submit">
-                                            Save your work!
-                                        </Button>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </Form>
-                    </Container>
-                </Col>
-            </Row>
-        </div>
+                        </Container>
+                    </Col>
+                </Row>
+            </div>
+        </Form>
 
     )
 }

@@ -1,7 +1,7 @@
 import React,{ useState , useEffect } from 'react'
 import { Field } from 'redux-form';
 import { renderFieldChangeWG, renderStyleMultipleRadio } from '../../utils/formUtils'
-import { getLabel ,assessmentSaved , headerLinksTemplate } from '../../utils/helpers'
+import { getLabel  , headerLinksTemplate } from '../../utils/helpers'
 import { getUnsplash ,getVerifiedDomain } from '../../middleware/assessments'
 import PropTypes from 'prop-types';
 import { assessmentFormValidate as validate } from '../../utils/validates'
@@ -13,23 +13,22 @@ import _ from 'lodash';
 import
 {
     Form,
-    Button,
     Container,
     Col,
     Row,
 }
     from 'react-bootstrap';
-import enterIcon from '../../public/images/enter-icon.png';
 import UploadImageModal from './shared/UploadImageModal'
+import AssessmentHeader from 'pages/assessment/header'
+
 const StepThree = (props) => {
-    const [ isSave, setSave ] = useState(false)
     const dispatch = useDispatch()
     const [ openModal, setModalOpen ] = useState(false)
     const form  = useSelector((state) => state.form.assessmentForm)
     const domains  = useSelector((state) => state.assessment.domains)
     const domainLoading  = useSelector((state) => state.assessment.domainLoading)
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
-    const { handleSubmit, valid ,prevPage ,onSubmit,assessmentData, saveData, setStep } = props;
+    const { handleSubmit ,prevPage ,assessmentData, setStep } = props;
     const data = {
         colors: form?.values?.colors,
         logoUrl: form.values.logoUrl,
@@ -46,10 +45,6 @@ const StepThree = (props) => {
         dispatch(getUnsplash('/photos',query))
         window.scrollTo(0, 0);
     },[]);
-
-    useEffect(()=>{
-        setSave(assessmentSaved('step3',form?.values))
-    },[ form?.values ])
 
     useEffect(()=>{
         if(!_.isEmpty(domains)){
@@ -70,10 +65,6 @@ const StepThree = (props) => {
     const clearImage = () => {
         dispatch(reduxChange('assessmentForm', 'logoUrl', null))
     }
-    const handleSave = () => {
-        setSave(true)
-        saveData()
-    }
 
     const handleChange = (value) => {
 
@@ -91,19 +82,15 @@ const StepThree = (props) => {
         return _.isEmpty(result) ? form?.values?.websiteName && form.values?.domain && [ { label: form.values?.domain,value: form.values?.domain } ] : result
     }
 
-    const handleSubmitData = (formData) => {
-        if(formData.nicheId && formData.colors && formData.websiteName && formData.domain){
-            onSubmit(formData)
-        }
-    }
-
     const domainsOptions = getDomains() || []
     return(
-        <div className="assesment-step assesment-step-3">
-            <Row  className="step-form">
-                <Col className="col-12">
-                    <Container>
-                        <Form className="form" onSubmit={ handleSubmit(handleSubmitData) }>
+        <Form className="form" onSubmit={ handleSubmit(() => {}) }>
+            <AssessmentHeader prevPage={ prevPage } { ... props }/>
+            <div className="assesment-step assesment-step-3">
+                <Row  className="step-form">
+                    <Col className="col-12">
+                        <Container>
+
                             <div className="form-heading">
                                 <h2>
                                     Name Your Website!
@@ -150,7 +137,7 @@ const StepThree = (props) => {
                                                 { getLabel(assessmentData.niches, form.values?.nicheId)}
                                             </li>}
                                             {form.values?.colors &&<li onClick={ () => setStep(2) }>
-                                                {form.values?.colors && JSON.parse(form.values.colors).name}
+                                                {form.values?.colors && JSON.parse(form.values.colors).name && JSON.parse(form.values.colors).name.replace('-',' ').upcaseWithSpace()}
                                             </li>}
                                         </ul>
 
@@ -186,48 +173,20 @@ const StepThree = (props) => {
                                     </div>
                                 </Col>
                             </Row>
-
-                            <div className="step-btns">
-                                <div className="step-btn-left">
-                                    <Button type="button" onClick={ prevPage } variant="secondary" >
-                                        Back
-                                    </Button>
-                                </div>
-                                <div className="step-btn-right">
-                                    <div className="step-btn">
-                                        <Button type="button"  disabled={ !valid || domainLoading } onClick={ handleSave } variant="light" >
-                                            { isSave ? 'Saved' : 'Save' }
-                                        </Button>
-                                    </div>
-                                    <div className="step-btn">
-                                        <span>
-                                            { valid && form?.values?.domain && !domainLoading ?
-                                                <Button type="submit" variant="primary">
-                                                    Next
-                                                </Button>
-                                                :
-                                                <Button type="button" disabled={ true } variant="primary">
-                                                    Next
-                                                </Button>}
-                                        </span>
-                                        <span className="enter-btn">
-                                            <a>
-                                                or Press Enter
-                                                <img src={ enterIcon } alt="Enter" />
-                                            </a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
                             <UploadImageModal fieldName={ 'logoUrl' } clearImage={ clearImage } previewFile={ form.values?.logoUrl } getBase64={ getBase64 } handleSearch={ handleSearch } unsplashImages={ unsplashImages } openModal={ openModal } handleToggleModal={ handleToggleModal } />
-                        </Form>
-                    </Container>
-                </Col>
-            </Row>
-        </div>
+                        </Container>
+                    </Col>
+                </Row>
+            </div>
+        </Form>
 
     )
 }
+String.prototype.upcaseWithSpace = function () {
+    let data = this.split(' ')
+    data = data.map((item) => item.charAt(0).toUpperCase() + item.slice(1))
+    return data.join(' ')
+};
 StepThree.propTypes = {
     handleSubmit: PropTypes.func,
     submitData: PropTypes.func,
