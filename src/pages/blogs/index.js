@@ -48,7 +48,7 @@ const BlogsPage = () => {
             payload: 'blog'
         })
         dispatch(allBlogsCount())
-        dispatch(getDraftBlogs());
+        dispatch(getDraftBlogs(`_limit=${ limit }`));
         dispatch(getPublishedBlogs(`_limit=${ limit }`));
     }, [ dispatch ]);
 
@@ -90,7 +90,11 @@ const BlogsPage = () => {
 
     const handlePublish = (event, blog ) => {
         event.preventDefault()
-        dispatch(callPublish(blog.id,event.target.checked))
+        const draftStartWith = (activePageDraft - 1) * limit
+        const draftArgs = `_start=${ draftStartWith }&_limit=${ limit }`
+        const publishStartWith = (activePageDraft - 1) * limit
+        const publishArgs = `_start=${ publishStartWith }&_limit=${ limit }`
+        dispatch(callPublish(blog.id,event.target.checked, draftArgs, publishArgs))
     }
 
     const redirectToBlog = (event,blog) => {
