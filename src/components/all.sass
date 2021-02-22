@@ -1645,7 +1645,7 @@ ul
           margin: 15px 0 0
 
 .modal-btns
-  text-align: center
+  text-align: right
   width: 100%
   .btn
     margin-left: 18px
@@ -1723,9 +1723,9 @@ ul
             margin-bottom: 2%
             width: auto
             display: inline-block
-            &:nth-child(5n+1)
-              margin-left: 0
-              clear: left
+            // &:nth-child(5n+1)
+            //   margin-left: 0
+            //   clear: left
             &::after
               display: none
             img
@@ -1941,7 +1941,7 @@ ul
       left: 20px
       animation-delay: 0
 .react-confirm-alert
-  background: #ffff;
+  background: #ffff
   padding: 25px
 .react-confirm-alert-overlay
     background: rgba(0, 0 ,0,0.5)
@@ -1954,9 +1954,15 @@ ul
   height: 33px
   width: 33px
 .blogs-pagination
-  width: 66px;
-  float: right;
-  margin-right: 54px;
+  width: 66px
+  float: right
+  margin-right: 54px
+
+.small-up-loader 
+    display: inline-block
+    position: relative
+    right: 50px
+    top: -38px
 
 @keyframes lds-facebook
   0%
@@ -1972,3 +1978,11 @@ ul
   50%, 100%
     top: 24px
     height: 50px
+.accordion-faq
+  &.accordion
+    .card
+      .card-header
+        .btn.btn-link
+          color: $white-color
+      .card-body
+        padding-bottom: 15px

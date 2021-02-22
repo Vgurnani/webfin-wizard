@@ -186,11 +186,11 @@ const EditSitePage =(props) => {
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>Site logo:</Form.Label>
-                                <div className="edit-site-btn no-arrow" onClick={ (event) => handleModal(event,'logo') }>{form?.values?.logoUrl  ? <img src={ form?.values?.logoUrl || site?.logoUrl } width={ 20 } /> : site?.websiteName }</div>
+                                <div className="logo-preview-btn edit-site-btn no-arrow" onClick={ (event) => handleModal(event,'logo') }>{form?.values?.logoUrl  ? <img src={ form?.values?.logoUrl || site?.logoUrl } width={ 20 } /> : site?.websiteName }</div>
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>Site icon:</Form.Label>
-                                <div className="edit-site-btn  no-arrow" onClick={ (event) => handleModal(event,'favicon') }>{form?.values?.faviconUrl ?  <img src={ form?.values?.faviconUrl || site?.faviconUrl } width={ 20 } /> : 'Select..'}</div>
+                                <div className="logo-preview-btn edit-site-btn  no-arrow" onClick={ (event) => handleModal(event,'favicon') }>{form?.values?.faviconUrl ?  <img src={ form?.values?.faviconUrl || site?.faviconUrl } width={ 20 } /> : 'Select..'}</div>
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail" className="edit-header-footer">
                                 <Form.Label>Header/Footer:</Form.Label>

@@ -61,7 +61,6 @@ export const createBlog = (domain,data,id, slug) => {
             strapiAxiosInstance.put(`${ route }/${ id }`, data).then((response)=>{
                 history.push(ROUTES.BLOGS)
                 dispatch(blogCreateSuccess(response))
-                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.BLOG_UPDATE);
             }).catch((error) => {
                 dispatch(blogCreateFailed(error))
                 notification(NOTIFICATION_TYPES.ERROR, MESSAGE.BLOG_FAILD);
@@ -70,7 +69,6 @@ export const createBlog = (domain,data,id, slug) => {
             strapiAxiosInstance.post(route, data).then((response)=>{
                 history.push(ROUTES.BLOGS)
                 dispatch(blogCreateSuccess(response))
-                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.BLOG_SUCCESS);
             }).catch((error) => {
                 dispatch(blogCreateFailed(error))
                 notification(NOTIFICATION_TYPES.ERROR, MESSAGE.BLOG_FAILD);
@@ -122,7 +120,7 @@ export const getDraftBlogs =  () => {
             const route = getRoute();
             const result = await strapiAxiosInstance.get(`${ route }?_publicationState=preview&published_at_null=true&deletedAt_null=true&type=blog`)
             if([ 200,203 ].includes(result.status)){
-                const data = result.data.filter((item) => item.published_at === null && item.type === 'blog')
+                const data = result.data.filter((item) => item.published_at === null && item.type === 'blog' && item.slug !== 'wizrd-welcome-blog')
                 dispatch(getDraftBlogListSuccess(data));
             }
         }catch(error){
@@ -139,7 +137,7 @@ export const getPublishedBlogs =  (args) => {
             const route = getRoute();
             const result = await strapiAxiosInstance.get(`${ route }?_publicationState=live&deletedAt_null=true&type=blog&${ args }`)
             if([ 200,203 ].includes(result.status)){
-                const data = result.data.filter((item) => item.published_at !== null)
+                const data = result.data.filter((item) => item.published_at !== null && item.slug !== 'wizrd-welcome-blog')
                 dispatch(getPublishBlogListSuccess(data));
             }
         }catch(error){
@@ -194,7 +192,6 @@ export const deleteBlog =  (id) => {
                 dispatch(deleteBlogSuccess())
                 dispatch(getDraftBlogs())
                 dispatch(getPublishedBlogs())
-                notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.BLOG_DELETED);
             }
         }catch(error){
             dispatch(deleteBlogFailed(error))

@@ -56,8 +56,9 @@ const UploadLogo = (props) => {
                                 isDropText={ 'Drag your images' }
                             />
                         </Col>
-                        <Col className="col-8">
-                            <div className="logo-gallery">
+                        <Col className="col-8 logo-preview-modal">
+                            <div className="logo-preview">
+                                <h4>Preview</h4>
                                 {previewFile && <div className="preview-logo">
                                     {typeof(previewFile) !== 'string' ?
                                         <span>
@@ -65,8 +66,9 @@ const UploadLogo = (props) => {
                                         </span> :
                                         <img src={ previewFile } />
                                     }
-                                    <span onClick={ clearImageFun } className="clear-logo">clear</span>
                                 </div>}
+                                {previewFile && <span onClick={ clearImageFun } className="clear-logo">clear</span>}
+
                             </div>
                             {/* <div className="logo-upload-progress">
                     <ProgressBar now={60} />

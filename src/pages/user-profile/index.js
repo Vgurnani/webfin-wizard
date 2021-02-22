@@ -26,7 +26,6 @@ const UserProfilePage =(props) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [ openModal, setModalOpen ]  = useState(false);
-    const [ isEditMode, setEditMode ]  = useState(false);
     const userProfileForm = useSelector((state)=>state.form.userProfileForm);
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
     const { handleSubmit , initialize } = props;
@@ -75,22 +74,21 @@ const UserProfilePage =(props) => {
                         <h4>My Account</h4>
                     </div>
                 </div>
-                <Form onSubmit={ handleSubmit(submitData) } className={ isEditMode ? 'profile-edit-info' : '' }>
+                <Form onSubmit={ handleSubmit(submitData) } className={ 'profile-edit-info' }>
                     <div className="profile-avtar-info">
                         <div className="profile-avtar">
                             <div className="upload-feature-img-wrap">
-                                <div className="upload-feature-img" onClick={ handleToggleModal }>
+                                <div className="upload-feature-img">
                                     {userProfileForm?.values?.profileImageUrl ? <img src={ userProfileForm?.values?.profileImageUrl } /> : 'Click here to edit feature image'}
                                 </div>
                             </div>
-                            <a className="edit-profile-avtar">
+                            <a className="edit-profile-avtar" onClick={ handleToggleModal }>
                                 <EditProfileIcon />
                             </a>
                         </div>
                         <div className="profile-main-info">
                             <h6>Main info</h6>
                             <h5>{ userProfileForm?.values?.firstName } { userProfileForm?.values?.lastName } </h5>
-                            <a onClick={ () => setEditMode(true) } className="edit-info-btn">Edit Info</a>
                             <Button className="btn btn-primary profile-save-btn" type="submit">
                                 Save
                             </Button>
@@ -107,7 +105,6 @@ const UserProfilePage =(props) => {
                             label="First Name:"
                             type="text"
                             component={ renderFieldWG }
-                            disabled={ !isEditMode }
                             maxLength="150"
                             placeholder='Enter your first name'
                         />
@@ -116,7 +113,6 @@ const UserProfilePage =(props) => {
                             label="Last Name:"
                             type="text"
                             component={ renderFieldWG }
-                            disabled={ !isEditMode }
                             maxLength="150"
                             placeholder='Enter your last name'
                         />
@@ -125,10 +121,13 @@ const UserProfilePage =(props) => {
                             label="User Name:"
                             type="text"
                             component={ renderFieldWG }
-                            disabled={ !isEditMode }
                             maxLength="150"
+                            withoutTouch={ true }
                             placeholder='Enter your user name'
                         />
+                        { props.asyncValidating && <div className="small-up-loader">
+                            <div className="lds-facebook"><div></div><div></div><div></div></div>
+                        </div> }
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Password:</Form.Label>
                             <div className="password-wrap">
@@ -136,7 +135,6 @@ const UserProfilePage =(props) => {
                                     name="password"
                                     label="password"
                                     type="password"
-                                    disabled={ !isEditMode }
                                     component={ renderField }
                                     maxLength="150"
                                     placeholder='Enter your password'
@@ -155,7 +153,6 @@ const UserProfilePage =(props) => {
                             label="Phone number:"
                             type="text"
                             component={ renderFieldWG }
-                            disabled={ !isEditMode }
                             maxLength="150"
                             placeholder='Enter your phone number'
                         />
@@ -347,7 +344,8 @@ const UserProfilePage =(props) => {
 
 UserProfilePage.propTypes = {
     handleSubmit: PropTypes.func,
-    initialize: PropTypes.func
+    initialize: PropTypes.func,
+    asyncValidating: PropTypes.bool
 };
 
 export default reduxForm({

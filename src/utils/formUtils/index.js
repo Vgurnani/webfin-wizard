@@ -15,6 +15,7 @@ export const Validations = (props) => {
         error,
         validationError,
         warning,
+        withoutTouch
     } = props.props;
 
     return (
@@ -22,6 +23,9 @@ export const Validations = (props) => {
             <p>
                 {touched && ((error && <span className="field_error">{error}</span>) || (warning && <span>{warning}</span>))}
             </p>
+            {withoutTouch && <p>
+                {((error && <span className="field_error">{error}</span>) || (warning && <span>{warning}</span>))}
+            </p>}
             {validationError && (
                 <p>
                     {(validationError && <span className="field_error">{validationError}</span>)}
@@ -44,6 +48,7 @@ const renderFieldWG = (props) => {
         maxLength,
         handleKeyUp,
         rows,
+        withoutTouch,
         defaultWarning
     } = props;
 
@@ -63,6 +68,7 @@ const renderFieldWG = (props) => {
                     error,
                     validationError,
                     warning,
+                    withoutTouch
                 } }
             />
         </Form.Group>

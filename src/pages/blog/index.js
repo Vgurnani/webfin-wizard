@@ -31,6 +31,7 @@ const BlogPage =(props) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [ errorMessageUrl, setErrorMessageUrl ] = useState(false)
+    const [ errorMessageContent, setErrorMessageContent ] = useState(false)
     const [ openModal, setModalOpen ]  = useState(false);
     const blogForm = useSelector((state)=>state.form.blogForm)
     const blog = useSelector((state) => state.blog.blog)
@@ -80,17 +81,24 @@ const BlogPage =(props) => {
 
     const submitData = (formData) => {
         console.log(userData)
-        if(formData.blogUrl){
-            const data = {
-                type:'blog',
-                content: formData.data,
-                imageUrl: formData.blogUrl,
-                title: formData.title
-            }
-            dispatch(createBlog(getDomain(userData.sites), data,id,blog?.slug))
-        }else{
-            setErrorMessageUrl(true)
+        if (!formData.blogUrl) {
+            setErrorMessageUrl(true);
+            return;
         }
+
+        if (!formData.data) {
+            setErrorMessageContent(true);
+            return;
+        }
+
+        const data = {
+            type:'blog',
+            content: formData.data || initialValue,
+            imageUrl: formData.blogUrl,
+            title: formData.title
+        }
+
+        dispatch(createBlog(getDomain(userData.sites), data,id,blog?.slug))
 
     }
 
@@ -116,16 +124,22 @@ const BlogPage =(props) => {
 
     useEffect(() => {
         if(blog){
-            blog[ 'blogUrl' ] = blog.imageUrl
-            delete blog.imageUrl
-            initialize(blog)
+            blog[ 'blogUrl' ] = blog.imageUrl;
+            blog[ 'data' ] = blog.content;
+            delete blog.imageUrl;
+            initialize(blog);
         }
     },[ blog ])
 
     const [ rteData, setRTEData ] = useState(blog && blog.content || initialValue)
     console.log(rteData)
-    const handleRTEdata = (data) =>{
-        dispatch(change('blogForm', 'data', data))
+    const handleRTEdata = (data) => {
+        let content = data;
+        if (data && data.length === 1 && !data[ 0 ].children[ 0 ].text?.trim()) {
+            content = null;
+        }
+
+        dispatch(change('blogForm', 'data', content))
         setRTEData(data)
     }
     const handleToggleModal = () => {
@@ -228,6 +242,7 @@ const BlogPage =(props) => {
                             <div className="blog-editor">
                                 {id && blog && blog.content &&  <RichTextEditor readOnly={ false } setRTEData={ handleRTEdata } initialValue={ blog && blog.content || initialValue } /> }
                                 {!id && <RichTextEditor readOnly={ false } setRTEData={ handleRTEdata } initialValue={ initialValue } />}
+                                {errorMessageContent && <p><span className="field_error">Please insert content</span></p>}
                             </div>
                         </div>
                         {/*

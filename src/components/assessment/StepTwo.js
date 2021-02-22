@@ -22,11 +22,10 @@ import enterIcon from '../../public/images/enter-icon.png';
 
 const StepTwo = (props) => {
     const [ isSave, setSave ] = useState(false)
-    const [ customColorOpen , setCustomColor ] = useState(false)
+    const [ customColorOpen, ] = useState(false)
     const dispatch = useDispatch()
     const { handleSubmit,prevPage ,colorPalette, saveData } = props;
     const assessmentForm = useSelector((state) => state.form.assessmentForm)
-    console.log(setCustomColor)
     const data = {
         colors: assessmentForm?.values.colors,
         logoUrl: assessmentForm.values.logoUrl,

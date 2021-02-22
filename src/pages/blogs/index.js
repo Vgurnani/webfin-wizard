@@ -132,10 +132,10 @@ const BlogsPage = () => {
                             <Link to={ ROUTES.BLOG } className='btn btn-primary'>Add New+</Link>
                         </div>
                     </div>
-                    { publishBlogs?.length > 0 && <div className="dashboard-table blogs-table">
+                    { publishBlogs?.length ? <div className="dashboard-table blogs-table">
                         <CustomTable headings={ [ 'Title','Views','Comments','Date Created','Actions' ] }>
                             {publishBlogs?.map((blog, index) => (<tr key={ blog?.slug }>
-                                <td onClick={ (event) => redirectToBlog(event, blog) } style={ { cursor: 'pointer ' } } key={ index } >
+                                <td style={ { cursor: 'pointer ' } } key={ index } >
                                     <Form.Check
                                         type="switch"
                                         id={ 'custom-switch-'+blog.id  }
@@ -181,9 +181,13 @@ const BlogsPage = () => {
                             />
                             }
                         </div>
-                    </div>}
-
-                    {draftBlogs?.length > 0 && <div className="draft-posts">
+                    </div> : <div>No Posts available</div>}
+                    <div className="dashboard-body-header">
+                        <div className="dashboard-body-title">
+                            <h2>Drafts</h2>
+                        </div>
+                    </div>
+                    {draftBlogs?.length ? <div className="draft-posts">
                         <Accordion defaultActiveKey="0">
                             <Card>
                                 <Card.Header>
@@ -242,8 +246,7 @@ const BlogsPage = () => {
                                 </Accordion.Collapse>
                             </Card>
                         </Accordion>
-
-                    </div>}
+                    </div> : <div>No Drafts available</div>}
                 </section>
             </section>
         </main>
