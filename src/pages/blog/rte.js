@@ -3,17 +3,24 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-use-before-define */
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import isHotkey from 'is-hotkey'
-import { Editable, withReact, useSlate, Slate } from 'slate-react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import isHotkey from 'is-hotkey';
+import { Editable, withReact, useSlate, Slate } from 'slate-react';
+import imageExtensions from 'image-extensions';
 import {
     Editor,
     Transforms,
     createEditor,
     Element as SlateElement,
-} from 'slate'
-import { withHistory } from 'slate-history'
-import { Button, Icon, Toolbar } from './components'
+} from 'slate';
+import isUrl from 'is-url';
+import { withHistory } from 'slate-history';
+import { Icon, Toolbar } from './components';
+import { Button } from './components/button';
+import { ImageElement, InsertImageButton, insertImage } from './components/image';
+import {
+    Form
+} from 'react-bootstrap';
 
 import {
     FontSizeEditor,
@@ -47,7 +54,7 @@ const RichTextEditor = (props) => {
     const [ value, setValue ] = useState(props.initialValue)
     const renderElement = useCallback(props => <Element { ...props } />, [])
     const renderLeaf = useCallback(props => <Leaf { ...props } />, [])
-    const editor = useMemo(() => withHistory(withReact(createEditor())), [])
+    const editor = useMemo(() => withImages(withHistory(withReact(createEditor()))), [])
 
     useEffect(() => {
         props.setRTEData(value);
@@ -57,56 +64,46 @@ const RichTextEditor = (props) => {
         <Slate editor={ editor } value={ value } onChange={ value => setValue(value) } className="custom-rte-editor">
             <Toolbar className="custom-rte-toolbar">
                 <div className="toolbar-wrapper">
-                    {/* <div className="toolbar-box">
-            <Form.Control as="select" custom>
-              <option>Paragraph</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </Form.Control>
-          </div> */}
-                    {/* <div className="toolbar-box">
-            <MarkButton format="font-size" icon="FontSizeEditor"/>
-            <MarkButton format="font-family" icon="FontFamilyEditor"/>
-          </div> */}
+                    <div className="toolbar-box">
+                        <Form.Control as="select" custom>
+                            <option>Paragraph</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </Form.Control>
+                    </div>
+                    <div className="toolbar-box">
+                        <MarkButton format="font-size" icon="FontSizeEditor"/>
+                        <MarkButton format="font-family" icon="FontFamilyEditor"/>
+                    </div>
                     <div className="toolbar-box">
                         <MarkButton format="bold" icon="BoldEditor"/>
                         <MarkButton format="italic" icon="ItalicEditor"/>
                         <MarkButton format="underline" icon="UnderlineEditor"/>
-                        {/* <MarkButton format="strike" icon="StrikeThroghEditor"/> */}
-                        {/* <MarkButton format="highlight" icon="HighlightEditor"/> */}
+                        <MarkButton format="strike" icon="StrikeThroghEditor"/>
+                        <MarkButton format="highlight" icon="HighlightEditor"/>
                     </div>
-                    {/* <div className="toolbar-box">
-                  <MarkButton format="list-numbered" icon="ListNumberedEditor"/>
-                  <MarkButton format="list-bullet" icon="ListBulletedEditor"/>
-                </div>
-                  <div className="toolbar-box">
-                    <MarkButton format="list-numbered" icon="LinkEditor"/>
-                    <MarkButton format="list-bullet" icon="QuoteEditor"/>
-                    <MarkButton format="list-bullet" icon="ImageUploadEditor"/>
-                    <MarkButton format="list-bullet" icon="TableEditor"/>
-                    <MarkButton format="list-bullet" icon="MediaEditor"/>
-                  </div>
                     <div className="toolbar-box">
-                      <MarkButton format="list-numbered" icon="UndoEditor"/>
-                      <MarkButton format="list-bullet" icon="RedoEditor"/>
-                    </div> */}
-                    {/*
+                        <MarkButton format="list-numbered" icon="ListNumberedEditor"/>
+                        <MarkButton format="list-bullet" icon="ListBulletedEditor"/>
+                    </div>
+                    <div className="toolbar-box">
+                        <MarkButton format="list-numbered" icon="LinkEditor"/>
+                        <MarkButton format="list-bullet" icon="QuoteEditor"/>
+                        <MarkButton format="list-bullet" icon="ImageUploadEditor"/>
+                        <MarkButton format="list-bullet" icon="TableEditor"/>
+                        <MarkButton format="list-bullet" icon="MediaEditor"/>
+                    </div>
+                    <div className="toolbar-box">
+                        <MarkButton format="list-numbered" icon="UndoEditor"/>
+                        <MarkButton format="list-bullet" icon="RedoEditor"/>
+                    </div>
 
-          <div className="toolbar-box">
+                    <div className="toolbar-box">
 
-          </div> */}
+                    </div>
                 </div>
-
-                {/* <MarkButton format="italic" icon="format_italic" />
-        <MarkButton format="underline" icon="format_underlined" />
-        <MarkButton format="code" icon="code" />
-        <BlockButton format="heading-one" icon="looks_one" />
-        <BlockButton format="heading-two" icon="looks_two" />
-        <BlockButton format="block-quote" icon="format_quote" />
-        <BlockButton format="numbered-list" icon="format_list_numbered" />
-        <BlockButton format="bulleted-list" icon="format_list_bulleted" /> */}
             </Toolbar>
             <div className="rte-editor-content">
                 <div className="editor-content">
@@ -134,6 +131,48 @@ const RichTextEditor = (props) => {
     )
 }
 
+const withImages = editor => {
+    const { insertData, isVoid } = editor
+
+    editor.isVoid = element => {
+        return element.type === 'image' ? true : isVoid(element)
+    }
+
+    editor.insertData = data => {
+        const text = data.getData('text/plain')
+        const { files } = data
+
+        if (files && files.length > 0) {
+            for (const file of files) {
+                const reader = new FileReader()
+                const [ mime ] = file.type.split('/')
+
+                if (mime === 'image') {
+                    reader.addEventListener('load', () => {
+                        const url = reader.result
+                        insertImage(editor, url)
+                    })
+
+                    reader.readAsDataURL(file)
+                }
+            }
+        } else if (isImageUrl(text)) {
+            insertImage(editor, text)
+        } else {
+            insertData(data)
+        }
+    }
+
+    return editor
+}
+
+const isImageUrl = url => {
+    if (!url) return false
+    if (!isUrl(url)) return false
+    const ext = new URL(url).pathname.split('.').pop()
+    return imageExtensions.includes(ext)
+}
+
 const getIcon = (iconType) => {
     switch (iconType) {
     case 'FontSizeEditor':
@@ -159,7 +198,7 @@ const getIcon = (iconType) => {
     case 'QuoteEditor':
         return <QuoteEditor />
     case 'ImageUploadEditor':
-        return <ImageUploadEditor />
+        return <InsertImageButton />
     case 'TableEditor':
         return <TableEditor />
     case 'MediaEditor':
@@ -219,7 +258,8 @@ const isMarkActive = (editor, format) => {
     return marks ? marks[ format ] === true : false
 }
 
-const Element = ({ attributes, children, element }) => {
+const Element = (props) => {
+    const { attributes, children, element } = props;
     switch (element.type) {
     case 'block-quote':
         return <blockquote { ...attributes }>{children}</blockquote>
@@ -233,6 +273,8 @@ const Element = ({ attributes, children, element }) => {
         return <li { ...attributes }>{children}</li>
     case 'numbered-list':
         return <ol { ...attributes }>{children}</ol>
+    case 'image':
+        return <ImageElement { ...props } />
     default:
         return <p { ...attributes }>{children}</p>
     }
