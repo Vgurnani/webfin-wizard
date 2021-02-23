@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment'
-import CustomTable from 'components/core/table'
 import ConfirmAlert from 'components/core/confirm-alert'
 import { confirmAlert } from 'react-confirm-alert';
 import Pagination from 'react-js-pagination';
@@ -22,12 +21,16 @@ import { getDynamicURL } from '../../services/api';
 
 import {
     OpenArrow,
-    DeleteIcon,
-    CloneIcon,
-} from '../../utils/svg';
+    EditBlogListIcon,
+    CloneBlogListIcon,
+    ShareBlogListIcon,
+    ViewsBlogListIcon,
+    CommentsBlogListIcon,
+    DeleteBlogListIcon
+} from '../../utils/svg'
+
 import { getSessionData } from 'utils/helpers'
 import searchIcon from '../../images/search.png';
-import EditIcon from '../../images/edit.png';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const BlogsPage = () => {
@@ -139,88 +142,109 @@ const BlogsPage = () => {
     return(
         <main className="dashboard-data blog-dashboard">
             <section className="dashboard-body" style={ { marginTop: '12px' } }>
-                <Accordion defaultActiveKey="0">
-                    <Card>
-                        <Card.Header>
-                            <Accordion.Toggle as={ Button } variant="link" eventKey="0">
-                                Posts
-                                <div className="dashboard-body-actions">
-                                    <Link to={ ROUTES.BLOG } className='btn btn-primary'>Add New+</Link>
+                <div className="dashboard-header">
+                    <div className="dashboard-title">
+                        <h1>Posts</h1>
+                        <div className="dashboard-body-actions">
+                            <Link to={ ROUTES.BLOG } className='btn btn-primary'>Add New+</Link>
+                        </div>
+                    </div>
+                    <div className="dashboard-actions">
+                        <Form className="search-form">
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Control onChange={ (event) => setFilter(event.target.value) }  className="form-control" placeholder="Search" />
+                            </Form.Group>
+                            <Button onClick={ handleFilter } className="btn-search" type="button">
+                                <img src={ searchIcon } alt={ 'searchIcon' } />
+                            </Button>
+                        </Form>
+                    </div>
+                </div>
+                <div className="blog-custom-list-table">
+                    <div className="blog-custom-list">
+                        <div className="blog-list-header">
+                            <div className="blog-list-column blog-list-live">
+                                Live
+                            </div>
+                            <div className="blog-list-column blog-list-title">
+                                Title
+                            </div>
+                            <div className="blog-list-column blog-list-date">
+                                Date Created
+                            </div>
+                            <div className="blog-list-column blog-list-views">
+                                Views
+                            </div>
+                            <div className="blog-list-column blog-list-comments">
+                                Comments
+                            </div>
+                            <div className="blog-list-column blog-list-delete">
+                                Delete
+                            </div>
+                        </div>
+                        { publishBlogs?.length ? <div className="blog-custom-list-table-data">
+                            {publishBlogs?.map((blog, index) => (<div className="blog-list-table blog-list-publish blog-list-header" key={ blog?.slug }>
+                                <div className="blog-list-column blog-list-live" key={ index }>
+                                    <Form.Check
+                                        type="switch"
+                                        id={ 'custom-switch-'+blog.id  }
+                                        label=""
+                                        onChange={ (e) => handlePublish(e, blog) }
+                                        checked={ blog.published_at !== null }
+                                    />
                                 </div>
-                                <div className="dashboard-actions">
-                                    <Form className="search-form">
-                                        <Form.Group controlId="formBasicEmail">
-                                            <Button onClick={ handleFilter } className="btn-search" type="button">
-                                                <img src={ searchIcon } alt={ 'searchIcon' } />
-                                            </Button>
-                                            <Form.Control className="form-control" onChange={ (event) => setFilter(event.target.value) } placeholder="Search" />
-                                        </Form.Group>
-
-                                    </Form>
+                                <div className="blog-list-column blog-list-title">
+                                    <span className="table-post-title">
+                                        {blog?.title}
+                                        <a onClick={ (event) => redirectToBlog(event, blog) }>View</a>
+                                    </span>
                                 </div>
-                                <OpenArrow />
-                            </Accordion.Toggle>
-                        </Card.Header>
-                        <Accordion.Collapse eventKey="0">
-                            <Card.Body>
-                                { publishBlogs?.length ? <div className="dashboard-table blogs-table">
-                                    <CustomTable headings={ [ 'Title','Views','Comments','Date Created','Actions' ] }>
-                                        {publishBlogs?.map((blog, index) => (<tr key={ blog?.slug }>
-                                            <td style={ { cursor: 'pointer ' } } key={ index } >
-                                                <Form.Check
-                                                    type="switch"
-                                                    id={ 'custom-switch-'+blog.id  }
-                                                    label=""
-                                                    onChange={ (e) => handlePublish(e, blog) }
-                                                    checked={ blog.published_at !== null }
-                                                />
-                                                <span className="table-post-title">{blog?.title}</span>&nbsp;
-                                                <a href="#" onClick={ (event) => redirectToBlog(event, blog) } style={ { textDecoration: 'underline' ,cursor: 'pointer ' } }>view</a>
-                                                <br/>
-                                                <a onClick={ (e) => handleEdit(e, blog) } className="table-action-btns" href="/#">
-                                                    <img src={ EditIcon } alt={ 'editIcon' } />
-                                                    <span>Edit</span>
-                                                </a>
-                                                <a onClick={ (e) => handleClone(e, blog) } className="table-action-btns" href="/#">
-                                                    <CloneIcon />
-                                                    <span>Clone</span>
-                                                </a>
-                                            </td>
-                                            <td >
-                                                -
-                                            </td>
-                                            <td >
-                                                -
-                                            </td>
-                                            <td >
-                                                { blog.created_at && moment(blog.created_at).format('L')}
-                                            </td>
-                                            <td>
-
-                                                <a onClick={ (e) => handleDelete(e, blog) } className="table-action-btns" href="/#">
-                                                    <DeleteIcon />
-                                                    <span>Delete</span>
-                                                </a>
-
-                                            </td>
-                                        </tr>)
-                                        )}
-                                    </CustomTable>
-                                    <div className='blogs-pagination'>
-                                        { limit -1  <= blogsCount?.publishCount && <Pagination
-                                            activePage={ activePagePublish }
-                                            itemsCountPerPage={ limit -1 }
-                                            totalItemsCount={ blogsCount?.publishCount }
-                                            pageRangeDisplayed={ 5 }
-                                            onChange={ handlePageChangePublish }
-                                        />
-                                        }
+                                <div className="blog-list-column blog-list-date">
+                                    { blog.created_at && moment(blog.created_at).format('L')}
+                                </div>
+                                <div className="blog-list-column blog-list-views">
+                                    <ViewsBlogListIcon />
+                                    <span>70,365</span>
+                                </div>
+                                <div className="blog-list-column blog-list-comments">
+                                    <CommentsBlogListIcon />
+                                    <span></span>
+                                </div>
+                                <div className="blog-list-column blog-list-actions  blog-list-delete">
+                                    <div className="hover-actions">
+                                        <a onClick={ (e) => handleEdit(e, blog) } className="table-action-btns" href="/#">
+                                            <EditBlogListIcon />
+                                            <span>Edit</span>
+                                        </a>
+                                        <a onClick={ (e) => handleClone(e, blog) } className="table-action-btns" href="/#">
+                                            <CloneBlogListIcon />
+                                            <span>Clone</span>
+                                        </a>
+                                        <a className="table-action-btns" href="/#">
+                                            <ShareBlogListIcon />
+                                            <span>Share</span>
+                                        </a>
                                     </div>
-                                </div> : <div>No Posts available</div>}
-                            </Card.Body>
-                        </Accordion.Collapse>
-                    </Card>
-                </Accordion>
+                                    <a onClick={ (e) => handleDelete(e, blog) } className="table-action-btns table-action-btns-delete" href="/#">
+                                        <DeleteBlogListIcon />
+                                    </a>
+                                </div>
+                            </div>)
+                            )}
+                            <div className='blogs-pagination'>
+                                { limit -1  <= blogsCount?.publishCount && <Pagination
+                                    activePage={ activePagePublish }
+                                    itemsCountPerPage={ limit -1 }
+                                    totalItemsCount={ blogsCount?.publishCount }
+                                    pageRangeDisplayed={ 5 }
+                                    onChange={ handlePageChangePublish }
+                                />
+                                }
+                            </div>
+                        </div> : <div className="blog-list-table blog-list-header no-post">No Posts available</div>}
+                    </div>
+                </div>
+
                 <div className="draft-posts">
                     <Accordion defaultActiveKey="0">
                         <Card>
@@ -232,24 +256,31 @@ const BlogsPage = () => {
                             </Card.Header>
                             <Accordion.Collapse eventKey="0">
                                 <Card.Body>
-                                    {draftBlogs?.length ? <div className="dashboard-table blogs-table">
-                                        <CustomTable headings={ [ 'Title','Views','Comments','Date Created','Actions' ] }>
-
-                                            {draftBlogs?.map(blog => (
-                                                <tr  key={ blog.slug }>
-                                                    <td>
-                                                        <span className="table-post-title">{blog.title}</span>
-                                                    </td>
-                                                    <td>
-                                                        -
-                                                    </td>
-                                                    <td>
-                                                        -
-                                                    </td>
-                                                    <td>
-                                                        { blog.created_at && moment(blog.created_at).format('L')}
-                                                    </td>
-                                                    <td>
+                                    <div className="blog-custom-list-table">
+                                        <div className="blog-custom-list">
+                                            <div className="blog-list-header">
+                                                <div className="blog-list-column blog-list-live">
+                                                    Live
+                                                </div>
+                                                <div className="blog-list-column blog-list-title">
+                                                    Title
+                                                </div>
+                                                <div className="blog-list-column blog-list-date">
+                                                    Date Created
+                                                </div>
+                                                <div className="blog-list-column blog-list-views">
+                                                    Views
+                                                </div>
+                                                <div className="blog-list-column blog-list-comments">
+                                                    Comments
+                                                </div>
+                                                <div className="blog-list-column blog-list-delete">
+                                                    Delete
+                                                </div>
+                                            </div>
+                                            { draftBlogs?.length ? <div className="blog-custom-list-table-data">
+                                                {draftBlogs?.map((blog, index) => (<div className="blog-list-table blog-list-header" key={ blog?.slug }>
+                                                    <div className="blog-list-column blog-list-live" key={ index }>
                                                         <Form.Check
                                                             type="switch"
                                                             id={ 'custom-switch-'+blog.id  }
@@ -257,25 +288,56 @@ const BlogsPage = () => {
                                                             onChange={ (e) => handlePublish(e, blog) }
                                                             checked={ blog.published_at !== null }
                                                         />
-                                                        <a onClick={ (e) => handleDelete(e, blog) } className="table-action-btns" href="/#">
-                                                            <DeleteIcon />
-                                                            <span>Delete</span>
+                                                    </div>
+                                                    <div className="blog-list-column blog-list-title">
+                                                        <span className="table-post-title">
+                                                            {blog?.title}
+                                                            <a onClick={ (event) => redirectToBlog(event, blog) }>View</a>
+                                                        </span>
+                                                    </div>
+                                                    <div className="blog-list-column blog-list-date">
+                                                        { blog.created_at && moment(blog.created_at).format('L')}
+                                                    </div>
+                                                    <div className="blog-list-column blog-list-views">
+                                                        <ViewsBlogListIcon />
+                                                        <span>70,365</span>
+                                                    </div>
+                                                    <div className="blog-list-column blog-list-comments">
+                                                        <CommentsBlogListIcon />
+                                                        <span></span>
+                                                    </div>
+                                                    <div className="blog-list-column blog-list-actions  blog-list-delete">
+                                                        <div className="hover-actions">
+                                                            <a onClick={ (e) => handleEdit(e, blog) } className="table-action-btns" href="/#">
+                                                                <EditBlogListIcon />
+                                                                <span>Edit</span>
+                                                            </a>
+                                                            <a onClick={ (e) => handleClone(e, blog) } className="table-action-btns" href="/#">
+                                                                <CloneBlogListIcon />
+                                                                <span>Clone</span>
+                                                            </a>
+                                                            <a className="table-action-btns" href="/#">
+                                                                <ShareBlogListIcon />
+                                                                <span>Share</span>
+                                                            </a>
+                                                        </div>
+                                                        <a onClick={ (e) => handleDelete(e, blog) } className="table-action-btns table-action-btns-delete" href="/#">
+                                                            <DeleteBlogListIcon />
                                                         </a>
-                                                    </td>
-                                                </tr>))}
-                                        </CustomTable>
-                                        <div className='blogs-pagination'>
-                                            { limit < blogsCount?.draftCount && <Pagination
-                                                activePage={ activePageDraft }
-                                                itemsCountPerPage={ limit }
-                                                totalItemsCount={ blogsCount?.draftCount }
-                                                pageRangeDisplayed={ 5 }
-                                                onChange={ handlePageChangeDraft }
-                                            />
-                                            }
+                                                    </div>
+                                                </div>)
+                                                )}
+                                                { limit < blogsCount?.draftCount && <Pagination
+                                                    activePage={ activePageDraft }
+                                                    itemsCountPerPage={ limit }
+                                                    totalItemsCount={ blogsCount?.draftCount }
+                                                    pageRangeDisplayed={ 5 }
+                                                    onChange={ handlePageChangeDraft }
+                                                />
+                                                }
+                                            </div> : <div className="blog-list-table blog-list-header no-post">No Drafts available</div>}
                                         </div>
-
-                                    </div> : <div>No Drafts available</div>}
+                                    </div>
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
