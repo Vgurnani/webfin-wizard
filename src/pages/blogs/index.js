@@ -27,7 +27,6 @@ import {
 } from '../../utils/svg';
 import { getSessionData } from 'utils/helpers'
 import searchIcon from '../../images/search.png';
-import filterIcon from '../../images/filter.png';
 import EditIcon from '../../images/edit.png';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
@@ -35,6 +34,7 @@ const BlogsPage = () => {
     const limit = 6;
     const dispatch = useDispatch();
     const history = useHistory();
+    const [ filter, setFilter ] = useState(null)
     const [ activePagePublish, setActivePagePublish ] = useState(1);
     const [ activePageDraft, setActivePageDraft ] = useState(1)
     const publishBlogs = useSelector(state => state.blog.publishBlogs)
@@ -51,6 +51,13 @@ const BlogsPage = () => {
         dispatch(getDraftBlogs(`_limit=${ limit }`));
         dispatch(getPublishedBlogs(`_limit=${ limit }`));
     }, [ dispatch ]);
+
+    const handleFilter = () => {
+        const filterData = `_where[title_contains]=${ filter }&_limit=${ limit }`
+        dispatch(allBlogsCount())
+        dispatch(getDraftBlogs(filterData));
+        dispatch(getPublishedBlogs(filterData));
+    }
 
     const handleEdit = (event, blog) => {
         event.preventDefault();
@@ -131,146 +138,149 @@ const BlogsPage = () => {
 
     return(
         <main className="dashboard-data blog-dashboard">
-            <section className="dashboard-body">
-                <div className="dashboard-header">
-                    <div className="dashboard-title">
-                        <h5>Site 1</h5>
-                        <h1>My blog about {data?.sites[ 0 ]?.niche?.label}</h1>
-                    </div>
-                    <div className="dashboard-actions">
-                        <Form className="search-form">
-                            <Form.Group controlId="formBasicEmail">
-                                <Form.Control className="form-control" placeholder="Search" />
-                            </Form.Group>
-                            <Button className="btn-search" type="submit">
-                                <img src={ searchIcon } alt={ 'searchIcon' } />
-                            </Button>
-                        </Form>
-                        <a className="btn-filter" href="/">
-                            <img src={ filterIcon } alt={ 'filterIcon' } />
-                        </a>
-                    </div>
-                </div>
-                <section className="dashboard-body">
-                    <div className="dashboard-body-header">
-                        <div className="dashboard-body-title">
-                            <h2>Posts</h2>
-                        </div>
-                        <div className="dashboard-body-actions">
-                            <Link to={ ROUTES.BLOG } className='btn btn-primary'>Add New+</Link>
-                        </div>
-                    </div>
-                    { publishBlogs?.length ? <div className="dashboard-table blogs-table">
-                        <CustomTable headings={ [ 'Title','Views','Comments','Date Created','Actions' ] }>
-                            {publishBlogs?.map((blog, index) => (<tr key={ blog?.slug }>
-                                <td style={ { cursor: 'pointer ' } } key={ index } >
-                                    <Form.Check
-                                        type="switch"
-                                        id={ 'custom-switch-'+blog.id  }
-                                        label=""
-                                        onChange={ (e) => handlePublish(e, blog) }
-                                        checked={ blog.published_at !== null }
-                                    />
-                                    <span className="table-post-title">{blog?.title}</span>
-                                </td>
-                                <td onClick={ (event) => redirectToBlog(event, blog) } style={ { cursor: 'pointer ' } }>
-                                    -
-                                </td>
-                                <td onClick={ (event) => redirectToBlog(event, blog) } style={ { cursor: 'pointer ' } }>
-                                    -
-                                </td>
-                                <td onClick={ (event) => redirectToBlog(event, blog) } style={ { cursor: 'pointer ' } }>
-                                    { blog.created_at && moment(blog.created_at).format('L')}
-                                </td>
-                                <td>
-                                    <a onClick={ (e) => handleEdit(e, blog) } className="table-action-btns" href="/#">
-                                        <img src={ EditIcon } alt={ 'editIcon' } />
-                                        <span>Edit</span>
-                                    </a>
-                                    <a onClick={ (e) => handleDelete(e, blog) } className="table-action-btns" href="/#">
-                                        <DeleteIcon />
-                                        <span>Delete</span>
-                                    </a>
-                                    <a onClick={ (e) => handleClone(e, blog) } className="table-action-btns" href="/#">
-                                        <CloneIcon />
-                                        <span>Clone</span>
-                                    </a>
-                                </td>
-                            </tr>)
-                            )}
-                        </CustomTable>
-                        <div className='blogs-pagination'>
-                            { limit < blogsCount?.publishCount && <Pagination
-                                activePage={ activePagePublish }
-                                itemsCountPerPage={ limit }
-                                totalItemsCount={ blogsCount?.publishCount }
-                                pageRangeDisplayed={ 5 }
-                                onChange={ handlePageChangePublish }
-                            />
-                            }
-                        </div>
-                    </div> : <div>No Posts available</div>}
-                    {draftBlogs?.length ? <div className="draft-posts">
-                        <Accordion defaultActiveKey="0">
-                            <Card>
-                                <Card.Header>
-                                    <Accordion.Toggle as={ Button } variant="link" eventKey="0">
-                                        Drafts
-                                        <OpenArrow />
-                                    </Accordion.Toggle>
-                                </Card.Header>
-                                <Accordion.Collapse eventKey="0">
-                                    <Card.Body>
-                                        <div className="dashboard-table blogs-table">
-                                            <CustomTable headings={ [ 'Title','Views','Comments','Date Created','Actions' ] }>
+            <section className="dashboard-body" style={ { marginTop: '12px' } }>
+                <Accordion defaultActiveKey="0">
+                    <Card>
+                        <Card.Header>
+                            <Accordion.Toggle as={ Button } variant="link" eventKey="0">
+                                Posts
+                                <div className="dashboard-body-actions">
+                                    <Link to={ ROUTES.BLOG } className='btn btn-primary'>Add New+</Link>
+                                </div>
+                                <div className="dashboard-actions">
+                                    <Form className="search-form">
+                                        <Form.Group controlId="formBasicEmail">
+                                            <Button onClick={ handleFilter } className="btn-search" type="button">
+                                                <img src={ searchIcon } alt={ 'searchIcon' } />
+                                            </Button>
+                                            <Form.Control className="form-control" onChange={ (event) => setFilter(event.target.value) } placeholder="Search" />
+                                        </Form.Group>
 
-                                                {draftBlogs?.map(blog => (
-                                                    <tr  key={ blog.slug }>
-                                                        <td>
-                                                            <span className="table-post-title">{blog.title}</span>
-                                                        </td>
-                                                        <td>
-                                                            -
-                                                        </td>
-                                                        <td>
-                                                            -
-                                                        </td>
-                                                        <td>
-                                                            { blog.created_at && moment(blog.created_at).format('L')}
-                                                        </td>
-                                                        <td>
-                                                            <Form.Check
-                                                                type="switch"
-                                                                id={ 'custom-switch-'+blog.id  }
-                                                                label=""
-                                                                onChange={ (e) => handlePublish(e, blog) }
-                                                                checked={ blog.published_at !== null }
-                                                            />
-                                                            <a onClick={ (e) => handleDelete(e, blog) } className="table-action-btns" href="/#">
-                                                                <DeleteIcon />
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </td>
-                                                    </tr>))}
-                                            </CustomTable>
-                                            <div className='blogs-pagination'>
-                                                { limit < blogsCount?.draftCount && <Pagination
-                                                    activePage={ activePageDraft }
-                                                    itemsCountPerPage={ limit }
-                                                    totalItemsCount={ blogsCount?.draftCount }
-                                                    pageRangeDisplayed={ 5 }
-                                                    onChange={ handlePageChangeDraft }
+                                    </Form>
+                                </div>
+                                <OpenArrow />
+                            </Accordion.Toggle>
+                        </Card.Header>
+                        <Accordion.Collapse eventKey="0">
+                            <Card.Body>
+                                { publishBlogs?.length ? <div className="dashboard-table blogs-table">
+                                    <CustomTable headings={ [ 'Title','Views','Comments','Date Created','Actions' ] }>
+                                        {publishBlogs?.map((blog, index) => (<tr key={ blog?.slug }>
+                                            <td style={ { cursor: 'pointer ' } } key={ index } >
+                                                <Form.Check
+                                                    type="switch"
+                                                    id={ 'custom-switch-'+blog.id  }
+                                                    label=""
+                                                    onChange={ (e) => handlePublish(e, blog) }
+                                                    checked={ blog.published_at !== null }
                                                 />
-                                                }
-                                            </div>
+                                                <span className="table-post-title">{blog?.title}</span>&nbsp;
+                                                <a href="#" onClick={ (event) => redirectToBlog(event, blog) } style={ { textDecoration: 'underline' ,cursor: 'pointer ' } }>view</a>
+                                                <br/>
+                                                <a onClick={ (e) => handleEdit(e, blog) } className="table-action-btns" href="/#">
+                                                    <img src={ EditIcon } alt={ 'editIcon' } />
+                                                    <span>Edit</span>
+                                                </a>
+                                                <a onClick={ (e) => handleClone(e, blog) } className="table-action-btns" href="/#">
+                                                    <CloneIcon />
+                                                    <span>Clone</span>
+                                                </a>
+                                            </td>
+                                            <td >
+                                                -
+                                            </td>
+                                            <td >
+                                                -
+                                            </td>
+                                            <td >
+                                                { blog.created_at && moment(blog.created_at).format('L')}
+                                            </td>
+                                            <td>
 
+                                                <a onClick={ (e) => handleDelete(e, blog) } className="table-action-btns" href="/#">
+                                                    <DeleteIcon />
+                                                    <span>Delete</span>
+                                                </a>
+
+                                            </td>
+                                        </tr>)
+                                        )}
+                                    </CustomTable>
+                                    <div className='blogs-pagination'>
+                                        { limit -1  <= blogsCount?.publishCount && <Pagination
+                                            activePage={ activePagePublish }
+                                            itemsCountPerPage={ limit -1 }
+                                            totalItemsCount={ blogsCount?.publishCount }
+                                            pageRangeDisplayed={ 5 }
+                                            onChange={ handlePageChangePublish }
+                                        />
+                                        }
+                                    </div>
+                                </div> : <div>No Posts available</div>}
+                            </Card.Body>
+                        </Accordion.Collapse>
+                    </Card>
+                </Accordion>
+                <div className="draft-posts">
+                    <Accordion defaultActiveKey="0">
+                        <Card>
+                            <Card.Header>
+                                <Accordion.Toggle as={ Button } variant="link" eventKey="0">
+                                    Drafts
+                                    <OpenArrow />
+                                </Accordion.Toggle>
+                            </Card.Header>
+                            <Accordion.Collapse eventKey="0">
+                                <Card.Body>
+                                    {draftBlogs?.length ? <div className="dashboard-table blogs-table">
+                                        <CustomTable headings={ [ 'Title','Views','Comments','Date Created','Actions' ] }>
+
+                                            {draftBlogs?.map(blog => (
+                                                <tr  key={ blog.slug }>
+                                                    <td>
+                                                        <span className="table-post-title">{blog.title}</span>
+                                                    </td>
+                                                    <td>
+                                                        -
+                                                    </td>
+                                                    <td>
+                                                        -
+                                                    </td>
+                                                    <td>
+                                                        { blog.created_at && moment(blog.created_at).format('L')}
+                                                    </td>
+                                                    <td>
+                                                        <Form.Check
+                                                            type="switch"
+                                                            id={ 'custom-switch-'+blog.id  }
+                                                            label=""
+                                                            onChange={ (e) => handlePublish(e, blog) }
+                                                            checked={ blog.published_at !== null }
+                                                        />
+                                                        <a onClick={ (e) => handleDelete(e, blog) } className="table-action-btns" href="/#">
+                                                            <DeleteIcon />
+                                                            <span>Delete</span>
+                                                        </a>
+                                                    </td>
+                                                </tr>))}
+                                        </CustomTable>
+                                        <div className='blogs-pagination'>
+                                            { limit < blogsCount?.draftCount && <Pagination
+                                                activePage={ activePageDraft }
+                                                itemsCountPerPage={ limit }
+                                                totalItemsCount={ blogsCount?.draftCount }
+                                                pageRangeDisplayed={ 5 }
+                                                onChange={ handlePageChangeDraft }
+                                            />
+                                            }
                                         </div>
-                                    </Card.Body>
-                                </Accordion.Collapse>
-                            </Card>
-                        </Accordion>
-                    </div> : <div>No Drafts available</div>}
-                </section>
+
+                                    </div> : <div>No Drafts available</div>}
+                                </Card.Body>
+                            </Accordion.Collapse>
+                        </Card>
+                    </Accordion>
+                </div>
             </section>
         </main>
 
