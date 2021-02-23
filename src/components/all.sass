@@ -1954,11 +1954,38 @@ ul
   height: 33px
   width: 33px
 .blogs-pagination
-  width: 66px
-  float: right
-  margin-right: 54px
+  width: 100%
+  display: inline-block
+  text-align: right
+  margin: 30px 0
+  .pagination
+    display: inline-block
+    width: 100%
+    margin: 0
+    padding: 0
+    text-align: right
+    li
+      width: auto
+      display: inline-block
+      margin: 0 3px
+      a
+        display: inline-block
+        width: 30px
+        height: 30px
+        line-height: 30px
+        border-radius: 100%
+        background-color: $dark-grey-color
+        color: $white-color
+        text-align: center
+        &:hover,
+        &:active,
+        &:focus
+          text-decoration: none
+      &.active
+        a
+          background-color: $primary-color
 
-.small-up-loader 
+.small-up-loader
     display: inline-block
     position: relative
     right: 50px
@@ -1986,3 +2013,5 @@ ul
           color: $white-color
       .card-body
         padding-bottom: 15px
+body.modal-open
+  padding: 0 !important
