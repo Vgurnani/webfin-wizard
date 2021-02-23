@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 
 const AssessmentHeader = (props) => {
     const { valid, prevPage , isFinalScreen, onSubmit } = props
-    debugger
     return (
         <header style={ { height: '70pt' } } className={ 'main-header' }>
             <Container>

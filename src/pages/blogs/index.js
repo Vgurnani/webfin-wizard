@@ -76,13 +76,38 @@ const BlogsPage = () => {
         setActivePageDraft(pageNumber);
     }
 
+    const handlePaginateData =(countPublish,countDraft ) => {
+        let draftStartWith = (activePageDraft - 1) * limit
+        let publishStartWith = (activePagePublish - 1) * limit
+        let publishArgs;
+        let draftArgs;
+        if(publishStartWith <= countPublish || countPublish === 0){
+            publishArgs = `_start=${ publishStartWith  }&_limit=${ limit }`
+        }else{
+            publishStartWith = publishStartWith - limit
+            publishArgs = `_start=${ publishStartWith  }&_limit=${ limit }`
+            setActivePagePublish(activePagePublish - 1)
+        }
+        if(draftStartWith < countDraft || countDraft === 0 ){
+            draftArgs = `_start=${ draftStartWith }&_limit=${ limit }`
+        }else{
+            draftStartWith = draftStartWith - limit
+            draftArgs = `_start=${ draftStartWith }&_limit=${ limit }`
+            setActivePageDraft(activePageDraft - 1)
+        }
+        return { publishArgs, draftArgs }
+    }
+
     const handleDelete = (event, blog) => {
         event.preventDefault();
+        const countPublish = ( blog.published_at !== null ? blogsCount.publishCount : (blogsCount.publishCount - 1) )
+        const countDraft = ( blog.published_at === null ? blogsCount.draftCount : (blogsCount.draftCount - 1) )
+        const result = handlePaginateData(countPublish,countDraft)
         confirmAlert({
             // eslint-disable-next-line react/display-name
             customUI: ({ onClose }) => {
                 return(
-                    <ConfirmAlert key={ 'box' } onClose={ onClose } handleAction={ () => dispatch(deleteBlog(blog.id)) } />
+                    <ConfirmAlert key={ 'box' } onClose={ onClose } handleAction={ () => dispatch(deleteBlog(blog.id,result.draftArgs,result.publishArgs)) } />
                 );
             }
         });
@@ -90,11 +115,10 @@ const BlogsPage = () => {
 
     const handlePublish = (event, blog ) => {
         event.preventDefault()
-        const draftStartWith = (activePageDraft - 1) * limit
-        const draftArgs = `_start=${ draftStartWith }&_limit=${ limit }`
-        const publishStartWith = (activePageDraft - 1) * limit
-        const publishArgs = `_start=${ publishStartWith }&_limit=${ limit }`
-        dispatch(callPublish(blog.id,event.target.checked, draftArgs, publishArgs))
+        const countPublish = ( event.target.checked ? blogsCount.publishCount : (blogsCount.publishCount - 1) )
+        const countDraft = ( !event.target.checked ? blogsCount.draftCount : (blogsCount.draftCount - 1) )
+        const result = handlePaginateData(countPublish,countDraft)
+        dispatch(callPublish(blog.id,event.target.checked, result.draftArgs, result.publishArgs))
     }
 
     const redirectToBlog = (event,blog) => {
@@ -186,11 +210,6 @@ const BlogsPage = () => {
                             }
                         </div>
                     </div> : <div>No Posts available</div>}
-                    <div className="dashboard-body-header">
-                        <div className="dashboard-body-title">
-                            <h2>Drafts</h2>
-                        </div>
-                    </div>
                     {draftBlogs?.length ? <div className="draft-posts">
                         <Accordion defaultActiveKey="0">
                             <Card>
