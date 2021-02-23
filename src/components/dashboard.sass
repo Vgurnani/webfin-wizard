@@ -247,7 +247,7 @@
                     .search-form
                         width: 297px
                         max-width: 60%
-                        margin-right: 25px
+                        margin-right: 0
                         display: inline-block
                         vertical-align: top
                         position: relative
@@ -284,6 +284,7 @@
                         height: 48px
                         line-height: 48px
                         text-align: center
+                        margin-left: 25px
                         @media (max-width: $breakpoint-mobile)
                             width: 35px
                             height: 35px
@@ -413,9 +414,17 @@
                             font-weight: 700
                             color: $dark-grey-color
                         h1
-                            color: $primary-color
-                            font-weight: normal
-    .draft-posts
+                            // color: $primary-color
+                            // font-weight: normal
+                            width: auto
+                            display: inline-block
+                            vertical-align: middle
+                        .dashboard-body-actions
+                            width: auto
+                            display: inline-block
+                            vertical-align: middle
+                            margin-left: 25px
+        .draft-posts
         border-top: 1px solid $optional-light-grey-color
     .data-box
         background-color: $white-color
@@ -1636,8 +1645,117 @@
                         font-weight: 700
                         width: 100%
                         display: inline-block
-.profile_username
-    .small-up-loader
+.dashboard-wrapper
+    .dashboard-data.blog-dashboard
+        .dashboard-body
+            width: 774px
+            max-width: 100%
+.blog-custom-list-table
+    margin: 23px 0
+    background-color: $white-color
+    border-radius: 24px
+    padding: 24px
+    .blog-custom-list
+        width: 100%
+        display: inline-block
+        .blog-list-header
+            width: 100%
+            display: flex
+            align-items: center
+            position: relative
+            border-bottom: 1px solid $optional-light-grey-color
+            padding: 13px 0
+            .blog-list-column
+                display: inline-block
+                margin-right: 20px
+                color: $body-color
+                font-size: 14px
+                line-height: 1.4
+                font-weight: normal
+                text-align: center
+                &.blog-list-live
+                    width: 35px
+                &.blog-list-date
+                    width: 95px
+                &.blog-list-views
+                    width: 96px
+                &.blog-list-comments
+                    width: 70px
+                &.blog-list-delete
+                    width: 42px
+                &.blog-list-title
+                    width: 267px
+                    max-width: calc(100% - 459px)
+                    transition: all 500ms
+            &.blog-list-table
+                .blog-list-column
+                    font-size: 16px
+                    line-height: 1.5
+                    color: $dark-grey-color
+                    span
+                        display: inline-block
+                        vertical-align: middle
+                        margin-left: 3px
+                    svg
+                        display: inline-block
+                        vertical-align: middle
+                    &.blog-list-title
+                        text-align: left
+                    .table-post-title
+                        font-weight: bold
+                        letter-spacing: 0.5px
+                        a
+                            font-size: 12px
+                            line-height: 1.4
+                            color: $body-color
+                            text-decoration: underline
+                            margin: 0 0 0 5px
+        .table-action-btns
+            background-color: #F2F2F2
+            border: 1px solid #9E9E9E
+            border-radius: 10px
+            color: $black-color
+            font-size: 14px
+            line-height: 1.4
+            font-family: 'Nunito Sans', sans-serif
+            padding: 3px 6px
+            display: inline-block
+            text-align: center
+            margin-right: 6px
+            &:last-child
+                margin-right: 0
+            &:hover,
+            &:focus,
+            &:active
+                text-decoration: none
+            span
+                margin-left: 3px
+                display: inline-block
+                vertical-align: middle
+            svg
+                display: inline-block
+                vertical-align: middle
+            &.table-action-btns-delete
+                box-shadow: -2px 2px 1px rgba(0, 0, 0, 0.6)
+
+.blog-list-actions
+    .hover-actions
         position: absolute
-        right: 40px
-        top: 1px
+        transform: translateX(-50000px)
+        bottom: 13px
+        left: 50px
+        //transition-delay: 5s
+        transition: all 500ms
+.blog-list-table
+    &.blog-list-publish.blog-list-header
+        cursor: pointer
+        &:hover
+            .blog-list-title
+                padding-bottom: 34px
+            .blog-list-actions
+                .hover-actions
+                    transform: translateX(0)
+.no-post
+    text-align: center
+    justify-content: center
+    font-weight: bold
