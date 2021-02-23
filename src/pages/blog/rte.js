@@ -65,12 +65,12 @@ const RichTextEditor = (props) => {
             <Toolbar className="custom-rte-toolbar">
                 <div className="toolbar-wrapper">
                     <div className="toolbar-box">
-                        <Form.Control as="select" custom>
+                        <Form.Control as="select" onChange={ event => handleHeading(event, editor) } custom>
                             <option>Paragraph</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <option format="heading-one">1</option>
+                            <option format="heading-two">2</option>
+                            <option format="heading-three">3</option>
+                            <option format="heading-four">4</option>
                         </Form.Control>
                     </div>
                     <div className="toolbar-box">
@@ -269,6 +269,10 @@ const Element = (props) => {
         return <h1 { ...attributes }>{children}</h1>
     case 'heading-two':
         return <h2 { ...attributes }>{children}</h2>
+    case 'heading-three':
+        return <h3 { ...attributes }>{children}</h3>
+    case 'heading-four':
+        return <h4 { ...attributes }>{children}</h4>
     case 'list-item':
         return <li { ...attributes }>{children}</li>
     case 'numbered-list':
@@ -330,6 +334,14 @@ const MarkButton = ({ format, icon }) => {
             <Icon>{iconSvg}</Icon>
         </Button>
     )
+}
+
+const handleHeading = (event, editor) => {
+    event.preventDefault()
+    const index = event.target.selectedIndex;
+    const optionElement = event.target.childNodes[ index ];
+    const format =  optionElement.getAttribute('format');
+    toggleBlock(editor, format)
 }
 
 RichTextEditor.prototype = {
