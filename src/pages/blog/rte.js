@@ -85,12 +85,12 @@ const RichTextEditor = (props) => {
                         <MarkButton format="highlight" icon="HighlightEditor"/>
                     </div>
                     <div className="toolbar-box">
-                        <MarkButton format="list-numbered" icon="ListNumberedEditor"/>
-                        <MarkButton format="list-bullet" icon="ListBulletedEditor"/>
+                        <BlockButton format="numbered-list" icon="ListNumberedEditor"/>
+                        <BlockButton format="bulleted-list" icon="ListBulletedEditor"/>
                     </div>
                     <div className="toolbar-box">
                         <MarkButton format="list-numbered" icon="LinkEditor"/>
-                        <MarkButton format="list-bullet" icon="QuoteEditor"/>
+                        <BlockButton format="block-quote" icon="QuoteEditor"/>
                         <MarkButton format="list-bullet" icon="ImageUploadEditor"/>
                         <MarkButton format="list-bullet" icon="TableEditor"/>
                         <MarkButton format="list-bullet" icon="MediaEditor"/>
@@ -306,15 +306,17 @@ const Leaf = ({ attributes, children, leaf }) => {
 
 const BlockButton = ({ format, icon }) => {
     const editor = useSlate()
+    const iconSvg = getIcon(icon)
     return (
         <Button
+            className="editor-icons"
             active={ isBlockActive(editor, format) }
             onMouseDown={ event => {
                 event.preventDefault()
                 toggleBlock(editor, format)
             } }
         >
-            <Icon>{icon}</Icon>
+            <Icon>{iconSvg}</Icon>
         </Button>
     )
 }
