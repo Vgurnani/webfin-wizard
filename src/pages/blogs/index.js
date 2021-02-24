@@ -18,7 +18,6 @@ import { Link, useHistory } from 'react-router-dom';
 import { getDraftBlogs,callPublish, getPublishedBlogs, getBlogById, deleteBlog } from '../../middleware/blog';
 import { ROUTES } from '../../constants/appRoutes';
 import { getDynamicURL } from '../../services/api';
-
 import {
     OpenArrow,
     EditBlogListIcon,
@@ -26,7 +25,10 @@ import {
     ShareBlogListIcon,
     ViewsBlogListIcon,
     CommentsBlogListIcon,
-    DeleteBlogListIcon
+    DeleteBlogListIcon,
+    SortBlogIcon,
+    DateBlogListIcon,
+    ChevronRight,
 } from '../../utils/svg';
 import { getSessionData } from 'utils/helpers'
 import searchIcon from '../../images/search.png';
@@ -91,7 +93,12 @@ const BlogsPage = () => {
                     <div className="dashboard-title">
                         <h1>Posts</h1>
                         <div className="dashboard-body-actions">
-                            <Link to={ ROUTES.BLOG } className='btn btn-primary'>Add New+</Link>
+
+                            <Link to={ ROUTES.BLOG } className='btn btn-primary add-new-blog'>Add New+</Link>
+                            <Link to={ ROUTES.BLOG } className='btn btn-primary sort-blogs'>
+                                <SortBlogIcon />
+                                Sort By
+                            </Link>
                         </div>
                     </div>
                     <div className="dashboard-actions">
@@ -157,7 +164,7 @@ const BlogsPage = () => {
                             </div>
                         </div>
                         { publishBlogs?.length ? <div className="blog-custom-list-table-data">
-                            {publishBlogs?.map((blog, index) => (<div className="blog-list-table blog-list-publish blog-list-header" key={ blog?.slug }>
+                            {publishBlogs?.map((blog, index) => (<div className="active blog-list-table blog-list-publish blog-list-header" key={ blog?.slug }>
                                 <div className="blog-list-column blog-list-live" key={ index }>
                                     <Form.Check
                                         type="switch"
@@ -171,10 +178,14 @@ const BlogsPage = () => {
                                     <span className="table-post-title">
                                         {blog?.title}
                                         <a onClick={ (event) => redirectToBlog(event, blog) }>View</a>
+                                        <a className="toggle-blog-detail">
+                                            <ChevronRight />
+                                        </a>
                                     </span>
                                 </div>
                                 <div className="blog-list-column blog-list-date">
-                                    { blog.created_at && moment(blog.created_at).format('L')}
+                                    <DateBlogListIcon />
+                                    <span> { blog.created_at && moment(blog.created_at).format('L')}</span>
                                 </div>
                                 <div className="blog-list-column blog-list-views">
                                     <ViewsBlogListIcon />
@@ -182,7 +193,7 @@ const BlogsPage = () => {
                                 </div>
                                 <div className="blog-list-column blog-list-comments">
                                     <CommentsBlogListIcon />
-                                    <span></span>
+                                    <span>32</span>
                                 </div>
                                 <div className="blog-list-column blog-list-actions  blog-list-delete">
                                     <div className="hover-actions">
@@ -203,6 +214,7 @@ const BlogsPage = () => {
                                         <DeleteBlogListIcon />
                                     </a>
                                 </div>
+
                             </div>)
                             )}
                         </div> : <div className="blog-list-table blog-list-header no-post">No Posts available</div>}
