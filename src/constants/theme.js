@@ -134,9 +134,9 @@ export const UltraViolet = () => {
 export const DefaultCustomColor = () => {
     return {
         'top-menu' : '#5289B5',
-        'top-menu-font': '#ffffff',
+        'top-menu-font': '#000000',
         'button': '#FF805A',
-        'button-font': '#ffffff',
+        'button-font': '#000000',
         'home-background': '#F0F6F9',
         'home-background-font': '#000000',
         'background': '#F0F6F9',
@@ -157,6 +157,6 @@ export const AllColors = () => {
         { label: 'Napa Red', value: NapaRed() },
         { label: 'Olive Green', value: OliveGreen() },
         { label: 'Royal Blue', value: RoyalBlue() },
-        //{ label: 'Custom Color', value: DefaultCustomColor() }
+        { label: 'Custom Color', value: DefaultCustomColor() }
     ])
 }

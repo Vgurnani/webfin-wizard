@@ -11,7 +11,6 @@ import Preview from  '../../components/assessment/Preview';
 import { ROUTES } from '../../constants/appRoutes'
 import { getAssessment ,createAssessment } from '../../middleware/assessments';
 import { isLoggedIn } from '../../utils/helpers'
-import { AllColors } from 'constants/theme'
 
 const AssessmentPage = () => {
     const history = useHistory();
@@ -44,11 +43,12 @@ const AssessmentPage = () => {
         setStep(step-1)
     }
 
-    const finalSubmit = (data) =>{
+    const finalSubmit = (event) =>{
+        event.preventDefault()
         if(isLoggedIn()){
-            dispatch(createAssessment(data))
+            dispatch(createAssessment(assessmentForm.values))
         }else{
-            sessionStorage.setItem('assessmentForm', JSON.stringify(data))
+            sessionStorage.setItem('assessmentForm', JSON.stringify(assessmentForm.values))
             history.push(ROUTES.REGISTER)
         }
     }
@@ -58,7 +58,7 @@ const AssessmentPage = () => {
         case 1:
             return <StepOne kindOfBuild={ niches } saveData={ saveData } onSubmit={ nextPage } />
         case 2:
-            return <StepTwo  colorPalette={ AllColors() } saveData={ saveData } prevPage={ prevPage } onSubmit={ nextPage } />
+            return <StepTwo  saveData={ saveData } prevPage={ prevPage } onSubmit={ nextPage } />
         case 3:
             return <StepThree setStep={ setStep }  assessmentData={ assessmentData } saveData={ saveData } prevPage={ prevPage } onSubmit={ nextPage } />
         case 4:

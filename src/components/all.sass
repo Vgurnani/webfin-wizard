@@ -1882,6 +1882,9 @@ ul
       max-width: 100%
       text-align: center
 .wizard-preview
+  .wizrd-banner-content 
+    h5
+      width: 100% !important
   h4
     color: #0A0A0A
     font-size: 24px
@@ -2015,3 +2018,79 @@ ul
         padding-bottom: 15px
 body.modal-open
   padding: 0 !important
+.color-box-view.active
+    border: 2px solid blue
+.color-box-view
+  border: 1px solid #ccc
+  border-radius: 50px
+  span
+    height: 20px
+    width: 20px
+    position: absolute
+    margin-top: 10px
+    margin-left: 11px
+    border-radius: 20px
+    border: 1px solid #ccc
+    line-height: 0
+  input
+    width: 105px
+    margin-left: 27px
+    background: transparent
+    border: none
+  input:focus
+    width: 105px !important
+    margin-left: 27px !important
+    background: transparent !important
+    border: none !important
+    outline: 0
+    box-shadow: none !important
+
+.custom-radio
+  display: flex
+  flex-direction: row
+  align-items: center
+  input[type=radio]
+    position: absolute
+    opacity: 0
+    width: 0
+    height: 0
+  .radio-item 
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    position: relative
+    border-radius: 2px
+  .label-icon
+    background-size: auto 40px
+    background-repeat: no-repeat
+    background-position: center 10px
+    margin-bottom: 0
+    padding: 1px 3px
+    padding-top: 6px
+    text-align: center
+    justify-content: center
+    display: flex
+    align-items: baseline
+  .option-white
+    background: $black-color
+    color: $white-color
+    width: 20px
+    height: 30px
+  .option-black
+    color: $black-color
+    background: $white-color
+    border: 1px solid $black-color
+    width: 20px
+    height: 30px
+  input[type=radio]:checked + .label-icon
+    border: 2px solid blue !important
+
+.custom-color-div
+  .drag-image-box
+    height: 120px
+    padding: 0 !important
+    img
+      height: 120px
+      width: 228px
+      border-radius: 10px

@@ -33,6 +33,7 @@ const StepThree = (props) => {
         colors: form?.values?.colors,
         logoUrl: form.values.logoUrl,
         logoText: form.values.websiteName,
+        coverImage: form.values.coverImage,
         headerLinks: headerLinksTemplate(),
         readOnly: true
     }

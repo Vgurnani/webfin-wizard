@@ -72,6 +72,10 @@ export const createAssessment = (data) => {
             const file = dataURLtoFile(data.logoUrl,uId()+'.png')
             data[ 'logoUrl' ] = await imageUpload(data.domain,'logo',file);
         }
+        if(data.coverImage){
+            const file = dataURLtoFile(data.coverImage,uId()+'.png')
+            data[ 'coverImage' ] = await imageUpload(data.domain,'cover-image',file);
+        }
         data[ 'menuLinks' ] = [ { name: 'home',url: '/' } ]
         axiosInstance.post('/assessment', data).then((response)=>{
             //notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CREATE_ASSESSMENT);
@@ -100,6 +104,10 @@ export const updateAssessment = (id,data, domain) => {
         if(data.faviconUrl && !data.faviconUrl.match('^(http|https)://')){
             const file = dataURLtoFile(data.faviconUrl,uId()+'.png')
             data[ 'faviconUrl' ] = await imageUpload(domain,'logo',file);
+        }
+        if(data.coverImage){
+            const file = dataURLtoFile(data.coverImage,uId()+'.png')
+            data[ 'coverImage' ] = await imageUpload(data.domain,'cover-image',file);
         }
         axiosInstance.put(`/assessment/${ id }`, data).then((response)=>{
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.UPDATE_ASSESSMENT);

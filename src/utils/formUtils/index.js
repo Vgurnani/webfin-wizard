@@ -202,7 +202,7 @@ const renderStyleMultipleRadio = (props) => {
                             } }
                             type="radio"
                             value={ isColors ? JSON.stringify(item.value) : item.value }
-                            checked={ isColors ? (JSON.stringify(item.value) === (input.value || defaultValue)) : (item.value === (input.value || defaultValue)) }
+                            checked={ isColors ? (input.value && JSON.parse(input.value)?.name === item.value.name ) : (item.value === (input.value || defaultValue)) }
                             id={ input.name }
                             className="styled-radio"
                         />
@@ -271,7 +271,7 @@ const renderFileDrop = (props)=> {
                                 style={ {  backgroundImage: url ? `url(${ url })`: null } } >
                                 <input  name={ input.name } { ...getInputProps()  } />
                                 <p className='' dangerouslySetInnerHTML={ { __html: placeholder } }/>
-                                {isDropText ? <div className='drag-image-box'><p>{isDropText}</p></div> : null }
+                                {isDropText ? <div className='drag-image-box'><p className='' dangerouslySetInnerHTML={ { __html: isDropText } }/></div> : null }
                             </div>
                         </div>
 

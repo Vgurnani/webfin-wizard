@@ -22,6 +22,7 @@ const Preview = (props) => {
         colors: assessmentForm?.values?.colors || [],
         logoUrl: assessmentForm?.values?.logoUrl,
         logoText: assessmentForm?.values?.websiteName,
+        coverImage: assessmentForm?.values?.coverImage,
         readOnly: true,
         headerLinks: headerLinksTemplate(),
     }

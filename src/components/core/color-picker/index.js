@@ -13,14 +13,14 @@ export const MyPicker = (props) => {
             padding: 20
         },
         hue: {
-            height: 200,
+            height: 150,
             position: 'relative',
             marginBottom: 10,
             width: 8
         },
         saturation: {
-            width: 250,
-            height: 200,
+            width: 194,
+            height: 150,
             position: 'relative'
         },
         input: {
@@ -29,8 +29,9 @@ export const MyPicker = (props) => {
             paddingLeft: 10
         },
         swatch: {
-            width: 54,
-            height: 38,
+            width: 30,
+            height: 30,
+            borderRadius: 20,
             background: colors.hex || ''
         }
     };
@@ -44,6 +45,7 @@ export const MyPicker = (props) => {
                 <Hue direction={ 'vertical' } hsl={ colors.hsl || hsl } onChange={ onChange } />
             </div>
             <div style={ { display: 'flex' } }>
+                <span>Hex:</span>
                 <div style={ styles.swatch } />
                 {colors.hex}
 
