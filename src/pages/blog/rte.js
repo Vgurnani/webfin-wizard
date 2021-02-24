@@ -40,6 +40,7 @@ import {
     UndoEditor,
     RedoEditor,
 } from '../../utils/svg';
+import { InsertVideoButton, VideoElement } from './components/video';
 
 const HOTKEYS = {
     'mod+b': 'bold',
@@ -135,7 +136,7 @@ const withImages = editor => {
     const { insertData, isVoid } = editor
 
     editor.isVoid = element => {
-        return element.type === 'image' ? true : isVoid(element)
+        return [ 'image', 'video' ].includes(element.type) ? true : isVoid(element)
     }
 
     editor.insertData = data => {
@@ -202,7 +203,7 @@ const getIcon = (iconType) => {
     case 'TableEditor':
         return <TableEditor />
     case 'MediaEditor':
-        return <MediaEditor />
+        return <InsertVideoButton />
     case 'UndoEditor':
         return <UndoEditor />
     case 'RedoEditor':
@@ -279,6 +280,8 @@ const Element = (props) => {
         return <ol { ...attributes }>{children}</ol>
     case 'image':
         return <ImageElement { ...props } />
+    case 'video':
+        return <VideoElement { ...props } />
     default:
         return <p { ...attributes }>{children}</p>
     }
