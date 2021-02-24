@@ -31,7 +31,6 @@ const CustomColor = (props) => {
         if(event.target.checked){
             const colorsData =  Object.assign({}, colors)
             colorsData[ event.target.name ] = event.target.value
-            debugger
             setColors(colorsData)
         }
     }
@@ -111,6 +110,19 @@ const CustomColor = (props) => {
                     />
                 </div>
                 {radioView('home-background-font','#000000','#FFFFFF')}
+            </div>
+            <div>
+                Box Shadow
+                <div onClick={ () => handleClick('box-shadow') } className={ `color-box-view ${ active ==='box-shadow' ? 'active' : '' }` }>
+                    <span style={ { background: colors[ 'box-shadow' ] } } ></span>
+                    <input
+                        type='text'
+                        onChange={ (event) => handleChange(event,'box-shadow') }
+                        className='form-control'
+                        defaultValue={ colors[ 'box-shadow' ] }
+                        value={ colors[ 'box-shadow' ] }
+                    />
+                </div>
             </div>
         </>)
     }

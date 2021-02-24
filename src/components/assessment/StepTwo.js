@@ -60,7 +60,6 @@ const StepTwo = (props) => {
         dispatch(reduxChange('assessmentForm', 'colors', JSON.stringify(colors)))
         setCustomColorOpen(false)
     }
-    debugger
     return(
         <Form className="form" onSubmit={ handleSubmit(() => {}) }>
             <AssessmentHeader  prevPage={ prevPage } { ...props } />
@@ -69,7 +68,7 @@ const StepTwo = (props) => {
                     <Col className="col-12">
                         <Container>
 
-                            <Modal show={ customColorOpen } onHide={ () => setCustomColorOpen(false) } className="logo-upload-modal"><CustomColor colorPalette={ colorPalette } handleColorsData={ (colors) => handleColorsData(colors) } data={ data } /></Modal>
+                            <Modal show={ customColorOpen } onHide={ () => setCustomColorOpen(false) } className="logo-upload-modal"><CustomColor backFun={ () => setCustomColorOpen(false) }  colorPalette={ colorPalette } handleColorsData={ (colors) => handleColorsData(colors) } data={ data } /></Modal>
                             <div className="form-heading">
                                 <h2>
                                     Choose Your Color Palette!
