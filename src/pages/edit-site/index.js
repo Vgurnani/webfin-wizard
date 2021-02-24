@@ -19,6 +19,7 @@ import {
     // OpenArrow,
     // GreyDeleteIcon,
 } from '../../utils/svg';
+import { AllColors } from 'constants/theme'
 
 const EditSitePage =(props) => {
     const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const EditSitePage =(props) => {
     const data = useSelector(state => state.user.sessionData?.data?.data)
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
     const [ menuLinks, setMenuLinks ] = useState(form?.values?.menuLinks)
-
+    const [ colorPalette , setColorPalette ] = useState(AllColors())
     const site =  data?.sites[ 0 ]
 
     useEffect(() => {
@@ -50,6 +51,15 @@ const EditSitePage =(props) => {
             setMenuLinks(form?.values?.menuLinks)
         }
     }, [ form?.values?.menuLinks ])
+
+    useEffect(() => {
+        if(!_.isEmpty(form?.values?.colors && JSON.parse(form?.values?.colors)?.name === 'custom-color')){
+            const obj = { label: 'Custom Color', value: JSON.parse(form?.values?.colors),imageUrl: undefined }
+            colorPalette.pop()
+            colorPalette.push(obj)
+            setColorPalette(colorPalette)
+        }
+    }, [ form?.values?.colors ])
 
     useEffect(() => {
         if(site){
