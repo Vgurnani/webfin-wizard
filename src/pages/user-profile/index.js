@@ -116,7 +116,7 @@ const UserProfilePage =(props) => {
                             maxLength="150"
                             placeholder='Enter your last name'
                         />
-                        {/* <Field
+                        <Field
                             name="userName"
                             label="User Name:"
                             type="text"
@@ -124,14 +124,12 @@ const UserProfilePage =(props) => {
                             maxLength="150"
                             withoutTouch={ true }
                             placeholder='Enter your user name'
-                        /> */}
-                        <Form.Group className="profile_username">
-                            <Form.Label>User Name:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter your user name" name="userName" maxLength="150"  withoutTouch={ true } />
-                            { props.asyncValidating && <div className="small-up-loader">
-                                <div className="lds-facebook"><div></div><div></div><div></div></div>
-                            </div> }
-                        </Form.Group>
+                        />
+
+                        { props.asyncValidating && <div className="small-up-loader">
+                            <div className="lds-facebook"><div></div><div></div><div></div></div>
+                        </div> }
+
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Password:</Form.Label>
                             <div className="password-wrap">
