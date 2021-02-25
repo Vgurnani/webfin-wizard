@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import PropTypes from 'prop-types';
 import{ Modal, Button, Row, Col, Form } from 'react-bootstrap';
 import {
@@ -8,27 +8,24 @@ import {
 const MenuLinks = (props) => {
     const [ linkType, setLinkType ] = useState(0)
     const [ loadingtype , setLoadingType ] = useState(false)
-    const { onClose  ,menuLinks,loadData,handleChangeMenuLink,isValid, addMenuLinks ,removeMenuLink } = props
+    const { onClose  ,menuLinks,handleChangeMenuLink,isValid, addMenuLinks ,removeMenuLink } = props
     const getData = () => {
         return menuLinks[ linkType ]
     }
     const addLinks = () =>{
         addMenuLinks()
     }
+    useEffect(()=>{
+        setLoadingType(false)
+    },[ linkType ])
     const setLinkTypeFun = (index) => {
-        setLoadingType(true)
+        linkType !== index && setLoadingType(true)
         setLinkType(index)
-        setTimeout(()=>{
-            setLoadingType(false)
-        },1)
     }
     const removeLinkTypeFun = (index) =>{
         setLoadingType(true)
-        setLinkType(0)
+        setLinkType(linkType-1)
         removeMenuLink(index)
-        setTimeout(()=>{
-            setLoadingType(false)
-        },1)
     }
 
     return(
@@ -45,8 +42,8 @@ const MenuLinks = (props) => {
             <Modal.Body>
                 <div className="edit-menu-listing">
                     <div className="menu-listing">
-                        <ol style={ { height: '230px' } }>
-                            { !loadData && menuLinks.map((item,index) => {
+                        <ol>
+                            { menuLinks.map((item,index) => {
                                 return(
                                     <li key={ index }>
                                         <div className="menu-order">{ index+1 }.</div>
@@ -87,7 +84,7 @@ const MenuLinks = (props) => {
                             </Form.Group>
                             <Form.Group className="url-control">
                                 <Form.Label>Link</Form.Label>
-                                {!loadData &&<input type='text'
+                                {<input type='text'
                                     name='url'
                                     disabled={ true }
                                     className='form-control'
