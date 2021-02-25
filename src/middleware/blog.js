@@ -118,7 +118,7 @@ export const getDraftBlogs =  (args) => {
         try{
             dispatch(getBlogsRequest())
             const route = getRoute();
-            const result = await strapiAxiosInstance.get(`${ route }?_sort=created_at:ASC&_publicationState=preview&published_at_null=true&deletedAt_null=true&type=blog&${ args }`)
+            const result = await strapiAxiosInstance.get(`${ route }?slug_ne=wizrd-welcome-blog&_sort=created_at:ASC&_publicationState=preview&published_at_null=true&deletedAt_null=true&type=blog&${ args }`)
             if([ 200,203 ].includes(result.status)){
                 const data = result.data.filter((item) => item.published_at === null && item.type === 'blog' && item.slug !== 'wizrd-welcome-blog')
                 dispatch(getDraftBlogListSuccess(data));
@@ -135,10 +135,9 @@ export const getPublishedBlogs =  (args) => {
         try{
             dispatch(getBlogsRequest())
             const route = getRoute();
-            const result = await strapiAxiosInstance.get(`${ route }?_sort=created_at:ASC&_publicationState=live&deletedAt_null=true&type=blog&${ args }`)
+            const result = await strapiAxiosInstance.get(`${ route }?slug_ne=wizrd-welcome-blog&_sort=created_at:ASC&_publicationState=live&deletedAt_null=true&type=blog&${ args }`)
             if([ 200,203 ].includes(result.status)){
-                const data = result.data.filter((item) => item.published_at !== null && item.slug !== 'wizrd-welcome-blog')
-                dispatch(getPublishBlogListSuccess(data));
+                dispatch(getPublishBlogListSuccess(result.data));
             }
         }catch(error){
             dispatch(getBlogListFailed(error))
@@ -152,10 +151,11 @@ export const allBlogsCount = () => {
         try{
             dispatch(getBlogsRequest())
             const route = getRoute();
-            const publishBlogResult = await strapiAxiosInstance.get(`${ route }?_publicationState=live&deletedAt_null=true&type=blog`)
-            const publishBlogCount = publishBlogResult.data.filter((item) => item.published_at !== null && item.slug !== 'wizrd-welcome-blog').length
-            const draftBlogResult =  await strapiAxiosInstance.get(`${ route }?_publicationState=preview&published_at_null=true&deletedAt_null=true&type=blog`)
-            const draftBlogCount = draftBlogResult.data.filter((item) => item.published_at == null && item.slug !== 'wizrd-welcome-blog').length
+            const publishBlogResult = await strapiAxiosInstance.get(`${ route }/count?slug_ne=wizrd-welcome-blog&_publicationState=live&deletedAt_null=true&type=blog`)
+            const publishBlogCount = publishBlogResult.data
+            const draftBlogResult =  await strapiAxiosInstance.get(`${ route }/count?slug_ne=wizrd-welcome-blog&_publicationState=preview&published_at_null=true&deletedAt_null=true&type=blog`)
+            const draftBlogCount = draftBlogResult.data
+
             dispatch(allBlogsCountSuccess(publishBlogCount, draftBlogCount));
 
         }catch(error){

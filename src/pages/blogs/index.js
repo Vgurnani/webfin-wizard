@@ -61,6 +61,9 @@ const BlogsPage = () => {
         dispatch(allBlogsCount())
         dispatch(getDraftBlogs(filterData));
         dispatch(getPublishedBlogs(filterData));
+        setActivePagePublish(1)
+        setActivePageDraft(1)
+
     }
 
     const handleEdit = (event, blog) => {
@@ -92,17 +95,17 @@ const BlogsPage = () => {
         let publishStartWith = (activePagePublish - 1) * limit
         let publishArgs;
         let draftArgs;
-        if(publishStartWith <= countPublish || countPublish === 0){
+        if((publishStartWith < countPublish) || countPublish === 0){
             publishArgs = `_start=${ publishStartWith  }&_limit=${ limit }`
         }else{
-            publishStartWith = publishStartWith - limit
+            publishStartWith = publishStartWith === 0  ? 0 : publishStartWith  - limit
             publishArgs = `_start=${ publishStartWith  }&_limit=${ limit }`
             setActivePagePublish(activePagePublish - 1)
         }
         if(draftStartWith < countDraft || countDraft === 0 ){
             draftArgs = `_start=${ draftStartWith }&_limit=${ limit }`
         }else{
-            draftStartWith = draftStartWith - limit
+            draftStartWith = draftStartWith === 0 ? 0 : draftStartWith - limit
             draftArgs = `_start=${ draftStartWith }&_limit=${ limit }`
             setActivePageDraft(activePageDraft - 1)
         }
@@ -111,8 +114,8 @@ const BlogsPage = () => {
 
     const handleDelete = (event, blog) => {
         event.preventDefault();
-        const countPublish = ( blog.published_at !== null ? blogsCount.publishCount : (blogsCount.publishCount - 1) )
-        const countDraft = ( blog.published_at === null ? blogsCount.draftCount : (blogsCount.draftCount - 1) )
+        const countPublish = ( blog.published_at !== null ? (blogsCount.publishCount - 1) :  blogsCount.publishCount )
+        const countDraft = ( blog.published_at === null ? (blogsCount.draftCount - 1) : blogsCount.draftCount)
         const result = handlePaginateData(countPublish,countDraft)
         confirmAlert({
             // eslint-disable-next-line react/display-name
@@ -243,9 +246,9 @@ const BlogsPage = () => {
                             </div>)
                             )}
                             <div className='blogs-pagination'>
-                                { limit -1  <= blogsCount?.publishCount && <Pagination
+                                { limit  < blogsCount?.publishCount && <Pagination
                                     activePage={ activePagePublish }
-                                    itemsCountPerPage={ limit -1 }
+                                    itemsCountPerPage={ limit  }
                                     totalItemsCount={ blogsCount?.publishCount }
                                     pageRangeDisplayed={ 5 }
                                     onChange={ handlePageChangePublish }
