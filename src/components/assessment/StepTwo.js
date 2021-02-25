@@ -24,7 +24,6 @@ import
 
 const StepTwo = (props) => {
     const [ customColorOpen, setCustomColorOpen ] = useState(false)
-    const [ colorPalette , setColorPalette ] = useState(AllColors())
     const dispatch = useDispatch()
     const { handleSubmit,prevPage } = props;
     const assessmentForm = useSelector((state) => state.form.assessmentForm)
@@ -36,7 +35,18 @@ const StepTwo = (props) => {
         headerLinks: headerLinksTemplate(),
         readOnly: true
     }
-
+    const setAllColors = () => {
+        if(assessmentForm?.values?.colors){
+            const obj = { label: 'Custom Color', value: JSON.parse(assessmentForm?.values?.colors),imageUrl: undefined }
+            const allColors = [ ... AllColors() ]
+            allColors.pop()
+            allColors.push(obj)
+            return allColors
+        }else{
+            return AllColors()
+        }
+    }
+    const [ colorPalette , setColorPalette ] = useState(setAllColors())
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -49,7 +59,7 @@ const StepTwo = (props) => {
 
     const handleColorChange = ( event ) => {
         const obj = event.currentTarget.value &&  JSON.parse(event.currentTarget.value)
-        obj.name === 'custom-color' ? setCustomColorOpen(!customColorOpen) : null
+        obj.name === 'custom-color' ?  setCustomColorOpen(!customColorOpen) : null
     }
 
     const handleColorsData = (colors) => {
