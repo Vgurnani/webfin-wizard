@@ -129,5 +129,8 @@ export const updateUserProfileValidate = values => {
     if(values.lastName && !values.lastName.match(letter)){
         errors.lastName = MESSAGE.SHOULD_CHAR;
     }
+    // if(values.phone && (values.phone.length < 10 || values.phone.length > 10) ){
+    //     errors.phone = MESSAGE.INVALID_MOBILE;
+    // }
     return errors;
 }

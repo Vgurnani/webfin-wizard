@@ -25,6 +25,7 @@ export const MESSAGE = {
     PASSWORD_MATCH: 'password should be match',
     SHOULD_CHAR: 'should be character only',
     INVALID_EMAIL: 'Invalid email',
+    INVALID_MOBILE: 'Invalid Mobile',
     PUBLISH_SUCCESS: 'Published!',
     VALID_ENTER: (value) => `Please enter ${ value }`,
     VALID_SELECT: (value) => `Please select ${ value }`,

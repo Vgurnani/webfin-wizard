@@ -285,6 +285,47 @@ const renderFileDrop = (props)=> {
                 } }
             /></>)
 }
+const renderFieldUsPhone = (props) => {
+    const {
+        input,
+        label,
+        name,
+        type,
+        placeholder,
+        disabled,
+        validationError,
+        meta: { asyncValidating, touched, error, warning },
+        maxLength,
+        handleKeyUp,
+        rows,
+        withoutTouch,
+        defaultWarning
+    } = props;
+
+    const changeValue = (event) =>{
+        var x = event.currentTarget.value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+        const value = x &&  x[ 1 ] + '-' + x[ 2 ] + '-' + x[ 3 ] || null;
+        input.onChange(value)
+        handleKeyUp && handleKeyUp(value)
+    }
+
+    return (
+        <Form.Group className={ asyncValidating ? 'async-validating' : '' } controlId={ name }>
+            { label &&  <Form.Label>{label || ''}</Form.Label> }
+            <Form.Control rows={ rows } { ...input } onBlur={ changeValue }  maxLength={ maxLength } disabled={ disabled || false } type={ type } className={ validationError || (touched && error) ? 'validation-error' : '' } placeholder={ placeholder || '' } />
+            {defaultWarning && !input.value && <span className="default-warning"><i className="fas fa-exclamation-triangle"></i> {defaultWarning}</span>}
+            <Validations
+                props={ {
+                    touched,
+                    error,
+                    validationError,
+                    warning,
+                    withoutTouch
+                } }
+            />
+        </Form.Group>
+    );
+};
 
 export {
     renderFileDrop,
@@ -293,4 +334,5 @@ export {
     renderOTPField,
     renderStyleMultipleRadio,
     renderFieldChangeWG,
+    renderFieldUsPhone
 };

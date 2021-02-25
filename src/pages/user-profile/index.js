@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { getUnsplash } from 'middleware/assessments';
-import { renderField, renderFieldWG } from '../../utils/formUtils';
+import { renderField, renderFieldWG, renderFieldUsPhone } from '../../utils/formUtils';
 import { updateUserProfileValidate as validate } from '../../utils/validates';
 import asyncValidate  from 'utils/asyncValidate';
 import { togglePassword, getUser } from '../../utils/helpers';
@@ -154,7 +154,7 @@ const UserProfilePage =(props) => {
                             name="phone"
                             label="Phone number:"
                             type="text"
-                            component={ renderFieldWG }
+                            component={ renderFieldUsPhone }
                             maxLength="150"
                             placeholder='Enter your phone number'
                         />
