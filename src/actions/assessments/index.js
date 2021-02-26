@@ -32,6 +32,11 @@ export const createAssessmentSuccess = (data) => {
         payload: data,
     };
 };
+export const updateAssessmentRequest = () => {
+    return {
+        type: ActionTypes.UPDATE_ASSESSMENT_REQUEST,
+    }
+}
 export const updateAssessmentSuccess = (data) => {
     return {
         type: ActionTypes.UPDATE_ASSESSMENT_SUCCESS,

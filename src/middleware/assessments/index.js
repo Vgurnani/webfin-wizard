@@ -21,7 +21,8 @@ import {
     getVerifiedDomainRequest,
     getVerifiedDomainError,
     updateAssessmentSuccess,
-    getUnsplashRequest
+    getUnsplashRequest,
+    updateAssessmentRequest
 
 } from '../../actions/assessments'
 
@@ -93,7 +94,7 @@ export const createAssessment = (data) => {
 
 export const updateAssessment = (id,data, domain) => {
     return async (dispatch) => {
-        dispatch(createAssessmentRequest())
+        dispatch(updateAssessmentRequest())
         if(data.logoUrl && !data.logoUrl.match('^(http|https)://')){
             const file = dataURLtoFile(data.logoUrl,uId()+'.png')
             data[ 'logoUrl' ] = await imageUpload(domain,'logo',file);

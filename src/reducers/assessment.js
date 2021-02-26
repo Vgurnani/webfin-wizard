@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
     case ActionTypes.CREATE_ASSESSMENT_SUCCESS:
         return { ...state, assessmentData: action.payload, loading: false };
     case ActionTypes.CREATE_ASSESSMENT_FAILURE:
-        return { ...state, error: action.error, loading: false };
+        return { ...state, error: action.error, loading: false ,updateAssessmentLoader: false };
     case ActionTypes.GET_UNSPLASH_REQUEST:
         return { ...state , unsplashLoading: true ,unsplashImages: [] }
     case ActionTypes.GET_UNSPLASH_SUCCESS:
@@ -31,8 +31,10 @@ export default (state = initialState, action) => {
         return { ...state, domains: action.payload.domains, domainLoading: false }
     case ActionTypes.GET_VERIFIED_DOMAIN_REQUEST:
         return { ...state, domainLoading: true }
+    case ActionTypes.UPDATE_ASSESSMENT_REQUEST:
+        return { ...state, updateAssessmentLoader: true }
     case ActionTypes.UPDATE_ASSESSMENT_SUCCESS:
-        return { ...state, loading: false }
+        return { ...state, updateAssessmentLoader: false }
     case ActionTypes.GET_VERIFIED_DOMAIN_ERROR:
         return { ...state, domains: [], domainLoading: false }
     case ActionTypes.CLEAR_DOMAINS:
