@@ -1792,6 +1792,7 @@
                         @media (max-width: $breakpoint-mobile)
                             display: inline-block
                     .toggle-blog-detail
+                        display: none
                         @media (max-width: $breakpoint-mobile)
                             width: 100%
                             display: inline-block
@@ -1868,14 +1869,13 @@
 .blog-list-actions
     .hover-actions
         position: absolute
-        transform: translateX(-50000px)
         bottom: 13px
         left: 50px
-        //transition-delay: 5s
+        opacity: 0
+        visibility: hidden
         transition: all 500ms
         @media (max-width: $breakpoint-mobile)
             position: relative
-            transform: none
             bottom: auto
             left: auto
             display: inline-block
@@ -1889,7 +1889,9 @@
                     padding-bottom: 0
             .blog-list-actions
                 .hover-actions
-                    transform: translateX(0)
+                    //transform: translateX(0)
+                    opacity: 1
+                    visibility: visible
 .no-post
     text-align: center
     justify-content: center

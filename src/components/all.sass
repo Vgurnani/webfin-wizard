@@ -130,9 +130,9 @@ body .btn
     &:hover,
     &:active,
     &:focus
-      background-color: $light-blue-color
-      border-color:  $light-blue-color
-      color: $white-color
+      background-color: $white-color
+      border-color:  $primary-color
+      color: $primary-color
       box-shadow: none
   &.btn-secondary
     background-color: $white-color
@@ -143,9 +143,9 @@ body .btn
     &:hover,
     &:active,
     &:focus
-      background-color: $white-color
-      border-color:  $light-blue-color
-      color: $light-blue-color
+      background-color: $primary-color
+      border-color:  $primary-color
+      color: $white-color
       box-shadow: none
   &.btn-light
     border: none
@@ -474,6 +474,12 @@ ul
               &.btn.btn-secondary
                 color: $primary-color
                 padding: 11px 62px
+                &:not(:disabled):not(.disabled):active,
+                &:not(:disabled):not(.disabled):active:focus,
+                &:hover,
+                &:active,
+                &:focus
+                  color: $white-color
             .nav-profile-pic
               img
                 height: 24px
@@ -952,8 +958,8 @@ ul
     &:hover,
     &:active,
     &:focus
-      background-color: $facebook-color
-      border-color: $facebook-color
+      background-color: $google-color
+      border-color: $google-color
     a
       color: $white-color
       outline: none
@@ -965,8 +971,8 @@ ul
     &:hover,
     &:active,
     &:focus
-      background-color: $google-color
-      border-color: $google-color
+      background-color: $facebook-color
+      border-color: $facebook-color
     a
       color: $white-color
       outline: none
@@ -2364,3 +2370,13 @@ body.modal-open
       border: 1.695px solid #1E1E1E
       line-height: 0
       padding: 6px
+.signup-section
+  @media (max-width: $breakpoint-mobile)
+    padding: 0
+  .sigunp-content-side.content-side
+    @media (max-width: $breakpoint-mobile)
+      order: 2
+      margin: 0
+  .sigunp-form-side
+    @media (max-width: $breakpoint-mobile)
+      order: 1
