@@ -42,6 +42,7 @@ import {
 } from '../../utils/svg';
 import { InsertVideoButton, VideoElement } from './components/video';
 import { LinkButton, LinkElement, wrapLink } from './components/link';
+import { EmojiButton } from './components/emoji';
 
 const HOTKEYS = {
     'mod+b': 'bold',
@@ -91,15 +92,15 @@ const RichTextEditor = (props) => {
                         <BlockButton format="bulleted-list" icon="ListBulletedEditor"/>
                     </div>
                     <div className="toolbar-box">
-                        <MarkButton format="list-numbered" icon="LinkEditor"/>
+                        <MarkButton format="link" icon="LinkEditor"/>
                         <BlockButton format="block-quote" icon="QuoteEditor"/>
-                        <MarkButton format="list-bullet" icon="ImageUploadEditor"/>
-                        <MarkButton format="list-bullet" icon="TableEditor"/>
-                        <MarkButton format="list-bullet" icon="MediaEditor"/>
+                        <MarkButton format="image" icon="ImageUploadEditor"/>
+                        <MarkButton format="emoji" icon="TableEditor"/>
+                        <MarkButton format="video" icon="MediaEditor"/>
                     </div>
                     <div className="toolbar-box">
-                        <MarkButton format="list-numbered" icon="UndoEditor"/>
-                        <MarkButton format="list-bullet" icon="RedoEditor"/>
+                        <MarkButton format="undo" icon="UndoEditor"/>
+                        <MarkButton format="redo" icon="RedoEditor"/>
                     </div>
 
                     <div className="toolbar-box">
@@ -216,7 +217,7 @@ const getIcon = (iconType) => {
     case 'ImageUploadEditor':
         return <InsertImageButton />
     case 'TableEditor':
-        return <TableEditor />
+        return <EmojiButton />
     case 'MediaEditor':
         return <InsertVideoButton />
     case 'UndoEditor':
