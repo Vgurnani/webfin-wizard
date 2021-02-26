@@ -41,6 +41,7 @@ import {
     RedoEditor,
 } from '../../utils/svg';
 import { InsertVideoButton, VideoElement } from './components/video';
+import { LinkButton, LinkElement, wrapLink } from './components/link';
 
 const HOTKEYS = {
     'mod+b': 'bold',
@@ -133,10 +134,22 @@ const RichTextEditor = (props) => {
 }
 
 const withImages = editor => {
-    const { insertData, isVoid } = editor
+    const { insertData, insertText, isVoid, isInline } = editor
 
     editor.isVoid = element => {
         return [ 'image', 'video' ].includes(element.type) ? true : isVoid(element)
+    }
+
+    editor.isInline = element => {
+        return element.type === 'link' ? true : isInline(element)
+    }
+
+    editor.insertText = text => {
+        if (text && isUrl(text)) {
+            wrapLink(editor, text)
+        } else {
+            insertText(text)
+        }
     }
 
     editor.insertData = data => {
@@ -159,6 +172,8 @@ const withImages = editor => {
             }
         } else if (isImageUrl(text)) {
             insertImage(editor, text)
+        } else if (text && isUrl(text)) {
+            wrapLink(editor, text)
         } else {
             insertData(data)
         }
@@ -195,7 +210,7 @@ const getIcon = (iconType) => {
     case 'ListBulletedEditor':
         return <ListBulletedEditor />
     case 'LinkEditor':
-        return <LinkEditor />
+        return <LinkButton />
     case 'QuoteEditor':
         return <QuoteEditor />
     case 'ImageUploadEditor':
@@ -282,6 +297,8 @@ const Element = (props) => {
         return <ImageElement { ...props } />
     case 'video':
         return <VideoElement { ...props } />
+    case 'link':
+        return <LinkElement { ...props } />
     default:
         return <p { ...attributes }>{children}</p>
     }
