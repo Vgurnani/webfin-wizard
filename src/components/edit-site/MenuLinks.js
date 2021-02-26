@@ -28,6 +28,9 @@ const MenuLinks = (props) => {
         setLinkType(linkType-1)
         removeMenuLink(index)
     }
+    const isValidMenu = () => {
+        return menuLinks && !menuLinks.map((item) => item.name ).includes(undefined)
+    }
 
     return(
         <div className="">
@@ -101,7 +104,7 @@ const MenuLinks = (props) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <div className="modal-btns text-right">
-                        { isValid ?
+                        { isValid  && isValidMenu() ?
                             <ButtonLoader
                                 button={ <Button type='submit' variant="primary">confirm</Button> }
                                 loadButton= {
