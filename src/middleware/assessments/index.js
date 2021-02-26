@@ -20,7 +20,8 @@ import {
     getVerifiedDomainSuccess,
     getVerifiedDomainRequest,
     getVerifiedDomainError,
-    updateAssessmentSuccess
+    updateAssessmentSuccess,
+    getUnsplashRequest
 
 } from '../../actions/assessments'
 
@@ -114,6 +115,7 @@ export const updateAssessment = (id,data, domain) => {
 
 export const getUnsplash = (url,query) => {
     return async (dispatch) => {
+        dispatch(getUnsplashRequest())
         const result = await  unsplashClient.search.getPhotos({
             query: query,
             page: 1,

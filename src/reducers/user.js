@@ -3,7 +3,8 @@ const initialState = {
     user: {},
     sessionData: {},
     openfpmodal: false,
-    loading: false
+    loading: false,
+    userProfileLoading: false
 }
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -38,11 +39,11 @@ export default (state = initialState, action) => {
     case ActionTypes.GET_USER_SUCCESS:
         return { ...state, sessionData: action.payload, loading: false };
     case ActionTypes.UPDATE_USER_PROFILE_REQUEST:
-        return { ...state, loading: true };
+        return { ...state, userProfileLoading: true };
     case ActionTypes.UPDATE_USER_PROFILE_SUCCESS:
-        return { ...state, user: action.payload, loading: false };
+        return { ...state, user: action.payload, userProfileLoading: false };
     case ActionTypes.UPDATE_USER_PROFILE_FAILURE:
-        return { ...state, error: action.payload, loading: false };
+        return { ...state, error: action.payload, userProfileLoading: false };
     default:
         return state;
     }

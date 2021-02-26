@@ -1,7 +1,7 @@
 import React,{ useState , useEffect } from 'react'
 import { Field } from 'redux-form';
 import { renderFieldChangeWG, renderStyleMultipleRadio } from '../../utils/formUtils'
-import { getLabel  , headerLinksTemplate } from '../../utils/helpers'
+import { getLabel, headerLinksTemplate } from '../../utils/helpers'
 import { getUnsplash ,getVerifiedDomain } from '../../middleware/assessments'
 import PropTypes from 'prop-types';
 import { assessmentFormValidate as validate } from '../../utils/validates'
@@ -54,7 +54,7 @@ const StepThree = (props) => {
 
     const handleSearch = (event) => {
         let query  = form.values?.nicheId && getLabel(assessmentData.niches, form.values?.nicheId)
-        query = event.currentTarget.value || query
+        query = event.target.value || query
         dispatch(getUnsplash('/photos',query))
     }
 

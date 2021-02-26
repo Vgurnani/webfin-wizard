@@ -3,6 +3,8 @@
 import React, { useState } from 'react'
 import { Link }  from 'react-router-dom'
 import PropTypes from 'prop-types';
+import history from 'utils/history'
+
 import {
     Container,
     Row,
@@ -64,13 +66,13 @@ const Navbar = (props) => {
                         <Dropdown >
                             <Dropdown.Toggle>
                                 <span className="nav-profile-pic">
-                                    <img src={ user?.profileImageUrl || profilePic } alt="John" />
+                                    <img src={ user?.profileImageUrl || profilePic } alt={ user?.firstName } />
                                 </span>
                                 <ChevronRight />
                             </Dropdown.Toggle>
 
-                            <Dropdown.Menu  menuAlign="right">
-                                <Link className="dropdown-item" to={ ROUTES.USER_PROFILE }>My Account</Link>
+                            <Dropdown.Menu menuAlign="right">
+                                <Dropdown.Item onClick={ () => history.push(ROUTES.USER_PROFILE) } >My Account</Dropdown.Item>
                                 <Dropdown.Item onClick={ logout } >Log out</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>

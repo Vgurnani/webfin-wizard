@@ -18,8 +18,7 @@ import
     from 'react-bootstrap';
 
 const StepOne = (props) => {
-    const { handleSubmit, kindOfBuild, initialize  } = props;
-
+    const { handleSubmit, kindOfBuild,onSubmit, initialize  } = props;
     useEffect(()=>{
         if(!_.isEmpty(assessmentIntialValues())){
             initialize(assessmentIntialValues())
@@ -29,7 +28,7 @@ const StepOne = (props) => {
 
     return(
         <>
-            <Form className="form" onSubmit={ handleSubmit(() => {}) }>
+            <Form className="form" onSubmit={ handleSubmit(onSubmit) }>
                 <AssessmentHeader { ...props } />
                 <section className="main-section">
                     <div className="assesment-step assesment-step-1">
@@ -104,7 +103,8 @@ StepOne.propTypes = {
     saveData: PropTypes.func,
     initialize: PropTypes.object,
     valid: PropTypes.bool,
-    kindOfBuild: PropTypes.array
+    kindOfBuild: PropTypes.array,
+    onSubmit: PropTypes.func
 };
 export default reduxForm({
     form: 'assessmentForm',

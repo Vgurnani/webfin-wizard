@@ -4,7 +4,8 @@ const initialState = {
     loading: false,
     domainLoading: false,
     unsplashImages: [],
-    domains: []
+    domains: [],
+    unsplashLoading: false
 }
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -20,10 +21,12 @@ export default (state = initialState, action) => {
         return { ...state, assessmentData: action.payload, loading: false };
     case ActionTypes.CREATE_ASSESSMENT_FAILURE:
         return { ...state, error: action.error, loading: false };
+    case ActionTypes.GET_UNSPLASH_REQUEST:
+        return { ...state , unsplashLoading: true ,unsplashImages: [] }
     case ActionTypes.GET_UNSPLASH_SUCCESS:
-        return { ...state, unsplashImages: action.payload || [], loading: false }
+        return { ...state, unsplashImages: action.payload || [], unsplashLoading: false }
     case ActionTypes.GET_UNSPLASH_ERROR:
-        return { ...state, unsplashImages: [], loading: false }
+        return { ...state, unsplashImages: [], unsplashLoading: false }
     case ActionTypes.GET_VERIFIED_DOMAIN:
         return { ...state, domains: action.payload.domains, domainLoading: false }
     case ActionTypes.GET_VERIFIED_DOMAIN_REQUEST:

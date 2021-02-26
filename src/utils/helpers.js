@@ -173,3 +173,12 @@ export const headerLinksTemplate = () => {
     links = links.map((item, index) => <a key={ index } href='#'>{ item.name }</a>)
     return links
 }
+export const debounce =( callback,event, delay ) => {
+    const timeout = setTimeout(() => {
+        callback(event)
+    }, delay );
+    return () => {
+        clearTimeout( timeout );
+    }
+
+}

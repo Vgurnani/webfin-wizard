@@ -42,6 +42,7 @@ const renderFieldWG = (props) => {
         name,
         type,
         placeholder,
+        asyncLoading,
         disabled,
         validationError,
         meta: { asyncValidating, touched, error, warning },
@@ -58,7 +59,7 @@ const renderFieldWG = (props) => {
     }
 
     return (
-        <Form.Group className={ asyncValidating ? 'async-validating' : '' } controlId={ name }>
+        <Form.Group controlId={ name }>
             { label &&  <Form.Label>{label || ''}</Form.Label> }
             <Form.Control rows={ rows } { ...input } onBlur={ changeValue }  maxLength={ maxLength } disabled={ disabled || false } type={ type } className={ validationError || (touched && error) ? 'validation-error' : '' } placeholder={ placeholder || '' } />
             {defaultWarning && !input.value && <span className="default-warning"><i className="fas fa-exclamation-triangle"></i> {defaultWarning}</span>}
@@ -71,6 +72,9 @@ const renderFieldWG = (props) => {
                     withoutTouch
                 } }
             />
+            { asyncLoading && asyncValidating ? <div className="small-up-loader">
+                <div className="lds-facebook"><div></div><div></div><div></div></div>
+            </div> : null }
         </Form.Group>
     );
 };
@@ -285,45 +289,6 @@ const renderFileDrop = (props)=> {
                 } }
             /></>)
 }
-const renderFieldUsPhone = (props) => {
-    const {
-        input,
-        label,
-        name,
-        type,
-        placeholder,
-        disabled,
-        validationError,
-        meta: { asyncValidating, touched, error, warning },
-        maxLength,
-        rows,
-        withoutTouch,
-        defaultWarning
-    } = props;
-
-    const changeValue = (event) =>{
-        var x = event.currentTarget.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-        const value = !x[ 2 ] ? x[ 1 ] :  x[ 1 ] + '-' + x[ 2 ] + (x[ 3 ] ? '-' + x[ 3 ] : '');
-        input.onChange(value)
-    }
-
-    return (
-        <Form.Group className={ asyncValidating ? 'async-validating' : '' } controlId={ name }>
-            { label &&  <Form.Label>{label || ''}</Form.Label> }
-            <Form.Control rows={ rows } { ...input } onChange={ changeValue }  maxLength={ maxLength } disabled={ disabled || false } type={ type } className={ validationError || (touched && error) ? 'validation-error' : '' } placeholder={ placeholder || '' } />
-            {defaultWarning && !input.value && <span className="default-warning"><i className="fas fa-exclamation-triangle"></i> {defaultWarning}</span>}
-            <Validations
-                props={ {
-                    touched,
-                    error,
-                    validationError,
-                    warning,
-                    withoutTouch
-                } }
-            />
-        </Form.Group>
-    );
-};
 
 export {
     renderFileDrop,
@@ -332,5 +297,4 @@ export {
     renderOTPField,
     renderStyleMultipleRadio,
     renderFieldChangeWG,
-    renderFieldUsPhone
 };

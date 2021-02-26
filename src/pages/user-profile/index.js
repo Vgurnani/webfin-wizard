@@ -5,11 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { getUnsplash } from 'middleware/assessments';
-import { renderField, renderFieldWG, renderFieldUsPhone } from '../../utils/formUtils';
+import { renderField, renderFieldWG } from '../../utils/formUtils';
 import { updateUserProfileValidate as validate } from '../../utils/validates';
 import asyncValidate  from 'utils/asyncValidate';
 import { togglePassword, getUser } from '../../utils/helpers';
 import { updateCurrentUser } from '../../middleware/auth';
+import { normalizePhone } from 'utils/normalize'
+import ButtonLoader from 'components/core/loader/button-loader'
 import
 {
     Form,
@@ -27,6 +29,7 @@ const UserProfilePage =(props) => {
     const history = useHistory();
     const [ openModal, setModalOpen ]  = useState(false);
     const userProfileForm = useSelector((state)=>state.form.userProfileForm);
+    const userProfileLoading = useSelector((state)=>state.user.userProfileLoading);
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
     const { handleSubmit , initialize } = props;
 
@@ -65,7 +68,6 @@ const UserProfilePage =(props) => {
         const query = event.currentTarget.value || 'cat'
         dispatch(getUnsplash('/photos',query))
     }
-
     return(
         <main className="dashboard-data">
             <section className="dashboard-body">
@@ -89,9 +91,19 @@ const UserProfilePage =(props) => {
                         <div className="profile-main-info">
                             <h6>Main info</h6>
                             <h5>{ userProfileForm?.values?.firstName } { userProfileForm?.values?.lastName } </h5>
-                            <Button className="btn btn-primary profile-save-btn" type="submit">
-                                Save
-                            </Button>
+                            <ButtonLoader
+                                button={ <Button className="btn btn-primary profile-save-btn" type="submit">
+                                    Save
+                                </Button> }
+                                loadButton= {
+                                    <Button className="btn btn-primary profile-save-btn" disabled={ true } type="button">
+                                        Saving
+                                    </Button>
+                                }
+                                loading={ userProfileLoading }
+
+                            />
+
                         </div>
                         {/* <div className="profile-delete-account">
                             <Button className="btn btn-secondary">
@@ -106,6 +118,7 @@ const UserProfilePage =(props) => {
                             type="text"
                             component={ renderFieldWG }
                             maxLength="150"
+                            disabled={ userProfileLoading }
                             placeholder='Enter your first name'
                         />
                         <Field
@@ -114,6 +127,7 @@ const UserProfilePage =(props) => {
                             type="text"
                             component={ renderFieldWG }
                             maxLength="150"
+                            disabled={ userProfileLoading }
                             placeholder='Enter your last name'
                         />
                         <Field
@@ -122,13 +136,11 @@ const UserProfilePage =(props) => {
                             type="text"
                             component={ renderFieldWG }
                             maxLength="150"
+                            asyncLoading={ true }
+                            disabled={ userProfileLoading }
                             withoutTouch={ true }
                             placeholder='Enter your user name'
                         />
-
-                        { props.asyncValidating && <div className="small-up-loader">
-                            <div className="lds-facebook"><div></div><div></div><div></div></div>
-                        </div> }
 
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Password:</Form.Label>
@@ -139,6 +151,7 @@ const UserProfilePage =(props) => {
                                     type="password"
                                     component={ renderField }
                                     maxLength="150"
+                                    disabled={ userProfileLoading }
                                     placeholder='Enter your password'
                                 />
 
@@ -154,9 +167,10 @@ const UserProfilePage =(props) => {
                             name="phone"
                             label="Phone number:"
                             type="text"
-                            component={ renderFieldUsPhone }
-                            maxLength="150"
+                            component={ renderFieldWG }
+                            disabled={ userProfileLoading }
                             placeholder='Enter your phone number'
+                            normalize={ normalizePhone }
                         />
                     </div>
                 </Form>
@@ -347,6 +361,7 @@ const UserProfilePage =(props) => {
 UserProfilePage.propTypes = {
     handleSubmit: PropTypes.func,
     initialize: PropTypes.func,
+    submitting: PropTypes.bool,
     asyncValidating: PropTypes.bool
 };
 

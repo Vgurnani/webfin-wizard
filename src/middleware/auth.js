@@ -181,7 +181,6 @@ export const updateCurrentUser = (data) => {
             .then((response) => {
                 const user = JSON.parse(getItem('user'));
                 setItem('user', { ...user, ...response.data })
-                history.push(ROUTES.DASHBOARD)
                 dispatch(updateUserProfileSuccess(response.data));
             })
             .catch((error) => {

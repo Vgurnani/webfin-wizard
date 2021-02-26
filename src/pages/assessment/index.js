@@ -36,7 +36,6 @@ const AssessmentPage = () => {
         }
     }
     const nextPage = () => {
-        debugger
         setStep(step+1)
         saveData()
     }
