@@ -36,6 +36,7 @@ const AssessmentPage = () => {
         }
     }
     const nextPage = () => {
+        debugger
         setStep(step+1)
         saveData()
     }
@@ -44,11 +45,11 @@ const AssessmentPage = () => {
         setStep(step-1)
     }
 
-    const finalSubmit = () =>{
+    const finalSubmit = (data) =>{
         if(isLoggedIn()){
-            dispatch(createAssessment(assessmentForm.values))
+            dispatch(createAssessment(data))
         }else{
-            sessionStorage.setItem('assessmentForm', JSON.stringify(assessmentForm.values))
+            sessionStorage.setItem('assessmentForm', JSON.stringify(data))
             history.push(ROUTES.REGISTER)
         }
     }
@@ -62,7 +63,7 @@ const AssessmentPage = () => {
         case 3:
             return <StepThree setStep={ setStep }  assessmentData={ assessmentData } saveData={ saveData } prevPage={ prevPage } onSubmit={ nextPage } />
         case 4:
-            return <Preview   assessmentData={ assessmentData } saveData={ saveData } prevPage={ prevPage } onSubmit={ finalSubmit } />
+            return <Preview assessmentData={ assessmentData } saveData={ saveData } prevPage={ prevPage } finalSubmit={ finalSubmit } />
         default:
             return null
         }

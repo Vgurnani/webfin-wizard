@@ -16,7 +16,7 @@ import
     from 'react-bootstrap';
 
 const Preview = (props) => {
-    const { handleSubmit ,prevPage } = props;
+    const { handleSubmit ,prevPage, finalSubmit } = props;
     const assessmentForm = useSelector((state) => state.form.assessmentForm)
     const data = {
         colors: assessmentForm?.values?.colors || [],
@@ -31,7 +31,7 @@ const Preview = (props) => {
     },[]);
 
     return(
-        <Form className="form" onSubmit={ handleSubmit(() => {}) }>
+        <Form className="form" onSubmit={ handleSubmit(finalSubmit) }>
             <AssessmentHeader isFinalScreen={ true } prevPage={ prevPage } { ... props }/>
             <div className="assesment-step assesment-step-final">
                 <Row  className="step-form">
@@ -117,7 +117,8 @@ Preview.propTypes = {
     handleSubmit: PropTypes.func,
     submitData: PropTypes.func,
     colorPalette: PropTypes.object,
-    prevPage: PropTypes.func
+    prevPage: PropTypes.func,
+    finalSubmit: PropTypes.func
 };
 export default reduxForm({
     form: 'assessmentForm',

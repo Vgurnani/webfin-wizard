@@ -34,7 +34,7 @@ const AssessmentHeader = (props) => {
                             <div className="step-btn">
                                 <span>
                                     { valid  ?
-                                        <Button type="button" onClick={ onSubmit }  variant="primary">
+                                        <Button type="submit" onClick={ onSubmit }  variant="primary">
                                             { isFinalScreen ? 'Finish!': 'Next' }
                                         </Button>
                                         :
