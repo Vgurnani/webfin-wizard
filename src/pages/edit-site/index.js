@@ -76,8 +76,7 @@ const EditSitePage =(props) => {
         setModalType(null)
         setOpen(false)
     }
-    const handleSearch = (event) => {
-        console.log(event)
+    const handleSearch = () => {
         //let query  = getLabel(assessmentData.niches, '1')
         //query = event.currentTarget.value || query
         //dispatch(getUnsplash('/photos',query))

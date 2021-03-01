@@ -29,8 +29,7 @@ import {
 export const siteBuild = (id) => {
     return() => {
         axiosInstance.put(`/user/site/${ id }/publish`).then(()=>{
-        }).catch((error)=>{
-            console.log(error)
+        }).catch(()=>{
         })
     }
 }

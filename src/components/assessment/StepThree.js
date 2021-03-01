@@ -1,4 +1,4 @@
-import React,{ useState , useEffect } from 'react'
+import React,{ useState , useEffect , useCallback } from 'react'
 import { Field } from 'redux-form';
 import { renderFieldChangeWG, renderStyleMultipleRadio } from '../../utils/formUtils'
 import { getLabel, headerLinksTemplate } from '../../utils/helpers'
@@ -67,15 +67,13 @@ const StepThree = (props) => {
     }
 
     const handleChange = (value) => {
-
         if(value){
-            setTimeout(function(){
-                dispatch(reduxChange('assessmentForm', 'domain', null))
-                dispatch(getVerifiedDomain(value))
-            },600)
-
+            dispatch(reduxChange('assessmentForm', 'domain', null))
+            dispatch(getVerifiedDomain(value))
         }else{dispatch({ type: 'CLEAR_DOMAINS' })}
     }
+    const changeWebsite = _.debounce(handleChange, 800);
+    const changeWebsiteCallback = useCallback(changeWebsite, []);
 
     const getDomains = () => {
         const result = domains?.map((item) => ({ label: item, value: item }))
@@ -103,7 +101,7 @@ const StepThree = (props) => {
                                         <Field
                                             name="websiteName"
                                             component={ renderFieldChangeWG }
-                                            handleChange={ handleChange }
+                                            handleChange={ changeWebsiteCallback }
                                             minLength={ 1 }
                                             placeholder={ 'Enter your website name' }
 

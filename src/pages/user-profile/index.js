@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { reduxForm, Field, change as reduxChange } from 'redux-form';
+import { reduxForm,stopAsyncValidation, Field, change as reduxChange } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { getUnsplash } from 'middleware/assessments';
-import { renderField, renderFieldWG } from '../../utils/formUtils';
+import { renderField, renderFieldWG, renderFieldChangeWG } from '../../utils/formUtils';
 import { updateUserProfileValidate as validate } from '../../utils/validates';
 import asyncValidate  from 'utils/asyncValidate';
 import { togglePassword, getUser } from '../../utils/helpers';
 import { updateCurrentUser } from '../../middleware/auth';
 import { normalizePhone } from 'utils/normalize'
 import ButtonLoader from 'components/core/loader/button-loader'
+import _ from 'lodash'
 import
 {
     Form,
@@ -23,11 +24,11 @@ import {
     EditProfileIcon,
 } from '../../utils/svg';
 import masterCardIcon from '../../images/master-card-logo.png';
-
 const UserProfilePage =(props) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [ openModal, setModalOpen ]  = useState(false);
+    const [ asyncLoad, setAsyncLoad ] =  useState(false)
     const userProfileForm = useSelector((state)=>state.form.userProfileForm);
     const userProfileLoading = useSelector((state)=>state.user.userProfileLoading);
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
@@ -68,6 +69,18 @@ const UserProfilePage =(props) => {
         const query = event.currentTarget.value || 'cat'
         dispatch(getUnsplash('/photos',query))
     }
+    const handleChange = (value) => {
+        if(value){
+            setAsyncLoad(true)
+            asyncValidate(value).then((result) => {
+                !result ? dispatch(stopAsyncValidation('userProfileForm', { userName: 'That username is taken' })) : null
+                setAsyncLoad(false)
+            })
+        }
+    }
+    const asyncValidateFunc = _.debounce(handleChange, 800);
+    const asyncChangeCallback = useCallback(asyncValidateFunc, []);
+
     return(
         <main className="dashboard-data">
             <section className="dashboard-body">
@@ -134,13 +147,16 @@ const UserProfilePage =(props) => {
                             name="userName"
                             label="User Name:"
                             type="text"
-                            component={ renderFieldWG }
+                            handleChange={ asyncChangeCallback }
+                            component={ renderFieldChangeWG }
                             maxLength="150"
-                            asyncLoading={ true }
                             disabled={ userProfileLoading }
                             withoutTouch={ true }
                             placeholder='Enter your user name'
                         />
+                        { asyncLoad && <div className="small-up-loader">
+                            <div className="lds-facebook"><div></div><div></div><div></div></div>
+                        </div> }
 
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Password:</Form.Label>
@@ -367,7 +383,5 @@ UserProfilePage.propTypes = {
 
 export default reduxForm({
     form: 'userProfileForm',
-    validate,
-    asyncValidate,
-    asyncChangeFields: [ 'userName' ]
+    validate
 })(UserProfilePage);

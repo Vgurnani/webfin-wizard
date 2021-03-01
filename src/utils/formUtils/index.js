@@ -251,8 +251,8 @@ const renderFileDrop = (props)=> {
         acceptedFiles.forEach((file) => {
             const reader = new FileReader()
 
-            reader.onabort = () => console.log('file reading was aborted')
-            reader.onerror = () => console.log('file reading has failed')
+            reader.onabort = () => {}
+            reader.onerror = () => {}
             reader.onload = () => {
                 const base64 = reader.result
                 input.onChange(base64)

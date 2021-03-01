@@ -208,9 +208,8 @@ export const getBlogById =  (id) => {
         dispatch(getBlogRequest())
         strapiAxiosInstance.get(route+'/'+id+'?type=blog').then((response) => {
             dispatch(getBlogSuccess(response.data))
-        }).catch((error) => {
+        }).catch(() => {
             history.push(ROUTES.BLOGS)
-            console.log(error)
         })
     }
 }

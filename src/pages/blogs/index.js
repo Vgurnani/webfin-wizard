@@ -45,7 +45,6 @@ const BlogsPage = () => {
     const blogsCount = useSelector(state => state.blog.blogsCount)
     const draftBlogs = useSelector(state => state.blog.draftBlogs)
     const data = useSelector(state => state.user.sessionData?.data?.data) || getSessionData()
-    console.log(blogsCount)
     useEffect(() => {
         dispatch({
             type: 'SET_ACTIVE_SIDEBAR',

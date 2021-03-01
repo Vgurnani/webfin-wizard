@@ -15,9 +15,8 @@ import
 }
     from 'react-bootstrap';
 const UploadLogo = (props) => {
-    const { handleSubmit, submitData,loading, assessmentData,previewFile,clearImage ,fieldName } = props
-    const [ selectedUnsplash, setSelectedUnsplash ] = useState(null);
-    console.log(selectedUnsplash, assessmentData)
+    const { handleSubmit, submitData,loading,previewFile,clearImage ,fieldName } = props
+    const [ setSelectedUnsplash ] = useState(null);
     // const handleSelect = async(id) => {
     //     setSelectedUnsplash(id)
     //     const image = unsplashImages.filter((item) => item.id == id)[ 0 ];

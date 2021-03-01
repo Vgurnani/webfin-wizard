@@ -80,7 +80,6 @@ const BlogPage =(props) => {
     const { handleSubmit, initialize } = props;
 
     const submitData = (formData) => {
-        console.log(userData)
         if (!formData.blogUrl) {
             setErrorMessageUrl(true);
             return;

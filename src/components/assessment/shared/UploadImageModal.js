@@ -29,7 +29,6 @@ const UploadImageModal = (props) => {
         setSelectedUnsplash(null)
         clearImage(event)
     }
-    console.log(unsplashLoading)
     return(
         <Modal show={ openModal } onHide={ handleToggleModal } className="logo-upload-modal">
             <Modal.Header closeButton>
