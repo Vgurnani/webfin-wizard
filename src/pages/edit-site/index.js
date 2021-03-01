@@ -138,7 +138,7 @@ const EditSitePage =(props) => {
         }
     }
     const submitData = (formData) => {
-        dispatch(updateAssessment(site?.id, formData, site.domain))
+        dispatch(updateAssessment(site?.id, formData, site.domain, handleClose))
     }
     const renderModalView = () =>{
         switch(modalType){

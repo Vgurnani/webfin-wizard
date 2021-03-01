@@ -92,7 +92,7 @@ export const createAssessment = (data) => {
     };
 };
 
-export const updateAssessment = (id,data, domain) => {
+export const updateAssessment = (id,data, domain,handleClose) => {
     return async (dispatch) => {
         dispatch(updateAssessmentRequest())
         if(data.logoUrl && !data.logoUrl.match('^(http|https)://')){
@@ -108,8 +108,10 @@ export const updateAssessment = (id,data, domain) => {
             dispatch(getCurrentUser())
             dispatch(updateAssessmentSuccess(response.data))
             dispatch(siteBuild(id))
+            handleClose()
         }).catch((error) => {
             notification(NOTIFICATION_TYPES.ERROR, error?.response?.data?.message)
+            handleClose()
         })
     };
 };
