@@ -33,10 +33,10 @@ export const MESSAGE = {
 }
 
 export const SOCIAL_MEDIA = [
-    { name: 'Facebook',value: 'facebook', imgUrl: `<img width='110px' src=${ facebook } />` },
-    { name: 'Linked in',value: 'linkedin', imgUrl: `<img width='110px' src=${ linkedin } />` },
-    { name: 'Instagram',value: 'instagram', imgUrl: `<img width='110px' src=${ instrgram } />` },
-    { name: 'Twitter',value: 'twitter', imgUrl: `<img width='110px' src=${ twitter } />` },
-    { name: 'Youtube',value: 'youtube', imgUrl: `<img width='110px' src=${ youtube } />` },
-    { name: 'Label',value: 'label', imgUrl: `<img width='110px' src=${ facebook } />` }
+    { name: 'Facebook',value: 'facebook', imgUrl: `<img src=${ facebook } />` },
+    { name: 'Linked in',value: 'linkedin', imgUrl: `<img src=${ linkedin } />` },
+    { name: 'Instagram',value: 'instagram', imgUrl: `<img src=${ instrgram } />` },
+    { name: 'Twitter',value: 'twitter', imgUrl: `<img src=${ twitter } />` },
+    { name: 'Youtube',value: 'youtube', imgUrl: `<img src=${ youtube } />` },
+    { name: 'Label',value: 'label', imgUrl: `<img src=${ facebook } />` }
 ]
