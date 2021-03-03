@@ -233,13 +233,14 @@ const CustomColor = (props) => {
                         </div>
                     </div>
                     <div className='custom-color-palate'>
-                        {radioView('header-color','#000000','#FFFFFF')}
-                        <Field
-                            name={ 'coverImage' }
-                            component={ renderFileDrop }
-                            placeholder={ "<a><i className='fa fa-plus'/> Change Header Image </a>" }
-                            isDropText={ data.coverImage ? `<img src=${ data.coverImage } alt='cover' />` : `<img src=${ blogBanner } alt='cover' />` }
-                        />
+                        <div>
+                            {radioView('header-color','#000000','#FFFFFF')}
+                            <Field
+                                name={ 'coverImage' }
+                                component={ renderFileDrop }
+                                placeholder={ "<a><i className='fa fa-plus'/> Change Header Image </a>" }
+                                isDropText={ data.coverImage ? `<img src=${ data.coverImage } alt='cover' />` : `<img src=${ blogBanner } alt='cover' />` }
+                            /></div>
                         <ColorPicker  colors={ objColors } onChange={ handleChangeColor } />
                     </div>
 

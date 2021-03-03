@@ -65,7 +65,7 @@ export const MidnightBlue = () => {
         'home-background-font': '#ffffff',
         'background': '#f7f7f7',
         'home-background': '#0C0C35',
-        'box-shadow': '#090d0f',
+        'box-shadow': '#55ace3',
         'top-menu': '#000000',
         'button': '#506BF0',
         'name': 'midnight-blue'
