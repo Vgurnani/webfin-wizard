@@ -1753,6 +1753,10 @@
                     width: 35px
                 &.blog-list-date
                     width: 95px
+                    svg
+                        display: none !important
+                        @media (max-width: $breakpoint-mobile)
+                            display: inline-block !important
                     @media (max-width: $breakpoint-mobile)
                         width: 115px
                     span
