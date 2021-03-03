@@ -198,7 +198,10 @@ const renderStyleMultipleRadio = (props) => {
         return isColors ? JSON.stringify(item.value) : (isNiche ? JSON.stringify({ id: item.value, label: item.label }) :  item.value)
     }
     const setChecked = (item) =>{
-        const value = typeof input.value === 'string' ? JSON.parse(input.value) : input.value
+        debugger
+
+        const value = typeof input.value === 'string' ? input.value &&  JSON.parse(input.value) : input.value
+
         const other = item.label === 'Other' ? input.value && !_.map(options,'label').includes(value.label) : false
         return isColors ? (JSON.stringify(item.value) === (input.value || defaultValue)) : (isNiche ? (value && value.id === item.value || other ) :  (item.value === (input.value || defaultValue)))
     }
