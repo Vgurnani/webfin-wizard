@@ -44,6 +44,7 @@ const BlogsPage = () => {
     const publishBlogs = useSelector(state => state.blog.publishBlogs)
     const publishMetaData = useSelector(state => state.blog.publishMetaData)
     const draftBlogs = useSelector(state => state.blog.draftBlogs)
+    const draftMetaData = useSelector(state => state.blog.draftMetaData)
     const data = useSelector(state => state.user.sessionData?.data?.data) || getSessionData()
     useEffect(() => {
         dispatch({
@@ -51,7 +52,7 @@ const BlogsPage = () => {
             payload: 'blog'
         })
         //dispatch(allBlogsCount())
-        //dispatch(getDraftBlogs(`_limit=${ limit }`));
+        dispatch(getDraftBlogs(`page=${ activePageDraft - 1 }&size=${ limit }`));
         dispatch(getPublishedBlogs(`page=${ activePagePublish - 1 }&size=${ limit }`));
     }, [ dispatch ]);
 
@@ -127,10 +128,11 @@ const BlogsPage = () => {
 
     const handlePublish = (event, blog ) => {
         event.preventDefault()
-        const countPublish = ( event.target.checked ? blogsCount.publishCount : (blogsCount.publishCount - 1) )
-        const countDraft = ( !event.target.checked ? blogsCount.draftCount : (blogsCount.draftCount - 1) )
-        const result = handlePaginateData(countPublish,countDraft)
-        dispatch(callPublish(blog.id,event.target.checked, result.draftArgs, result.publishArgs))
+        const publishPage = !event.target.checked && publishBlogs.length === 1 ? activePagePublish - 2 : activePagePublish - 1
+        const publishArgs = `page=${ publishPage }&size=${ limit }`
+        const draftPage = event.target.checked && draftBlogs.length === 1 ? activePageDraft - 2 : activePageDraft - 1
+        const draftArgs = `page=${ draftPage }&size=${ limit }`
+        dispatch(callPublish(blog.id,event.target.checked, publishArgs , draftArgs))
     }
 
     const redirectToBlog = (event,blog) => {
@@ -197,7 +199,7 @@ const BlogsPage = () => {
                                         id={ 'custom-switch-'+blog.id  }
                                         label=""
                                         onChange={ (e) => handlePublish(e, blog) }
-                                        checked={ blog.published_at !== null }
+                                        checked={  blog.status === 'PUBLISHED' }
                                     />
                                 </div>
                                 <div className="blog-list-column blog-list-title">
@@ -298,7 +300,7 @@ const BlogsPage = () => {
                                                             id={ 'custom-switch-'+blog.id  }
                                                             label=""
                                                             onChange={ (e) => handlePublish(e, blog) }
-                                                            checked={ blog.published_at !== null }
+                                                            checked={ blog.status !== 'DRAFT' }
                                                         />
                                                     </div>
                                                     <div className="blog-list-column blog-list-title">
@@ -339,10 +341,10 @@ const BlogsPage = () => {
                                                     </div>
                                                 </div>)
                                                 )}
-                                                { limit < blogsCount?.draftCount && <Pagination
+                                                { limit < draftMetaData?.count && <Pagination
                                                     activePage={ activePageDraft }
                                                     itemsCountPerPage={ limit }
-                                                    totalItemsCount={ blogsCount?.draftCount }
+                                                    totalItemsCount={ draftMetaData?.count }
                                                     pageRangeDisplayed={ 5 }
                                                     onChange={ handlePageChangeDraft }
                                                 />

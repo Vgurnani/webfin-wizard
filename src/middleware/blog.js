@@ -145,12 +145,11 @@ export const getSocialMedia = () => {
 export const getDraftBlogs =  (args) => {
     return async(dispatch) => {
         try{
+            const site = getSite();
             dispatch(getBlogsRequest())
-            const route = getRoute();
-            const result = await strapiAxiosInstance.get(`${ route }?slug_ne=wizrd-welcome-blog&_sort=created_at:ASC&_publicationState=preview&published_at_null=true&deletedAt_null=true&type=blog&${ args }`)
+            const result = await axiosInstance.get(`/site/${ site?.id }/posts?state=${ BLOG_STATUS.DRAFT }&${ args }`)
             if([ 200,203 ].includes(result.status)){
-                const data = result.data.filter((item) => item.published_at === null && item.type === 'blog' && item.slug !== 'wizrd-welcome-blog')
-                dispatch(getDraftBlogListSuccess(data));
+                dispatch(getDraftBlogListSuccess(result.data));
             }
         }catch(error){
             dispatch(getBlogListFailed(error))
@@ -210,14 +209,12 @@ export const allBlogsCount = () => {
         }
     }
 }
-export const callPublish = (id,isPublish, draftArgs, publishArgs) => {
-    const route = getRoute();
+export const callPublish = (id,isPublish, publishArgs, draftArgs) => {
     return(dispatch) => {
         // eslint-disable-next-line camelcase
-        const data = isPublish ? { published_at: new Date() } : { published_at: null }
+        const data = isPublish ? { status: BLOG_STATUS.PUBLISHED } : { status: BLOG_STATUS.DRAFT }
         dispatch(publishRequest())
-        strapiAxiosInstance.put(`${ route }/${ id }`, data).then((response)=>{
-            dispatch(allBlogsCount())
+        axiosInstance.put(`/posts/${ id }`, data).then((response)=>{
             dispatch(getDraftBlogs(draftArgs))
             dispatch(getPublishedBlogs(publishArgs))
             dispatch(publishSuccess(response))
