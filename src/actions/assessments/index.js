@@ -88,3 +88,21 @@ export const getVerifiedDomainError = (error) => {
         error: error
     }
 }
+
+export const getNicheSuggestionRequest = () => {
+    return {
+        type: ActionTypes.GET_NICHE_SUGGESTION_REQUEST
+    }
+}
+export const getNicheSuggestionSuccess = (data) => {
+    return {
+        type: ActionTypes.GET_NICHE_SUGGESTION,
+        payload: data
+    }
+}
+export const getNicheSuggestionError = (error) => {
+    return {
+        type: ActionTypes.GET_NICHE_SUGGESTION_ERROR,
+        error: error
+    }
+}

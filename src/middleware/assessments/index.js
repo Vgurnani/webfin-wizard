@@ -22,7 +22,10 @@ import {
     getVerifiedDomainError,
     updateAssessmentSuccess,
     getUnsplashRequest,
-    updateAssessmentRequest
+    updateAssessmentRequest,
+    getNicheSuggestionRequest,
+    getNicheSuggestionSuccess,
+    getNicheSuggestionError
 
 } from '../../actions/assessments'
 
@@ -74,6 +77,7 @@ export const createAssessment = (data) => {
             data[ 'logoUrl' ] = await imageUpload(data.domain,'logo',file);
         }
         data[ 'menuLinks' ] = [ { name: 'home',url: '/' } ]
+        data[ 'niche' ] = JSON.parse(data.niche)
         axiosInstance.post('/assessment', data).then((response)=>{
             //notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.CREATE_ASSESSMENT);
             const user= getUser();
@@ -94,6 +98,7 @@ export const createAssessment = (data) => {
 export const updateAssessment = (id,data, domain,handleClose) => {
     return async (dispatch) => {
         dispatch(updateAssessmentRequest())
+        data[ 'niche' ] = JSON.parse(data.niche)
         if(data.logoUrl && !data.logoUrl.match('^(http|https)://')){
             const file = dataURLtoFile(data.logoUrl,uId()+'.png')
             data[ 'logoUrl' ] = await imageUpload(domain,'logo',file);
@@ -134,6 +139,17 @@ export const getVerifiedDomain = (name) => {
             dispatch(getVerifiedDomainSuccess(response.data))
         }).catch((error) => {
             dispatch(getVerifiedDomainError(error))
+        })
+    };
+}
+
+export const getNicheSuggestion = (name) => {
+    return (dispatch) => {
+        dispatch(getNicheSuggestionRequest())
+        axiosInstance.get(`/assessment/niche?keyword=${ name }`).then((response)=>{
+            dispatch(getNicheSuggestionSuccess(response.data.data))
+        }).catch((error) => {
+            dispatch(getNicheSuggestionError(error))
         })
     };
 }

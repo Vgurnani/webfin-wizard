@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState , useCallback } from 'react'
 import { Field } from 'redux-form';
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 // import Link from 'next/link'
-import { renderStyleMultipleRadio } from '../../utils/formUtils'
+import { renderStyleMultipleRadio , renderNicheSelectField } from '../../utils/formUtils'
+import { getNicheSuggestion } from 'middleware/assessments'
 import { assessmentFormValidate as validate } from '../../utils/validates'
 import { assessmentIntialValues  } from '../../utils/helpers'
+import { useDispatch, useSelector } from 'react-redux'
+//import { change as reduxChange } from 'redux-form'
+
 import _ from 'lodash'
 import AssessmentHeader from 'pages/assessment/header'
 import
@@ -18,7 +22,11 @@ import
     from 'react-bootstrap';
 
 const StepOne = (props) => {
+    const dispatch = useDispatch()
+    const form  = useSelector((state) => state.form.assessmentForm)
+    const customNiches = useSelector((state) => state.assessment.customNiches )
     const { handleSubmit, kindOfBuild,onSubmit, initialize  } = props;
+    const [ showCustomNiche , setCustomNiche ] = useState(false)
     useEffect(()=>{
         if(!_.isEmpty(assessmentIntialValues())){
             initialize(assessmentIntialValues())
@@ -26,6 +34,30 @@ const StepOne = (props) => {
         window.scrollTo(0, 0);
     },[]);
 
+    useEffect(() => {
+        if(form?.initial?.niche){
+            const niche = JSON.parse(form?.initial?.niche)
+            if(kindOfBuild && !_.map(kindOfBuild,'label').includes(niche.label)){
+                dispatch(getNicheSuggestion(niche.label))
+                setCustomNiche(true)
+            }
+        }
+    },[ form?.initial?.niche, kindOfBuild ])
+
+    const handleNicheChange = ( event ) => {
+        const obj = JSON.parse(event.target.value)
+        obj.label === 'Other'? setCustomNiche(true) : setCustomNiche(false)
+    }
+    const getSuggestion = (value) => {
+        dispatch(getNicheSuggestion(value.label))
+    }
+
+    const setDefaultValue = () => {
+        const label = form?.values?.niche && JSON.parse(form?.values?.niche).label
+        return (label === 'Other' ? '' : label)
+    }
+    const asyncValidateFunc = _.debounce(getSuggestion, 300);
+    const asyncChangeCallback = useCallback(asyncValidateFunc, []);
     return(
         <>
             <Form className="form" onSubmit={ handleSubmit(onSubmit) }>
@@ -71,15 +103,24 @@ const StepOne = (props) => {
                                     </div>
                                     <div className="category-wrapper">
                                         <Field
-                                            name="nicheId"
+                                            name="niche"
                                             options={ kindOfBuild || [] }
                                             component={ renderStyleMultipleRadio }
+                                            handleChange={ handleNicheChange }
+                                            isNiche={ true }
                                             defaultValue={ 'no' }
                                             placeholder={ 'gaveCraving' }
                                             className='styled-radio-btn'
                                             imgWidth="30px"
                                             isIcons={ true }
                                         />
+                                        {showCustomNiche && <Field
+                                            name="niche"
+                                            defaultValue={ setDefaultValue() }
+                                            options={ customNiches || [] }
+                                            handleChange = { asyncChangeCallback }
+                                            component={ renderNicheSelectField }
+                                        />}
                                     </div>
                                     <div className="step-btns">
                                         <div className="step-btn-left">

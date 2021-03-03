@@ -39,6 +39,12 @@ export default (state = initialState, action) => {
         return { ...state, domains: [], domainLoading: false }
     case ActionTypes.CLEAR_DOMAINS:
         return { ...state, domains: [] }
+    case ActionTypes.GET_NICHE_SUGGESTION_REQUEST:
+        return { ...state, nicheLoading: true }
+    case ActionTypes.GET_NICHE_SUGGESTION:
+        return { ...state, customNiches: action.payload.niches, nicheLoading: false }
+    case ActionTypes.GET_NICHE_SUGGESTION_ERROR:
+        return { ...state, nicheLoading: false }
     default:
         return state;
     }

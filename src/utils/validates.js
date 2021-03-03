@@ -87,8 +87,8 @@ export const assessmentFormValidate = values => {
     } else if(values.websiteName && (values.websiteName.match(letter))) {
         errors.websiteName = MESSAGE.REQUIRED;
     }
-    if (!values.nicheId) {
-        errors.nicheId = MESSAGE.REQUIRED;
+    if (!values.niche && !values.customNiche) {
+        errors.niche = MESSAGE.REQUIRED;
     }
     if (!values.colors) {
         errors.colors = MESSAGE.REQUIRED;

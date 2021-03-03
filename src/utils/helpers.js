@@ -46,8 +46,8 @@ export const isLoggedIn = () => {
     return user && Object.keys(user).length > 0 && user.constructor === Object;
 }
 
-export const getLabel = (data,value) => {
-    return data.filter((item)=> item.value === value)[ 0 ]?.label
+export const getLabel = (value) => {
+    return JSON.parse(value).label
 }
 
 export const isLoading = (state) => {
@@ -100,7 +100,7 @@ export const assessmentSaved = (step,values) => {
     assessment =  assessment ? JSON.parse(assessment) : {}
     switch(step){
     case 'step1':
-        return !_.isEmpty(assessment?.nicheId) && assessment.nicheId === values?.nicheId
+        return !_.isEmpty(assessment?.niche) && assessment.niche === values?.niche
     case 'step2':
         return !_.isEmpty(assessment?.colors) && assessment.colors === values?.colors
     case 'step3':

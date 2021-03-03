@@ -9,14 +9,14 @@ const RegisterRoute = ({ component: Component, ...rest }) => {
     const user = getUser()
     const assessment = sessionStorage.assessmentForm && JSON.parse(sessionStorage.assessmentForm);
     useEffect(() => {
-        if(rest.location.pathname === '/register' && !(assessment?.nicheId && assessment?.colors && assessment?.websiteName && assessment?.domain)){
+        if(rest.location.pathname === '/register' && !(assessment?.niche && assessment?.colors && assessment?.websiteName && assessment?.domain)){
             notification(NOTIFICATION_TYPES.ERROR, 'Please fill first assessment')
         }
     },[])
 
     const isAssessmentSubmit = () => {
         const assessmentData = sessionStorage.assessmentForm && JSON.parse(sessionStorage.assessmentForm);
-        return (assessmentData?.nicheId && assessmentData?.colors && assessmentData?.websiteName && assessmentData?.domain)
+        return (assessmentData?.niche && assessmentData?.colors && assessmentData?.websiteName && assessmentData?.domain)
     }
 
     return (

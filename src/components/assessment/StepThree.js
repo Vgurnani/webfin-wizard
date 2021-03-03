@@ -28,7 +28,7 @@ const StepThree = (props) => {
     const domains  = useSelector((state) => state.assessment.domains)
     const domainLoading  = useSelector((state) => state.assessment.domainLoading)
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
-    const { handleSubmit ,prevPage ,assessmentData, setStep } = props;
+    const { handleSubmit ,prevPage, setStep } = props;
     const data = {
         colors: form?.values?.colors,
         logoUrl: form.values.logoUrl,
@@ -41,7 +41,7 @@ const StepThree = (props) => {
     }
 
     useEffect(()=>{
-        const query = form.values?.nicheId && getLabel(assessmentData.niches, form.values?.nicheId)
+        const query = form.values?.niche && getLabel(form.values?.niche)
         dispatch(getUnsplash('/photos',query))
         window.scrollTo(0, 0);
     },[]);
@@ -53,7 +53,7 @@ const StepThree = (props) => {
     },[ domains, domainLoading ])
 
     const handleSearch = (event) => {
-        let query  = form.values?.nicheId && getLabel(assessmentData.niches, form.values?.nicheId)
+        let query  = form.values?.niche && getLabel(form.values?.niche)
         query = event.target.value || query
         dispatch(getUnsplash('/photos',query))
     }
@@ -131,8 +131,8 @@ const StepThree = (props) => {
                                         </div>
 
                                         <ul className="cat-list">
-                                            {form.values?.nicheId && <li onClick={ () => setStep(1) }>
-                                                { getLabel(assessmentData.niches, form.values?.nicheId)}
+                                            {form.values?.niche && <li onClick={ () => setStep(1) }>
+                                                { getLabel(form.values?.niche) }
                                             </li>}
                                             {form.values?.colors &&<li onClick={ () => setStep(2) }>
                                                 {form.values?.colors && JSON.parse(form.values.colors).name && JSON.parse(form.values.colors).name.replace('-',' ').upcaseWithSpace()}

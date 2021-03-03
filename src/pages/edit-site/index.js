@@ -54,7 +54,7 @@ const EditSitePage =(props) => {
     useEffect(() => {
         if(site){
             const formData = {
-                nicheId: site.niche.id.toString(),
+                niche: JSON.stringify({ id: site.niche.id.toString(),label:  site.niche.label }),
                 colors: site.colors,
                 logoUrl: site.logoUrl,
                 faviconUrl: site.faviconUrl,
@@ -142,7 +142,7 @@ const EditSitePage =(props) => {
     const renderModalView = () =>{
         switch(modalType){
         case 'niche':
-            return <Niche handleSubmit={ handleSubmit }  submitData= { submitData } assessmentData={ assessmentData } loading={ updateAssessmentLoader } />
+            return <Niche form={ form } handleSubmit={ handleSubmit }  submitData= { submitData } assessmentData={ assessmentData } loading={ updateAssessmentLoader } />
         case 'colour':
             return <ColourPalette handleSubmit={ handleSubmit }  submitData= { submitData }  loading={ updateAssessmentLoader } />
         case 'logo':
@@ -153,7 +153,7 @@ const EditSitePage =(props) => {
             return <UploadLogo handleSubmit={ handleSubmit }  submitData= { submitData } fieldName='faviconUrl' previewFile={ form?.values?.faviconUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } loading={ updateAssessmentLoader } />
         }
     }
-    const niche = assessmentData?.niches?.filter((item) => item.value === form?.values?.nicheId.toString())[ 0 ] || site?.niche
+    const niche = assessmentData?.niches?.filter((item) => item.value === form?.values?.nicheId && JSON.parse(form?.values?.nicheId).id)[ 0 ] || site?.niche
     return(
         <main className="dashboard-data dashboard-edit-site-wrap">
             <section className="dashboard-body">

@@ -7,8 +7,9 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 import OtpInput from 'react-otp-input';
-import Dropzone from 'react-dropzone'
-import ColorImage from 'images/color.png'
+import Dropzone from 'react-dropzone';
+import ColorImage from 'images/color.png';
+import _ from 'lodash';
 export const Validations = (props) => {
     const {
         touched,
@@ -188,9 +189,19 @@ const renderStyleMultipleRadio = (props) => {
         isIcons,
         handleChange,
         isColors,
+        isNiche,
         fontStyled,
         meta: { touched, error, warning },
     } = props;
+
+    const setValue = (item) => {
+        return isColors ? JSON.stringify(item.value) : (isNiche ? JSON.stringify({ id: item.value, label: item.label }) :  item.value)
+    }
+    const setChecked = (item) =>{
+        const value = typeof input.value === 'string' ? JSON.parse(input.value) : input.value
+        const other = item.label === 'Other' ? input.value && !_.map(options,'label').includes(value.label) : false
+        return isColors ? (JSON.stringify(item.value) === (input.value || defaultValue)) : (isNiche ? (value && value.id === item.value || other ) :  (item.value === (input.value || defaultValue)))
+    }
     return (
         <Form.Group>
             { options.map((item,index) => {
@@ -205,8 +216,8 @@ const renderStyleMultipleRadio = (props) => {
                                 handleChange && handleChange(value || elm?.value)
                             } }
                             type="radio"
-                            value={ isColors ? JSON.stringify(item.value) : item.value }
-                            checked={ isColors ? (JSON.stringify(item.value) === (input.value || defaultValue)) : (item.value === (input.value || defaultValue)) }
+                            value={ setValue(item) }
+                            checked={ setChecked(item) }
                             id={ input.name }
                             className="styled-radio"
                         />
@@ -290,9 +301,51 @@ const renderFileDrop = (props)=> {
             /></>)
 }
 
+const renderNicheSelectField = (props) => {
+    const {
+        input,
+        validationError,
+        meta: { touched, error, warning },
+        options,
+        defaultValue,
+        handleChange,
+        defaultWarning
+    } = props;
+
+    const onChange = (event) => {
+        const value = options.filter((item) => item.label === event.target.value )[ 0 ] || { label: event.target.value }
+        handleChange && handleChange(value)
+        input.onChange(JSON.stringify(value))
+    }
+
+    return (
+        <Form.Group>
+            <input defaultValue={ defaultValue } autoComplete={ 'off' } id='selectFieldInput' list='selectField' name={ name }  className={ validationError || (touched && error) ? 'form-control validation-error' : 'form-control' } onChange={ onChange } />
+            <datalist id="selectField">
+
+                {
+                    options.map((item, index) => (
+                        <option key={ index } data-value={ item.value }>
+                            {item.label}
+                        </option>
+                    ))}
+            </datalist>
+            {defaultWarning && !input.value && <span className="default-warning"><i className="fas fa-exclamation-triangle"></i> {defaultWarning}</span>}
+            <Validations
+                props={ {
+                    touched,
+                    error,
+                    validationError,
+                    warning,
+                } }
+            />
+        </Form.Group>
+    );
+};
 export {
     renderFileDrop,
     renderFieldWG,
+    renderNicheSelectField,
     renderField,
     renderOTPField,
     renderStyleMultipleRadio,
