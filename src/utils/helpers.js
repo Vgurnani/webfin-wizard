@@ -168,6 +168,10 @@ export const getDomain = (sites) =>{
     return site?.domain
 }
 
+export const getSite = (sites) =>{
+    return (sites && sites[ 0 ]) || JSON.parse(getItem('sessionData'))?.data?.data?.sites[ 0 ];
+}
+
 export const headerLinksTemplate = () => {
     let links = [ { name: 'Home', url: '#' },{ name: 'Blog', url: '#' },{ name: 'About', url: '#' },{ name: 'Contact', url: '#' } ]
     links = links.map((item, index) => <a key={ index } href='#'>{ item.name }</a>)

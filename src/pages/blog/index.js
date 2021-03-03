@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RichTextEditor from './rte';
 import { Field, change } from 'redux-form';
 import { renderFieldWG } from '../../utils/formUtils'
-import { getIdFromPath , getDomain } from 'utils/helpers'
+import { getIdFromPath , getDomain, getSite } from 'utils/helpers'
 import {
     Facebook,
     LinkedIn,
@@ -27,6 +27,7 @@ import { change as reduxChange } from 'redux-form'
 import { blogValidate as validate } from '../../utils/validates';
 import profilePic from 'images/user-avatar.png';
 import UploadImageModal from '../../components/assessment/shared/UploadImageModal'
+import { BLOG_STATUS } from 'constants/app';
 const BlogPage =(props) => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -63,12 +64,14 @@ const BlogPage =(props) => {
             setErrorMessageContent(true);
             return;
         }
-
+        const site = getSite();
         const data = {
+            siteId: site?.id,
             type:'blog',
             content: formData.data ? formData.data : initialValue,
             imageUrl: formData.blogUrl,
-            title: formData.title
+            title: formData.title,
+            status: BLOG_STATUS.PUBLISHED
         }
 
         dispatch(createBlog(getDomain(userData.sites), data,id,blog?.slug))

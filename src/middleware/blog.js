@@ -23,13 +23,14 @@ import {
     getBlogSuccess
 } from '../actions/blog';
 import strapiAxiosInstance from '../services/strapiApi';
+import axiosInstance from '../services/api';
 import { getItem } from '../utils/cache';
 import { ROUTES } from '../constants/appRoutes';
-import { NOTIFICATION_TYPES,MESSAGE } from '../constants/app';
+import { NOTIFICATION_TYPES,MESSAGE, BLOG_STATUS } from '../constants/app';
 import { notification } from '../services/notification';
 import history from '../utils/history'
 import { imageUpload } from './assessments'
-import { dataURLtoFile , uId, getRoute } from '../utils/helpers'
+import { dataURLtoFile , uId, getRoute, getSite } from '../utils/helpers'
 import _ from 'lodash';
 
 export const checkAvailbleSlug = async(route,data) => {
@@ -48,7 +49,7 @@ export const checkAvailbleSlug = async(route,data) => {
     }
 }
 
-export const createBlog = (domain,data,id, slug) => {
+export const createNewBlog = (domain,data,id, slug) => {
     return async(dispatch) => {
         dispatch(blogCreateRequest())
         const route = JSON.parse(getItem('sessionData'))?.data?.data?.sites[ 0 ]?.route;
@@ -67,6 +68,34 @@ export const createBlog = (domain,data,id, slug) => {
             })
         }else{
             strapiAxiosInstance.post(route, data).then((response)=>{
+                history.push(ROUTES.BLOGS)
+                dispatch(blogCreateSuccess(response))
+            }).catch((error) => {
+                dispatch(blogCreateFailed(error))
+                notification(NOTIFICATION_TYPES.ERROR, MESSAGE.BLOG_FAILD);
+            })
+
+        }
+    };
+};
+
+export const createBlog = (domain,data,id) => {
+    return async(dispatch) => {
+        dispatch(blogCreateRequest())
+        if(data.imageUrl && !data.imageUrl.match('^(http|https)://')){
+            const file = dataURLtoFile(data.imageUrl,uId()+'.png')
+            data[ 'imageUrl' ] = await imageUpload(domain,`blogs/${ data.slug }`,file);
+        }
+        if(id){
+            axiosInstance.put(`/posts/${ id }`, data).then((response)=>{
+                history.push(ROUTES.BLOGS)
+                dispatch(blogCreateSuccess(response))
+            }).catch((error) => {
+                dispatch(blogCreateFailed(error))
+                notification(NOTIFICATION_TYPES.ERROR, MESSAGE.BLOG_FAILD);
+            })
+        }else{
+            axiosInstance.post('/posts', data).then((response)=>{
                 history.push(ROUTES.BLOGS)
                 dispatch(blogCreateSuccess(response))
             }).catch((error) => {
@@ -130,12 +159,28 @@ export const getDraftBlogs =  (args) => {
     }
 }
 
-export const getPublishedBlogs =  (args) => {
+export const getPublishedNewBlogs =  (args) => {
     return async(dispatch) => {
         try{
             dispatch(getBlogsRequest())
             const route = getRoute();
             const result = await strapiAxiosInstance.get(`${ route }?slug_ne=wizrd-welcome-blog&_sort=created_at:ASC&_publicationState=live&deletedAt_null=true&type=blog&${ args }`)
+            if([ 200,203 ].includes(result.status)){
+                dispatch(getPublishBlogListSuccess(result.data));
+            }
+        }catch(error){
+            dispatch(getBlogListFailed(error))
+            notification(NOTIFICATION_TYPES.ERROR, MESSAGE.SOMETHING_WRONG);
+        }
+    }
+}
+
+export const getPublishedBlogs =  () => {
+    return async(dispatch) => {
+        try{
+            const site = getSite();
+            dispatch(getBlogsRequest())
+            const result = await axiosInstance.get(`/site/${ site?.id }/posts?state=${ BLOG_STATUS.PUBLISHED }`)
             if([ 200,203 ].includes(result.status)){
                 dispatch(getPublishBlogListSuccess(result.data));
             }
@@ -187,8 +232,7 @@ export const deleteBlog =  (id,draftArgs, publishArgs) => {
     return async(dispatch) => {
         try{
             dispatch(deleteBlogRequest())
-            const route = getRoute();
-            const result = await strapiAxiosInstance.put(`${ route }/${ id }`, { deletedAt: new Date() })
+            const result = await strapiAxiosInstance.put(`/posts/${ id }`)
             if([ 200,203 ].includes(result.status)){
                 dispatch(deleteBlogSuccess())
                 dispatch(allBlogsCount())

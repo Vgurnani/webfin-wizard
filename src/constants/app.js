@@ -40,3 +40,9 @@ export const SOCIAL_MEDIA = [
     { name: 'Youtube',value: 'youtube', imgUrl: `<img src=${ youtube } />` },
     { name: 'Label',value: 'label', imgUrl: `<img src=${ facebook } />` }
 ]
+
+export const BLOG_STATUS = {
+    DRAFT: 'DRAFT',
+    DELETED: 'DELETED',
+    PUBLISHED: 'PUBLISHED'
+}
