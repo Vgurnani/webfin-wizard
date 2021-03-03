@@ -241,7 +241,7 @@ const renderStyleMultipleRadio = (props) => {
                     </div>)
 
             })}
-
+            { isNiche && input.value && (typeof input.value === 'string' ?  JSON.parse(input.value).label !== 'Other' : input?.value?.label !== 'Other') &&
             <Validations
                 props={ {
                     touched,
@@ -249,7 +249,7 @@ const renderStyleMultipleRadio = (props) => {
                     validationError,
                     warning,
                 } }
-            />
+            /> }
         </Form.Group>)
 }
 const renderFileDrop = (props)=> {

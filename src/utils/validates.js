@@ -80,6 +80,7 @@ export const forgetPasswordValidate = values => {
 
 export const assessmentFormValidate = values => {
     const errors = {};
+    const niche = values && values.niche && JSON.parse(values.niche)
 
     const letter = /[^a-zA-Z0-9 ]/gi;
     if (!values.websiteName) {
@@ -87,7 +88,10 @@ export const assessmentFormValidate = values => {
     } else if(values.websiteName && (values.websiteName.match(letter))) {
         errors.websiteName = MESSAGE.REQUIRED;
     }
-    if (!values.niche && !values.customNiche) {
+    if (!niche) {
+        errors.niche = MESSAGE.REQUIRED;
+    }
+    if (niche && (niche.label ==='Other' || niche.label === '')) {
         errors.niche = MESSAGE.REQUIRED;
     }
     if (!values.colors) {
