@@ -44,37 +44,9 @@ const BlogPage =(props) => {
         {
             type: 'paragraph',
             children: [
-                { text: 'This is editable ' },
-                { text: 'rich', bold: true },
-                { text: ' text, ' },
-                { text: 'much', italic: true },
-                { text: ' better than a ' },
-                { text: '<textarea>', code: true },
-                { text: '!' },
+                { text: '' },
             ],
-        },
-        {
-            type: 'paragraph',
-            children: [
-                {
-                    text:
-            "Since it's rich text, you can do things like turn a selection of text ",
-                },
-                { text: 'bold', bold: true },
-                {
-                    text:
-            ', or add a semantically rendered block quote in the middle of the page, like this:',
-                },
-            ],
-        },
-        {
-            type: 'block-quote',
-            children: [ { text: 'A wise quote.' } ],
-        },
-        {
-            type: 'paragraph',
-            children: [ { text: 'Try it out for yourself!' } ],
-        },
+        }
     ]
 
     const { handleSubmit, initialize } = props;
@@ -85,14 +57,16 @@ const BlogPage =(props) => {
             return;
         }
 
-        if (!formData.data) {
+        if (!formData?.data || (formData?.data?.length < 2 && !(
+            formData?.data[ 0 ].children[ 0 ] &&
+            formData?.data[ 0 ].children[ 0 ].text.length))) {
             setErrorMessageContent(true);
             return;
         }
 
         const data = {
             type:'blog',
-            content: formData.data || initialValue,
+            content: formData.data ? formData.data : initialValue,
             imageUrl: formData.blogUrl,
             title: formData.title
         }
@@ -112,7 +86,6 @@ const BlogPage =(props) => {
             type: 'SET_ACTIVE_SIDEBAR',
             payload: 'blog'
         })
-        dispatch(change('blogForm', 'data', initialValue))
         return () => {
             dispatch(reset('blogForm'))
             dispatch({
@@ -130,8 +103,8 @@ const BlogPage =(props) => {
         }
     },[ blog ])
 
-    const [ rteData, setRTEData ] = useState(blog && blog.content || initialValue)
-    console.log(rteData)
+    // const [ , setRTEData ] = useState(blog?.content ? blog.content : initialValue)
+
     const handleRTEdata = (data) => {
         let content = data;
         if (data && data.length === 1 && !data[ 0 ].children[ 0 ].text?.trim()) {
@@ -139,7 +112,6 @@ const BlogPage =(props) => {
         }
 
         dispatch(change('blogForm', 'data', content))
-        setRTEData(data)
     }
     const handleToggleModal = () => {
         setModalOpen(!openModal)
