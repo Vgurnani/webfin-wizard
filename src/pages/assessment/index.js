@@ -43,12 +43,11 @@ const AssessmentPage = () => {
         setStep(step-1)
     }
 
-    const finalSubmit = (event) =>{
-        event.preventDefault()
+    const finalSubmit = (data) =>{
         if(isLoggedIn()){
-            dispatch(createAssessment(assessmentForm.values))
+            dispatch(createAssessment(data))
         }else{
-            sessionStorage.setItem('assessmentForm', JSON.stringify(assessmentForm.values))
+            sessionStorage.setItem('assessmentForm', JSON.stringify(data))
             history.push(ROUTES.REGISTER)
         }
     }

@@ -25,7 +25,7 @@ import
 const StepTwo = (props) => {
     const [ customColorOpen, setCustomColorOpen ] = useState(false)
     const dispatch = useDispatch()
-    const { handleSubmit,prevPage } = props;
+    const { handleSubmit,onSubmit, prevPage } = props;
     const assessmentForm = useSelector((state) => state.form.assessmentForm)
     const data = {
         colors: assessmentForm?.values.colors,
@@ -71,14 +71,14 @@ const StepTwo = (props) => {
         setCustomColorOpen(false)
     }
     return(
-        <Form className="form" onSubmit={ handleSubmit(() => {}) }>
+        <Form className="form" onSubmit={ handleSubmit(onSubmit) }>
             <AssessmentHeader  prevPage={ prevPage } { ...props } />
             <div className="assesment-step assesment-step-2">
                 <Row  className="step-form">
                     <Col className="col-12">
                         <Container>
 
-                            <Modal show={ customColorOpen } onHide={ () => setCustomColorOpen(false) } className="logo-upload-modal"><CustomColor backFun={ () => setCustomColorOpen(false) }  colorPalette={ colorPalette } handleColorsData={ (colors) => handleColorsData(colors) } data={ data } /></Modal>
+                            <Modal show={ customColorOpen } onHide={ () => setCustomColorOpen(false) } className="custom-color-modal"><CustomColor backFun={ () => setCustomColorOpen(false) }  colorPalette={ colorPalette } handleColorsData={ (colors) => handleColorsData(colors) } data={ data } /></Modal>
                             <div className="form-heading">
                                 <h2>
                                     Choose Your Color Palette!
@@ -171,7 +171,8 @@ StepTwo.propTypes = {
     saveData: PropTypes.func,
     colorPalette: PropTypes.object,
     valid: PropTypes.bool,
-    prevPage: PropTypes.prevPage
+    prevPage: PropTypes.prevPage,
+    onSubmit: PropTypes.func
 };
 export default reduxForm({
     form: 'assessmentForm',

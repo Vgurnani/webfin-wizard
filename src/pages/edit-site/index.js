@@ -149,12 +149,13 @@ const EditSitePage =(props) => {
     const submitData = (formData) => {
         dispatch(updateAssessment(site?.id, formData, site.domain, handleClose))
     }
+
     const renderModalView = () =>{
         switch(modalType){
         case 'niche':
             return <Niche form={ form } handleSubmit={ handleSubmit }  submitData= { submitData } assessmentData={ assessmentData } loading={ updateAssessmentLoader } />
         case 'colour':
-            return <ColourPalette handleSubmit={ handleSubmit }  submitData= { submitData }  loading={ updateAssessmentLoader } />
+            return <ColourPalette handleSubmit={ handleSubmit }  submitData= { submitData } formValues={ form.values }  site={ site }  setColorPalette={ setColorPalette } colorPalette={ colorPalette }  onClose={ handleClose }  loading={ updateAssessmentLoader } />
         case 'logo':
             return <UploadLogo handleSubmit={ handleSubmit }  submitData= { submitData }fieldName='logoUrl' previewFile={ form?.values?.logoUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } loading={ updateAssessmentLoader } />
         case 'menulinks':
