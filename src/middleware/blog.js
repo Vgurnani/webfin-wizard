@@ -175,12 +175,13 @@ export const getPublishedNewBlogs =  (args) => {
     }
 }
 
-export const getPublishedBlogs =  () => {
+export const getPublishedBlogs =  (args) => {
+    console.log(args)
     return async(dispatch) => {
         try{
             const site = getSite();
             dispatch(getBlogsRequest())
-            const result = await axiosInstance.get(`/site/${ site?.id }/posts?state=${ BLOG_STATUS.PUBLISHED }`)
+            const result = await axiosInstance.get(`/site/${ site?.id }/posts?state=${ BLOG_STATUS.PUBLISHED }&${ args }`)
             if([ 200,203 ].includes(result.status)){
                 dispatch(getPublishBlogListSuccess(result.data));
             }

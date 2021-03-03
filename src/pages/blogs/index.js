@@ -42,7 +42,7 @@ const BlogsPage = () => {
     const [ activePagePublish, setActivePagePublish ] = useState(1);
     const [ activePageDraft, setActivePageDraft ] = useState(1)
     const publishBlogs = useSelector(state => state.blog.publishBlogs)
-    const blogsCount = useSelector(state => state.blog.blogsCount)
+    const publishMetaData = useSelector(state => state.blog.publishMetaData)
     const draftBlogs = useSelector(state => state.blog.draftBlogs)
     const data = useSelector(state => state.user.sessionData?.data?.data) || getSessionData()
     useEffect(() => {
@@ -50,9 +50,9 @@ const BlogsPage = () => {
             type: 'SET_ACTIVE_SIDEBAR',
             payload: 'blog'
         })
-        dispatch(allBlogsCount())
-        dispatch(getDraftBlogs(`_limit=${ limit }`));
-        dispatch(getPublishedBlogs(`_limit=${ limit }`));
+        //dispatch(allBlogsCount())
+        //dispatch(getDraftBlogs(`_limit=${ limit }`));
+        dispatch(getPublishedBlogs(`page=${ activePagePublish - 1 }&size=${ limit }`));
     }, [ dispatch ]);
 
     const handleFilter = () => {
@@ -77,8 +77,7 @@ const BlogsPage = () => {
     }
 
     const handlePageChangePublish = (pageNumber) => {
-        const startWith = (pageNumber - 1) * limit
-        const args = `_start=${ startWith }&_limit=${ limit }`
+        const args = `page=${ pageNumber - 1 }&size=${ limit }`
         dispatch(getPublishedBlogs(args));
         setActivePagePublish(pageNumber);
     }
@@ -245,10 +244,10 @@ const BlogsPage = () => {
                             </div>)
                             )}
                             <div className='blogs-pagination'>
-                                { limit  < blogsCount?.publishCount && <Pagination
+                                { limit  < publishMetaData?.count && <Pagination
                                     activePage={ activePagePublish }
                                     itemsCountPerPage={ limit  }
-                                    totalItemsCount={ blogsCount?.publishCount }
+                                    totalItemsCount={ publishMetaData?.count }
                                     pageRangeDisplayed={ 5 }
                                     onChange={ handlePageChangePublish }
                                 />
