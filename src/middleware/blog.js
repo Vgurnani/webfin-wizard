@@ -131,22 +131,6 @@ export const getDraftBlogs =  (args) => {
     }
 }
 
-// export const getPublishedNewBlogs =  (args) => {
-//     return async(dispatch) => {
-//         try{
-//             dispatch(getBlogsRequest())
-//             const route = getRoute();
-//             const result = await strapiAxiosInstance.get(`${ route }?slug_ne=wizrd-welcome-blog&_sort=created_at:ASC&_publicationState=live&deletedAt_null=true&type=blog&${ args }`)
-//             if([ 200,203 ].includes(result.status)){
-//                 dispatch(getPublishBlogListSuccess(result.data));
-//             }
-//         }catch(error){
-//             dispatch(getBlogListFailed(error))
-//             notification(NOTIFICATION_TYPES.ERROR, MESSAGE.SOMETHING_WRONG);
-//         }
-//     }
-// }
-
 export const getPublishedBlogs =  (args) => {
     return async(dispatch) => {
         try{

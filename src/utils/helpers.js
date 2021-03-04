@@ -164,7 +164,6 @@ export const dataUrlToBase64 = (url, callback) => {
 
 export const getIdFromPath = (path) => {
     var regex = /\d+/g;
-    console.log('pathpath', path)
     return  path.match(regex) && path.match(regex)[ 0 ];
 }
 
