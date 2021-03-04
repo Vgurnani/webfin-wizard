@@ -29,7 +29,7 @@ export const addBodyClass = (pathname) =>{
         document.body.classList.add('blue-left');
         document.body.classList.add('no-footer');
     } else if(path === ROUTES.BLOG || path === ROUTES.USER_PROFILE || path === ROUTES.DASHBOARD || path === ROUTES.BLOGS || path === ROUTES.EDIT_SITE){
-        document.body.classList.add('full-width-header');
+        document.body.classList.add('no-header');
         document.body.classList.add('no-footer');
     }else if(path.match('/blog')){
         document.body.classList.add('full-width-header');

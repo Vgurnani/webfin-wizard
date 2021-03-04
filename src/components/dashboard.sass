@@ -69,12 +69,35 @@
         overflow-x: hidden
         overflow-y: auto
         -webkit-overflow-scrolling: touch
-        padding: 140px 56px 55px 16px
+        padding: 17px 56px 55px 16px
         z-index: 10
         transition: all 500ms
         @media (max-width: $breakpoint-ipad)
             padding-top: 85px
             display: none
+        .sidebar-logo
+            width: 100%
+            display: inline-block
+            text-align: center
+            img
+                max-width: 100%
+        .sidebar-view-site
+            width: 100%
+            display: inline-block
+            text-align: center
+            margin: 18px 0 17px
+            a
+                color: $white-color
+                font-size: 14px
+                font-weight: 600
+                span
+                    display: inline-block
+                    vertical-align: middle
+                    text-decoration: underline
+                svg
+                    display: inline-block
+                    vertical-align: middle
+                    margin-left: 3px
         ul
             li
                 margin: 0 0 15px
