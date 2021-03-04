@@ -5,7 +5,7 @@ import moment from 'moment'
 import ConfirmAlert from 'components/core/confirm-alert'
 import { confirmAlert } from 'react-confirm-alert';
 import Pagination from 'react-js-pagination';
-
+import { absoluteValue } from 'utils/helpers'
 import
 {
     Form,
@@ -15,8 +15,9 @@ import
 }
     from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
-import { allBlogsCount, getDraftBlogs,callPublish, getPublishedBlogs, getBlogById, deleteBlog } from '../../middleware/blog';
+import { getDraftBlogs,callPublish, getPublishedBlogs, getBlogById, deleteBlog } from '../../middleware/blog';
 import { ROUTES } from '../../constants/appRoutes';
+import { BLOG_STATUS } from 'constants/app'
 import { getDynamicURL } from '../../services/api';
 import {
     OpenArrow,
@@ -38,31 +39,32 @@ const BlogsPage = () => {
     const limit = 6;
     const dispatch = useDispatch();
     const history = useHistory();
-    const [ filter, setFilter ] = useState(null)
-    const [ activePagePublish, setActivePagePublish ] = useState(1);
-    const [ activePageDraft, setActivePageDraft ] = useState(1)
+    const [ activePagePublish, setActivePagePublish ] = useState(0);
+    const [ activePageDraft, setActivePageDraft ] = useState(0)
     const publishBlogs = useSelector(state => state.blog.publishBlogs)
     const publishMetaData = useSelector(state => state.blog.publishMetaData)
     const draftBlogs = useSelector(state => state.blog.draftBlogs)
     const draftMetaData = useSelector(state => state.blog.draftMetaData)
-    const data = useSelector(state => state.user.sessionData?.data?.data) || getSessionData()
+    const data = useSelector(state => state.user.sessionData?.data?.data) || getSessionData();
+    const [ sortPublish, setSortPublish ] = useState({ title: 'desc', createdAt: 'desc' })
+    const [ sortDraft, setSortDraft ] = useState({ title: 'desc', createdAt: 'desc' })
+
     useEffect(() => {
         dispatch({
             type: 'SET_ACTIVE_SIDEBAR',
             payload: 'blog'
         })
         //dispatch(allBlogsCount())
-        dispatch(getDraftBlogs(`page=${ activePageDraft - 1 }&size=${ limit }`));
-        dispatch(getPublishedBlogs(`page=${ activePagePublish - 1 }&size=${ limit }`));
+        dispatch(getDraftBlogs(`page=${ activePageDraft }&size=${ limit }`));
+        dispatch(getPublishedBlogs(`page=${ activePagePublish }&size=${ limit }`));
     }, [ dispatch ]);
 
     const handleFilter = () => {
-        const filterData = `_where[title_contains]=${ filter }&_limit=${ limit }`
-        dispatch(allBlogsCount())
-        dispatch(getDraftBlogs(filterData));
-        dispatch(getPublishedBlogs(filterData));
-        setActivePagePublish(1)
-        setActivePageDraft(1)
+        // const filterData = `_where[title_contains]=${ filter }&_limit=${ limit }`
+        // dispatch(getDraftBlogs(filterData));
+        // dispatch(getPublishedBlogs(filterData));
+        // setActivePagePublish(1)
+        // setActivePageDraft(1)
 
     }
 
@@ -86,7 +88,7 @@ const BlogsPage = () => {
         const startWith = (pageNumber - 1) * limit
         const args = `_start=${ startWith }&_limit=${ limit }`
         dispatch(getDraftBlogs(args));
-        setActivePageDraft(pageNumber);
+        setActivePageDraft(pageNumber - 1);
     }
 
     const handlePaginateData =(countPublish,countDraft ) => {
@@ -128,11 +130,11 @@ const BlogsPage = () => {
 
     const handlePublish = (event, blog ) => {
         event.preventDefault()
-        const publishPage = !event.target.checked && publishBlogs.length === 1 ? activePagePublish - 2 : activePagePublish - 1
-        const publishArgs = `page=${ publishPage }&size=${ limit }`
-        const draftPage = event.target.checked && draftBlogs.length === 1 ? activePageDraft - 2 : activePageDraft - 1
-        const draftArgs = `page=${ draftPage }&size=${ limit }`
-        dispatch(callPublish(blog.id,event.target.checked, publishArgs , draftArgs))
+        const publishPage = !event.target.checked && publishBlogs.length === 1 ? activePagePublish - 1 : activePagePublish
+        const publishArgs = `page=${ absoluteValue(publishPage) }&size=${ limit }`
+        const draftPage = event.target.checked && draftBlogs.length === 1 ? activePageDraft - 1 : activePageDraft
+        const draftArgs = `page=${ absoluteValue(draftPage) }&size=${ limit }`
+        dispatch(callPublish(blog.slug,event.target.checked, publishArgs , draftArgs))
     }
 
     const redirectToBlog = (event,blog) => {
@@ -141,6 +143,20 @@ const BlogsPage = () => {
             `https://${ data.sites[ 0 ].domain }/blog/${ blog.slug }`,
             '_blank'
         );
+    }
+
+    const sortData = (type,blogType) => {
+        if(BLOG_STATUS.PUBLISHED === blogType ){
+            sortPublish[ type ] = sortPublish[ type ] === 'asc' ? 'desc' : 'asc'
+            setSortPublish(sortPublish)
+
+        }else{
+            sortDraft[ type ] = sortDraft[ type ] === 'asc' ? 'desc' : 'asc'
+            setSortDraft(sortDraft)
+        }
+        const args = `page=${ blogType === BLOG_STATUS.PUBLISHED ? activePagePublish : activePageDraft }&size=${ limit }&sort=${ type },${ BLOG_STATUS.PUBLISHED ? sortPublish[ type ] : sortDraft[ type ] }`
+        blogType === BLOG_STATUS.PUBLISHED ?  dispatch(getPublishedBlogs(args)) : dispatch(getDraftBlogs(args));
+
     }
 
     return(
@@ -161,7 +177,7 @@ const BlogsPage = () => {
                     <div className="dashboard-actions">
                         <Form className="search-form">
                             <Form.Group controlId="formBasicEmail">
-                                <Form.Control onChange={ (event) => setFilter(event.target.value) }  className="form-control" placeholder="Search" />
+                                <Form.Control onChange={ () => {} }  className="form-control" placeholder="Search" />
                             </Form.Group>
                             <Button onClick={ handleFilter } className="btn-search" type="button">
                                 <img src={ searchIcon } alt={ 'searchIcon' } />
@@ -172,13 +188,13 @@ const BlogsPage = () => {
                 <div className="blog-custom-list-table">
                     <div className="blog-custom-list">
                         <div className="blog-list-header">
-                            <div className="blog-list-column blog-list-live">
+                            <div className="blog-list-column blog-list-live" >
                                 Live
                             </div>
-                            <div className="blog-list-column blog-list-title">
+                            <div className={ `blog-list-column blog-list-title ${ sortPublish[ 'title' ] ==='desc' ?  'headerSortDown': 'headerSortUp' }` } onClick={ () => sortData('title',BLOG_STATUS.PUBLISHED) }>
                                 Title
                             </div>
-                            <div className="blog-list-column blog-list-date">
+                            <div className={ `blog-list-column blog-list-date ${ sortPublish[ 'createdAt' ] ==='desc' ?  'headerSortDown': 'headerSortUp' }` } onClick={ () => sortData('createdAt',BLOG_STATUS.PUBLISHED) } >
                                 Date Created
                             </div>
                             <div className="blog-list-column blog-list-views">
@@ -199,7 +215,7 @@ const BlogsPage = () => {
                                         id={ 'custom-switch-'+blog.id  }
                                         label=""
                                         onChange={ (e) => handlePublish(e, blog) }
-                                        checked={  blog.status === 'PUBLISHED' }
+                                        checked={  blog.status === BLOG_STATUS.PUBLISHED }
                                     />
                                 </div>
                                 <div className="blog-list-column blog-list-title">
@@ -213,7 +229,7 @@ const BlogsPage = () => {
                                 </div>
                                 <div className="blog-list-column blog-list-date">
                                     <DateBlogListIcon />
-                                    <span> { blog.created_at && moment(blog.created_at).format('L')}</span>
+                                    <span> { blog.createdAt && moment(blog.createdAt).format('L')}</span>
                                 </div>
                                 <div className="blog-list-column blog-list-views">
                                     <ViewsBlogListIcon />
@@ -276,10 +292,10 @@ const BlogsPage = () => {
                                                 <div className="blog-list-column blog-list-live">
                                                     Live
                                                 </div>
-                                                <div className="blog-list-column blog-list-title">
+                                                <div className={ `blog-list-column blog-list-title ${ sortDraft[ 'title' ] ==='desc' ?  'headerSortDown': 'headerSortUp' }` } onClick={ () => sortData('title',BLOG_STATUS.DRAFT) }>
                                                     Title
                                                 </div>
-                                                <div className="blog-list-column blog-list-date">
+                                                <div className={ `blog-list-column blog-list-date ${ sortDraft[ 'createdAt' ] ==='desc' ?  'headerSortDown': 'headerSortUp' }` }  onClick={ () => sortData('createdAt',BLOG_STATUS.DRAFT) }>
                                                     Date Created
                                                 </div>
                                                 <div className="blog-list-column blog-list-views">
@@ -310,7 +326,8 @@ const BlogsPage = () => {
                                                         </span>
                                                     </div>
                                                     <div className="blog-list-column blog-list-date">
-                                                        { blog.created_at && moment(blog.created_at).format('L')}
+                                                        <DateBlogListIcon />
+                                                        <span> { blog.createdAt && moment(blog.createdAt).format('L')}</span>
                                                     </div>
                                                     <div className="blog-list-column blog-list-views">
                                                         <ViewsBlogListIcon />

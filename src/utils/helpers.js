@@ -186,3 +186,7 @@ export const debounce =( callback,event, delay ) => {
     }
 
 }
+
+export const absoluteValue = (value) => {
+    return value < 0 ? 0 : value
+}
