@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import {
+    ChevronRight,
     DashboardMenuIcon,
     BlogMenuIcon,
     DrawerArrowIcon,
@@ -11,6 +12,8 @@ import {
     SupportMenuIcon,
 } from '../../utils/svg'
 import whiteLogo from '../../images/header/webFin-white-logo.png';
+import profilePic from 'images/user-avatar.png';
+import { Dropdown } from 'react-bootstrap';
 const SideBar = () => {
     const [ isSideBarActive, toggleSideBar ] = React.useState(false);
     const theme = useSelector((state) => state.theme)
@@ -61,7 +64,23 @@ const SideBar = () => {
                         <SupportMenuIcon />
                     </Link>
                 </li>
+                <li className="header-profile-img">
+                    <Dropdown >
+                        <Dropdown.Toggle>
+                            <span className="nav-profile-pic">
+                                <img src={ profilePic } />
+                                <span className="notification-bubble"></span>
+                            </span>
+                            <span>My Account</span>
+                            <ChevronRight />
+                        </Dropdown.Toggle>
 
+                        <Dropdown.Menu menuAlign="right">
+                            <Dropdown.Item>My Account</Dropdown.Item>
+                            <Dropdown.Item>Log out</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </li>
             </ul>
         </aside>)
 }
