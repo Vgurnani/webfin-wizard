@@ -17,8 +17,12 @@ import { isLoggedIn } from '../../utils/helpers'
 import { logoutUser } from '../../middleware/auth';
 import { useDispatch, useSelector } from 'react-redux'
 import {
-    NotificationIcon,
     ChevronRight,
+    DashboardMenuIcon,
+    BlogMenuIcon,
+    EditSiteMenuIcon,
+    MarketingMenuIcon,
+    SupportMenuIcon,
 } from '../../utils/svg';
 import { ROUTES } from 'constants/appRoutes';
 import profilePic from 'images/user-avatar.png';
@@ -50,6 +54,55 @@ const Navbar = (props) => {
             return(
                 <ul className="main-navigation">
                     <li>
+                        <Link to="/dashboard">
+                            <DashboardMenuIcon />
+                            Dashboard
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/blogs">
+                            <BlogMenuIcon />
+                            Blog
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/edit-site">
+                            <EditSiteMenuIcon />
+                            Edit Site
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/edit-site">
+                            <MarketingMenuIcon />
+                            Marketing
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/edit-site">
+                            <SupportMenuIcon />
+                            Support
+                        </Link>
+                    </li>
+                    <li className="header-profile-img">
+                        <Dropdown >
+                            <Dropdown.Toggle>
+                                <span>
+                                    <span className="nav-profile-pic">
+                                        <img src={ profilePic } />
+                                        <span className="notification-bubble">1</span>
+                                    </span>
+                                    <span className="dropdown-label">My Account</span>
+                                </span>
+                                <ChevronRight />
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu menuAlign="right">
+                                <Dropdown.Item>My Account</Dropdown.Item>
+                                <Dropdown.Item>Log out</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </li>
+                    {/* <li>
                         <a  href="#">All Sites</a>
                     </li>
                     <li>
@@ -76,7 +129,7 @@ const Navbar = (props) => {
                                 <Dropdown.Item onClick={ logout } >Log out</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
-                    </li>
+                    </li> */}
                     {/* <li className={`header-profile-img ${activeProfileNav ? 'active' : ''}`}>
               <a href="javascript:void(0)" onClick={() => setActiveProfileNav(!activeProfileNav)}>
                 <span className="nav-profile-pic">

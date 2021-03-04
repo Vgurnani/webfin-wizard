@@ -67,11 +67,13 @@ const SideBar = () => {
                 <li className="header-profile-img">
                     <Dropdown >
                         <Dropdown.Toggle>
-                            <span className="nav-profile-pic">
-                                <img src={ profilePic } />
-                                <span className="notification-bubble"></span>
+                            <span>
+                                <span className="nav-profile-pic">
+                                    <img src={ profilePic } />
+                                    <span className="notification-bubble">1</span>
+                                </span>
+                                <span className="dropdown-label">My Account</span>
                             </span>
-                            <span>My Account</span>
                             <ChevronRight />
                         </Dropdown.Toggle>
 

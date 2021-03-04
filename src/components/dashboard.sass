@@ -49,10 +49,11 @@
         width: 48px
         height: 48px
         background-color: $green-color
-        bottom: 10%
+        bottom: 25%
         border-radius: 24px 0 0 24px
         text-align: center
         line-height: 46px
+        box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.25)
         svg
             transform: rotate(180deg)
     .dashboard-menu
@@ -172,8 +173,8 @@
                 //transform: translateX(265px)
                 width: calc(100% - 265px)
                 @media (max-width: $breakpoint-ipad)
-                    width: calc(100% - 56px)
-                    margin-left: 56px
+                    width: 100%
+                    margin-left: 0
                     //transform: translateX(56px)
             .drawer-toggle
                 svg
@@ -192,6 +193,7 @@
         @media (max-width: $breakpoint-ipad)
             //width: calc(100% - 65px)
             width: 100%
+            margin-left: 0
             transform: none
             padding: 30px 30px 50px
         @media (max-width: $breakpoint-mobile)
@@ -1903,3 +1905,63 @@
         margin: 0 0 33px
         text-align: left
         color: $black-color
+.header-profile-img
+    background-color: $optional-light-grey-color
+    position: absolute
+    left: 0
+    right: 0
+    padding: 0 16px
+    bottom: 10%
+    .dropdown
+        width: 100%
+        display: inline-block
+        .dropdown-toggle
+            display: flex
+            justify-content: space-between
+            align-items: center
+            width: 100%
+            &.btn.btn-primary
+                padding: 13px
+                background-color: transparent
+                border: none
+                &:not(:disabled):not(.disabled):active,
+                &:not(:disabled):not(.disabled):active:focus,
+                &:hover,
+                &:active,
+                &:focus
+                    outline: none
+                    box-shadow: none
+                    background-color: transparent
+                    border: none
+            &::after
+                display: none
+            .nav-profile-pic
+                width: 35px
+                display: inline-block
+                vertical-align: middle
+                position: relative
+                img
+                    width: 35px
+                    height: 35px
+                    border-radius: 100%
+                .notification-bubble
+                    width: 18px
+                    height: 18px
+                    border-radius: 100%
+                    background-color: $red-color
+                    color: $white-color
+                    font-size: 14px
+                    line-height: 18px
+                    font-weight: 700
+                    text-align: center
+                    display: inline-block
+                    position: absolute
+                    top: -8px
+                    right: -2px
+        .dropdown-label
+            font-size: 16px
+            font-weight: bold
+            color: $black-color
+            margin: 0 9px
+            display: inline-block
+            vertical-align: middle
