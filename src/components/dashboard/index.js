@@ -1,7 +1,7 @@
-import React,{ useState , useEffect } from 'react'
+import React,{ useState  } from 'react'
 import SocialMedia from './socialMedia'
 import PropTypes  from 'prop-types'
-import { createSocialMedia, getSocialMedia } from 'middleware/blog'
+import { createSocialMedia } from 'middleware/blog'
 import { useDispatch , useSelector } from 'react-redux';
 import{
     Button,
@@ -10,23 +10,10 @@ const Dashboard =(props) => {
     const { site } = props
     const dispatch = useDispatch()
     const connecting = useSelector((state) => state.blog.connecting)
-    const socialMediaLinks = useSelector((state) => state.blog.socialMediaLinks)
     const [ openModal ,setOpenModal ] = useState(false)
-    useEffect(() => {
-        if(site){
-            dispatch(getSocialMedia())
-        }
-    },[ site ])
 
     const connectData = (values) => {
-        const data = {
-            type:'social-media-links',
-            content: values,
-            imageUrl: 'https://static.helpjuice.com/helpjuice_production/uploads/upload/image/2747/125355/social_media_icons.jpg',
-            title: 'Social Media Links',
-            slug: 'social-media-links'
-        }
-        dispatch(createSocialMedia(data, setOpenModal))
+        dispatch(createSocialMedia(site.id,{ socialMediaLinks: values }, setOpenModal))
     }
     return(
         <div className="blog-dashboard-data">
@@ -39,7 +26,7 @@ const Dashboard =(props) => {
                         <li>
                             <h4>1. Connect Social</h4>
                             <Button onClick={ () => { setOpenModal(!openModal)} }>connect</Button>
-                            <SocialMedia socialMediaLinks={ socialMediaLinks } connecting={ connecting } connectData={ connectData } openModal={ openModal } setOpenModal={ setOpenModal } />
+                            <SocialMedia socialMediaLinks={ site?.socialMediaLinks || {} } connecting={ connecting } connectData={ connectData } openModal={ openModal } setOpenModal={ setOpenModal } />
                         </li>
                         <li>
                             <h4>2. Try Blog Trends </h4>

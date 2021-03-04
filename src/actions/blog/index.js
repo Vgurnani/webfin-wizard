@@ -61,25 +61,6 @@ export const socialMediaFailed = (error) => {
     };
 };
 
-export const getSocialMediaRequest = () => {
-    return {
-        type: ActionTypes.GET_SOCIAL_MEDIA_REQUEST,
-    };
-};
-
-export const getSocialMediaSuccess = (data) => {
-    return {
-        type: ActionTypes.GET_SOCIAL_MEDIA_SUCCESS,
-        payload: data
-    };
-};
-
-export const getSocialMediaFailed = (error) => {
-    return {
-        type: ActionTypes.GET_SOCIAL_MEDIA_FAILURE,
-        error: error
-    };
-};
 export const getBlogsRequest = () => {
     return {
         type: ActionTypes.GET_BLOG_LIST

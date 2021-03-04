@@ -8,9 +8,6 @@ import {
     publishRequest,
     publishSuccess,
     publishFailed,
-    getSocialMediaRequest,
-    getSocialMediaSuccess,
-    getSocialMediaFailed,
     getDraftBlogListSuccess,
     getPublishBlogListSuccess,
     getBlogListFailed,
@@ -31,7 +28,6 @@ import { notification } from '../services/notification';
 import history from '../utils/history'
 import { imageUpload } from './assessments'
 import { dataURLtoFile , uId, getRoute, getSite } from '../utils/helpers'
-import _ from 'lodash';
 
 export const checkAvailbleSlug = async(route,data) => {
     const requestData = {
@@ -107,41 +103,18 @@ export const createBlog = (domain,data,id) => {
     };
 };
 
-export const createSocialMedia = (data, setOpenModal) => {
-    const route = getRoute();
+export const createSocialMedia = (id,data, setOpenModal) => {
     return async(dispatch) => {
         dispatch(socialMediaRequest())
-        const result = await strapiAxiosInstance.get(route+'?type=social-media-links')
-        if(_.isEmpty(result.data)){
-            strapiAxiosInstance.post(route, data).then((response)=>{
-                dispatch(socialMediaSuccess(response))
-                setOpenModal(false)
-            }).catch((error) => {
-                dispatch(socialMediaFailed(error))
-            })
-        }else{
-            const id = result.data && result.data[ 0 ].id
-            strapiAxiosInstance.put(`${ route }/${ id }`, data).then((response)=>{
-                dispatch(socialMediaSuccess(response))
-                setOpenModal(false)
-            }).catch((error) => {
-                dispatch(socialMediaFailed(error))
-            })
-        }
-    };
-};
-
-export const getSocialMedia = () => {
-    const route = getRoute();
-    return async(dispatch) => {
-        dispatch(getSocialMediaRequest())
-        strapiAxiosInstance.get(route+'?type=social-media-links').then((response)=>{
-            dispatch(getSocialMediaSuccess(response))
+        axiosInstance.put(`/assessment/${ id }`, data).then((response)=>{
+            dispatch(socialMediaSuccess(response))
+            setOpenModal(false)
         }).catch((error) => {
-            dispatch(getSocialMediaFailed(error))
+            dispatch(socialMediaFailed(error))
         })
     };
 };
+
 export const getDraftBlogs =  (args) => {
     return async(dispatch) => {
         try{
