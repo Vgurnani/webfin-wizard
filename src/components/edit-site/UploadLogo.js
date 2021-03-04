@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { renderFileDrop } from 'utils/formUtils'
@@ -16,7 +16,6 @@ import
     from 'react-bootstrap';
 const UploadLogo = (props) => {
     const { handleSubmit, submitData,loading,previewFile,clearImage ,fieldName } = props
-    const [ setSelectedUnsplash ] = useState(null);
     // const handleSelect = async(id) => {
     //     setSelectedUnsplash(id)
     //     const image = unsplashImages.filter((item) => item.id == id)[ 0 ];
@@ -54,7 +53,7 @@ const UploadLogo = (props) => {
                                 <Field
                                     name={ fieldName }
                                     component={ renderFileDrop }
-                                    isDrop={ ()=> { setSelectedUnsplash(null)} }
+                                    isDrop={ ()=> {} }
                                     placeholder={ "<a><i className='fa fa-plus'/> upload your logo</a>" }
                                     isDropText={ 'Drag your images' }
                                 />

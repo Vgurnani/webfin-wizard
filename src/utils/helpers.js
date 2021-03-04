@@ -122,15 +122,19 @@ export const queryStringToObject = (queryString) => {
 
 export const dataURLtoFile = (dataurl,filename) => {
     const arr = dataurl.split(',');
-    const mime = arr[ 0 ].match(/:(.*?);/)[ 1 ];
-    const bstr = atob(arr[ 1 ]);
-    let num = bstr.length;
-    const u8arr = new Uint8Array(num);
-    while(num --){
-        u8arr[ num ] = bstr.charCodeAt(num);
-    }
+    const mime = arr[ 0 ].match(/:(.*?);/) && arr[ 0 ].match(/:(.*?);/)[ 1 ];
+    if(mime){
+        const bstr = atob(arr[ 1 ]);
+        let num = bstr.length;
+        const u8arr = new Uint8Array(num);
+        while(num --){
+            u8arr[ num ] = bstr.charCodeAt(num);
+        }
 
-    return new File([ u8arr ], filename, { type:mime });
+        return new File([ u8arr ], filename, { type:mime });
+    }
+    return null
+
 }
 
 export const getRoute = () =>{

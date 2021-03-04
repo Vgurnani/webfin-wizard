@@ -111,7 +111,7 @@ export const updateAssessment = (id,data, domain,handleClose) => {
             const file = dataURLtoFile(data.faviconUrl,uId()+'.png')
             data[ 'faviconUrl' ] = await imageUpload(domain,'logo',file);
         }
-        if(data.coverImage){
+        if(data.coverImage  && !data.coverImage.match('^(http|https)://')){
             const file = dataURLtoFile(data.coverImage,uId()+'.png')
             data[ 'coverImage' ] = await imageUpload(data.domain,'cover-image',file);
         }
