@@ -67,6 +67,7 @@ const EditSitePage =(props) => {
                 niche: JSON.stringify({ id: site.niche.id.toString(),label:  site.niche.label }),
                 colors: site.colors,
                 logoUrl: site.logoUrl,
+                coverImage: site.coverImage,
                 faviconUrl: site.faviconUrl,
                 menuLinks: _.isEmpty(site.menuLinks ) ? [ { name: 'home',url: '/' } ] : site.menuLinks
             }
