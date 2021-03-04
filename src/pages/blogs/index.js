@@ -70,12 +70,12 @@ const BlogsPage = () => {
 
     const handleEdit = (event, blog) => {
         event.preventDefault();
-        const route = getDynamicURL(ROUTES.EDIT_BLOG, { id: blog.id });
+        const route = getDynamicURL(ROUTES.EDIT_BLOG, { id: blog.slug });
         history.push(route)
     }
     const handleClone = (event, blog) => {
         event.preventDefault();
-        dispatch(getBlogById(blog.id))
+        dispatch(getBlogById(blog.slug))
         history.push(ROUTES.BLOG)
     }
 
@@ -91,38 +91,18 @@ const BlogsPage = () => {
         setActivePageDraft(pageNumber - 1);
     }
 
-    const handlePaginateData =(countPublish,countDraft ) => {
-        let draftStartWith = (activePageDraft - 1) * limit
-        let publishStartWith = (activePagePublish - 1) * limit
-        let publishArgs;
-        let draftArgs;
-        if((publishStartWith < countPublish) || countPublish === 0){
-            publishArgs = `_start=${ publishStartWith  }&_limit=${ limit }`
-        }else{
-            publishStartWith = publishStartWith === 0  ? 0 : publishStartWith  - limit
-            publishArgs = `_start=${ publishStartWith  }&_limit=${ limit }`
-            setActivePagePublish(activePagePublish - 1)
-        }
-        if(draftStartWith < countDraft || countDraft === 0 ){
-            draftArgs = `_start=${ draftStartWith }&_limit=${ limit }`
-        }else{
-            draftStartWith = draftStartWith === 0 ? 0 : draftStartWith - limit
-            draftArgs = `_start=${ draftStartWith }&_limit=${ limit }`
-            setActivePageDraft(activePageDraft - 1)
-        }
-        return { publishArgs, draftArgs }
-    }
-
     const handleDelete = (event, blog) => {
         event.preventDefault();
-        const countPublish = ( blog.published_at !== null ? (blogsCount.publishCount - 1) :  blogsCount.publishCount )
-        const countDraft = ( blog.published_at === null ? (blogsCount.draftCount - 1) : blogsCount.draftCount)
-        const result = handlePaginateData(countPublish,countDraft)
+        const countPublish = blog.status == BLOG_STATUS.PUBLISHED && publishBlogs.length === 1 ? activePagePublish - 1 : activePagePublish
+        const publishArgs = `page=${ absoluteValue(countPublish) }&size=${ limit }`
+        const countDraft = blog.status == BLOG_STATUS.DRAFT && draftBlogs.length === 1 ? activePageDraft - 1 : activePageDraft
+        const draftArgs = `page=${ absoluteValue(countDraft) }&size=${ limit }`
+
         confirmAlert({
             // eslint-disable-next-line react/display-name
             customUI: ({ onClose }) => {
                 return(
-                    <ConfirmAlert key={ 'box' } onClose={ onClose } handleAction={ () => dispatch(deleteBlog(blog.id,result.draftArgs,result.publishArgs)) } />
+                    <ConfirmAlert key={ 'box' } onClose={ onClose } handleAction={ () => dispatch(deleteBlog(blog.slug,draftArgs,publishArgs)) } />
                 );
             }
         });

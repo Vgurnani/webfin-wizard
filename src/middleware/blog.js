@@ -131,24 +131,23 @@ export const getDraftBlogs =  (args) => {
     }
 }
 
-export const getPublishedNewBlogs =  (args) => {
-    return async(dispatch) => {
-        try{
-            dispatch(getBlogsRequest())
-            const route = getRoute();
-            const result = await strapiAxiosInstance.get(`${ route }?slug_ne=wizrd-welcome-blog&_sort=created_at:ASC&_publicationState=live&deletedAt_null=true&type=blog&${ args }`)
-            if([ 200,203 ].includes(result.status)){
-                dispatch(getPublishBlogListSuccess(result.data));
-            }
-        }catch(error){
-            dispatch(getBlogListFailed(error))
-            notification(NOTIFICATION_TYPES.ERROR, MESSAGE.SOMETHING_WRONG);
-        }
-    }
-}
+// export const getPublishedNewBlogs =  (args) => {
+//     return async(dispatch) => {
+//         try{
+//             dispatch(getBlogsRequest())
+//             const route = getRoute();
+//             const result = await strapiAxiosInstance.get(`${ route }?slug_ne=wizrd-welcome-blog&_sort=created_at:ASC&_publicationState=live&deletedAt_null=true&type=blog&${ args }`)
+//             if([ 200,203 ].includes(result.status)){
+//                 dispatch(getPublishBlogListSuccess(result.data));
+//             }
+//         }catch(error){
+//             dispatch(getBlogListFailed(error))
+//             notification(NOTIFICATION_TYPES.ERROR, MESSAGE.SOMETHING_WRONG);
+//         }
+//     }
+// }
 
 export const getPublishedBlogs =  (args) => {
-    console.log(args)
     return async(dispatch) => {
         try{
             const site = getSite();
@@ -203,10 +202,9 @@ export const deleteBlog =  (id,draftArgs, publishArgs) => {
     return async(dispatch) => {
         try{
             dispatch(deleteBlogRequest())
-            const result = await strapiAxiosInstance.put(`/posts/${ id }`)
-            if([ 200,203 ].includes(result.status)){
+            const result = await axiosInstance.delete(`/posts/${ id }`)
+            if([ 200,203, 204 ].includes(result.status)){
                 dispatch(deleteBlogSuccess())
-                dispatch(allBlogsCount())
                 dispatch(getDraftBlogs(draftArgs))
                 dispatch(getPublishedBlogs(publishArgs))
             }
@@ -218,10 +216,9 @@ export const deleteBlog =  (id,draftArgs, publishArgs) => {
 }
 
 export const getBlogById =  (id) => {
-    const route = getRoute();
     return async(dispatch) => {
         dispatch(getBlogRequest())
-        strapiAxiosInstance.get(route+'/'+id+'?type=blog').then((response) => {
+        axiosInstance.get(`/posts/${ id }?type=blog`).then((response) => {
             dispatch(getBlogSuccess(response.data))
         }).catch(() => {
             history.push(ROUTES.BLOGS)

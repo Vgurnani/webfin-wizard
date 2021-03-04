@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RichTextEditor from './rte';
 import { Field, change } from 'redux-form';
 import { renderFieldWG } from '../../utils/formUtils'
-import { getIdFromPath , getDomain, getSite } from 'utils/helpers'
+import { getDomain, getSite, getSlugFromPath } from 'utils/helpers'
 import {
     Facebook,
     LinkedIn,
@@ -38,7 +38,7 @@ const BlogPage =(props) => {
     const blog = useSelector((state) => state.blog.blog)
     const userData = useSelector(state => state.user.sessionData?.data?.data)
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
-    const id = getIdFromPath(history.location.pathname)
+    const id = getSlugFromPath(history.location.pathname)
     //const isReadyPublish = useSelector((state) => state.blog.isReadyPublish)
 
     const initialValue = [
@@ -73,7 +73,9 @@ const BlogPage =(props) => {
             title: formData.title,
             status: BLOG_STATUS.PUBLISHED
         }
-
+        if (id && blog.title === formData.title) {
+            delete data.title;
+        }
         dispatch(createBlog(getDomain(userData.sites), data,id,blog?.slug))
 
     }
@@ -97,16 +99,19 @@ const BlogPage =(props) => {
         }
     },[])
 
+    // const [ , setRTEData ] = useState(initialValue)
+    const [ rteLoading, setRteLoading ] = useState(false)
+
     useEffect(() => {
-        if(blog){
+        if(blog && blog.slug) {
+            setRteLoading(true)
             blog[ 'blogUrl' ] = blog.imageUrl;
             blog[ 'data' ] = blog.content;
             delete blog.imageUrl;
             initialize(blog);
+            setTimeout(() => {setRteLoading(false)})
         }
     },[ blog ])
-
-    // const [ , setRTEData ] = useState(blog?.content ? blog.content : initialValue)
 
     const handleRTEdata = (data) => {
         let content = data;
@@ -215,7 +220,7 @@ const BlogPage =(props) => {
                             </div>
                             <div className="blog-editor">
                                 {id && blog && blog.content &&  <RichTextEditor readOnly={ false } setRTEData={ handleRTEdata } initialValue={ blog && blog.content || initialValue } /> }
-                                {!id && <RichTextEditor readOnly={ false } setRTEData={ handleRTEdata } initialValue={ initialValue } />}
+                                {!id && !rteLoading && <RichTextEditor readOnly={ false } setRTEData={ handleRTEdata } initialValue={ blogForm?.values?.data || initialValue } />}
                                 {errorMessageContent && <p><span className="field_error">Please insert content</span></p>}
                             </div>
                         </div>
