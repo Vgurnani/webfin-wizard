@@ -1071,9 +1071,22 @@
             &:last-child
                 &::after
                     display: none
+        span
+            display: inline-block
+            vertical-align: middle
+            min-width: 30px
+            line-height: 28px
+            text-align: center
+            border: 1px solid transparent
+            &.button-active
+                border-color: rgba(0,0,0,.1)
         .editor-icons
             padding: 8.3px
             display: inline-block
+        .custom-select
+            border: none
+            padding: 0 33px 0 13px
+            height: 35px
 .rte-editor-content
     width: 100%
     display: inline-block

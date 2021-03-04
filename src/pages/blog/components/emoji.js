@@ -2,7 +2,6 @@ import React, { useCallback, useRef, useState } from 'react'
 import { useSelected, useFocused, useSlate } from 'slate-react';
 import { Transforms } from 'slate';
 import PropTypes from 'prop-types'
-import { css } from '@emotion/css'
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 
