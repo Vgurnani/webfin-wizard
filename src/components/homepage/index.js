@@ -45,7 +45,7 @@ const HomePage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col className="text-side col-6">
+                        <Col className="text-side col-6" sm="12">
                             <div className="text-wrap">
                                 <ListGroup className={ 'mainList' }>
                                     <ListGroup.Item> <img src={ megicStick } alt="" /> Get more traffic with a blazing fast blog made for seo.</ListGroup.Item>
@@ -60,7 +60,7 @@ const HomePage = () => {
                                 </div>
                             </div>
                         </Col>
-                        <Col className="img-side col-6">
+                        <Col className="img-side col-6" sm="12">
                             <Carousel controls={ false }>
                                 <Carousel.Item>
                                     <img src={ sliderNew } alt='slider1' />
@@ -84,7 +84,7 @@ const HomePage = () => {
                         </Col>
                     </Row>
                     <Row className={ 'align-items-stretch' }>
-                        <Col col={ 4 }>
+                        <Col col={ 4 } className={ 'rightArrow' }>
                             <div className={ 'box text-center d-flex flex-column' }>
                                 <span className={ 'circleBox' }>1</span>
                                 <h3 className={ 'mt-2' }>Choose a niche</h3>
@@ -98,7 +98,7 @@ const HomePage = () => {
                                 </div>
                             </div>
                         </Col>
-                        <Col col={ 4 } className={ 'd-flex justify-content-center' }>
+                        <Col col={ 4 } className={ 'd-flex justify-content-center rightArrow' }>
                             <div className={ 'box text-center' }>
                                 <span className={ 'circleBox' }>2</span>
                                 <h3 className={ 'mt-2' }>Choose a color palette</h3>
@@ -179,8 +179,8 @@ const HomePage = () => {
                             <h2 className={ 'text-center titleHeading' }>What’s Included With <b>Every</b> Wizard Blog</h2>
                         </Col>
                     </Row>
-                    <Row className={ 'align-items-stretch' }>
-                        <Col col={ 3 }>
+                    <Row className={ 'align-items-stretch' } >
+                        <Col col={ 3 } className={ 'mobileBottom' } sm="6">
                             <div className={ 'box text-center' }>
                                 <span className={ 'circleBox' }>
                                     <img src={ seoImg } alt="SEO" />
@@ -189,7 +189,7 @@ const HomePage = () => {
                                 <p>Our sites are built for Google Search so you get more traffic and rank higher, with no experience necessary</p>
                             </div>
                         </Col>
-                        <Col col={ 3 } className={ 'd-flex justify-content-center' }>
+                        <Col col={ 3 } className={ 'd-flex justify-content-center mobileBottom' } sm="6">
                             <div className={ 'box text-center' }>
                                 <span className={ 'circleBox' }>
                                     <img src={ mobileImg } alt="SEO" />
@@ -198,7 +198,7 @@ const HomePage = () => {
                                 <p>According to Google, over 50% of website traffic comes from mobile visitors</p>
                             </div>
                         </Col>
-                        <Col col={ 3 } className={ 'd-flex justify-content-end' }>
+                        <Col col={ 3 } className={ 'd-flex justify-content-end mobileBottom' } sm="6">
                             <div className={ 'box text-center' }>
                                 <span className={ 'circleBox' }>
                                     <img src={ downloadSpeed } alt="SEO" />
@@ -207,7 +207,7 @@ const HomePage = () => {
                                 <p>Get blazing fast load times, avoid crashes, and easily handle millions of visitors. Built with the same technology used by Netflix, NASA and Twitter.</p>
                             </div>
                         </Col>
-                        <Col col={ 3 } className={ 'd-flex justify-content-end' }>
+                        <Col col={ 3 } className={ 'd-flex justify-content-end' } sm="6">
                             <div className={ 'box text-center' }>
                                 <span className={ 'circleBox' }>
                                     <img src={ emailImportant } alt="SEO" />
