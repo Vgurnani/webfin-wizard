@@ -80,7 +80,7 @@ export const createBlog = (domain,data,id) => {
         dispatch(blogCreateRequest())
         if(data.imageUrl && !data.imageUrl.match('^(http|https)://')){
             const file = dataURLtoFile(data.imageUrl,uId()+'.png')
-            data[ 'imageUrl' ] = await imageUpload(domain,`blogs/${ data.slug }`,file);
+            data[ 'imageUrl' ] = await imageUpload(domain,'blog-images',file);
         }
         if(id){
             axiosInstance.put(`/posts/${ id }`, data).then((response)=>{
