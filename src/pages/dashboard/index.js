@@ -74,7 +74,7 @@ const DashboardPage =() => {
                             </div>
                             <div className="author-name">
                                 <h6>Welcome back!</h6>
-                                <h5>{user.firstName} {user.lastName}</h5>
+                                <h5>{user?.userName} </h5>
                             </div>
                         </div> }
                     </div>

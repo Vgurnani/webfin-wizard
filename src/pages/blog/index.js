@@ -173,7 +173,7 @@ const BlogPage =(props) => {
                                         <img src={ userData && userData.user.profileImageUrl || profilePic } alt="Jason Miller" />
                                     </div>
                                     <div className="author-name">
-                                        <span>{userData && `${ userData.user?.firstName } ${ userData.user?.lastName }`}</span>
+                                        <span>{userData && `${ userData.user?.userName }`}</span>
 
                                     </div>
                                 </div>
