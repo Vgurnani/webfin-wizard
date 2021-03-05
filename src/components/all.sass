@@ -80,7 +80,7 @@ h5
 h6
   font-family: 'Nunito Sans', sans-serif
   font-weight: 400
-  
+
 #selectFieldInput
   width: 350px
   border: 1px solid #ddd
@@ -130,9 +130,9 @@ body .btn
     &:hover,
     &:active,
     &:focus
-      background-color: $light-blue-color
-      border-color:  $light-blue-color
-      color: $white-color
+      background-color: $white-color
+      border-color:  $primary-color
+      color: $primary-color
       box-shadow: none
   &.btn-secondary
     background-color: $white-color
@@ -143,9 +143,9 @@ body .btn
     &:hover,
     &:active,
     &:focus
-      background-color: $white-color
-      border-color:  $light-blue-color
-      color: $light-blue-color
+      background-color: $primary-color
+      border-color:  $primary-color
+      color: $white-color
       box-shadow: none
   &.btn-light
     border: none
@@ -352,7 +352,35 @@ ul
     //   border-style: solid
     //   border-color: transparent transparent $red-color transparent
 
-
+.no-header
+  .main-header
+    display: none
+    @media (max-width: $breakpoint-ipad)
+      display: inline-block
+      width: 100%
+      ul
+        li
+          svg
+            display: inline-block
+            vertical-align: middle
+            margin-right: 10px
+            path,
+            rect
+                fill: $dark-grey-color
+          &.header-profile-img
+            svg
+              path
+                fill: none
+.full-width-header
+  .main-header
+    background-color: $white-color
+    position: relative
+    z-index: 11
+    .container
+      max-width: unset !important
+      padding: 0 78px
+      @media (max-width: $breakpoint-mobile)
+        padding: 0 10px
 .main-header
   .header-top
     padding: 12px 0
@@ -400,8 +428,8 @@ ul
         @media (max-width: $breakpoint-ipad)
           position: absolute
           top: 100%
-          left: 15px
-          right: 15px
+          left: 0
+          right: 0
           z-index: 20
           display: none
           padding: 0
@@ -411,7 +439,7 @@ ul
           display: inline-block
           width: 100%
           justify-content: flex-start
-          padding: 15px 0
+          padding: 0 0
         .main-navigation
           margin: 0
           padding: 0
@@ -423,8 +451,11 @@ ul
             @media (max-width: $breakpoint-ipad)
               width: 100%
               text-align: left
-              margin: 10px 0
-              padding: 0 10px
+              margin: 0
+              padding: 10px 10px
+              border-bottom: 1px solid rgba(0,0,0,.1)
+              &:last-child
+                border-bottom: none
             &.header-profile-img
               a
                 padding-right: 0
@@ -466,6 +497,7 @@ ul
               line-height: 1.4
               font-weight: 700
               padding: 11px 24px
+              display: inline-block
               &:hover,
               &:active,
               &:focus
@@ -474,6 +506,12 @@ ul
               &.btn.btn-secondary
                 color: $primary-color
                 padding: 11px 62px
+                &:not(:disabled):not(.disabled):active,
+                &:not(:disabled):not(.disabled):active:focus,
+                &:hover,
+                &:active,
+                &:focus
+                  color: $white-color
             .nav-profile-pic
               img
                 height: 24px
@@ -952,8 +990,8 @@ ul
     &:hover,
     &:active,
     &:focus
-      background-color: $facebook-color
-      border-color: $facebook-color
+      background-color: $google-color
+      border-color: $google-color
     a
       color: $white-color
       outline: none
@@ -965,8 +1003,8 @@ ul
     &:hover,
     &:active,
     &:focus
-      background-color: $google-color
-      border-color: $google-color
+      background-color: $facebook-color
+      border-color: $facebook-color
     a
       color: $white-color
       outline: none
@@ -1872,16 +1910,6 @@ ul
     font-weight: 600
     padding: 0 9px
     text-align: left
-.full-width-header
-  .main-header
-    background-color: $white-color
-    position: relative
-    z-index: 11
-    .container
-      max-width: unset !important
-      padding: 0 78px
-      @media (max-width: $breakpoint-mobile)
-        padding: 0 10px
 .forgot-password-section
   .form-side
     @media (max-width: $breakpoint-mobile)
@@ -1903,7 +1931,7 @@ ul
       max-width: 100%
       text-align: center
 .wizard-preview
-  .wizrd-banner-content 
+  .wizrd-banner-content
     h5
       width: 100% !important
   h4
@@ -2383,3 +2411,13 @@ body.modal-open
 .headerSortDown,
 .headerSortUp
   padding-right: 0px
+.signup-section
+  @media (max-width: $breakpoint-mobile)
+    padding: 0
+  .sigunp-content-side.content-side
+    @media (max-width: $breakpoint-mobile)
+      order: 2
+      margin: 0
+  .sigunp-form-side
+    @media (max-width: $breakpoint-mobile)
+      order: 1

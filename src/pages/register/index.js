@@ -39,7 +39,7 @@ const RegisterPage = (props) => {
         <section className="signup-section main-section">
             <Container>
                 <Row className="align-items-center">
-                    <Col className="content-side col-6 light-content">
+                    <Col className="content-side col-6 light-content sigunp-content-side">
                         <div className="content-side-inner">
                             <h4>Benefits of Registering </h4>
                             <p>
@@ -53,7 +53,7 @@ const RegisterPage = (props) => {
                             </ul>
                         </div>
                     </Col>
-                    <Col className="col-6 form-side">
+                    <Col className="col-6 form-side sigunp-form-side">
                         <div className="small-wrapper">
                             <Row className="login-forms signup-forms">
                                 <Col className="col-12">
