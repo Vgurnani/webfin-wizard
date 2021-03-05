@@ -71,13 +71,13 @@ const Navbar = (props) => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/edit-site">
+                        <Link to="#">
                             <MarketingMenuIcon />
                             Marketing
                         </Link>
                     </li>
                     <li>
-                        <Link to="/edit-site">
+                        <Link to="#">
                             <SupportMenuIcon />
                             Support
                         </Link>

@@ -22,6 +22,7 @@ import { ROUTES } from 'constants/appRoutes';
 const SideBar = () => {
     const dispatch  = useDispatch();
     const [ isSideBarActive, toggleSideBar ] = React.useState(false);
+    const data = useSelector(state => state.user.sessionData?.data?.data)
     const theme = useSelector((state) => state.theme)
 
     const logout = () => {
@@ -38,7 +39,7 @@ const SideBar = () => {
                 </a>
             </div>
             <div className="sidebar-view-site">
-                <a>
+                <a href={ `https://${ data && data.sites[ 0 ].domain }` } rel="noreferrer" target='_blank' >
                     <span>View Website</span>
                     <ViewWebsiteIcon />
                 </a>
@@ -62,14 +63,14 @@ const SideBar = () => {
                         <EditSiteMenuIcon />
                     </Link>
                 </li>
-                <li className={ `${ theme.sidebarActive === 'edit-site' ?  'active' : '' }` } >
-                    <Link to="/edit-site">
+                <li className={ `${ theme.sidebarActive === '' ?  'active' : '' }` } >
+                    <Link to="#">
                         Marketing
                         <MarketingMenuIcon />
                     </Link>
                 </li>
-                <li className={ `${ theme.sidebarActive === 'edit-site' ?  'active' : '' }` } >
-                    <Link to="/edit-site">
+                <li className={ `${ theme.sidebarActive === '' ?  'active' : '' }` } >
+                    <Link to="#">
                         Support
                         <SupportMenuIcon />
                     </Link>
