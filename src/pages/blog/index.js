@@ -125,7 +125,7 @@ const BlogPage =(props) => {
         setModalOpen(!openModal)
     }
     const handleSearch = (event) => {
-        const query = event.currentTarget.value || 'cat'
+        const query = event.target.value || 'cat'
         dispatch(getUnsplash('/photos',query))
     }
 

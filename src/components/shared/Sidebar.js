@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
+import { logoutUser } from '../../middleware/auth';
+import history from 'utils/history'
+
 import {
     ChevronRight,
     DashboardMenuIcon,
@@ -14,9 +17,16 @@ import {
 import whiteLogo from '../../images/header/webFin-white-logo.png';
 import profilePic from 'images/user-avatar.png';
 import { Dropdown } from 'react-bootstrap';
+import { ROUTES } from 'constants/appRoutes';
+
 const SideBar = () => {
+    const dispatch  = useDispatch();
     const [ isSideBarActive, toggleSideBar ] = React.useState(false);
     const theme = useSelector((state) => state.theme)
+
+    const logout = () => {
+        dispatch(logoutUser())
+    }
     return(
         <aside className={ `dashboard-menu ${ isSideBarActive ? 'toggle-sidebar' : '' }` }>
             <div className="drawer-toggle" onClick={ () => toggleSideBar(!isSideBarActive) }>
@@ -78,8 +88,8 @@ const SideBar = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu menuAlign="right">
-                            <Dropdown.Item>My Account</Dropdown.Item>
-                            <Dropdown.Item>Log out</Dropdown.Item>
+                            <Dropdown.Item onClick={ () => history.push(ROUTES.USER_PROFILE) }>My Account</Dropdown.Item>
+                            <Dropdown.Item onClick={ logout }>Log out</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </li>
