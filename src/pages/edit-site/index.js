@@ -202,9 +202,9 @@ const EditSitePage =(props) => {
                             <Form.Label>Site icon:</Form.Label>
                             <div className="logo-preview-btn edit-site-btn  no-arrow" onClick={ (event) => handleModal(event,'favicon') }>{form?.values?.faviconUrl ?  <img src={ form?.values?.faviconUrl || site?.faviconUrl } width={ 20 } /> : 'Select..'}</div>
                         </Form.Group>
-                        <Form.Group controlId="formBasicEmail" className="edit-header-footer">
+                        {/*<Form.Group controlId="formBasicEmail" className="edit-header-footer">
                             <Form.Label>Header/Footer:</Form.Label>
-                        </Form.Group>
+                            </Form.Group>*/}
                     </div>
                     <Modal show={ open } onHide={ handleClose } className="logo-upload-modal">
                         {renderModalView()}
