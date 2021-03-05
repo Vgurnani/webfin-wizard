@@ -109,7 +109,7 @@ export const updateAssessment = (id,data, domain,handleClose) => {
         }
         if(data.faviconUrl && !data.faviconUrl.match('^(http|https)://')){
             const file = dataURLtoFile(data.faviconUrl,uId()+'.png')
-            data[ 'faviconUrl' ] = await imageUpload(domain,'logo',file);
+            data[ 'faviconUrl' ] = await imageUpload(domain,'favicon-icon',file);
         }
         if(data.coverImage  && !data.coverImage.match('^(http|https)://')){
             const file = dataURLtoFile(data.coverImage,uId()+'.png')
