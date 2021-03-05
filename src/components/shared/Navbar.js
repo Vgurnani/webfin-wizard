@@ -22,6 +22,7 @@ import {
     EditSiteMenuIcon,
     MarketingMenuIcon,
     SupportMenuIcon,
+    NotificationIcon,
 } from '../../utils/svg';
 import { ROUTES } from 'constants/appRoutes';
 import profilePic from 'images/user-avatar.png';
@@ -88,6 +89,31 @@ const Navbar = (props) => {
                                 <span>
                                     <span className="nav-profile-pic">
                                         <img src={ profilePic } />
+
+                                    </span>
+                                </span>
+                                <span className="dropdown-label">My Account</span>
+                                <ChevronRight />
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu menuAlign="left">
+                                <Dropdown.Item onClick={ () => history.push(ROUTES.USER_PROFILE) }>My Account</Dropdown.Item>
+                                <Dropdown.Item onClick={ logout }>Log out</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        <Link className="notification-menu">
+                            <span className="notification-link">
+                                <NotificationIcon />
+                                <span className="notification-bubble">1</span>
+                            </span>
+                        </Link>
+                    </li>
+                    {/* <li className="header-profile-img">
+                        <Dropdown >
+                            <Dropdown.Toggle>
+                                <span>
+                                    <span className="nav-profile-pic">
+                                        <img src={ profilePic } />
                                         <span className="notification-bubble">1</span>
                                     </span>
                                     <span className="dropdown-label">My Account</span>
@@ -100,7 +126,7 @@ const Navbar = (props) => {
                                 <Dropdown.Item>Log out</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
-                    </li>
+                    </li> */}
                     {/* <li>
                         <a  href="#">All Sites</a>
                     </li>

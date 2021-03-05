@@ -13,6 +13,7 @@ import {
     ViewWebsiteIcon,
     MarketingMenuIcon,
     SupportMenuIcon,
+    NotificationIcon,
 } from '../../utils/svg'
 import whiteLogo from '../../images/header/webFin-white-logo.png';
 import profilePic from 'images/user-avatar.png';
@@ -81,18 +82,25 @@ const SideBar = () => {
                             <span>
                                 <span className="nav-profile-pic">
                                     <img src={ profilePic } />
-                                    <span className="notification-bubble">1</span>
+
                                 </span>
-                                <span className="dropdown-label">My Account</span>
                             </span>
+                            <span className="dropdown-label">My Account</span>
                             <ChevronRight />
                         </Dropdown.Toggle>
 
-                        <Dropdown.Menu menuAlign="right">
+                        <Dropdown.Menu menuAlign="left">
                             <Dropdown.Item onClick={ () => history.push(ROUTES.USER_PROFILE) }>My Account</Dropdown.Item>
                             <Dropdown.Item onClick={ logout }>Log out</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
+                    <Link className="notification-menu">
+                        <span className="notification-link">
+                            <NotificationIcon />
+                            <span className="notification-bubble">1</span>
+                        </span>
+
+                    </Link>
                 </li>
             </ul>
         </aside>)
