@@ -113,7 +113,7 @@ export const updateAssessment = (id,data, domain,handleClose) => {
         }
         if(data.coverImage  && !data.coverImage.match('^(http|https)://')){
             const file = dataURLtoFile(data.coverImage,uId()+'.png')
-            data[ 'coverImage' ] = await imageUpload(data.domain,'cover-image',file);
+            data[ 'coverImage' ] = await imageUpload(domain,'cover-image',file);
         }
         axiosInstance.put(`/assessment/${ id }`, data).then((response)=>{
             notification(NOTIFICATION_TYPES.SUCCESS, MESSAGE.UPDATE_ASSESSMENT);
