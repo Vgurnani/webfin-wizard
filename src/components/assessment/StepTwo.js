@@ -37,10 +37,13 @@ const StepTwo = (props) => {
     }
     const setAllColors = () => {
         if(assessmentForm?.values?.colors){
-            const obj = { label: 'Custom Color', value: JSON.parse(assessmentForm?.values?.colors),imageUrl: undefined }
+            const colors = JSON.parse(assessmentForm?.values?.colors)
+            const obj = { label: 'Custom Color', value: colors,imageUrl: undefined }
             const allColors = [ ... AllColors() ]
-            allColors.pop()
-            allColors.push(obj)
+            if(colors.name === 'custom-color'){
+                allColors.pop()
+                allColors.push(obj)
+            }
             return allColors
         }else{
             return AllColors()

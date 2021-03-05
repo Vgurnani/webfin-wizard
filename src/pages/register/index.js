@@ -65,22 +65,6 @@ const RegisterPage = (props) => {
                                     </p>
                                     <Form className="form" onSubmit={ handleSubmit(submitData) }>
                                         <Field
-                                            name="firstName"
-                                            label="First Name:"
-                                            type="text"
-                                            component={ renderFieldWG }
-                                            maxLength="150"
-                                            placeholder='Enter your first name'
-                                        />
-                                        <Field
-                                            name="lastName"
-                                            label="Last Name:"
-                                            type="text"
-                                            component={ renderFieldWG }
-                                            maxLength="150"
-                                            placeholder='Enter your last name'
-                                        />
-                                        <Field
                                             name="email"
                                             label="Email:"
                                             type="text"
