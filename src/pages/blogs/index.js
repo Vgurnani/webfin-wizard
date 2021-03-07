@@ -40,6 +40,7 @@ const BlogsPage = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [ activePagePublish, setActivePagePublish ] = useState(0);
+    const [ copySuccess, setCopySuccess ] = useState('');
     const [ activePageDraft, setActivePageDraft ] = useState(0)
     const publishBlogs = useSelector(state => state.blog.publishBlogs)
     const publishMetaData = useSelector(state => state.blog.publishMetaData)
@@ -139,6 +140,13 @@ const BlogsPage = () => {
 
     }
 
+    const copyToClipBoard = (event, blog) => {
+        event.preventDefault();
+        navigator.clipboard.writeText(`https://${ data.sites[ 0 ].domain }/blog/${ blog.slug }`)
+        setCopySuccess('Copied!');
+        setTimeout(() => setCopySuccess(''), 1000);
+    };
+
     return(
         <main className="dashboard-data blog-dashboard">
             <section className="dashboard-body" style={ { marginTop: '12px' } }>
@@ -165,6 +173,7 @@ const BlogsPage = () => {
                         </Form>
                     </div>
                 </div>
+                <div>{copySuccess}</div>
                 <div className="blog-custom-list-table">
                     <div className="blog-custom-list">
                         <div className="blog-list-header">
@@ -225,11 +234,11 @@ const BlogsPage = () => {
                                             <EditBlogListIcon />
                                             <span>Edit</span>
                                         </a>
-                                        <a onClick={ (e) => handleClone(e, blog) } className="table-action-btns" href="/#">
+                                        <a onClick={ (e) => handleClone(e, blog) } className="table-action-btns active" href="/#">
                                             <CloneBlogListIcon />
                                             <span>Clone</span>
                                         </a>
-                                        <a className="table-action-btns" href="/#">
+                                        <a className='table-action-btns' href="/#" onClick={ (e) => copyToClipBoard(e, blog) }>
                                             <ShareBlogListIcon />
                                             <span>Share</span>
                                         </a>
@@ -289,7 +298,7 @@ const BlogsPage = () => {
                                                 </div>
                                             </div>
                                             { draftBlogs?.length ? <div className="blog-custom-list-table-data">
-                                                {draftBlogs?.map((blog, index) => (<div className="blog-list-table blog-list-header" key={ blog?.slug }>
+                                                {draftBlogs?.map((blog, index) => (<div className="active blog-list-table blog-list-publish blog-list-header" key={ blog?.slug }>
                                                     <div className="blog-list-column blog-list-live" key={ index }>
                                                         <Form.Check
                                                             type="switch"
@@ -327,7 +336,7 @@ const BlogsPage = () => {
                                                                 <CloneBlogListIcon />
                                                                 <span>Clone</span>
                                                             </a>
-                                                            <a className="table-action-btns" href="/#">
+                                                            <a className="table-action-btns" href="/#" onClick={ (e) => copyToClipBoard(e, blog) }>
                                                                 <ShareBlogListIcon />
                                                                 <span>Share</span>
                                                             </a>

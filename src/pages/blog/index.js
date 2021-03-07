@@ -71,7 +71,7 @@ const BlogPage =(props) => {
             content: formData.data ? formData.data : initialValue,
             imageUrl: formData.blogUrl,
             title: formData.title,
-            status: BLOG_STATUS.PUBLISHED
+            status: id && blog.status ? blog.status : BLOG_STATUS.PUBLISHED
         }
         if (id && blog.title === formData.title) {
             delete data.title;
