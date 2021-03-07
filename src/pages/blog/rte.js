@@ -76,16 +76,16 @@ const RichTextEditor = (props) => {
                             <option format="heading-four">4</option>
                         </Form.Control>
                     </div>
-                    <div className="toolbar-box">
+                    {/* <div className="toolbar-box">
                         <MarkButton format="font-size" icon="FontSizeEditor"/>
                         <MarkButton format="font-family" icon="FontFamilyEditor"/>
-                    </div>
+                    </div> */}
                     <div className="toolbar-box">
                         <MarkButton format="bold" icon="BoldEditor"/>
                         <MarkButton format="italic" icon="ItalicEditor"/>
                         <MarkButton format="underline" icon="UnderlineEditor"/>
-                        <MarkButton format="strike" icon="StrikeThroghEditor"/>
-                        <MarkButton format="highlight" icon="HighlightEditor"/>
+                        {/* <MarkButton format="strike" icon="StrikeThroghEditor"/>
+                        <MarkButton format="highlight" icon="HighlightEditor"/> */}
                     </div>
                     <div className="toolbar-box">
                         <BlockButton format="numbered-list" icon="ListNumberedEditor"/>
@@ -98,14 +98,14 @@ const RichTextEditor = (props) => {
                         <MarkButton format="emoji" icon="TableEditor"/>
                         <MarkButton format="video" icon="MediaEditor"/>
                     </div>
-                    <div className="toolbar-box">
+                    {/* <div className="toolbar-box">
                         <MarkButton format="undo" icon="UndoEditor"/>
                         <MarkButton format="redo" icon="RedoEditor"/>
-                    </div>
+                    </div> */}
 
-                    <div className="toolbar-box">
+                    {/* <div className="toolbar-box">
 
-                    </div>
+                    </div> */}
                 </div>
             </Toolbar>
             <div className="rte-editor-content">
