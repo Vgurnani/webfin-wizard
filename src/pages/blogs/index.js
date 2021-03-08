@@ -39,6 +39,7 @@ const BlogsPage = () => {
     const limit = 6;
     const dispatch = useDispatch();
     const history = useHistory();
+    const [ sortToggle, setSortToggle ] = useState(false);
     const [ activePagePublish, setActivePagePublish ] = useState(0);
     const [ copySuccess, setCopySuccess ] = useState('');
     const [ activePageDraft, setActivePageDraft ] = useState(0)
@@ -139,6 +140,17 @@ const BlogsPage = () => {
         blogType === BLOG_STATUS.PUBLISHED ?  dispatch(getPublishedBlogs(args)) : dispatch(getDraftBlogs(args));
 
     }
+    const sortDataMobile = ( type, order ) => {
+        sortPublish[ type ] = order
+        sortDraft[ type ] = order
+        setSortPublish(sortPublish)
+        setSortDraft(sortDraft)
+        const publishArgs = `page=${ activePagePublish }&size=${ limit }&sort=${ type },${ order }`
+        const draftArgs = `page=${ activePageDraft }&size=${ limit }&sort=${ type },${ order }`
+        dispatch(getPublishedBlogs(publishArgs))
+        dispatch(getDraftBlogs(draftArgs))
+        setSortToggle(!sortToggle)
+    }
 
     const copyToClipBoard = (event, blog) => {
         event.preventDefault();
@@ -146,7 +158,6 @@ const BlogsPage = () => {
         setCopySuccess('Copied!');
         setTimeout(() => setCopySuccess(''), 1000);
     };
-
     return(
         <main className="dashboard-data blog-dashboard">
             <section className="dashboard-body" style={ { marginTop: '12px' } }>
@@ -156,10 +167,18 @@ const BlogsPage = () => {
                         <div className="dashboard-body-actions">
 
                             <Link to={ ROUTES.BLOG } className='btn btn-primary add-new-blog'>Add New+</Link>
-                            <Link to={ ROUTES.BLOG } className='btn btn-primary sort-blogs'>
+                            <Link to='#' onClick={ () => setSortToggle(!sortToggle) } className='btn btn-primary sort-blogs'>
                                 <SortBlogIcon />
                                 Sort By
                             </Link>
+                            {
+                                sortToggle && <ul className='wrap-drop drop'>
+                                    <li  onClick={ () => sortDataMobile('title','asc') }><a>Title -asc</a></li>
+                                    <li onClick={ () => sortDataMobile('createdAt','asc') } ><a>Created At -asc</a></li>
+                                    <li onClick={ () => sortDataMobile('title','desc') }><a>Title -desc</a></li>
+                                    <li className={ sortPublish[ 'createdAt' ] === 'desc' ? 'active' : '' } onClick={ () => sortDataMobile('createdAt','desc') }><a>Created At -desc</a></li>
+                                </ul>
+                            }
                         </div>
                     </div>
                     <div className="dashboard-actions">
