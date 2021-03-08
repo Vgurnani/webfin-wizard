@@ -1910,7 +1910,7 @@
     left: 0
     right: 0
     padding: 0 0 0 16px
-    bottom: 2%
+    bottom: 10%
     .notification-menu
         width: 60px !important
         display: inline-block !important
@@ -1968,16 +1968,19 @@
             right: 0 !important
             top: auto !important
             bottom: 100% !important
+            padding: 10px 34px !important
             @media (max-width: $breakpoint-ipad)
                 top: 100% !important
                 bottom: auto !important
-            .dropdown-item
+                padding: 10px 24px !important
+            .dropdown-item,
+            a
                 font-size: 16px
                 line-height: 1.4
                 letter-spacing: 0.5px
                 color: $dark-grey-color
-                padding: 0 !important
-                margin: 0 0 20px
+                padding: 10px 0 !important
+                margin: 0
                 &:hover,
                 &:active,
                 &:focus
@@ -1994,6 +1997,7 @@
                 padding: 13px 0
                 background-color: transparent
                 border: none
+                max-width: 240px
                 &:not(:disabled):not(.disabled):active,
                 &:not(:disabled):not(.disabled):active:focus,
                 &:hover,
