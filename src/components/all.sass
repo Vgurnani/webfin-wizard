@@ -1646,6 +1646,7 @@ ul
     color: $primary-color
 .drag-image-box
   width: 100%
+  max-width: 225px
   display: inline-block
   height: 100px
   background: $light-bg-color
@@ -2154,6 +2155,8 @@ body.modal-open
     width: 888px
     .modal-content
       width: 100%
+      @media (max-width: $breakpoint-mobile)
+        max-height: 97vh;
     .back-to-home
       a
         color: $dark-grey-color !important
@@ -2167,6 +2170,8 @@ body.modal-open
       top: 0
     .modal-body
       padding: 26px 45px 0
+      @media (max-width: $breakpoint-mobile)
+        padding: 25px 15px 0
   .drag-image-box
     padding: 0
     position: relative
@@ -2191,10 +2196,22 @@ body.modal-open
     width: 62%
     display: inline-block
     vertical-align: top
+    @media (max-width: $breakpoint-mobile)
+      width: 100%
+      .color-palate-preview
+        max-width: 100%
+        width: 100%
   .custom-color-palate
     display: inline-block
     vertical-align: top
     width: 38%
+    @media (max-width: $breakpoint-mobile)
+      width: 100%
+    .manage-header
+      position: relative
+      .font-color-switcher
+        position: absolute
+        right: 0
   .preview-switch
     width: 100%
     display: inline-block
@@ -2241,12 +2258,20 @@ body.modal-open
 .color-selector
   width: 100%
   display: inline-block
+  @media (max-width: $breakpoint-mobile)
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
   .color-selector-group
     width: 126px
     display: inline-block
     vertical-align: top
     margin-left: 20px
     margin-bottom: 20px
+    @media (max-width: $breakpoint-mobile)
+      width: 45%
+      margin-left: 0
     &.home-bg
       width: 162px
     &:first-child
@@ -2266,9 +2291,12 @@ body.modal-open
       border: 1px solid #757575
       border-radius: 24px
       padding: 7px 10px
+      height: 45px
+      &.active
+        border: 2px solid $primary-color !important
       .form-control
         width: 60%
-        width: calc(100% - 41px)
+        width: calc(100% - 38px)
         display: inline-block
         vertical-align: middle
         border-radius: 0
@@ -2279,6 +2307,8 @@ body.modal-open
         line-height: 1.5
         letter-spacing: 0.5px
         height: auto
+        &:focus 
+          box-shadow: none
       .color-selector-preview
         display: inline-block
         vertical-align: middle

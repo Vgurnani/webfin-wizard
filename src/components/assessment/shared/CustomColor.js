@@ -232,8 +232,8 @@ const CustomColor = (props) => {
                             </WebTemplates>
                         </div>
                     </div>
-                    <div className='custom-color-palate'>
-                        <div>
+                    <div className='custom-color-palate mt-5'>
+                        <div className={ 'manage-header' }>
                             {radioView('header-color','#000000','#FFFFFF')}
                             <Field
                                 name={ 'coverImage' }
