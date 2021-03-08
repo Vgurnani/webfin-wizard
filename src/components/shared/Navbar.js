@@ -97,7 +97,7 @@ const Navbar = (props) => {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu menuAlign="left">
-                                <Dropdown.Item onClick={ () => history.push(ROUTES.USER_PROFILE) }>My Account</Dropdown.Item>
+                                <Dropdown.Item><Link to={ ROUTES.USER_PROFILE }>My Account</Link></Dropdown.Item>
                                 <Dropdown.Item onClick={ logout }>Log out</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
