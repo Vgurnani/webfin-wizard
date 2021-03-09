@@ -206,7 +206,7 @@ const EditSitePage =(props) => {
                             <Form.Label>Header/Footer:</Form.Label>
                             </Form.Group>*/}
                     </div>
-                    <Modal show={ open } onHide={ handleClose } className="logo-upload-modal">
+                    <Modal show={ open } onHide={ handleClose } className='logo-upload-modal'>
                         {renderModalView()}
                     </Modal>
                 </div>
