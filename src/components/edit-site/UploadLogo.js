@@ -33,7 +33,7 @@ const UploadLogo = (props) => {
                 <Modal.Header closeButton>
                     <div className="logo-upload-header">
                         <Row>
-                            <Col className="col-6">
+                            <Col className="col">
                                 <Modal.Title>Site {fieldName === 'logoUrl' ? 'Logo' : 'Icon/ Favicon'}</Modal.Title>
                             </Col>
                             {/*<Col className="col-6 search-wrapper">
