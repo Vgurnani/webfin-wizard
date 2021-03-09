@@ -216,7 +216,7 @@ const getIcon = (iconType, bogFormData) => {
         return <QuoteEditor />
     case 'ImageUploadEditor':
         return <InsertImageButton bogFormData={ bogFormData } />
-    case 'TableEditor':
+    case 'SmileEditor':
         return <EmojiButton />
     case 'MediaEditor':
         return <InsertVideoButton />
