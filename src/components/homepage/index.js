@@ -8,13 +8,14 @@ import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
+import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../constants/appRoutes';
 // import slider1 from '../../public/images/home/slider-1.png';
 import sliderNew from '../homepage/assets/images/assesment.png';
 import basicPlan from '../homepage/assets/images/mana.svg';
 import premiumPlan from '../homepage/assets/images/fantasy.svg';
-import vipPlan from '../homepage/assets/images/man-mage.svg';
+// import vipPlan from '../homepage/assets/images/man-mage.svg';
 
 import hamBurger from '../homepage/assets/images/hamburger.svg';
 import megicStick from '../homepage/assets/images/stick-icon.svg';
@@ -30,7 +31,8 @@ import downloadSpeed from '../homepage/assets/images/fast-download.svg';
 import emailImportant from '../homepage/assets/images/important-mail.svg';
 import wizardIcon from '../homepage/assets/images/wizrd-white.png';
 import checkIcon from '../homepage/assets/images/check.svg';
-import wizardBlueIcon from '../homepage/assets/images/blue_hat_wizrd.png';
+import hourglassIcon from '../homepage/assets/images/hourglass.svg';
+import moneyIcon from '../homepage/assets/images/money.svg';
 import './home.sass';
 
 const HomePage = () => {
@@ -98,7 +100,7 @@ const HomePage = () => {
                                 </div>
                             </div>
                         </Col>
-                        <Col col={ 4 } className={ 'd-flex justify-content-center rightArrow' }>
+                        <Col col={ 4 } className={ 'd-flex justify-content-center rightArrow manageBefore' }>
                             <div className={ 'box text-center' }>
                                 <span className={ 'circleBox' }>2</span>
                                 <h3 className={ 'mt-2' }>Choose a color palette</h3>
@@ -180,7 +182,7 @@ const HomePage = () => {
                         </Col>
                     </Row>
                     <Row className={ 'align-items-stretch' } >
-                        <Col col={ 3 } className={ 'mobileBottom' } sm="6" md="3">
+                        <Col col={ 3 } className={ 'mobileBottom' } sm="6" md="6" xl="3">
                             <div className={ 'box text-center' }>
                                 <span className={ 'circleBox' }>
                                     <img src={ seoImg } alt="SEO" />
@@ -189,7 +191,7 @@ const HomePage = () => {
                                 <p>Our sites are built for Google Search so you get more traffic and rank higher, with no experience necessary</p>
                             </div>
                         </Col>
-                        <Col col={ 3 } className={ 'd-flex justify-content-center mobileBottom' } sm="6" md="3">
+                        <Col col={ 3 } className={ 'd-flex justify-content-center mobileBottom' } sm="6" md="6" xl="3">
                             <div className={ 'box text-center' }>
                                 <span className={ 'circleBox' }>
                                     <img src={ mobileImg } alt="SEO" />
@@ -198,7 +200,7 @@ const HomePage = () => {
                                 <p>According to Google, over 50% of website traffic comes from mobile visitors</p>
                             </div>
                         </Col>
-                        <Col col={ 3 } className={ 'd-flex justify-content-end mobileBottom' } sm="6" md="3">
+                        <Col col={ 3 } className={ 'd-flex justify-content-end mobileBottom' } sm="6" md="6" xl="3">
                             <div className={ 'box text-center' }>
                                 <span className={ 'circleBox' }>
                                     <img src={ downloadSpeed } alt="SEO" />
@@ -207,7 +209,7 @@ const HomePage = () => {
                                 <p>Get blazing fast load times, avoid crashes, and easily handle millions of visitors. Built with the same technology used by Netflix, NASA and Twitter.</p>
                             </div>
                         </Col>
-                        <Col col={ 3 } className={ 'd-flex justify-content-end' } sm="6" md="3">
+                        <Col col={ 3 } className={ 'd-flex justify-content-end' } sm="6" md="6" xl="3">
                             <div className={ 'box text-center' }>
                                 <span className={ 'circleBox' }>
                                     <img src={ emailImportant } alt="SEO" />
@@ -223,7 +225,7 @@ const HomePage = () => {
                 <Container fluid>
                     <Row>
                         <Col col={ 12 }>
-                            <h2 className={ 'text-center titleHeading' }>Here’s How Much <span className={ 'font-bold color-purple' }>Time</span> You Can Save</h2>
+                            <h2 className={ 'text-center titleHeading' }>Here’s How Much <span className={ 'font-bold color-purple' }>Time</span> You Can Save <img src={ hourglassIcon } alt="Time" /></h2>
                         </Col>
                     </Row>
                     <Row className={ 'tableView' }>
@@ -305,7 +307,7 @@ const HomePage = () => {
 
                     <Row>
                         <Col col={ 12 }>
-                            <h2 className={ 'text-center titleHeading mt-4' }>Here’s How Much <span className={ 'font-bold color-purple' }>Money</span> You Can Save</h2>
+                            <h2 className={ 'text-center titleHeading mt-4' }>Here’s How Much <span className={ 'font-bold color-purple' }>Money</span> You Can Save <img src={ moneyIcon } alt="Money" /></h2>
                         </Col>
                     </Row>
                     <Row className={ 'tableView' }>
@@ -380,7 +382,26 @@ const HomePage = () => {
             </section>
             <section className="website-plan pt-3 pb-5">
                 <Container fluid>
-                    <h3 className={ 'titleHeading' }>Pricing</h3>
+                    <h3 className={ 'titleHeading mb-0' }>Pricing</h3>
+                    <Form className="select_plan">
+                        <p className="switch_text">Annually</p>
+                        <Form.Check type="switch" id="custom-switch" label="" />
+                        <p className="">Monthly</p>
+                    </Form>
+                    <h4 className={ 'subheading mb-0' }>Switch to annually to get <strong>2 months FREE</strong></h4>
+                    {/* <Row>
+                        <Carousel controls={ false }>
+                            <Carousel.Item>
+                                <img src={ sliderNew } alt='slider1' />
+                            </Carousel.Item>
+                            <Carousel.Item>
+                                <img src={ sliderNew } alt='slider2'/>
+                            </Carousel.Item>
+                            <Carousel.Item>
+                                <img src={ sliderNew } alt='slider3'/>
+                            </Carousel.Item>
+                        </Carousel>
+                    </Row> */}
                     <Row className="">
                         <Col className="col-4">
                             <div className="plan-detail">
@@ -388,14 +409,38 @@ const HomePage = () => {
                                     <div className="plan-img">
                                         <img src={ basicPlan } alt="Basic Plan" />
                                     </div>
-                                    <h4 className="plan-name">14-Day Free Trial</h4>
+                                    <h4 className="plan-name">Wizrd</h4>
                                     <ul className="plan-feature">
-                                        <li>Get a beautiful blog in minutes!</li>
+                                        <li>Get a beautiful blog in seconds!</li>
                                         <li>1 Website + 1 Custom Sub-Domain</li>
-                                        <li>1 user seat</li>
+                                        <li>1,000 Views / Month</li>
+                                        <li>1 user</li>
                                         <li>100 MB of space </li>
-                                        <li>Blog Trends (Limited)</li>
-                                        <li>No credit card required</li>
+                                        <li>2 Blog posts / Month </li>
+                                        <li>No credit card required </li>
+                                    </ul>
+                                    <div className="plan-price">Free</div>
+                                    <div className="plan-action">
+                                        <button className="btn btn-secondary">Try Now</button>
+                                        <span className={ 'getText mt-3' }>Get Yours In Minutes</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                        <Col className="col-4">
+                            <div className="plan-detail">
+                                <div className="plan-detail-inner">
+                                    <div className="plan-img">
+                                        <img src={ basicPlan } alt="Basic Plan" />
+                                    </div>
+                                    <h4 className="plan-name">Wizrd <span>Plus</span></h4>
+                                    <ul className="plan-feature">
+                                        <li>1 Website + 1 Custom Sub-Domain</li>
+                                        <li>5,000 Views / Month</li>
+                                        <li>1 User </li>
+                                        <li>200 MB of space </li>
+                                        <li>4 Blog posts / Month</li>
+                                        <li>No credit card required </li>
                                     </ul>
                                     <div className="plan-price">Free</div>
                                     <div className="plan-action">
@@ -411,18 +456,18 @@ const HomePage = () => {
                                     <div className="plan-img">
                                         <img src={ premiumPlan } alt="Premium Plan" />
                                     </div>
-                                    <h4 className="plan-name">
-                                        <img src={ wizardBlueIcon } alt="" />
-                                    </h4>
+                                    <h4 className="plan-name">Wizrd <span className={ 'purple-color' }>Pro</span></h4>
                                     <ul className="plan-feature">
                                         <li>1 Website </li>
                                         <li>Connect Custom Domain</li>
-                                        <li>2 user seats</li>
-                                        <li>25k pageviews per month</li>
-                                        <li>1,000 email subscribers</li>
-                                        <li>10 GB space</li>
+                                        <li>25,000 Views / Month</li>
+                                        <li>1 User </li>
+                                        <li>5 GB space</li>
                                         <li>Free SSL</li>
                                         <li>Cancel Anytime</li>
+                                        <li><strong>Collect email subscribers (Up to 1,000)</strong></li>
+                                        <li>Remove “Powered by Wizrd”</li>
+                                        <li>Customize colors to match your brand</li>
                                     </ul>
                                     <div className="plan-price">$29<sub>/mo</sub></div>
                                     <div className="plan-action">
@@ -435,21 +480,19 @@ const HomePage = () => {
                             <div className="plan-detail">
                                 <div className="plan-detail-inner">
                                     <div className="plan-img">
-                                        <img src={ vipPlan } alt="VIP Plan" />
+                                        <img src={ premiumPlan } alt="Premium Plan" />
                                     </div>
-                                    <h4 className="plan-name">
-                                        <img src={ wizardBlueIcon } alt="" />
-                                    </h4>
+                                    <h4 className="plan-name">Wizrd <span className={ 'purple-color' }>Pro</span></h4>
                                     <ul className="plan-feature">
-                                        <li>Blog Trends Tool</li>
-                                        <li>1 Websites + 1 Free Domain</li>
-                                        <li>Analytics</li>
-                                        <li>5 user seats</li>
-                                        <li>100k pageviews per month</li>
-                                        <li>5,000 email subscribers</li>
+                                        <li>1 Website </li>
+                                        <li>Connect Custom Domain</li>
+                                        <li>100,000 Views / Month</li>
+                                        <li>1 User </li>
                                         <li>10 GB space</li>
                                         <li>Free SSL</li>
                                         <li>Cancel Anytime</li>
+                                        <li>Collect email subscribers (Up to 10,000)</li>
+                                        <li>Remove “Powered by Wizrd”</li>
                                     </ul>
                                     <div className="plan-price">$49<sub>/mo</sub></div>
                                     <div className="plan-action">
