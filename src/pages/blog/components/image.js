@@ -9,11 +9,12 @@ import { Button } from './button';
 import {
     ImageUploadEditor
 } from '../../../utils/svg';
-import ModalBox from 'components/core/modal';
+import { Modal , Row, Col } from 'react-bootstrap';
 import UploadImage from './uploadImage';
 import { dataURLtoFile, getDomain, uId } from 'utils/helpers';
 import { imageUpload } from 'middleware/assessments';
 import { useSlate } from 'slate-react';
+import { useSelector } from 'react-redux'
 
 export const ImageElement = ({ attributes, children, element }) => {
     // const selected = useSelected()
@@ -32,11 +33,17 @@ export const ImageElement = ({ attributes, children, element }) => {
 
 export const insertImage = (editor, url) => {
     const text = { text: '' }
-    const image = { type: 'image', url, children: [ text ] }
+    const image = [ { type: 'image', url, children: [ text ] },{
+        type: 'paragraph',
+        children: [
+            { text: '' },
+        ],
+    } ]
     Transforms.insertNodes(editor, image)
 }
 
 export const InsertImageButton = ({ bogFormData, handleSubmit }) => {
+    const form = useSelector((state) => state.form.blogForm )
     const editor = useSlate();
     const [ open, toggleModal ] = useState(false);
     const handleModal = () => {
@@ -47,16 +54,25 @@ export const InsertImageButton = ({ bogFormData, handleSubmit }) => {
         if (bogFormData.slateImage && !bogFormData.slateImage.match('^(http|https)://')){
             const file = dataURLtoFile(bogFormData.slateImage,uId()+'.png')
             const newUrl = await imageUpload(getDomain(),'blog-images',file);
-            console.log('newUrl', newUrl);
             insertImage(editor, newUrl)
+            toggleModal(!open);
         }
     }
 
     return (
         <>
-            <ModalBox open={ open } handleClose={ handleModal } >
-                <UploadImage submitData={ submitData } fieldName={ 'slateImage' } handleSubmit={ handleSubmit } title={ 'Add Image' } />
-            </ModalBox>
+            <Modal show={ open }  onHide={ handleModal } className="logo-upload-modal" >
+                <Modal.Header closeButton>
+                    <div className="logo-upload-header">
+                        <Row>
+                            <Col className="col-6">
+                                <Modal.Title>Add image</Modal.Title>
+                            </Col>
+                        </Row>
+                    </div>
+                </Modal.Header>
+                <UploadImage previewFile={ form?.values?.slateImage } submitData={ submitData } fieldName={ 'slateImage' } handleSubmit={ handleSubmit } title={ 'Add Image' } />
+            </Modal>
             <Button
                 onMouseDown={ event => {
                     event.preventDefault()
@@ -68,6 +84,7 @@ export const InsertImageButton = ({ bogFormData, handleSubmit }) => {
             >
                 <ImageUploadEditor />
             </Button>
+
         </>
     )
 }

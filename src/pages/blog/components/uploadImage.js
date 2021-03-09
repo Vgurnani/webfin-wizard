@@ -15,7 +15,7 @@ import
 }
     from 'react-bootstrap';
 const UploadImage = (props) => {
-    const { submitData,loading,previewFile,clearImage ,fieldName, title } = props
+    const { submitData,loading,previewFile,clearImage ,fieldName } = props
     // const handleSelect = async(id) => {
     //     setSelectedUnsplash(id)
     //     const image = unsplashImages.filter((item) => item.id == id)[ 0 ];
@@ -29,60 +29,42 @@ const UploadImage = (props) => {
     }
     return(
         <div className="">
-            <Form onSubmit={ submitData }>
-                <Modal.Header closeButton>
-                    <div className="logo-upload-header">
-                        <Row>
-                            <Col className="col-6">
-                                <Modal.Title>{title || `Site ${ fieldName === 'logoUrl' ? 'Logo' : 'Icon/ Favicon' }`}</Modal.Title>
-                            </Col>
-                            {/*<Col className="col-6 search-wrapper">
-                            <Form.Group>
-                                <input onChange={ handleSearch } name='search' className='form-control' />
-                            </Form.Group>
-
-                        </Col>*/}
-                        </Row>
-                    </div>
-                </Modal.Header>
+            <Form onSubmit={ () => {} }>
                 <Modal.Body>
+                    <Row>
+                        <Col className="col-4">
+                            <Field
+                                name={ fieldName }
+                                component={ renderFileDrop }
+                                isDrop={ ()=> {} }
+                                placeholder={ "<a><i className='fa fa-plus'/> upload your image</a>" }
+                                isDropText={ 'Drag your image' }
+                            />
+                        </Col>
+                        <Col className="col-8 logo-preview-modal">
+                            <div className="logo-preview">
+                                <h4>Preview</h4>
+                                {previewFile && <div className="preview-logo">
+                                    {typeof(previewFile) !== 'string' ?
+                                        <span>
+                                            {previewFile.name}-{bytesToSize(previewFile.size)}
+                                        </span> :
+                                        <img src={ previewFile } />
+                                    }
+                                </div>}
+                                {previewFile && <span onClick={ clearImageFun } className="clear-logo">clear</span>}
 
-                    <div className="">
-                        <Row>
-                            <Col className="col-4">
-                                <Field
-                                    name={ fieldName }
-                                    component={ renderFileDrop }
-                                    isDrop={ ()=> {} }
-                                    placeholder={ "<a><i className='fa fa-plus'/> upload your logo</a>" }
-                                    isDropText={ 'Drag your images' }
-                                />
-                            </Col>
-                            <Col className="col-8 logo-preview-modal">
-                                <div className="logo-preview">
-                                    <h4>Preview</h4>
-                                    {previewFile && <div className="preview-logo">
-                                        {typeof(previewFile) !== 'string' ?
-                                            <span>
-                                                {previewFile.name}-{bytesToSize(previewFile.size)}
-                                            </span> :
-                                            <img src={ previewFile } />
-                                        }
-                                    </div>}
-                                    {previewFile && <span onClick={ clearImageFun } className="clear-logo">clear</span>}
-
-                                </div>
-                                {/* <div className="logo-upload-progress">
+                            </div>
+                            {/* <div className="logo-upload-progress">
                     <ProgressBar now={60} />
                     </div> */}
-                            </Col>
-                        </Row>
-                    </div>
+                        </Col>
+                    </Row>
                 </Modal.Body>
                 <Modal.Footer>
                     <div className="modal-btns text-right">
                         <ButtonLoader
-                            button={ <Button type='submit' variant="primary">confirm</Button> }
+                            button={ <Button type='button' onClick={ () => submitData() } variant="primary">confirm</Button> }
                             loadButton= {
                                 <Button disabled={ true } type='button' variant="primary">saving..</Button>
                             }
