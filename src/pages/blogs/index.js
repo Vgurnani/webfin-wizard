@@ -44,6 +44,7 @@ const BlogsPage = () => {
     const history = useHistory();
     const [ sortToggle, setSortToggle ] = useState(false);
     const [ activePagePublish, setActivePagePublish ] = useState(0);
+    const [ activeBlogs, setActiveBlogs ] = useState([]);
     const [ copySuccess, setCopySuccess ] = useState('');
     const [ activePageDraft, setActivePageDraft ] = useState(0)
     const publishBlogs = useSelector(state => state.blog.publishBlogs)
@@ -161,6 +162,17 @@ const BlogsPage = () => {
         setCopySuccess('Copied!');
         setTimeout(() => setCopySuccess(''), 1000);
     };
+
+    const toggleActiveBlogs = (id) => {
+        const blogsData = [ ...activeBlogs ];
+        if (blogsData.includes(id)) {
+            delete blogsData[ blogsData.indexOf(id) ];
+        } else {
+            blogsData.push(id)
+        }
+        setActiveBlogs(blogsData);
+    }
+
     return(
         <main className="dashboard-data blog-dashboard">
             <section className="dashboard-body" style={ { marginTop: '12px' } }>
@@ -219,7 +231,7 @@ const BlogsPage = () => {
                             </div>
                         </div>
                         { publishBlogs?.length ? <div className="blog-custom-list-table-data">
-                            {publishBlogs?.map((blog, index) => (<div className="active blog-list-table blog-list-publish blog-list-header" key={ blog?.slug }>
+                            {publishBlogs?.map((blog, index) => (<div className={ (activeBlogs?.includes(blog?.id) ? 'active ' : '') + 'blog-list-table blog-list-publish blog-list-header' } key={ blog?.slug }>
                                 <div className="blog-list-column blog-list-live" key={ index }>
                                     <Form.Check
                                         type="switch"
@@ -233,7 +245,7 @@ const BlogsPage = () => {
                                     <span className="table-post-title">
                                         {blog?.title}
                                         <a onClick={ (event) => redirectToBlog(event, blog) }>View</a>
-                                        <a className="toggle-blog-detail">
+                                        <a onClick={ () => toggleActiveBlogs(blog?.id) } className="toggle-blog-detail">
                                             <ChevronRight />
                                         </a>
                                     </span>
@@ -320,7 +332,7 @@ const BlogsPage = () => {
                                                 </div>
                                             </div>
                                             { draftBlogs?.length ? <div className="blog-custom-list-table-data">
-                                                {draftBlogs?.map((blog, index) => (<div className="active blog-list-table blog-list-publish blog-list-header" key={ blog?.slug }>
+                                                {draftBlogs?.map((blog, index) => (<div className={ (activeBlogs?.includes(blog?.id) ? 'active ' : '') + 'blog-list-table blog-list-publish blog-list-header' } key={ blog?.slug }>
                                                     <div className="blog-list-column blog-list-live" key={ index }>
                                                         <Form.Check
                                                             type="switch"
@@ -334,6 +346,9 @@ const BlogsPage = () => {
                                                         <span className="table-post-title">
                                                             {blog?.title}
                                                             <a onClick={ (event) => redirectToBlog(event, blog) }>View</a>
+                                                            <a onClick={ () => toggleActiveBlogs(blog?.id) } className="toggle-blog-detail">
+                                                                <ChevronRight />
+                                                            </a>
                                                         </span>
                                                     </div>
                                                     <div className="blog-list-column blog-list-date">
