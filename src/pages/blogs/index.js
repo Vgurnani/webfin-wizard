@@ -30,6 +30,9 @@ import {
     SortBlogIcon,
     DateBlogListIcon,
     ChevronRight,
+    MobileHomeIcon,
+    MobileSAddNewIcon,
+    MobileSearchIcon,
 } from '../../utils/svg';
 import { getSessionData } from 'utils/helpers'
 import searchIcon from '../../images/search.png';
@@ -381,6 +384,25 @@ const BlogsPage = () => {
                             </Accordion.Collapse>
                         </Card>
                     </Accordion>
+                </div>
+                <div className="blog-mobile-action">
+                    <ul>
+                        <li>
+                            <Link>
+                                <MobileHomeIcon />
+                            </Link>
+                        </li>
+                        <li>
+                            <Link>
+                                <MobileSAddNewIcon />
+                            </Link>
+                        </li>
+                        <li>
+                            <Link>
+                                <MobileSearchIcon />
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
             </section>
         </main>
