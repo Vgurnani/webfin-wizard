@@ -219,8 +219,8 @@ const BlogPage =(props) => {
 
                             </div>
                             <div className="blog-editor">
-                                {id && blog && blog.content &&  <RichTextEditor readOnly={ false } setRTEData={ handleRTEdata } initialValue={ blog && blog.content || initialValue } /> }
-                                {!id && !rteLoading && <RichTextEditor readOnly={ false } setRTEData={ handleRTEdata } initialValue={ blogForm?.values?.data || initialValue } />}
+                                {id && blog && blog.content &&  <RichTextEditor bogFormData={ blogForm.values } readOnly={ false } setRTEData={ handleRTEdata } initialValue={ blog && blog.content || initialValue } /> }
+                                {!id && !rteLoading && <RichTextEditor bogFormData={ blogForm.values } readOnly={ false } setRTEData={ handleRTEdata } initialValue={ blogForm?.values?.data || initialValue } />}
                                 {errorMessageContent && <p><span className="field_error">Please insert content</span></p>}
                             </div>
                         </div>

@@ -94,7 +94,7 @@ const RichTextEditor = (props) => {
                     <div className="toolbar-box">
                         <MarkButton format="link" icon="LinkEditor"/>
                         <BlockButton format="block-quote" icon="QuoteEditor"/>
-                        <MarkButton format="image" icon="ImageUploadEditor"/>
+                        <MarkButton { ...props } format="image" icon="ImageUploadEditor"/>
                         <MarkButton format="emoji" icon="TableEditor"/>
                         <MarkButton format="video" icon="MediaEditor"/>
                     </div>
@@ -190,7 +190,7 @@ const isImageUrl = url => {
     return imageExtensions.includes(ext)
 }
 
-const getIcon = (iconType) => {
+const getIcon = (iconType, bogFormData) => {
     switch (iconType) {
     case 'FontSizeEditor':
         return <FontSizeEditor />
@@ -215,7 +215,7 @@ const getIcon = (iconType) => {
     case 'QuoteEditor':
         return <QuoteEditor />
     case 'ImageUploadEditor':
-        return <InsertImageButton />
+        return <InsertImageButton bogFormData={ bogFormData } />
     case 'TableEditor':
         return <EmojiButton />
     case 'MediaEditor':
@@ -342,9 +342,9 @@ const BlockButton = ({ format, icon }) => {
     )
 }
 
-const MarkButton = ({ format, icon }) => {
+const MarkButton = ({ format, icon, bogFormData }) => {
     const editor = useSlate()
-    const iconSvg = getIcon(icon)
+    const iconSvg = getIcon(icon, bogFormData)
     return (
         <Button
             className="editor-icons"

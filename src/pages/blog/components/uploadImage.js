@@ -14,8 +14,8 @@ import
     Form
 }
     from 'react-bootstrap';
-const UploadLogo = (props) => {
-    const { handleSubmit, submitData,loading,previewFile,clearImage ,fieldName, title } = props
+const UploadImage = (props) => {
+    const { submitData,loading,previewFile,clearImage ,fieldName, title } = props
     // const handleSelect = async(id) => {
     //     setSelectedUnsplash(id)
     //     const image = unsplashImages.filter((item) => item.id == id)[ 0 ];
@@ -29,7 +29,7 @@ const UploadLogo = (props) => {
     }
     return(
         <div className="">
-            <Form onSubmit={ handleSubmit(submitData) }>
+            <Form onSubmit={ submitData }>
                 <Modal.Header closeButton>
                     <div className="logo-upload-header">
                         <Row>
@@ -97,7 +97,7 @@ const UploadLogo = (props) => {
     )
 }
 
-UploadLogo.propTypes = {
+UploadImage.propTypes = {
     submitData: PropTypes.func,
     handleSubmit: PropTypes.func,
     onClose: PropTypes.func,
@@ -112,4 +112,4 @@ UploadLogo.propTypes = {
     title: PropTypes.string
 };
 
-export default UploadLogo
+export default UploadImage
