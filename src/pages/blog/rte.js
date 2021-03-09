@@ -8,6 +8,7 @@ import isHotkey from 'is-hotkey';
 import { Editable, withReact, useSlate, Slate } from 'slate-react';
 import imageExtensions from 'image-extensions';
 import {
+    Text,
     Editor,
     Transforms,
     createEditor,
@@ -21,6 +22,11 @@ import { ImageElement, InsertImageButton, insertImage } from './components/image
 import {
     Form
 } from 'react-bootstrap';
+import Prism from 'prismjs'
+import 'prismjs/components/prism-python'
+import 'prismjs/components/prism-php'
+import 'prismjs/components/prism-sql'
+import 'prismjs/components/prism-java'
 
 import {
     FontSizeEditor,
@@ -55,9 +61,49 @@ const LIST_TYPES = [ 'numbered-list', 'bulleted-list' ]
 
 const RichTextEditor = (props) => {
     const [ value, setValue ] = useState(props.initialValue)
+    const [ language, setLanguage ] = useState('html')
     const renderElement = useCallback(props => <Element { ...props } />, [])
     const renderLeaf = useCallback(props => <Leaf { ...props } />, [])
     const editor = useMemo(() => withImages(withHistory(withReact(createEditor()))), [])
+
+    const getLength = token => {
+        if (typeof token === 'string') {
+            return token.length
+        } else if (typeof token.content === 'string') {
+            return token.content.length
+        } else {
+            return token.content.reduce((l, t) => l + getLength(t), 0)
+        }
+    }
+
+    const decorate = useCallback(
+        ([ node, path ]) => {
+            const ranges = []
+            if (!Text.isText(node)) {
+                return ranges
+            }
+            const tokens = Prism.tokenize(node.text, Prism.languages[ language ])
+            let start = 0
+
+            for (const token of tokens) {
+                const length = getLength(token)
+                const end = start + length
+
+                if (typeof token !== 'string') {
+                    ranges.push({
+                        [ token.type ]: true,
+                        anchor: { path, offset: start },
+                        focus: { path, offset: end },
+                    })
+                }
+
+                start = end
+            }
+
+            return ranges
+        },
+        [ language ]
+    )
 
     useEffect(() => {
         props.setRTEData(value);
@@ -111,6 +157,7 @@ const RichTextEditor = (props) => {
             <div className="rte-editor-content">
                 <div className="editor-content">
                     <Editable
+                        decorate={ decorate }
                         renderElement={ renderElement }
                         renderLeaf={ renderLeaf }
                         placeholder="Enter some rich text…"
@@ -321,8 +368,55 @@ const Leaf = ({ attributes, children, leaf }) => {
     if (leaf.underline) {
         children = <u>{children}</u>
     }
+    let color = '';
 
-    return <span { ...attributes }>{children}</span>
+    if (leaf.comment) {
+        color = 'slategray';
+    }
+
+    if (leaf.operator || leaf.url) {
+        color = '#9a6e3a';
+    }
+
+    if (leaf.keyword) {
+        color = '#07a';
+    }
+
+    if (leaf.variable || leaf.regex) {
+        color = '#e90';
+    }
+
+    if (leaf.number ||
+        leaf.boolean ||
+        leaf.tag ||
+        leaf.constant ||
+        leaf.symbol ||
+        leaf[ 'attr-name' ] ||
+        leaf.selector) {
+        color = '#905';
+    }
+
+    if (leaf.punctuation) {
+        color = '#999';
+    }
+
+    if (leaf.string || leaf.char) {
+        color = '#690';
+    }
+
+    if (leaf.function || leaf[ 'class-name' ]) {
+        color = '#dd4a68';
+    }
+
+    return <span { ...attributes }
+        style={
+            {
+                fontFamily: 'monospace',
+                background: 'hsla(0, 0%, 100%, .5)',
+                color: color
+            }
+        }
+    >{children}</span>
 }
 
 const BlockButton = ({ format, icon }) => {
@@ -366,6 +460,82 @@ const handleHeading = (event, editor) => {
     const format =  optionElement.getAttribute('format');
     toggleBlock(editor, format)
 }
+
+Prism.languages.javascript = Prism.languages.extend('javascript', {})
+Prism.languages.insertBefore('javascript', 'prolog', {
+    comment: { pattern: /\/\/[^\n]*/, alias: 'comment' },
+})
+Prism.languages.html = Prism.languages.extend('html', {})
+Prism.languages.insertBefore('html', 'prolog', {
+    comment: { pattern: /<!--[^\n]*-->/, alias: 'comment' },
+})
+Prism.languages.markdown = Prism.languages.extend('markup', {})
+Prism.languages.insertBefore('markdown', 'prolog', {
+    blockquote: { pattern: /^>(?:[\t ]*>)*/m, alias: 'punctuation' },
+    code: [
+        { pattern: /^(?: {4}|\t).+/m, alias: 'keyword' },
+        { pattern: /``.+?``|`[^`\n]+`/, alias: 'keyword' },
+    ],
+    title: [
+        {
+            pattern: /\w+.*(?:\r?\n|\r)(?:==+|--+)/,
+            alias: 'important',
+            inside: { punctuation: /==+$|--+$/ },
+        },
+        {
+            pattern: /(^\s*)#+.+/m,
+            lookbehind: !0,
+            alias: 'important',
+            inside: { punctuation: /^#+|#+$/ },
+        },
+    ],
+    hr: {
+        pattern: /(^\s*)([*-])([\t ]*\2){2,}(?=\s*$)/m,
+        lookbehind: !0,
+        alias: 'punctuation',
+    },
+    list: {
+        pattern: /(^\s*)(?:[*+-]|\d+\.)(?=[\t ].)/m,
+        lookbehind: !0,
+        alias: 'punctuation',
+    },
+    'url-reference': {
+        pattern: /!?\[[^\]]+\]:[\t ]+(?:\S+|<(?:\\.|[^>\\])+>)(?:[\t ]+(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\((?:\\.|[^)\\])*\)))?/,
+        inside: {
+            variable: { pattern: /^(!?\[)[^\]]+/, lookbehind: !0 },
+            string: /(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\((?:\\.|[^)\\])*\))$/,
+            punctuation: /^[[\]!:]|[<>]/,
+        },
+        alias: 'url',
+    },
+    bold: {
+        pattern: /(^|[^\\])(\*\*|__)(?:(?:\r?\n|\r)(?!\r?\n|\r)|.)+?\2/,
+        lookbehind: !0,
+        inside: { punctuation: /^\*\*|^__|\*\*$|__$/ },
+    },
+    italic: {
+        pattern: /(^|[^\\])([*_])(?:(?:\r?\n|\r)(?!\r?\n|\r)|.)+?\2/,
+        lookbehind: !0,
+        inside: { punctuation: /^[*_]|[*_]$/ },
+    },
+    url: {
+        pattern: /!?\[[^\]]+\](?:\([^\s)]+(?:[\t ]+"(?:\\.|[^"\\])*")?\)| ?\[[^\]\n]*\])/,
+        inside: {
+            variable: { pattern: /(!?\[)[^\]]+(?=\]$)/, lookbehind: !0 },
+            string: { pattern: /"(?:\\.|[^"\\])*"(?=\)$)/ },
+        },
+    },
+})
+Prism.languages.markdown.bold.inside.url = Prism.util.clone(
+    Prism.languages.markdown.url
+)
+Prism.languages.markdown.italic.inside.url = Prism.util.clone(
+    Prism.languages.markdown.url
+)
+Prism.languages.markdown.bold.inside.italic = Prism.util.clone(
+    Prism.languages.markdown.italic
+)
+Prism.languages.markdown.italic.inside.bold = Prism.util.clone(Prism.languages.markdown.bold); // prettier-ignore
 
 RichTextEditor.prototype = {
 }

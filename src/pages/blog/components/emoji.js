@@ -19,9 +19,7 @@ export const EmojiElement = ({ attributes, children, element }) => {
             <div contentEditable={ false }>
                 <img
                     src={ element.url }
-                    className={ css`
-              box-shadow: ${ selected && focused ? '0 0 0 3px #B4D5FF' : 'none' };
-            ` }
+                    style={ { boxShadow: `${ selected && focused ? '0 0 0 3px #B4D5FF' : 'none' }` } }
                 />
             </div>
             {children}
