@@ -6,7 +6,7 @@ import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 
 import {
-    ImageUploadEditor
+    SmileEditor
 } from '../../../utils/svg';
 import { Button } from './button';
 import useClickOutside from './hooks/useClickOutside';
@@ -20,9 +20,6 @@ export const EmojiElement = ({ attributes, children, element }) => {
                 <img
                     src={ element.url }
                     className={ css`
-              display: block;
-              max-width: 100%;
-              max-height: 20em;
               box-shadow: ${ selected && focused ? '0 0 0 3px #B4D5FF' : 'none' };
             ` }
                 />
@@ -66,7 +63,7 @@ export const EmojiButton = () => {
                 <Picker emoji="" title="" native={ true } onSelect={ insertEmoji } />
             )}
             <Button onClick={ togglePicker }>
-                <ImageUploadEditor />
+                <SmileEditor />
             </Button>
         </div>
     )

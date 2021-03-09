@@ -95,7 +95,7 @@ const RichTextEditor = (props) => {
                         <MarkButton format="link" icon="LinkEditor"/>
                         <BlockButton format="block-quote" icon="QuoteEditor"/>
                         <MarkButton { ...props } format="image" icon="ImageUploadEditor"/>
-                        <MarkButton format="emoji" icon="TableEditor"/>
+                        <MarkButton format="emoji" icon="SmileEditor"/>
                         <MarkButton format="video" icon="MediaEditor"/>
                     </div>
                     {/* <div className="toolbar-box">
