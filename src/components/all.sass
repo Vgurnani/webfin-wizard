@@ -1431,7 +1431,7 @@ ul
   @media (max-width: $breakpoint-mobile)
     justify-content: center
   @media (max-width: $breakpoint-mobile)
-    margin: 30px 0 0
+    margin: 10px 0 0
   &.step-btns-right
     justify-content: flex-end
     @media (max-width: $breakpoint-mobile)
@@ -2040,13 +2040,13 @@ body.modal-open
         @media (max-width: $breakpoint-mobile)
           order: 2
           flex: unset
-          width: 100%
+          width: 40%
           text-align: center
       .assesment-right-btns
         order: 3
         @media (max-width: $breakpoint-mobile)
           flex: unset
-          width: 100%
+          width: 60%
           text-align: center
 .custom-color-modal
   .modal-dialog
@@ -2074,7 +2074,7 @@ body.modal-open
       z-index: 9999
     .modal-body
       padding: 26px 45px 0
-      @media (max-width: $breakpoint-mobile)
+      @media (max-width: $breakpoint-ipad)
         padding: 25px 15px 0
   .drag-image-box
     padding: 0
@@ -2178,13 +2178,18 @@ body.modal-open
     vertical-align: top
     margin-left: 20px
     margin-bottom: 20px
-    @media (max-width: $breakpoint-mobile)
-      width: 45%
-      margin-left: 0
     @media (max-width: $breakpoint-ipad)
-      margin-left: 0
+      margin-left: 3px
+    @media (max-width: $breakpoint-mobile)
+      width: 49%
+      margin-left: 2%
+      text-align: center
+      &:nth-child(2n+1)
+        margin-left: 0
     &.home-bg
       width: 162px
+      @media (max-width: $breakpoint-mobile)
+        width: 60%
     &:first-child
       margin-left: 0
     label
@@ -2218,7 +2223,7 @@ body.modal-open
         line-height: 1.5
         letter-spacing: 0.5px
         height: auto
-        &:focus 
+        &:focus
           box-shadow: none
       .color-selector-preview
         display: inline-block

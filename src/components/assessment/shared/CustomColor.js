@@ -109,6 +109,19 @@ const CustomColor = (props) => {
                     {radioView('background-font','#000000','#FFFFFF')}
                 </div>
             </div>
+            <div className="color-selector-group">
+                <label>Box Shadow</label>
+                <div onClick={ () => handleClick('box-shadow') } className={ `color-box-view ${ active ==='box-shadow' ? 'active' : '' }` }>
+                    <span className="color-selector-preview" style={ { background: colors[ 'box-shadow' ] } } ></span>
+                    <input
+                        type='text'
+                        onChange={ (event) => handleChange(event,'box-shadow') }
+                        className='form-control'
+                        defaultValue={ colors[ 'box-shadow' ] }
+                        value={ colors[ 'box-shadow' ] }
+                    />
+                </div>
+            </div>
             <div className="color-selector-group home-bg">
                 <label>Home Background</label>
                 <div onClick={ () => handleClick('home-background') } className={ `color-box-view ${ active ==='home-background' ? 'active' : '' }` }>
@@ -123,19 +136,6 @@ const CustomColor = (props) => {
                 </div>
                 <div className="font-switcher">
                     {radioView('home-background-font','#000000','#FFFFFF')}
-                </div>
-            </div>
-            <div className="color-selector-group">
-                <label>Box Shadow</label>
-                <div onClick={ () => handleClick('box-shadow') } className={ `color-box-view ${ active ==='box-shadow' ? 'active' : '' }` }>
-                    <span className="color-selector-preview" style={ { background: colors[ 'box-shadow' ] } } ></span>
-                    <input
-                        type='text'
-                        onChange={ (event) => handleChange(event,'box-shadow') }
-                        className='form-control'
-                        defaultValue={ colors[ 'box-shadow' ] }
-                        value={ colors[ 'box-shadow' ] }
-                    />
                 </div>
             </div>
         </>)
