@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSlate } from 'slate-react';
 import { Transforms } from 'slate';
 import PropTypes from 'prop-types';
 import { Button } from './button';
 import { MediaEditor } from 'utils/svg';
-
 export const VideoElement = ({ attributes, children, element }) => {
     const { url } = element
     return (
@@ -34,25 +33,40 @@ export const VideoElement = ({ attributes, children, element }) => {
     )
 }
 
-export const insertVedio = (editor, url) => {
-    const text = { text: '' }
-    const image = { type: 'video', url, children: [ text ] }
-    Transforms.insertNodes(editor, image)
+export const insertVedio = (editor, url, setOpen) => {
+    if((url?.indexOf('http://') == 0 || url?.indexOf('https://') == 0)){
+
+        const text = { text: '' }
+        const image = [ { type: 'video', url, children: [ text ] },{
+            type: 'paragraph',
+            children: [
+                { text: '' },
+            ],
+        } ]
+        Transforms.insertNodes(editor, image)
+        setOpen(false)
+    }
 }
 
 export const InsertVideoButton = () => {
     const editor = useSlate()
+    const [ isOpen , setOpen ] = useState(false)
+    const [ videoUrl , setVideoUrl ] = useState(null)
     return (
-        <Button
-            onMouseDown={ event => {
-                event.preventDefault()
-                const url = window.prompt('Enter the URL of the video:')
-                if (!url) return
-                insertVedio(editor, url)
-            } }
-        >
-            <MediaEditor />
-        </Button>
+        <>
+            <Button
+                onClick={ ( ) => setOpen(!isOpen) }
+            >
+                <MediaEditor />
+            </Button>
+            {isOpen &&<div className='emoji-mart video-mart'>
+
+                <input type='text' defaultValue={ videoUrl }  onChange={ (event) => setVideoUrl(event.target.value) } />
+
+                <Button onClick={ () => insertVedio(editor,videoUrl, setOpen) } >confirm</Button>
+            </div>}
+        </>
+
     )
 }
 

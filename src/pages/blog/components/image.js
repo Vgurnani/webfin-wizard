@@ -13,17 +13,23 @@ import { Modal , Row, Col } from 'react-bootstrap';
 import UploadImage from './uploadImage';
 import { dataURLtoFile, getDomain, uId } from 'utils/helpers';
 import { imageUpload } from 'middleware/assessments';
-import { useSlate } from 'slate-react';
+import { useSlate, useSelected, useFocused } from 'slate-react';
 import { useSelector } from 'react-redux'
 
 export const ImageElement = ({ attributes, children, element }) => {
-    // const selected = useSelected()
-    // const focused = useFocused()
+    const selected = useSelected()
+    const focused = useFocused()
     return (
         <div { ...attributes }>
             <div contentEditable={ false }>
                 <img
                     src={ element.url }
+                    style={ {
+                        display: 'block',
+                        maxWidth: '100%',
+                        maxHeight: '20em',
+                        boxShadow: `${ selected && focused ? '0 0 0 3px #B4D5FF' : 'none' }`
+                    } }
                 />
             </div>
             {children}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSlate } from 'slate-react';
 import {
     Transforms,
@@ -33,7 +33,7 @@ const unwrapLink = editor => {
     })
 }
 
-export const wrapLink = (editor, url) => {
+export const wrapLink = (editor, url,title ) => {
     if (isLinkActive(editor)) {
         unwrapLink(editor)
     }
@@ -43,7 +43,7 @@ export const wrapLink = (editor, url) => {
     const link = {
         type: 'link',
         url,
-        children: isCollapsed ? [ { text: url } ] : [],
+        children: isCollapsed ? [ { text: title } ] : [],
     }
 
     if (isCollapsed) {
@@ -54,27 +54,33 @@ export const wrapLink = (editor, url) => {
     }
 }
 
-const insertLink = (editor, url) => {
+const insertLink = (editor, url,title, setOpen) => {
     if (editor.selection) {
         wrapLink(editor, url)
+        setOpen(false)
     }
 }
 
 export const LinkButton = () => {
     const editor = useSlate()
+    const [ isOpen , setOpen ] = useState(false)
+    const [ linkUrl , setLinkUrl ] = useState(null)
+    const [ linkTitle , setLinkTitle ] = useState(null)
     return (
-        <Button
-            active={ isLinkActive(editor) }
-            onMouseDown={ event => {
-                event.preventDefault()
-                const url = window.prompt('Enter the URL of the link:')
-                if (!url) return
-                insertLink(editor, url)
-            } }
-        >
-            <LinkEditor />
-        </Button>
-    )
+        <>
+            <Button
+                onClick={ ( ) => setOpen(!isOpen) }
+            >
+                <LinkEditor />
+            </Button>
+            {isOpen &&<div className='emoji-mart link-mart'>
+                <label>Title</label>
+                <input type='text' defaultValue={ linkUrl }  onChange={ (event) => setLinkUrl(event.target.value) } /><br/>
+                <label>Url</label>
+                <input type='text' defaultValue={ linkTitle }  onChange={ (event) => setLinkTitle(event.target.value) } /><br/>
+                <Button onClick={ () => insertLink(editor,linkUrl,linkTitle, setOpen) } >confirm</Button>
+            </div>}
+        </>)
 }
 
 LinkElement.propTypes = {
