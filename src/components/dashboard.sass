@@ -172,6 +172,7 @@
                 margin-left: 265px
                 width: calc(100% - 265px)
                 @media (max-width: $breakpoint-ipad)
+                    margin-left: 0
                     width: 100%
                     margin-left: 0
             .drawer-toggle
@@ -457,6 +458,7 @@
                             display: inline-block
                             vertical-align: middle
                             margin-left: 25px
+                            position: relative
                             @media (max-width: $breakpoint-mobile)
                                 margin-left: 5px
                             .btn.btn-primary
@@ -468,6 +470,7 @@
                                     font-size: 12px
                                     padding: 5px 9px
                                     display: none
+                                    position: relative
                                     svg
                                         margin-right: 7px
                                         display: inline-block
@@ -477,6 +480,22 @@
                                 &.add-new-blog
                                     @media (max-width: $breakpoint-mobile)
                                         display: none
+                            ul.wrap-drop.drop
+                                position: absolute
+                                top: 100%
+                                z-index: 2
+                                background-color: $white-color
+                                padding: 5px 20px
+                                border-radius: 10px
+                                margin: 5px 0 0
+                                min-width: 165px
+                                box-shadow: 0 0 5px 1px rgba(0,0,0,.1)
+                                li
+                                    font-size: 14px
+                                    font-weight: 700
+                                    margin: 8px 0
+                                    a
+                                        color: $dark-grey-color
                     .dashboard-actions
                         @media (max-width: $breakpoint-mobile)
                             width: 137px
