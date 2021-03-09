@@ -1672,6 +1672,8 @@ ul
       max-width: 100%
       @media (max-width: $breakpoint-mobile)
         margin: 0
+      @media (max-width: $breakpoint-ipad)
+        margin: 0 auto
       .close
         padding: 0
         font-size: 0
@@ -2153,10 +2155,15 @@ body.modal-open
 .custom-color-modal
   .modal-dialog
     width: 888px
+    @media (max-width: $breakpoint-ipad)
+      width: 100%;
+      max-width: 100%;
+      margin: 0
     .modal-content
       width: 100%
       @media (max-width: $breakpoint-mobile)
-        max-height: 97vh;
+        max-height: 100vh
+        border-radius: 0
     .back-to-home
       a
         color: $dark-grey-color !important
@@ -2168,6 +2175,7 @@ body.modal-open
       left: 0
       right: 0
       top: 0
+      z-index: 9999
     .modal-body
       padding: 26px 45px 0
       @media (max-width: $breakpoint-mobile)
@@ -2263,6 +2271,11 @@ body.modal-open
     flex-direction: row
     flex-wrap: wrap
     justify-content: space-between
+  @media (max-width: $breakpoint-ipad)
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
   .color-selector-group
     width: 126px
     display: inline-block
@@ -2271,6 +2284,8 @@ body.modal-open
     margin-bottom: 20px
     @media (max-width: $breakpoint-mobile)
       width: 45%
+      margin-left: 0
+    @media (max-width: $breakpoint-ipad)
       margin-left: 0
     &.home-bg
       width: 162px
