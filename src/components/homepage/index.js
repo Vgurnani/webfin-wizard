@@ -33,6 +33,7 @@ import wizardIcon from '../homepage/assets/images/wizrd-white.png';
 import checkIcon from '../homepage/assets/images/check.svg';
 import hourglassIcon from '../homepage/assets/images/hourglass.svg';
 import moneyIcon from '../homepage/assets/images/money.svg';
+import arrowIcon from '../homepage/assets/images/arrow.svg';
 import './home.sass';
 
 const responsive = {
@@ -99,8 +100,8 @@ const HomePage = () => {
                             <h2 className={ 'text-center titleHeading' }>How It Work</h2>
                         </Col>
                     </Row>
-                    <Row className={ 'align-items-stretch' }>
-                        <Col col={ 4 } className={ 'rightArrow' }>
+                    <Row className={ 'align-items-stretch justify-content-between customGrid' }>
+                        <div className={ 'rightArrow' }>
                             <div className={ 'box text-center d-flex flex-column' }>
                                 <span className={ 'circleBox' }>1</span>
                                 <h3 className={ 'mt-2' }>Choose a niche</h3>
@@ -113,8 +114,11 @@ const HomePage = () => {
                                     <img src={ laptopIcon } alt="" />
                                 </div>
                             </div>
-                        </Col>
-                        <Col col={ 4 } className={ 'd-flex justify-content-center rightArrow manageBefore' }>
+                        </div>
+                        <div className="arrow">
+                            <img src={ arrowIcon } alt="Direction" />
+                        </div>
+                        <div className={ 'd-flex justify-content-center rightArrow manageBefore' }>
                             <div className={ 'box text-center' }>
                                 <span className={ 'circleBox' }>2</span>
                                 <h3 className={ 'mt-2' }>Choose a color palette</h3>
@@ -123,8 +127,11 @@ const HomePage = () => {
                                     <img src={ paintPalette } alt="" />
                                 </div>
                             </div>
-                        </Col>
-                        <Col col={ 4 } className={ 'd-flex justify-content-end' }>
+                        </div>
+                        <div className="arrow">
+                            <img src={ arrowIcon } alt="Direction" />
+                        </div>
+                        <div className={ 'd-flex justify-content-end' }>
                             <div className={ 'box text-center' }>
                                 <span className={ 'circleBox' }>3</span>
                                 <h3 className={ 'mt-2' }>Name Your Blog and Start Writing!</h3>
@@ -133,7 +140,7 @@ const HomePage = () => {
                                     <img src={ pencilIcon } alt="" />
                                 </div>
                             </div>
-                        </Col>
+                        </div>
                     </Row>
                 </Container>
             </section>
