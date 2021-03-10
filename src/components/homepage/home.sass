@@ -264,8 +264,13 @@
                 transform: translateX(0.25rem)
                 .custom-control-input
                     &:focus
-                        box-shadow: none
-                    &:checked     
+                        &~.custom-control-label
+                            &:before
+                                box-shadow: none
+                    &:checked
+                        &~.custom-control-label
+                                &:after 
+                                    transform: translateX(1.75rem)
                 .custom-control-label
                     &:before    
                         border: $light-greybg-color solid 5px
@@ -327,9 +332,8 @@
                         color: $black-color
                     button
                         max-width: 166px
-                        width: 100%
-                    
-        
+                        width: 100%            
+
 
 
 

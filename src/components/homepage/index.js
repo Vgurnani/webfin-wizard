@@ -14,7 +14,7 @@ import { ROUTES } from '../../constants/appRoutes';
 // import slider1 from '../../public/images/home/slider-1.png';
 import sliderNew from '../homepage/assets/images/assesment.png';
 import basicPlan from '../homepage/assets/images/mana.svg';
-import premiumPlan from '../homepage/assets/images/fantasy.svg';
+// import premiumPlan from '../homepage/assets/images/fantasy.svg';
 // import vipPlan from '../homepage/assets/images/man-mage.svg';
 
 import hamBurger from '../homepage/assets/images/hamburger.svg';
@@ -35,6 +35,20 @@ import hourglassIcon from '../homepage/assets/images/hourglass.svg';
 import moneyIcon from '../homepage/assets/images/money.svg';
 import './home.sass';
 
+const responsive = {
+    desktop: {
+        breakpoint: { max: 3000, min: 1280 },
+        items: 3,
+    },
+    tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 2,
+    },
+    mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 1,
+    },
+};
 const HomePage = () => {
     return(
 
@@ -389,20 +403,85 @@ const HomePage = () => {
                         <p className="">Monthly</p>
                     </Form>
                     <h4 className={ 'subheading mb-0' }>Switch to annually to get <strong>2 months FREE</strong></h4>
-                    {/* <Row>
-                        <Carousel controls={ false }>
-                            <Carousel.Item>
-                                <img src={ sliderNew } alt='slider1' />
-                            </Carousel.Item>
-                            <Carousel.Item>
-                                <img src={ sliderNew } alt='slider2'/>
-                            </Carousel.Item>
-                            <Carousel.Item>
-                                <img src={ sliderNew } alt='slider3'/>
-                            </Carousel.Item>
-                        </Carousel>
-                    </Row> */}
-                    <Row className="">
+                    <Row>
+                        <Col sm="12">
+                            <Carousel controls={ true } responsive={ responsive }>
+                                <Carousel.Item>
+                                    <div className="plan-detail">
+                                        <div className="plan-detail-inner">
+                                            <div className="plan-img">
+                                                <img src={ basicPlan } alt="Basic Plan" />
+                                            </div>
+                                            <h4 className="plan-name">Wizrd</h4>
+                                            <ul className="plan-feature">
+                                                <li>Get a beautiful blog in seconds!</li>
+                                                <li>1 Website + 1 Custom Sub-Domain</li>
+                                                <li>1,000 Views / Month</li>
+                                                <li>1 user</li>
+                                                <li>100 MB of space </li>
+                                                <li>2 Blog posts / Month </li>
+                                                <li>No credit card required </li>
+                                            </ul>
+                                            <div className="plan-price">Free</div>
+                                            <div className="plan-action">
+                                                <button className="btn btn-secondary">Try Now</button>
+                                                <span className={ 'getText mt-3' }>Get Yours In Minutes</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Carousel.Item>
+                                <Carousel.Item>
+                                    <div className="plan-detail">
+                                        <div className="plan-detail-inner">
+                                            <div className="plan-img">
+                                                <img src={ basicPlan } alt="Basic Plan" />
+                                            </div>
+                                            <h4 className="plan-name">Wizrd</h4>
+                                            <ul className="plan-feature">
+                                                <li>Get a beautiful blog in seconds!</li>
+                                                <li>1 Website + 1 Custom Sub-Domain</li>
+                                                <li>1,000 Views / Month</li>
+                                                <li>1 user</li>
+                                                <li>100 MB of space </li>
+                                                <li>2 Blog posts / Month </li>
+                                                <li>No credit card required </li>
+                                            </ul>
+                                            <div className="plan-price">Free</div>
+                                            <div className="plan-action">
+                                                <button className="btn btn-secondary">Try Now</button>
+                                                <span className={ 'getText mt-3' }>Get Yours In Minutes</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Carousel.Item>
+                                <Carousel.Item>
+                                    <div className="plan-detail">
+                                        <div className="plan-detail-inner">
+                                            <div className="plan-img">
+                                                <img src={ basicPlan } alt="Basic Plan" />
+                                            </div>
+                                            <h4 className="plan-name">Wizrd</h4>
+                                            <ul className="plan-feature">
+                                                <li>Get a beautiful blog in seconds!</li>
+                                                <li>1 Website + 1 Custom Sub-Domain</li>
+                                                <li>1,000 Views / Month</li>
+                                                <li>1 user</li>
+                                                <li>100 MB of space </li>
+                                                <li>2 Blog posts / Month </li>
+                                                <li>No credit card required </li>
+                                            </ul>
+                                            <div className="plan-price">Free</div>
+                                            <div className="plan-action">
+                                                <button className="btn btn-secondary">Try Now</button>
+                                                <span className={ 'getText mt-3' }>Get Yours In Minutes</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Carousel.Item>
+                            </Carousel>
+                        </Col>
+                    </Row>
+                    {/* <Row className="">
                         <Col className="col-4">
                             <div className="plan-detail">
                                 <div className="plan-detail-inner">
@@ -501,7 +580,7 @@ const HomePage = () => {
                                 </div>
                             </div>
                         </Col>
-                    </Row>
+                    </Row> */}
                 </Container>
             </section>
             <section className="website-faq">
