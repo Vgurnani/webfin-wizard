@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useSlate } from 'slate-react';
 import { Transforms } from 'slate';
 import PropTypes from 'prop-types';
 import { Button } from './button';
+import useOutsideClick from 'components/hoc/OutsideClick'
 import { MediaEditor } from 'utils/svg';
 export const VideoElement = ({ attributes, children, element }) => {
     const { url } = element
@@ -49,29 +50,53 @@ export const insertVedio = (editor, url, setOpen) => {
 }
 
 export const InsertVideoButton = () => {
-    const editor = useSlate()
+    const inputRef = useRef();
     const [ isOpen , setOpen ] = useState(false)
-    const [ videoUrl , setVideoUrl ] = useState(null)
+    const handleOpen =() => {
+        setOpen(!isOpen)
+        setTimeout(()=> {
+            inputRef?.current?.focus()
+        },1)
+
+    }
     return (
         <>
             <Button
-                onClick={ ( ) => setOpen(!isOpen) }
+                onClick={ () => handleOpen() }
             >
                 <MediaEditor />
             </Button>
-            {isOpen &&<div className='emoji-mart video-mart'>
-
-                <input type='text' defaultValue={ videoUrl }  onChange={ (event) => setVideoUrl(event.target.value) } />
-
-                <Button onClick={ () => insertVedio(editor,videoUrl, setOpen) } >confirm</Button>
-            </div>}
+            {isOpen &&
+            <InputText inputRef={ inputRef }  setOpen={ setOpen }/>
+            }
         </>
 
     )
 }
 
+const InputText = (props) => {
+    const divRef = useRef()
+    const { setOpen, inputRef } = props
+    const editor = useSlate()
+    const [ videoUrl , setVideoUrl ] = useState(null)
+
+    useOutsideClick(divRef, () => {
+        setOpen(false)
+    });
+    return(
+        <div ref={ divRef } className='emoji-mart video-mart'>
+
+            <input type='text' ref={ inputRef } defaultValue={ videoUrl }  onChange={ (event) => setVideoUrl(event.target.value) } />
+
+            <Button onClick={ () => insertVedio(editor,videoUrl, setOpen) } >confirm</Button>
+        </div>)
+}
 VideoElement.propTypes = {
     attributes: PropTypes.any,
     children: PropTypes.any,
     element: PropTypes.any,
+}
+InputText.propTypes = {
+    setOpen: PropTypes.func,
+    inputRef: PropTypes.any
 }
