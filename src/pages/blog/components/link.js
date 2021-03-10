@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState , useRef } from 'react'
 import { useSlate } from 'slate-react';
 import {
     Transforms,
@@ -9,6 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import { Button } from './button';
 import { LinkEditor } from 'utils/svg';
+import useOutsideClick from 'components/hoc/OutsideClick'
 
 export const LinkElement = ({ attributes, children, element }) => {
     return (
@@ -33,7 +34,7 @@ const unwrapLink = editor => {
     })
 }
 
-export const wrapLink = (editor, url,title ) => {
+export const wrapLink = (editor, url ) => {
     if (isLinkActive(editor)) {
         unwrapLink(editor)
     }
@@ -43,7 +44,7 @@ export const wrapLink = (editor, url,title ) => {
     const link = {
         type: 'link',
         url,
-        children: isCollapsed ? [ { text: title } ] : [],
+        children: isCollapsed ? [ { text: url } ] : [],
     }
 
     if (isCollapsed) {
@@ -54,7 +55,7 @@ export const wrapLink = (editor, url,title ) => {
     }
 }
 
-const insertLink = (editor, url,title, setOpen) => {
+const insertLink = (editor, url, setOpen) => {
     if (editor.selection) {
         wrapLink(editor, url)
         setOpen(false)
@@ -62,29 +63,47 @@ const insertLink = (editor, url,title, setOpen) => {
 }
 
 export const LinkButton = () => {
-    const editor = useSlate()
+    const inputRef = useRef();
     const [ isOpen , setOpen ] = useState(false)
-    const [ linkUrl , setLinkUrl ] = useState(null)
-    const [ linkTitle , setLinkTitle ] = useState(null)
+    const handleOpen = () => {
+        setOpen(!isOpen)
+        setTimeout(()=> {
+            inputRef?.current?.focus()
+        },1)
+
+    }
     return (
         <>
             <Button
-                onClick={ ( ) => setOpen(!isOpen) }
+                onClick={ handleOpen }
             >
                 <LinkEditor />
             </Button>
-            {isOpen &&<div className='emoji-mart link-mart'>
-                <label>Title</label>
-                <input type='text' defaultValue={ linkUrl }  onChange={ (event) => setLinkUrl(event.target.value) } /><br/>
-                <label>Url</label>
-                <input type='text' defaultValue={ linkTitle }  onChange={ (event) => setLinkTitle(event.target.value) } /><br/>
-                <Button onClick={ () => insertLink(editor,linkUrl,linkTitle, setOpen) } >confirm</Button>
-            </div>}
+            {isOpen && <InputText inputRef={ inputRef } setOpen={ setOpen }  />}
         </>)
 }
 
+const InputText = (props) => {
+    const divRef = useRef()
+    const { setOpen, inputRef } = props
+    const editor = useSlate()
+    const [ linkUrl , setLinkUrl ] = useState(null)
+
+    useOutsideClick(divRef, () => {
+        setOpen(false)
+    });
+    return(
+        <div ref={ divRef } className='emoji-mart video-mart'>
+            <input ref={ inputRef } type='text' defaultValue={ linkUrl }  onChange={ (event) => setLinkUrl(event.target.value) } /><br/>
+            <Button onClick={ () => insertLink(editor,linkUrl, setOpen) } >confirm</Button>
+        </div>)
+}
 LinkElement.propTypes = {
     attributes: PropTypes.any,
     children: PropTypes.any,
     element: PropTypes.any,
+}
+InputText.propTypes = {
+    setOpen: PropTypes.func,
+    inputRef: PropTypes.any
 }
