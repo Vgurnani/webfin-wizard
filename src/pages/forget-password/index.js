@@ -82,7 +82,7 @@ const ForgetPasswordPage = (props) => {
                     </Col>
                 </Row>
             </Container>
-            <Modal show={ openfpmodal } className="logo-upload-modal">
+            <Modal show={ openfpmodal } className="password-reset-modal">
                 {/* <Modal show={true} className="password-reset-modal">  */}
                 <Modal.Body>
                     <LockOverturning />

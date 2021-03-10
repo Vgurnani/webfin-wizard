@@ -52,9 +52,6 @@ p
     line-height: 1.3
   &::last-child
     margin-bottom: 0
-
-.edit-menu-listing
-  height: 230px
 h1
   font-family: 'Nunito Sans', sans-serif
   font-weight: 400
@@ -1690,8 +1687,6 @@ ul
         opacity: 1
         &:focus
           outline: none
-      .modal-header
-        border: none
       .modal-footer
         border: none
       .modal-title
@@ -2076,6 +2071,7 @@ body.modal-open
       right: 0
       top: 0
       z-index: 9999
+      border: none
     .modal-body
       padding: 26px 45px 0
       @media (max-width: $breakpoint-ipad)
@@ -2406,20 +2402,61 @@ body.modal-open
 
 .logo-upload-modal
   .modal-dialog
-    width: 888px
-    @media (max-width: $breakpoint-ipad)
-      width: 100%;
-      max-width: 100%;
-      margin: 0
     .modal-content
-      width: 100%
+      padding: 65px
+      width: 888px
       @media (max-width: $breakpoint-mobile)
-        max-height: 100vh
-        border-radius: 0
+        padding: 20px
+      .close
+        right: 0
+        top: 0
+        position: absolute
+      .preview-logo
+        width: 100%
+        margin: 15px 0 0
+        display: flex
+        align-items: center
+        img
+          border-radius: 16px
+          width: 92px
+          height: 92px
+          object-fit: cover
+          margin-right: 15px
+        .clear-logo
+          text-transform: capitalize
+          color: $red-color
+          font-weight: 700
+      .logo-upload-header
+        width: 100%
+        display: inline-block
+        .col
+          @media (max-width: $breakpoint-mobile)
+            max-width: 100%
+            flex: 0 0 100%
+        .search-wrapper
+          text-align: right
+          @media (max-width: $breakpoint-mobile)
+            margin: 15px 0 0
+          .form-group
+            margin: 0
+            text-align: right
+            width: auto
+            @media (max-width: $breakpoint-mobile)
+              width: 100%
+            .form-control
+              background-color: #f7f7f7
+              width: 297px
+              max-width: 100%
+              background-image: url('/images/search.png')
+              background-repeat: no-repeat
+              background-position: 16px
+              padding-left: 50px
       .logo-gallery
         width: 100%
         display: inline-block
         overflow: auto
+        @media (max-width: $breakpoint-mobile)
+          margin: 15px 0 0
         ul
           margin: 0
           padding: 0
@@ -2436,22 +2473,24 @@ body.modal-open
               width: 92px
               height: 92px
               object-fit: cover
+            &.active
+              img
+                border: 5px solid #3032c8
     .back-to-home
       a
         color: $dark-grey-color !important
         svg
           padding-right: 8px
     .modal-header
-      padding: 14px 19px
-      position: absolute
-      left: 0
-      right: 0
-      top: 0
-      z-index: 9999
+      padding: 45px 0 15px
+      position: relative
+      border-bottom: 1px solid #e2e2e2
     .modal-body
-      padding: 70px 45px 0
-      @media (max-width: $breakpoint-mobile)
-        padding: 25px 15px 0
+      padding: 18px 0
+      .col
+        @media (max-width: $breakpoint-mobile)
+          max-width: 100%
+          flex: 0 0 100%
   .drag-image-box
     padding: 0
     position: relative
