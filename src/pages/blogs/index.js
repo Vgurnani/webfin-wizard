@@ -37,8 +37,9 @@ import {
 import { getSessionData } from 'utils/helpers'
 import searchIcon from '../../images/search.png';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-
+const searchInput = React.createRef()
 const BlogsPage = () => {
+
     const limit = 6;
     const dispatch = useDispatch();
     const history = useHistory();
@@ -173,6 +174,10 @@ const BlogsPage = () => {
         setActiveBlogs(blogsData);
     }
 
+    const toggleSearch = () => {
+        searchInput?.current?.focus()
+    }
+
     return(
         <main className="dashboard-data blog-dashboard">
             <section className="dashboard-body" style={ { marginTop: '12px' } }>
@@ -199,7 +204,7 @@ const BlogsPage = () => {
                     <div className="dashboard-actions">
                         <Form className="search-form">
                             <Form.Group controlId="formBasicEmail">
-                                <Form.Control onChange={ () => {} }  className="form-control" placeholder="Search" />
+                                <Form.Control ref={ searchInput } onChange={ () => {} }  className="form-control" placeholder="Search" />
                             </Form.Group>
                             <Button onClick={ handleFilter } className="btn-search" type="button">
                                 <img src={ searchIcon } alt={ 'searchIcon' } />
@@ -403,17 +408,17 @@ const BlogsPage = () => {
                 <div className="blog-mobile-action">
                     <ul>
                         <li>
-                            <Link>
+                            <Link to={ ROUTES.DASHBOARD }>
                                 <MobileHomeIcon />
                             </Link>
                         </li>
                         <li>
-                            <Link>
+                            <Link to={ ROUTES.BLOG }>
                                 <MobileSAddNewIcon />
                             </Link>
                         </li>
                         <li>
-                            <Link>
+                            <Link onClick={ toggleSearch }>
                                 <MobileSearchIcon />
                             </Link>
                         </li>
