@@ -10,8 +10,8 @@ import { Link } from 'react-router-dom'
 import notFound from '../public/images/notFound.png';
 /* eslint-disable */
 
-const NotFoundPage = () => (
-    <section className="login-section main-section">
+const NotFoundPage = () => {
+    return(<section className="login-section main-section">
         <Container>
             <section className="page-section not-found-page">
                 <Row className="align-items-center">
@@ -31,8 +31,7 @@ const NotFoundPage = () => (
             </section>
 
         </Container>
-    </section>
+    </section>)
 
-)
-
+}
 export default NotFoundPage

@@ -26,27 +26,25 @@ import './components/dashboard.sass';
 const RegisterRoute = React.lazy(() => import('./components/hoc/RegisterRoute'));
 
 const App = () => {
-    return (
+    return (<Layout className="main-layout">
         <Switch>
-            <Layout className="main-layout">
-                <PublicRoute exact path={ ROUTES.ROOT } component={ HomePage } />
-                <PublicRoute path={ ROUTES.LOGIN } name="Login Page" component={ LoginPage }/>
-                <RegisterRoute path={ ROUTES.REGISTER } name="Register Page" component={ RegisterPage }/>
-                <AssessmentRoute exact path={ ROUTES.ASSESSMENT } component={ AssessmentPage } />
-                <PublicRoute path={ ROUTES.FORGET_PASSWORD } name="Forget Password Page" component={ ForgetPasswordPage }/>
-                <PublicRoute path={ ROUTES.AUTH_REDIRECT } name="Auth" component={ RedirectAuth }/>
-                <PrivateRoute path={ ROUTES.DASHBOARD } component={ Dashboard } />
-                <ConfirmAccountRoute  path={ ROUTES.CONFIRM_ACCOUNT } component={ ConfirmAccount } />
-                <Route exact path={ ROUTES.TERMS_CONDITIONS } component={ TermsCondition } />
-                <Route exact path={ ROUTES.PRIVACY_POLICY } component={ PrivacyPolicy } />
-                <PrivateRoute exact path={ ROUTES.BLOG } component={ BlogPage } />
-                <PrivateRoute exact path={ ROUTES.BLOGS } component={ BlogsPage } />
-                <PrivateRoute exact path={ ROUTES.EDIT_SITE } component={ EditSitePage } />
-                <PrivateRoute exact path={ ROUTES.EDIT_BLOG } component={ BlogPage } />
-                <PrivateRoute exact path={ ROUTES.USER_PROFILE } component={ UserProfilePage } />
-            </Layout>
-            <Route exact component={ NotFoundPage } />
-        </Switch>);
+            <PublicRoute exact path={ ROUTES.ROOT } component={ HomePage } />
+            <PublicRoute path={ ROUTES.LOGIN } name="Login Page" component={ LoginPage }/>
+            <RegisterRoute path={ ROUTES.REGISTER } name="Register Page" component={ RegisterPage }/>
+            <AssessmentRoute exact path={ ROUTES.ASSESSMENT } component={ AssessmentPage } />
+            <PublicRoute path={ ROUTES.FORGET_PASSWORD } name="Forget Password Page" component={ ForgetPasswordPage }/>
+            <PublicRoute path={ ROUTES.AUTH_REDIRECT } name="Auth" component={ RedirectAuth }/>
+            <PrivateRoute path={ ROUTES.DASHBOARD } component={ Dashboard } />
+            <ConfirmAccountRoute  path={ ROUTES.CONFIRM_ACCOUNT } component={ ConfirmAccount } />
+            <Route exact path={ ROUTES.TERMS_CONDITIONS } component={ TermsCondition } />
+            <Route exact path={ ROUTES.PRIVACY_POLICY } component={ PrivacyPolicy } />
+            <PrivateRoute exact path={ ROUTES.BLOG } component={ BlogPage } />
+            <PrivateRoute exact path={ ROUTES.BLOGS } component={ BlogsPage } />
+            <PrivateRoute exact path={ ROUTES.EDIT_SITE } component={ EditSitePage } />
+            <PrivateRoute exact path={ ROUTES.EDIT_BLOG } component={ BlogPage } />
+            <PrivateRoute exact path={ ROUTES.USER_PROFILE } component={ UserProfilePage } />
+            <Route component={ NotFoundPage } />
+        </Switch>
+    </Layout>);
 }
-
 export default withRouter(App);
