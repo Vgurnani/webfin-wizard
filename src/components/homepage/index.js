@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Carousel from 'react-bootstrap/Carousel';
+// import Carousel from 'react-bootstrap/Carousel';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import { ROUTES } from '../../constants/appRoutes';
 // import slider1 from '../../public/images/home/slider-1.png';
 import sliderNew from '../homepage/assets/images/assesment.png';
-import basicPlan from '../homepage/assets/images/mana.svg';
+// import basicPlan from '../homepage/assets/images/mana.svg';
 // import premiumPlan from '../homepage/assets/images/fantasy.svg';
 // import vipPlan from '../homepage/assets/images/man-mage.svg';
 
@@ -35,34 +35,34 @@ import hourglassIcon from '../homepage/assets/images/hourglass.svg';
 import moneyIcon from '../homepage/assets/images/money.svg';
 import arrowIcon from '../homepage/assets/images/arrow.svg';
 import './home.sass';
-
-const responsive = {
-    desktop: {
-        breakpoint: { max: 3000, min: 1280 },
-        items: 3,
-    },
-    tablet: {
-        breakpoint: { max: 1024, min: 464 },
-        items: 2,
-    },
-    mobile: {
-        breakpoint: { max: 464, min: 0 },
-        items: 1,
-    },
-};
+import MultipleSlider from './multi-slider';
+// const responsive = {
+//     desktop: {
+//         breakpoint: { max: 3000, min: 1280 },
+//         items: 3,
+//     },
+//     tablet: {
+//         breakpoint: { max: 1024, min: 464 },
+//         items: 2,
+//     },
+//     mobile: {
+//         breakpoint: { max: 464, min: 0 },
+//         items: 1,
+//     },
+// };
 const HomePage = () => {
     return(
 
         <section className="main-section">
             <section className="home-banner">
-                <Container fluid>
-                    <Row className="align-items-center">
-                        <Col col={ 12 }>
+                <Container fluid className="home-container">
+                    <div className="align-items-center">
+                        <div col={ 12 }>
                             <h1 className={ 'mainHeading text-center' }>Get a beautiful blog <span className="">in seconds!</span></h1>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className="text-side col-6" md="6" sm="12">
+                        </div>
+                    </div>
+                    <div className="home-banner-content">
+                        <div className="text-side">
                             <div className="text-wrap">
                                 <ListGroup className={ 'mainList' }>
                                     <ListGroup.Item> <img src={ megicStick } alt="" /> Get more traffic with a blazing fast blog made for seo.</ListGroup.Item>
@@ -76,9 +76,10 @@ const HomePage = () => {
                                     <span className={ 'infoText mt-2' }>*No Credit Card Required</span>
                                 </div>
                             </div>
-                        </Col>
-                        <Col className="img-side col-6" md="6" sm="12">
-                            <Carousel controls={ false }>
+                        </div>
+                        <div className="img-side">
+                            <img src={ sliderNew } />
+                            {/* <Carousel controls={ false }>
                                 <Carousel.Item>
                                     <img src={ sliderNew } alt='slider1' />
                                 </Carousel.Item>
@@ -88,9 +89,9 @@ const HomePage = () => {
                                 <Carousel.Item>
                                     <img src={ sliderNew } alt='slider3'/>
                                 </Carousel.Item>
-                            </Carousel>
-                        </Col>
-                    </Row>
+                            </Carousel> */}
+                        </div>
+                    </div>
                 </Container>
             </section>
             <section className="how-it-work">
@@ -410,9 +411,11 @@ const HomePage = () => {
                         <p className="">Monthly</p>
                     </Form>
                     <h4 className={ 'subheading mb-0' }>Switch to annually to get <strong>2 months FREE</strong></h4>
+
                     <Row>
                         <Col sm="12">
-                            <Carousel controls={ true } responsive={ responsive }>
+                            <MultipleSlider />
+                            {/* <Carousel controls={ true } responsive={ responsive }>
                                 <Carousel.Item>
                                     <div className="plan-detail">
                                         <div className="plan-detail-inner">
@@ -485,7 +488,7 @@ const HomePage = () => {
                                         </div>
                                     </div>
                                 </Carousel.Item>
-                            </Carousel>
+                            </Carousel> */}
                         </Col>
                     </Row>
                     {/* <Row className="">

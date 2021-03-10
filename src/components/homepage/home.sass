@@ -1,12 +1,14 @@
 @import '../variables.sass';
-.main-section 
-    .mainHeading 
+.main-section
+    .mainHeading
         font-size: 72px
+        line-height: 1
         font-weight: 900
-        margin-bottom: 30px
+        margin: 0 0 37px
+        letter-spacing: -1.5px
         color: $black-color
         span
-            color: $light-blue-color
+            color: $purple-bg-color
         @media (max-width: $breakpoint-mobile)
             font-size: 42px
             line-height: 45px
@@ -14,7 +16,8 @@
             font-size: 42px
             line-height: 45px
     .home-banner
-        .img-side 
+        padding: 18px 0 0
+        .img-side
             @media (max-width: $breakpoint-ipad)
                 text-align: center
         .text-wrap
@@ -29,7 +32,7 @@
             display: flex
             align-items: flex-start
             text-align: left
-            img 
+            img
                 margin-top: 5px
                 margin-right: 15px
     .green-btn
@@ -45,7 +48,7 @@
             color: $white-color
     .infoText
         color: $light-grey-link
-        font-weight: bold 
+        font-weight: bold
         font-size: 16px
     .how-it-work
         padding: 30px 0
@@ -155,7 +158,7 @@
                 border: 6px solid $primary-color
                 border-radius: 100%
                 color: $black-color
-            p 
+            p
                 padding: 20px 15px
                 font-weight: bold
                 font-size: 24px
@@ -202,7 +205,7 @@
                 max-width: 100%
     .old-way-wizard
         padding: 60px 0
-        .titleHeading 
+        .titleHeading
             font-weight: 800
             color: $black-color
             font-size: 48px
@@ -253,7 +256,7 @@
                             td
                                 border-top: 0
                         td
-                            border: 3px solid #757575  
+                            border: 3px solid #757575
                             font-size: 18px
                             line-height: 20px
                             font-weight: 700
@@ -294,7 +297,7 @@
             justify-content: center
             align-items: center
             margin-top: 5px
-            margin-bottom: 10px     
+            margin-bottom: 10px
             p
                 margin: 0
             .custom-control
@@ -307,10 +310,10 @@
                                 box-shadow: none
                     &:checked
                         &~.custom-control-label
-                                &:after 
+                                &:after
                                     transform: translateX(1.75rem)
                 .custom-control-label
-                    &:before    
+                    &:before
                         border: $light-greybg-color solid 5px
                         height: 28px
                         width: 58px
@@ -318,7 +321,7 @@
                         left: -3.25rem
                         background: transparent
                         top: 0
-                    &:after 
+                    &:after
                         background: $purple-bg-color
                         height: 26px
                         width: 26px
@@ -327,23 +330,23 @@
                         left: calc(-3.25rem + 2px)
                 ~ &.custom-control-label
                     &:after
-                        transform: translateX(1.75rem); 
+                        transform: translateX(1.75rem);
         .plan-detail
             padding: 62px 46px
             @media (max-width: $breakpoint-ipad)
                 padding: 62px 25px
-            &:hover 
+            &:hover
                 box-shadow: 0 0 0 3px $primary-color
                 border-radius: 16px
                 border: 1px solid $primary-color
-            .plan-detail-inner 
+            .plan-detail-inner
                 .plan-name
                     font-weight: bold
                     font-size: 36px
                     display: flex
                     align-items: center
                     justify-content: center
-                    span    
+                    span
                         background: $green-color
                         border-radius: 10px
                         color: $white-color
@@ -355,9 +358,9 @@
                         align-items: center
                         justify-content: center
                         margin-left: 10px
-                        &.purple-color  
+                        &.purple-color
                             background: $primary-color
-                ul 
+                ul
                     li
                         font-size: 14px
                 .plan-action
@@ -370,13 +373,8 @@
                         color: $black-color
                     button
                         max-width: 166px
-                        width: 100%            
-
-
-
-
-
-
-
-
-            
+                        width: 100%
+.container-fluid
+    &.home-container
+        padding-left: 31px
+        padding-right: 31px
