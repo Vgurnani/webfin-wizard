@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types';
 import{ Modal, Button, Row, Col,Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
@@ -12,7 +12,7 @@ import ButtonLoader from 'components/core/loader/button-loader'
 
 const ColourPalette = (props) => {
     const dispatch = useDispatch();
-    const { colorPalette,setColorPalette,handleSubmit,submitData, site, formValues , loading } = props
+    const { colorPalette,customOpen, setCustomPopup,setColorPalette,handleSubmit,submitData, site, formValues , loading } = props
     const data = {
         colors: formValues.colors,
         logoUrl: formValues.logoUrl,
@@ -21,7 +21,7 @@ const ColourPalette = (props) => {
         headerLinks: headerLinksTemplate(),
         readOnly: true
     }
-    const [ customOpen, setCustomPopup ] = useState(false)
+
     useEffect(() => {
         if(formValues.colors){
             setCustomPopup(JSON.parse(formValues.colors).name === 'custom-color' )
@@ -118,6 +118,8 @@ ColourPalette.propTypes = {
     site: PropTypes.object,
     handleSubmit: PropTypes.func,
     submitData: PropTypes.func,
-    loading: PropTypes.func
+    loading: PropTypes.func,
+    customOpen: PropTypes.bool,
+    setCustomPopup: PropTypes.func,
 };
 export default ColourPalette;

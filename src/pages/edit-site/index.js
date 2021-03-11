@@ -35,7 +35,7 @@ const EditSitePage =(props) => {
     const [ menuLinks, setMenuLinks ] = useState(form?.values?.menuLinks)
     const [ colorPalette , setColorPalette ] = useState(AllColors())
     const site =  data?.sites[ 0 ]
-
+    const [ customOpen, setCustomPopup ] = useState(false)
     useEffect(() => {
         dispatch({
             type: 'SET_ACTIVE_SIDEBAR',
@@ -156,7 +156,7 @@ const EditSitePage =(props) => {
         case 'niche':
             return <Niche form={ form } handleSubmit={ handleSubmit }  submitData= { submitData } assessmentData={ assessmentData } loading={ updateAssessmentLoader } />
         case 'colour':
-            return <ColourPalette handleSubmit={ handleSubmit }  submitData= { submitData } formValues={ form.values }  site={ site }  setColorPalette={ setColorPalette } colorPalette={ colorPalette }  onClose={ handleClose }  loading={ updateAssessmentLoader } />
+            return <ColourPalette customOpen={ customOpen } setCustomPopup={ setCustomPopup }  handleSubmit={ handleSubmit }  submitData= { submitData } formValues={ form.values }  site={ site }  setColorPalette={ setColorPalette } colorPalette={ colorPalette }  onClose={ handleClose }  loading={ updateAssessmentLoader } />
         case 'logo':
             return <UploadLogo handleSubmit={ handleSubmit }  submitData= { submitData }fieldName='logoUrl' previewFile={ form?.values?.logoUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } loading={ updateAssessmentLoader } />
         case 'menulinks':
@@ -206,7 +206,7 @@ const EditSitePage =(props) => {
                             <Form.Label>Header/Footer:</Form.Label>
                             </Form.Group>*/}
                     </div>
-                    <Modal show={ open } onHide={ handleClose } className='logo-upload-modal'>
+                    <Modal show={ open } onHide={ handleClose } className={ `${ customOpen ? 'custom-color-modal' : 'logo-upload-modal' }` }>
                         {renderModalView()}
                     </Modal>
                 </div>
