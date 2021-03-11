@@ -51,6 +51,7 @@ export const insertImage = (editor, url) => {
 export const InsertImageButton = ({ bogFormData, handleSubmit }) => {
     const form = useSelector((state) => state.form.blogForm )
     const editor = useSlate();
+    const [ loading , setLoader ] = useState(false)
     const [ open, toggleModal ] = useState(false);
     const handleModal = () => {
         toggleModal(!open);
@@ -58,9 +59,11 @@ export const InsertImageButton = ({ bogFormData, handleSubmit }) => {
 
     const submitData = async () => {
         if (bogFormData.slateImage && !bogFormData.slateImage.match('^(http|https)://')){
+            setLoader(true)
             const file = dataURLtoFile(bogFormData.slateImage,uId()+'.png')
             const newUrl = await imageUpload(getDomain(),'blog-images',file);
             insertImage(editor, newUrl)
+            setLoader(false)
             toggleModal(!open);
         }
     }
@@ -77,7 +80,7 @@ export const InsertImageButton = ({ bogFormData, handleSubmit }) => {
                         </Row>
                     </div>
                 </Modal.Header>
-                <UploadImage previewFile={ form?.values?.slateImage } submitData={ submitData } fieldName={ 'slateImage' } handleSubmit={ handleSubmit } title={ 'Add Image' } />
+                <UploadImage loading={ loading } previewFile={ form?.values?.slateImage } submitData={ submitData } fieldName={ 'slateImage' } handleSubmit={ handleSubmit } title={ 'Add Image' } />
             </Modal>
             <Button
                 onMouseDown={ event => {
