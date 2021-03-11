@@ -74,7 +74,7 @@ const DashboardPage =() => {
                             </div>
                             <div className="author-name">
                                 <h6>Welcome back!</h6>
-                                <h5>{user?.userName} </h5>
+                                <h5>{user?.userName?.toUsername()} </h5>
                             </div>
                         </div> }
                     </div>
@@ -85,5 +85,7 @@ const DashboardPage =() => {
 
     )
 }
-
+String.prototype.toUsername = function(){
+    return this?.split('@') && this?.split('@')[ 0 ];
+}
 export default DashboardPage
