@@ -162,7 +162,7 @@ const EditSitePage =(props) => {
         case 'menulinks':
             return  <MenuLinks handleSubmit={ handleSubmit }  submitData= { submitData } isValid={ isValid } removeMenuLink={ removeMenuLink } handleChangeMenuLink={ handleChangeMenuLink } loadData={ loadData } menuLinks={ menuLinks } addMenuLinks={ addMenuLinks } loading={ updateAssessmentLoader } />
         case 'favicon':
-            return <UploadLogo handleSubmit={ handleSubmit }  submitData= { submitData } fieldName='faviconUrl' previewFile={ form?.values?.faviconUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } loading={ updateAssessmentLoader } />
+            return <UploadLogo allowExtenstions={ 'image/jpeg, image/png, .ico' } handleSubmit={ handleSubmit }  submitData= { submitData } fieldName='faviconUrl' previewFile={ form?.values?.faviconUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } loading={ updateAssessmentLoader } />
         }
     }
     const niche = assessmentData?.niches?.filter((item) => item.value === form?.values?.nicheId && JSON.parse(form?.values?.nicheId).id)[ 0 ] || site?.niche

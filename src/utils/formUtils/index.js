@@ -266,6 +266,7 @@ const renderFileDrop = (props)=> {
         formClass,
         isDropText,
         isDrop,
+        allowExtenstions,
         placeholder,
         meta: { touched, error, warning },
     } = props;
@@ -286,10 +287,11 @@ const renderFileDrop = (props)=> {
             reader.readAsDataURL(file);
         })
     }
+    const extensions = allowExtenstions || 'image/jpeg, image/png'
 
     return(
         <>
-            <Dropzone accept="image/jpeg, image/png" multiple={ false } onDrop={ acceptedFiles => handleDrop(acceptedFiles) } >
+            <Dropzone accept={ extensions } multiple={ false } onDrop={ acceptedFiles => handleDrop(acceptedFiles) } >
                 {({ getRootProps, getInputProps }) => {
                     return(
 

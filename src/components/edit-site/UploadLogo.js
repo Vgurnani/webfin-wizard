@@ -15,7 +15,7 @@ import
 }
     from 'react-bootstrap';
 const UploadLogo = (props) => {
-    const { handleSubmit, submitData,loading,previewFile,clearImage ,fieldName, title } = props
+    const { handleSubmit,allowExtenstions, submitData,loading,previewFile,clearImage ,fieldName, title } = props
     // const handleSelect = async(id) => {
     //     setSelectedUnsplash(id)
     //     const image = unsplashImages.filter((item) => item.id == id)[ 0 ];
@@ -54,6 +54,7 @@ const UploadLogo = (props) => {
                                     name={ fieldName }
                                     component={ renderFileDrop }
                                     isDrop={ ()=> {} }
+                                    allowExtenstions={ allowExtenstions }
                                     placeholder={ "<a><i className='fa fa-plus'/> upload your logo</a>" }
                                     isDropText={ 'Drag your images' }
                                 />
@@ -109,6 +110,7 @@ UploadLogo.propTypes = {
     previewFile: PropTypes.any,
     fieldName: PropTypes.string,
     loading: PropTypes.bool,
+    allowExtenstions: PropTypes.array,
     title: PropTypes.string
 };
 

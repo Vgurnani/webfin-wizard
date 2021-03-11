@@ -63,9 +63,9 @@ const DashboardPage =() => {
                                 {status ? 'Done' : 'In Progress'}
                             </span> */}
                         </h5>
-                        <div className="dashboard-btns">
+                        {/*<div className="dashboard-btns">
                             <a href={ `https://${ site?.domain }` } rel="noreferrer" target='_blank' className="btn btn-primary">View Website</a>
-                        </div>
+                        </div>*/}
                     </div>
                     <div className="dashboard-actions">
                         { user && <div className="author-info">
