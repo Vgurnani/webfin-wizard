@@ -85,9 +85,7 @@ const InputText = (props) => {
     });
     return(
         <div ref={ divRef } className='emoji-mart video-mart'>
-
-            <input type='text' ref={ inputRef } defaultValue={ videoUrl }  onChange={ (event) => setVideoUrl(event.target.value) } />
-
+            <input placeholder="Enter video Link" type='text' ref={ inputRef } defaultValue={ videoUrl }  onChange={ (event) => setVideoUrl(event.target.value) } />
             <Button onClick={ () => insertVedio(editor,videoUrl, setOpen) } >confirm</Button>
         </div>)
 }

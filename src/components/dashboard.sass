@@ -1055,6 +1055,8 @@
         width: 100%
         display: flex
         align-items: center
+        @media (max-width: $breakpoint-mobile)
+            display: inline-block
         .toolbar-box
             width: auto
             display: inline-block
@@ -1068,6 +1070,8 @@
                 bottom: 0
                 right: 0
                 width: 1px
+                @media (max-width: $breakpoint-mobile)
+                    display: none
             &:last-child
                 &::after
                     display: none
@@ -2101,6 +2105,10 @@
     left: -50%
     background-color: $white-color
     z-index: 2
+    @media (max-width: $breakpoint-mobile)
+        max-width: 300px
+        width: 300px
+        left: -42%
 button.emoji-mart-search-icon
     top: 4px
 .emoji-mart-skin-swatches
@@ -2178,3 +2186,36 @@ button.emoji-mart-search-icon
 .emoji-mart-category .emoji-mart-emoji:hover:before
     top: 4px
     left: 2px
+.video-mart
+    padding: 5px
+    input
+        display: inline-block
+        vertical-align: middle
+        font-size: 14px
+        line-height: 1.5
+        letter-spacing: 0.5px
+        color: $dark-grey-color
+        font-weight: normal
+        border: 1px solid $dark-grey-color
+        background-color: $white-color
+        border-radius: 0
+        padding: 5px 10px
+        width: 60%
+        width: calc(100% - 70px)
+        height: 33px
+        &:focus
+            border: 1px solid $dark-grey-color
+    span
+        display: inline-block
+        vertical-align: middle
+        background-color: $primary-color
+        color: $white-color
+        border-radius: 0
+        font-size: 14px
+        line-height: 1.5
+        letter-spacing: 0.5px
+        padding: 2px 5px 1px
+        text-transform: capitalize
+        width: 70px
+        height: 33px
+        margin-left: -2px

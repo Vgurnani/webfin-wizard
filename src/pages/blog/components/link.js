@@ -94,7 +94,7 @@ const InputText = (props) => {
     });
     return(
         <div ref={ divRef } className='emoji-mart video-mart'>
-            <input ref={ inputRef } type='text' defaultValue={ linkUrl }  onChange={ (event) => setLinkUrl(event.target.value) } /><br/>
+            <input placeholder="Enter Link" ref={ inputRef } type='text' defaultValue={ linkUrl }  onChange={ (event) => setLinkUrl(event.target.value) } />
             <Button onClick={ () => insertLink(editor,linkUrl, setOpen) } >confirm</Button>
         </div>)
 }
