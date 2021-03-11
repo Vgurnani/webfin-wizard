@@ -350,7 +350,7 @@ const BlogsPage = () => {
                                                     <div className="blog-list-column blog-list-title">
                                                         <span className="table-post-title">
                                                             {blog?.title}
-                                                            <a onClick={ (event) => redirectToBlog(event, blog) }>View</a>
+                                                            {/* <a onClick={ (event) => redirectToBlog(event, blog) }>View</a> */}
                                                             <a onClick={ () => toggleActiveBlogs(blog?.id) } className="toggle-blog-detail">
                                                                 <ChevronRight />
                                                             </a>
@@ -378,10 +378,10 @@ const BlogsPage = () => {
                                                                 <CloneBlogListIcon />
                                                                 <span>Clone</span>
                                                             </a>
-                                                            <a className="table-action-btns" href="/#" onClick={ (e) => copyToClipBoard(e, blog) }>
+                                                            {/* <a className="table-action-btns" href="/#" onClick={ (e) => copyToClipBoard(e, blog) }>
                                                                 <ShareBlogListIcon />
                                                                 <span>Share</span>
-                                                            </a>
+                                                            </a> */}
                                                         </div>
                                                         <a onClick={ (e) => handleDelete(e, blog) } className="table-action-btns table-action-btns-delete" href="/#">
                                                             <DeleteBlogListIcon />
