@@ -63,25 +63,42 @@ const insertLink = (editor, url, setOpen) => {
 }
 
 export const LinkButton = () => {
-    const inputRef = useRef();
-    const [ isOpen , setOpen ] = useState(false)
-    const handleOpen = () => {
-        setOpen(!isOpen)
-        setTimeout(()=> {
-            inputRef?.current?.focus()
-        },1)
-
-    }
+    const editor = useSlate()
     return (
-        <>
-            <Button
-                onClick={ handleOpen }
-            >
-                <LinkEditor />
-            </Button>
-            {isOpen && <InputText inputRef={ inputRef } setOpen={ setOpen }  />}
-        </>)
+        <Button
+            active={ isLinkActive(editor) }
+            onMouseDown={ event => {
+                event.preventDefault()
+                const url = window.prompt('Enter the URL of the link:')
+                if (!url) return
+                insertLink(editor, url)
+            } }
+        >
+            <LinkEditor />
+        </Button>
+    )
 }
+
+// export const LinkButton = () => {
+//     const inputRef = useRef();
+//     const [ isOpen , setOpen ] = useState(false)
+//     const handleOpen = () => {
+//         setOpen(!isOpen)
+//         setTimeout(()=> {
+//             inputRef?.current?.focus()
+//         },1)
+
+//     }
+//     return (
+//         <>
+//             <Button
+//                 onClick={ handleOpen }
+//             >
+//                 <LinkEditor />
+//             </Button>
+//             {isOpen && <InputText inputRef={ inputRef } setOpen={ setOpen }  />}
+//         </>)
+// }
 
 const InputText = (props) => {
     const divRef = useRef()

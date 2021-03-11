@@ -49,28 +49,44 @@ export const insertVedio = (editor, url, setOpen) => {
     }
 }
 
+// export const InsertVideoButton = () => {
+//     const inputRef = useRef();
+//     const [ isOpen , setOpen ] = useState(false)
+//     const handleOpen =() => {
+//         setOpen(!isOpen)
+//         setTimeout(()=> {
+//             inputRef?.current?.focus()
+//         },1)
+
+//     }
+//     return (
+//         <>
+//             <Button
+//                 onClick={ () => handleOpen() }
+//             >
+//                 <MediaEditor />
+//             </Button>
+//             {isOpen &&
+//             <InputText inputRef={ inputRef }  setOpen={ setOpen }/>
+//             }
+//         </>
+
+//     )
+// }
+
 export const InsertVideoButton = () => {
-    const inputRef = useRef();
-    const [ isOpen , setOpen ] = useState(false)
-    const handleOpen =() => {
-        setOpen(!isOpen)
-        setTimeout(()=> {
-            inputRef?.current?.focus()
-        },1)
-
-    }
+    const editor = useSlate()
     return (
-        <>
-            <Button
-                onClick={ () => handleOpen() }
-            >
-                <MediaEditor />
-            </Button>
-            {isOpen &&
-            <InputText inputRef={ inputRef }  setOpen={ setOpen }/>
-            }
-        </>
-
+        <Button
+            onMouseDown={ event => {
+                event.preventDefault()
+                const url = window.prompt('Enter the URL:')
+                if (!url) return
+                insertVedio(editor, url)
+            } }
+        >
+            <MediaEditor />
+        </Button>
     )
 }
 
