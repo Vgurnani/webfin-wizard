@@ -51,6 +51,10 @@ const ColourPalette = (props) => {
         const obj = event.currentTarget.value &&  JSON.parse(event.currentTarget.value)
         obj.name === 'custom-color' ? setCustomPopup(!customOpen) : null
     }
+    const handleClick = ( event ) => {
+        const obj = event.currentTarget.value &&  JSON.parse(event.currentTarget.value)
+        obj.name === 'custom-color' ? setCustomPopup(true) : null
+    }
 
     return(
         <div className="color-palette-popup">
@@ -76,6 +80,7 @@ const ColourPalette = (props) => {
                                         component={ renderStyleMultipleRadio }
                                         defaultValue={ 'no' }
                                         handleChange={ handleColorChange }
+                                        handleClick={ handleClick }
                                         placeholder={ 'gaveCraving' }
                                         isColors={ true }
                                         className='styled-radio-btn btn-outline'

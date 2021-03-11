@@ -73,6 +73,9 @@ const StepTwo = (props) => {
         dispatch(reduxChange('assessmentForm', 'colors', JSON.stringify(colors)))
         setCustomColorOpen(false)
     }
+    const handleClick = () => {
+        setCustomColorOpen(!customColorOpen)
+    }
     return(
         <Form className="form" onSubmit={ handleSubmit(onSubmit) }>
             <AssessmentHeader  prevPage={ prevPage } { ...props } />
@@ -94,6 +97,7 @@ const StepTwo = (props) => {
                                         options={ colorPalette }
                                         component={ renderStyleMultipleRadio }
                                         handleChange={ handleColorChange }
+                                        handleClick={ handleClick }
                                         placeholder={ 'gaveCraving' }
                                         isColors={ true }
                                         className='styled-radio-btn btn-outline'

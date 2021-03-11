@@ -189,6 +189,7 @@ const renderStyleMultipleRadio = (props) => {
         isIcons,
         handleChange,
         isColors,
+        handleClick,
         isNiche,
         fontStyled,
         meta: { touched, error, warning },
@@ -225,6 +226,9 @@ const renderStyleMultipleRadio = (props) => {
                             } }
                             type="radio"
                             value={ setValue(item) }
+                            onClick={ (event) => {
+                                isColors && item.label === 'Custom Color' ? handleClick && handleClick(event) : null }
+                            }
                             checked={ setChecked(item) }
                             id={ input.name }
                             className="styled-radio"
