@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Carousel from 'react-bootstrap/Carousel';
+// import Carousel from 'react-bootstrap/Carousel';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -13,12 +13,12 @@ import { Link } from 'react-router-dom';
 import { ROUTES } from '../../constants/appRoutes';
 // import slider1 from '../../public/images/home/slider-1.png';
 import sliderNew from '../homepage/assets/images/assesment.png';
-import basicPlan from '../homepage/assets/images/mana.svg';
+// import basicPlan from '../homepage/assets/images/mana.svg';
 // import premiumPlan from '../homepage/assets/images/fantasy.svg';
 // import vipPlan from '../homepage/assets/images/man-mage.svg';
 
 import hamBurger from '../homepage/assets/images/hamburger.svg';
-import megicStick from '../homepage/assets/images/stick-icon.svg';
+// import megicStick from '../homepage/assets/images/stick-icon.svg';
 import airplaneIcon from '../homepage/assets/images/airplane.svg';
 import fitnessIcon from '../homepage/assets/images/fitness.svg';
 import nailPolish from '../homepage/assets/images/nail-polish.svg';
@@ -35,50 +35,51 @@ import hourglassIcon from '../homepage/assets/images/hourglass.svg';
 import moneyIcon from '../homepage/assets/images/money.svg';
 import arrowIcon from '../homepage/assets/images/arrow.svg';
 import './home.sass';
-
-const responsive = {
-    desktop: {
-        breakpoint: { max: 3000, min: 1280 },
-        items: 3,
-    },
-    tablet: {
-        breakpoint: { max: 1024, min: 464 },
-        items: 2,
-    },
-    mobile: {
-        breakpoint: { max: 464, min: 0 },
-        items: 1,
-    },
-};
+import MultipleSlider from './multi-slider';
+// const responsive = {
+//     desktop: {
+//         breakpoint: { max: 3000, min: 1280 },
+//         items: 3,
+//     },
+//     tablet: {
+//         breakpoint: { max: 1024, min: 464 },
+//         items: 2,
+//     },
+//     mobile: {
+//         breakpoint: { max: 464, min: 0 },
+//         items: 1,
+//     },
+// };
 const HomePage = () => {
     return(
 
         <section className="main-section">
             <section className="home-banner">
-                <Container fluid>
-                    <Row className="align-items-center">
-                        <Col col={ 12 }>
+                <Container className="home-container">
+                    <div className="align-items-center">
+                        <div col={ 12 }>
                             <h1 className={ 'mainHeading text-center' }>Get a beautiful blog <span className="">in seconds!</span></h1>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className="text-side col-6" md="6" sm="12">
+                        </div>
+                    </div>
+                    <div className="home-banner-content">
+                        <div className="text-side">
                             <div className="text-wrap">
                                 <ListGroup className={ 'mainList' }>
-                                    <ListGroup.Item> <img src={ megicStick } alt="" /> Get more traffic with a blazing fast blog made for seo.</ListGroup.Item>
-                                    <ListGroup.Item> <img src={ megicStick } alt="" />  Ready to launch in minutes. Just start writting. </ListGroup.Item>
-                                    <ListGroup.Item> <img src={ megicStick } alt="" />  Sign up on any device - even your phone! No coding or web design experience required.</ListGroup.Item>
+                                    <ListGroup.Item> Get more traffic with a blazing fast blog <br /><b>made for seo.</b></ListGroup.Item>
+                                    <ListGroup.Item> Ready to launch in minutes. <b>Just start writting.</b> </ListGroup.Item>
+                                    <ListGroup.Item>  Sign up on <b>any device</b> - even your phone!<br /> No coding or web design experience required.</ListGroup.Item>
                                 </ListGroup>
-                                <div className={ 'd-flex flex-column justify-content-center align-items-center mt-3' }>
-                                    <Link to={ ROUTES.ASSESSMENT } className={ 'green-btn btn btn-primary' }>
-                                        Try For Free! No Signup Needed
+                                <div className="home-banner-btn">
+                                    <Link to={ ROUTES.ASSESSMENT } className="btn btn-primary">
+                                        Start Blogging for FREE! No CC Required
                                     </Link>
-                                    <span className={ 'infoText mt-2' }>*No Credit Card Required</span>
+                                    <p>*No Credit Card Required</p>
                                 </div>
                             </div>
-                        </Col>
-                        <Col className="img-side col-6" md="6" sm="12">
-                            <Carousel controls={ false }>
+                        </div>
+                        <div className="img-side">
+                            <img src={ sliderNew } />
+                            {/* <Carousel controls={ false }>
                                 <Carousel.Item>
                                     <img src={ sliderNew } alt='slider1' />
                                 </Carousel.Item>
@@ -88,25 +89,21 @@ const HomePage = () => {
                                 <Carousel.Item>
                                     <img src={ sliderNew } alt='slider3'/>
                                 </Carousel.Item>
-                            </Carousel>
-                        </Col>
-                    </Row>
+                            </Carousel> */}
+                        </div>
+                    </div>
                 </Container>
             </section>
             <section className="how-it-work">
-                <Container fluid>
-                    <Row>
-                        <Col col={ 12 }>
-                            <h2 className={ 'text-center titleHeading' }>How It Work</h2>
-                        </Col>
-                    </Row>
-                    <Row className={ 'align-items-stretch justify-content-between customGrid' }>
-                        <div className={ 'rightArrow' }>
-                            <div className={ 'box text-center d-flex flex-column' }>
-                                <span className={ 'circleBox' }>1</span>
-                                <h3 className={ 'mt-2' }>Choose a niche</h3>
+                <Container className="home-container">
+                    <h2 className="text-center titleHeading">How It Work</h2>
+                    <div className="how-it-work-box">
+                        <div className="price-box">
+                            <div className="price-box-inner">
+                                <span className="price-box-step">1</span>
+                                <h3>Choose a niche</h3>
                                 <p>Pick a topic to get a blog personalized to your niche!</p>
-                                <div className={ 'd- flex flex-row mt-auto mb-3' }>
+                                <div className="price-box-icon">
                                     <img src={ hamBurger } alt="" />
                                     <img src={ airplaneIcon } alt="" />
                                     <img src={ fitnessIcon } alt="" />
@@ -118,12 +115,12 @@ const HomePage = () => {
                         <div className="arrow">
                             <img src={ arrowIcon } alt="Direction" />
                         </div>
-                        <div className={ 'd-flex justify-content-center rightArrow manageBefore' }>
-                            <div className={ 'box text-center' }>
-                                <span className={ 'circleBox' }>2</span>
-                                <h3 className={ 'mt-2' }>Choose a color palette</h3>
-                                <p>Pick a topic to get a blog personalized to your niche!</p>
-                                <div className={ 'd- flex flex-row' }>
+                        <div className="price-box">
+                            <div className="price-box-inner">
+                                <span className="price-box-step">1</span>
+                                <h3>Choose a color palette</h3>
+                                <p>Choose from our web designer approved color schemes or create your own!</p>
+                                <div className="price-box-icon">
                                     <img src={ paintPalette } alt="" />
                                 </div>
                             </div>
@@ -131,119 +128,128 @@ const HomePage = () => {
                         <div className="arrow">
                             <img src={ arrowIcon } alt="Direction" />
                         </div>
-                        <div className={ 'd-flex justify-content-end' }>
-                            <div className={ 'box text-center' }>
-                                <span className={ 'circleBox' }>3</span>
-                                <h3 className={ 'mt-2' }>Name Your Blog and Start Writing!</h3>
-                                <p>Pick a topic to get a blog personalized to your niche!</p>
-                                <div className={ 'd- flex flex-row' }>
+                        <div className="price-box">
+                            <div className="price-box-inner">
+                                <span className="price-box-step">1</span>
+                                <h3>Name Your Blog and Start Writing!</h3>
+                                <p>Get more views with a blog that’s optimized for SEO out-of-the-box</p>
+                                <div className="price-box-icon">
                                     <img src={ pencilIcon } alt="" />
                                 </div>
                             </div>
                         </div>
-                    </Row>
+                    </div>
                 </Container>
             </section>
-            <section className={ 'conversion_rate' }>
-                <Container fluid>
-                    <Row>
-                        <Col col={ 4 } className={ 'text-center col-sm-4' }>
-                            <div className="contentCircle">
-                                <span className={ 'rate_circle' }>50%</span>
-                                <p>of software companies voted SEO and Blogging as the <b>most effective</b> marketing channels</p>
+            <section className="conversion_rate">
+                <Container className="home-container">
+                    <h2 className="text-center titleHeading">Why should you start a blog?</h2>
+                    <div className="conversion_box_wrap">
+                        <div className="conversion_box">
+                            <div className="conversion_percent">
+                                <span>50%</span>
                             </div>
-                        </Col>
-                        <Col col={ 4 } className={ 'text-center col-sm-4' }>
-                            <div className="contentCircle">
-                                <span className={ 'rate_circle' }>6X</span>
-                                <p><b>Website conversion rate</b> is nearly six times higher for content marketing adopters than non-adopters</p>
+                            <p>
+                                of software companies voted SEO and Blogging as the <b>most effective</b> marketing channels
+                            </p>
+                        </div>
+                        <div className="conversion_box">
+                            <div className="conversion_percent">
+                                <span>6x</span>
                             </div>
-                        </Col>
-                        <Col col={ 4 } className={ 'text-center col-sm-4' }>
-                            <div className="contentCircle">
-                                <span className={ 'rate_circle' }>40%</span>
-                                <p>the average amount of their entir marketing budget that softwere companies invest into <b>SEO and Blogging</b></p>
+                            <p>
+                                <b>Website conversion rate</b> is nearly six times higher for content marketing adopters than non-adopters
+                            </p>
+                        </div>
+                        <div className="conversion_box">
+                            <div className="conversion_percent">
+                                <span>40%</span>
                             </div>
-                        </Col>
-                        <Col col={ 4 } className={ 'text-center col-sm-4' }>
-                            <div className="contentCircle">
-                                <span className={ 'rate_circle' }>82%</span>
-                                <p>of marketing who blog see <b>positive ROI</b> from their inbond marketing</p>
+                            <p>
+                                the average amount of their entire marketing budget that software companies invest into <b>SEO and Blogging</b>
+                            </p>
+                        </div>
+                        <div className="conversion_box">
+                            <div className="conversion_percent">
+                                <span>82%</span>
                             </div>
-                        </Col>
-                        <Col col={ 4 } className={ 'text-center col-sm-4' }>
-                            <div className="contentCircle">
-                                <span className={ 'rate_circle' }>61%</span>
-                                <p>of software companies voted SEO and Blogging as the <b>most effective</b> marketing channels</p>
+                            <p>
+                                of marketers who blog see <b>positive ROI</b> from their inbound marketing
+                            </p>
+                        </div>
+                        <div className="conversion_box">
+                            <div className="conversion_percent">
+                                <span>61%</span>
                             </div>
-                        </Col>
-                        <Col col={ 4 } className={ 'text-center col-sm-4' }>
-                            <div className="contentCircle">
-                                <span className={ 'rate_circle' }>78%</span>
-                                <p>of software companies voted SEO and Blogging as the <b>most effective</b> marketing channels</p>
+                            <p>
+                                of consumers say they feel better about, and are <b>more likely to buy from,</b> a company that delivers custom content
+                            </p>
+                        </div>
+                        <div className="conversion_box">
+                            <div className="conversion_percent">
+                                <span>78%</span>
                             </div>
-                        </Col>
-                        <Col col={ 12 }>
-                            <ListGroup className={ 'inlineList' }>
-                                <ListGroup.Item> <Link>1. helloroketto.com</Link></ListGroup.Item>
-                                <ListGroup.Item> <Link>2. uplandsoftware.com</Link></ListGroup.Item>
-                                <ListGroup.Item> <Link>3. hubspot.com</Link></ListGroup.Item>
-                                <ListGroup.Item> <Link>2. thecontentcouncil.com</Link> </ListGroup.Item>
-                                <ListGroup.Item> <Link>2. demandmetric.com</Link> </ListGroup.Item>
-                            </ListGroup>
-                        </Col>
-                    </Row>
+                            <p>
+                                of CMOs believe custom content is the <b>future</b> of marketing
+                            </p>
+                        </div>
+                    </div>
+                    <Col col={ 12 }>
+                        <ListGroup className={ 'inlineList' }>
+                            <ListGroup.Item> <Link>1. helloroketto.com</Link></ListGroup.Item>
+                            <ListGroup.Item> <Link>2. uplandsoftware.com</Link></ListGroup.Item>
+                            <ListGroup.Item> <Link>3. hubspot.com</Link></ListGroup.Item>
+                            <ListGroup.Item> <Link>2. thecontentcouncil.com</Link> </ListGroup.Item>
+                            <ListGroup.Item> <Link>2. demandmetric.com</Link> </ListGroup.Item>
+                        </ListGroup>
+                    </Col>
                 </Container>
             </section>
             <section className="how-it-work wizardBlog">
-                <Container fluid>
-                    <Row>
-                        <Col col={ 12 }>
-                            <h2 className={ 'text-center titleHeading' }>What’s Included With <b>Every</b> Wizard Blog</h2>
-                        </Col>
-                    </Row>
-                    <Row className={ 'align-items-stretch' } >
-                        <Col col={ 3 } className={ 'mobileBottom' } sm="6" md="6" xl="3">
-                            <div className={ 'box text-center boxAlign' }>
-                                <span className={ 'circleBox' }>
+                <Container className="home-container">
+                    <h2 className="text-center titleHeading">What’s Included With <b>Every</b> Wizard Blog</h2>
+                    <div className="how-it-work-box">
+                        <div className="price-box">
+                            <div className="price-box-inner">
+                                <span className="price-box-step">
                                     <img src={ seoImg } alt="SEO" />
                                 </span>
-                                <h3 className={ 'mt-2' }>SEO</h3>
+                                <h3>SEO</h3>
                                 <p>Our sites are built for Google Search so you get more traffic and rank higher, with no experience necessary</p>
                             </div>
-                        </Col>
-                        <Col col={ 3 } className={ 'd-flex justify-content-center mobileBottom boxAlign' } sm="6" md="6" xl="3">
-                            <div className={ 'box text-center' }>
-                                <span className={ 'circleBox' }>
-                                    <img src={ mobileImg } alt="SEO" />
+                        </div>
+                        <div className="price-box">
+                            <div className="price-box-inner">
+                                <span className="price-box-step">
+                                    <img src={ mobileImg } alt="Mobile Responsive" />
                                 </span>
-                                <h3 className={ 'mt-2' }>Mobile Responsive</h3>
+                                <h3>Mobile Responsive</h3>
                                 <p>According to Google, over 50% of website traffic comes from mobile visitors</p>
                             </div>
-                        </Col>
-                        <Col col={ 3 } className={ 'd-flex justify-content-end mobileBottom boxAlign' } sm="6" md="6" xl="3">
-                            <div className={ 'box text-center' }>
-                                <span className={ 'circleBox' }>
-                                    <img src={ downloadSpeed } alt="SEO" />
+                        </div>
+                        <div className="price-box">
+                            <div className="price-box-inner">
+                                <span className="price-box-step">
+                                    <img src={ downloadSpeed } alt="Performance + Security" />
                                 </span>
-                                <h3 className={ 'mt-2' }>Performance + Security</h3>
+                                <h3>Performance + Security</h3>
                                 <p>Get blazing fast load times, avoid crashes, and easily handle millions of visitors. Built with the same technology used by Netflix, NASA and Twitter.</p>
                             </div>
-                        </Col>
-                        <Col col={ 3 } className={ 'd-flex justify-content-end boxAlign' } sm="6" md="6" xl="3">
-                            <div className={ 'box text-center' }>
-                                <span className={ 'circleBox' }>
-                                    <img src={ emailImportant } alt="SEO" />
+                        </div>
+                        <div className="price-box">
+                            <div className="price-box-inner">
+                                <span className="price-box-step">
+                                    <img src={ emailImportant } alt="Collect Email Subscribers " />
                                 </span>
-                                <h3 className={ 'mt-2' }>Name Your Blog and Start Writing!</h3>
+                                <h3>Collect Email Subscribers </h3>
                                 <p>Easily collect email subscribers with built in opt-in forms that help you build and grow and audience.</p>
                             </div>
-                        </Col>
-                    </Row>
+                        </div>
+                    </div>
                 </Container>
             </section>
             <section className="old-way-wizard">
-                <Container fluid>
+                <Container className="home-container">
                     <Row>
                         <Col col={ 12 }>
                             <h2 className={ 'text-center titleHeading' }>Here’s How Much <span className={ 'font-bold color-purple' }>Time</span> You Can Save <img src={ hourglassIcon } alt="Time" /></h2>
@@ -402,7 +408,7 @@ const HomePage = () => {
                 </Container>
             </section>
             <section className="website-plan pt-3 pb-5">
-                <Container fluid>
+                <Container  className="home-container">
                     <h3 className={ 'titleHeading mb-0' }>Pricing</h3>
                     <Form className="select_plan">
                         <p className="switch_text">Annually</p>
@@ -410,84 +416,84 @@ const HomePage = () => {
                         <p className="">Monthly</p>
                     </Form>
                     <h4 className={ 'subheading mb-0' }>Switch to annually to get <strong>2 months FREE</strong></h4>
-                    <Row>
-                        <Col sm="12">
-                            <Carousel controls={ true } responsive={ responsive }>
-                                <Carousel.Item>
-                                    <div className="plan-detail">
-                                        <div className="plan-detail-inner">
-                                            <div className="plan-img">
-                                                <img src={ basicPlan } alt="Basic Plan" />
-                                            </div>
-                                            <h4 className="plan-name">Wizrd</h4>
-                                            <ul className="plan-feature">
-                                                <li>Get a beautiful blog in seconds!</li>
-                                                <li>1 Website + 1 Custom Sub-Domain</li>
-                                                <li>1,000 Views / Month</li>
-                                                <li>1 user</li>
-                                                <li>100 MB of space </li>
-                                                <li>2 Blog posts / Month </li>
-                                                <li>No credit card required </li>
-                                            </ul>
-                                            <div className="plan-price">Free</div>
-                                            <div className="plan-action">
-                                                <button className="btn btn-secondary">Try Now</button>
-                                                <span className={ 'getText mt-3' }>Get Yours In Minutes</span>
-                                            </div>
-                                        </div>
+
+                    <div className="price-slider">
+                        <MultipleSlider />
+                    </div>
+                    {/* <Carousel controls={ true } responsive={ responsive }>
+                        <Carousel.Item>
+                            <div className="plan-detail">
+                                <div className="plan-detail-inner">
+                                    <div className="plan-img">
+                                        <img src={ basicPlan } alt="Basic Plan" />
                                     </div>
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <div className="plan-detail">
-                                        <div className="plan-detail-inner">
-                                            <div className="plan-img">
-                                                <img src={ basicPlan } alt="Basic Plan" />
-                                            </div>
-                                            <h4 className="plan-name">Wizrd</h4>
-                                            <ul className="plan-feature">
-                                                <li>Get a beautiful blog in seconds!</li>
-                                                <li>1 Website + 1 Custom Sub-Domain</li>
-                                                <li>1,000 Views / Month</li>
-                                                <li>1 user</li>
-                                                <li>100 MB of space </li>
-                                                <li>2 Blog posts / Month </li>
-                                                <li>No credit card required </li>
-                                            </ul>
-                                            <div className="plan-price">Free</div>
-                                            <div className="plan-action">
-                                                <button className="btn btn-secondary">Try Now</button>
-                                                <span className={ 'getText mt-3' }>Get Yours In Minutes</span>
-                                            </div>
-                                        </div>
+                                    <h4 className="plan-name">Wizrd</h4>
+                                    <ul className="plan-feature">
+                                        <li>Get a beautiful blog in seconds!</li>
+                                        <li>1 Website + 1 Custom Sub-Domain</li>
+                                        <li>1,000 Views / Month</li>
+                                        <li>1 user</li>
+                                        <li>100 MB of space </li>
+                                        <li>2 Blog posts / Month </li>
+                                        <li>No credit card required </li>
+                                    </ul>
+                                    <div className="plan-price">Free</div>
+                                    <div className="plan-action">
+                                        <button className="btn btn-secondary">Try Now</button>
+                                        <span className={ 'getText mt-3' }>Get Yours In Minutes</span>
                                     </div>
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <div className="plan-detail">
-                                        <div className="plan-detail-inner">
-                                            <div className="plan-img">
-                                                <img src={ basicPlan } alt="Basic Plan" />
-                                            </div>
-                                            <h4 className="plan-name">Wizrd</h4>
-                                            <ul className="plan-feature">
-                                                <li>Get a beautiful blog in seconds!</li>
-                                                <li>1 Website + 1 Custom Sub-Domain</li>
-                                                <li>1,000 Views / Month</li>
-                                                <li>1 user</li>
-                                                <li>100 MB of space </li>
-                                                <li>2 Blog posts / Month </li>
-                                                <li>No credit card required </li>
-                                            </ul>
-                                            <div className="plan-price">Free</div>
-                                            <div className="plan-action">
-                                                <button className="btn btn-secondary">Try Now</button>
-                                                <span className={ 'getText mt-3' }>Get Yours In Minutes</span>
-                                            </div>
-                                        </div>
+                                </div>
+                            </div>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <div className="plan-detail">
+                                <div className="plan-detail-inner">
+                                    <div className="plan-img">
+                                        <img src={ basicPlan } alt="Basic Plan" />
                                     </div>
-                                </Carousel.Item>
-                            </Carousel>
-                        </Col>
-                    </Row>
+                                    <h4 className="plan-name">Wizrd</h4>
+                                    <ul className="plan-feature">
+                                        <li>Get a beautiful blog in seconds!</li>
+                                        <li>1 Website + 1 Custom Sub-Domain</li>
+                                        <li>1,000 Views / Month</li>
+                                        <li>1 user</li>
+                                        <li>100 MB of space </li>
+                                        <li>2 Blog posts / Month </li>
+                                        <li>No credit card required </li>
+                                    </ul>
+                                    <div className="plan-price">Free</div>
+                                    <div className="plan-action">
+                                        <button className="btn btn-secondary">Try Now</button>
+                                        <span className={ 'getText mt-3' }>Get Yours In Minutes</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <div className="plan-detail">
+                                <div className="plan-detail-inner">
+                                    <div className="plan-img">
+                                        <img src={ basicPlan } alt="Basic Plan" />
+                                    </div>
+                                    <h4 className="plan-name">Wizrd</h4>
+                                    <ul className="plan-feature">
+                                        <li>Get a beautiful blog in seconds!</li>
+                                        <li>1 Website + 1 Custom Sub-Domain</li>
+                                        <li>1,000 Views / Month</li>
+                                        <li>1 user</li>
+                                        <li>100 MB of space </li>
+                                        <li>2 Blog posts / Month </li>
+                                        <li>No credit card required </li>
+                                    </ul>
+                                    <div className="plan-price">Free</div>
+                                    <div className="plan-action">
+                                        <button className="btn btn-secondary">Try Now</button>
+                                        <span className={ 'getText mt-3' }>Get Yours In Minutes</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </Carousel.Item>
+                    </Carousel> */}
                     {/* <Row className="">
                         <Col className="col-4">
                             <div className="plan-detail">

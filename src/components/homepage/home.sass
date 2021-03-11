@@ -1,12 +1,20 @@
 @import '../variables.sass';
-.main-section 
-    .mainHeading 
+.titleHeading
+    font-weight: 800
+    color: $white-color
+    font-size: 48px
+    line-height: 65px
+    margin-bottom: 20px
+.main-section
+    .mainHeading
         font-size: 72px
+        line-height: 1
         font-weight: 900
-        margin-bottom: 30px
+        margin: 0 0 25px
+        letter-spacing: -1.5px
         color: $black-color
         span
-            color: $light-blue-color
+            color: $purple-bg-color
         @media (max-width: $breakpoint-mobile)
             font-size: 42px
             line-height: 45px
@@ -14,170 +22,178 @@
             font-size: 42px
             line-height: 45px
     .home-banner
-        .img-side 
+        padding: 18px 0 35px
+        .home-banner-content
+            display: flex
+            justify-content: center
+            align-items: flex-start
+            width: 100%
             @media (max-width: $breakpoint-ipad)
-                text-align: center
-        .text-wrap
-            @media (max-width: $breakpoint-ipad)
-                margin: 0 auto
+                flex-direction: column
+            .img-side
+                width: 501px
+                margin-left: 37px
+                display: inline-block
+                @media (max-width: $breakpoint-ipad)
+                    text-align: center
+                    width: 100%
+            .text-side
+                display: inline-block
+                width: 60%
+                width: calc(100% - 537px)
+                padding: 32px 0 0
+                @media (max-width: $breakpoint-ipad)
+                    width: 100%
+                    margin: 0 0 30px 0 !important
+                    margin: 0 auto
+                    padding: 0
+        .home-banner-btn
+            width: 100%
+            display: inline-block
+            text-align: center
+            margin: 20px 0 0
+            .btn.btn-primary
+                color: $white-color
+                background-color: $light-green
+                border-color: $light-green
+                box-shadow: -3px 3px 4px rgba(0, 0, 0, 0.25)
+                &:not(:disabled):not(.disabled):active,
+                &:not(:disabled):not(.disabled):active:focus,
+                &:hover,
+                &:active,
+                &:focus
+                    color: $white-color
+                    background-color: $dark-green-color
+                    border-color: $dark-green-color
+            p
+                font-size: 16px
+                line-height: 1.3
+                color: $body-color
+                letter-spacing: 0.18px
+                margin: 15px 0 0
     .mainList
         .list-group-item
             border: 0
             font-size: 28px
-            font-weight: 600
+            line-height: 1.1
+            font-weight: 700
             color: $black-color
-            display: flex
-            align-items: flex-start
-            text-align: left
-            img 
+            margin: 0 0 32px
+            padding: 0 0 0 45px
+            min-height: 35px
+            background-image: url('assets/images/stick-icon.svg')
+            background-repeat: no-repeat
+            background-position: 0 0
+            b
+                font-weight: 900
+            &:last-child
+                margin-bottom: 0
+            img
                 margin-top: 5px
                 margin-right: 15px
-    .green-btn
-        font-size: 18px
-        background-color: $light-green !important
-        border-color: $light-green !important
-        filter: drop-shadow(-3px 3px 4px rgba(0, 0, 0, 0.25))
-        padding: 12px 0
-        color: $white-color
-        &:hover
-            color: $white-color !important
-        &:focus
-            color: $white-color
-    .infoText
-        color: $light-grey-link
-        font-weight: bold 
-        font-size: 16px
     .how-it-work
         padding: 30px 0
         background: $ligh-bg-gradient
-        .titleHeading
-            font-weight: 700
-            color: $white-color
-            font-size: 48px
-            line-height: 65px
-            margin-bottom: 20px
-            @media (max-width: $breakpoint-mobile)
-                font-size: 32px
-                line-height: 45px
+        .how-it-work-box
+            width: 100%
+            display: flex
+            justify-content: center
             @media (max-width: $breakpoint-ipad)
-                font-size: 32px
-                line-height: 45px
-        .arrow
-            padding-top: 98px
-            @media (max-width: $breakpoint-mobile)
-                padding: 65px 0
-                transform: rotate(90deg)
-                display: flex
-                justify-content: center
-                align-items: center
-                margin: 0 auto
-            @media (max-width: $breakpoint-ipad)
-                padding: 65px 0
-                transform: rotate(90deg)
-                display: flex
-                justify-content: center
-                align-items: center
-                margin: 0 auto
-        // .rightArrow
-        //     position: relative
-        //     &:before
-        //         content: "\2192"
-        //         position: absolute
-        //         right: -35px
-        //         font-size: 135px
-        //         color: #fff
-        //     &.manageBefore
-        //         &:before
-        //             right: -85px
-        // @media (max-width: $breakpoint-mobile)
-        //     .rightArrow
-        //         margin-bottom: 30px;
-        //         &:before
-        //             content: none
-        //         &.manageBefore
-        //             &:before
-        //                 content: none
-        // @media (max-width: $breakpoint-ipad)
-        //     .rightArrow
-        //         margin-bottom: 30px
-        //         &:before
-        //             content: none
-        //         &.manageBefore
-        //             &:before
-        //                 content: none
-    .customGrid
-        padding: 0 15px
-        @media (max-width: $breakpoint-mobile)
-            flex-wrap: wrap
-            flex-direction: column
-        @media (max-width: $breakpoint-ipad)
-            flex-wrap: wrap
-            flex-direction: column
-        .box
+                flex-direction: column
+            .arrow
+                margin: 83px 0 0
+                @media (max-width: $breakpoint-ipad)
+                    // margin: 20px 0
+                    // transform: rotate(90deg)
+                    // transform-origin: center center
+                    display: none
+        .price-box
+            background-color: $white-color
             border: 5px solid $primary-color
-            height: 100%
-            max-width: 304px
+            width: 330px
+            margin: 0 11px
+            display: inline-block
             border-radius: 10px
-            position: relative
-            @media (max-width: $breakpoint-mobile)
-                max-width: 100%
+            padding: 32px 9px 40px
+            text-align: center
             @media (max-width: $breakpoint-ipad)
-                margin: 0 auto
-            .circleBox
-                font-size: 64px
-                font-weight: 800
-                height: 148px
-                width: 148px
-                display: flex
-                justify-content: center
-                align-items: center
-                margin: 0 auto
-                border: 3px solid $primary-color
-                border-radius: 100%
-                background: $light-blue-color
-                color: $white-color
+                margin: 11px auto
+            .price-box-inner
+                width: 100%
+                display: inline-block
+                .price-box-step
+                    width: 148px
+                    height: 148px
+                    border-radius: 100%
+                    border: 3px solid $primary-color
+                    background-color: $purple-bg-color
+                    color: $white-color
+                    font-size: 64px
+                    line-height: 142px
+                    font-weight: bold
+                    font-family: 'Nunito Sans', sans-serif
+                    display: inline-block
+                h3
+                    font-size: 28px
+                    line-height: 40px
+                    color: $black-color
+                    font-weight: bold
+                    margin: 15px 0 5px
+                    min-height: 80px
+                p
+                    font-size: 20px
+                    line-height: 27px
+                    min-height: 78px
+                    margin: 0 0 22px
     .conversion_rate
-        padding: 80px 0
-        @media (max-width: $breakpoint-mobile)
-            padding: 40px 0
-        @media (max-width: $breakpoint-ipad)
-            padding: 40px 0
-        .contentCircle
-            .rate_circle
-                font-size: 30px
-                font-weight: 800
-                height: 165px
-                width: 179px
-                display: flex
-                justify-content: center
-                align-items: center
-                margin: 0 auto
-                border: 6px solid $primary-color
-                border-radius: 100%
-                color: $black-color
-            p 
-                padding: 20px 15px
-                font-weight: bold
-                font-size: 24px
-                line-height: 33px
-        .inlineList
-            flex-direction: row
-            flex-wrap: wrap;
-            @media (max-width: $breakpoint-mobile)
-                justify-content: center;
-            @media (max-width: $breakpoint-ipad)
-                justify-content: center;
+        padding: 30px 0
+        .titleHeading
+            color: $black-color
+        .conversion_box_wrap
+            width: 100%
+            display: inline-block
+            text-align: center
+            .conversion_box
+                width: 385px
+                display: inline-block
+                vertical-align: top
+                margin: 0 10px 18px
+                text-align: center
+                .conversion_percent
+                    font-weight: 900
+                    font-size: 64px
+                    line-height: 2.3
+                    width: 179px
+                    height: 165px
+                    border-radius: 100%
+                    border: 6px solid $primary-color
+                    display: inline-block
+                p
+                    margin: 5px 0 0
+                    padding: 0
+                    font-weight: bold
+                    font-size: 24px
+                    line-height: 33px
+                    b
+                        font-weight: 900
+        .list-group
+            flex-direction: unset
+            margin: 30px 0 60px
             .list-group-item
                 border: 0
-                padding-left: 0
+                padding: 0 22px 0 0
                 a
                     color: $grey-link
                     font-size: 13px
-                    font-weight: 800
+                    font-weight: 700
                     line-height: 15px
                     opacity: 0.6
-        .font-bold
-            font-weight: bold;
+    .wizardBlog
+        .how-it-work-box
+            .price-box
+                margin: 0 22px
+                @media (max-width: $breakpoint-ipad)
+                    margin: 20px auto
     .wizardBlog
         background-color: $purple-bg-color
         @media (max-width: $breakpoint-mobile)
@@ -202,7 +218,7 @@
                 max-width: 100%
     .old-way-wizard
         padding: 60px 0
-        .titleHeading 
+        .titleHeading
             font-weight: 800
             color: $black-color
             font-size: 48px
@@ -253,7 +269,7 @@
                             td
                                 border-top: 0
                         td
-                            border: 3px solid #757575  
+                            border: 3px solid #757575
                             font-size: 18px
                             line-height: 20px
                             font-weight: 700
@@ -279,9 +295,6 @@
             font-size: 48px
             line-height: 65px
             margin-bottom: 20px
-            @media (max-width: $breakpoint-mobile)
-                font-size: 32px
-                line-height: 45px
             @media (max-width: $breakpoint-ipad)
                 font-size: 32px
                 line-height: 45px
@@ -294,7 +307,7 @@
             justify-content: center
             align-items: center
             margin-top: 5px
-            margin-bottom: 10px     
+            margin-bottom: 10px
             p
                 margin: 0
             .custom-control
@@ -307,10 +320,10 @@
                                 box-shadow: none
                     &:checked
                         &~.custom-control-label
-                                &:after 
+                                &:after
                                     transform: translateX(1.75rem)
                 .custom-control-label
-                    &:before    
+                    &:before
                         border: $light-greybg-color solid 5px
                         height: 28px
                         width: 58px
@@ -318,7 +331,7 @@
                         left: -3.25rem
                         background: transparent
                         top: 0
-                    &:after 
+                    &:after
                         background: $purple-bg-color
                         height: 26px
                         width: 26px
@@ -327,24 +340,24 @@
                         left: calc(-3.25rem + 2px)
                 ~ &.custom-control-label
                     &:after
-                        transform: translateX(1.75rem); 
+                        transform: translateX(1.75rem);
         .plan-detail
-            padding: 62px 46px
+            padding: 9px 46px 40px
             @media (max-width: $breakpoint-ipad)
                 padding: 62px 25px
-            &:hover 
-                box-shadow: 0 0 0 3px $primary-color
-                border-radius: 16px
-                border: 1px solid $primary-color
-            .plan-detail-inner 
+            // &:hover
+            //     box-shadow: 0 0 0 3px $primary-color
+            //     border-radius: 16px
+            //     border: 1px solid $primary-color
+            .plan-detail-inner
                 .plan-name
                     font-weight: bold
                     font-size: 36px
                     display: flex
                     align-items: center
                     justify-content: center
-                    span    
-                        background: $green-color
+                    span.plan_tag
+                        background: $dark-green-color
                         border-radius: 10px
                         color: $white-color
                         font-weight: bold
@@ -355,9 +368,9 @@
                         align-items: center
                         justify-content: center
                         margin-left: 10px
-                        &.purple-color  
+                        &.primary-color
                             background: $primary-color
-                ul 
+                ul
                     li
                         font-size: 14px
                 .plan-action
@@ -369,14 +382,40 @@
                         font-size: 14px
                         color: $black-color
                     button
-                        max-width: 166px
-                        width: 100%            
-
-
-
-
-
-
-
-
-            
+                        padding: 12px 45px
+                        width: 100%
+.container
+    &.home-container
+        max-width: 1250px !important
+    .react-multiple-carousel__arrow
+        background-color: transparent
+        background-image: url('assets/images/slider-arrow.png')
+        background-repeat: no-repeat
+        background-position: 0 0
+        width: 17px
+        height: 67px
+        display: inline-block
+        &:hover,
+        &:active,
+        &:focus
+            background-color: transparent
+            background-image: url('assets/images/slider-arrow.png')
+            background-repeat: no-repeat
+            background-position: 0 0
+        &::before
+            display: none
+    .react-multiple-carousel__arrow--right
+        right: 20px
+    .react-multiple-carousel__arrow--left
+        left: 20px
+        transform: rotate(180deg)
+    .react-multi-carousel-item
+        padding: 20px 30px
+        & > div
+            border: 1px solid rgba(0,0,0,.08)
+            box-shadow: 0 0 0 3px $white-color
+            border-radius: 16px
+        &:hover
+            & > div
+                border-color: $primary-color
+                box-shadow: 0 0 0 3px $primary-color
