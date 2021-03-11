@@ -146,14 +146,6 @@ const StepTwo = (props) => {
                                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
                                                             </Card>
                                                         </li>
-                                                        <li>
-                                                            <Card
-                                                                image={ 'https://homepages.cae.wisc.edu/~ece533/images/boat.png' }
-                                                            >
-                                                                <h3>The Joy of Cooking</h3>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
-                                                            </Card>
-                                                        </li>
                                                     </ul>
                                                 </Blogs>
                                             </Home>

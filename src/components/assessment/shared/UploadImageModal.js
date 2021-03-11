@@ -71,7 +71,7 @@ const UploadImageModal = (props) => {
                         </Col>
                         <Col className="col-8">
                             <div className="logo-gallery">
-                                { unsplashLoading ?  <div className='unsplash-emtpy'><div className="small-up-loader btn-loader">
+                                { unsplashLoading ?  <div className='unsplash-emtpy'><div className="small-up-loader btn-loader ">
                                     <div className="lds-facebook"><div></div><div></div><div></div></div>
                                 </div></div> : null }
                                 {_.isEmpty(unsplashImages) && !unsplashLoading ? <div className='unsplash-emtpy'><p>No Records found</p></div> : <>
