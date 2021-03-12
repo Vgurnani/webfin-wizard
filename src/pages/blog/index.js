@@ -173,7 +173,7 @@ const BlogPage =(props) => {
                                         <img src={ userData && userData.user.profileImageUrl || profilePic } alt="Jason Miller" />
                                     </div>
                                     <div className="author-name">
-                                        <span>{userData && `${ userData.user?.userName }`}</span>
+                                        <span>{userData && `${ userData.user?.userName?.toUsername() }`}</span>
 
                                     </div>
                                 </div>
@@ -429,7 +429,9 @@ BlogPage.propTypes = {
     handleSubmit: PropTypes.func,
     initialize: PropTypes.func
 };
-
+String.prototype.toUsername = function(){
+    return this?.split('@') && this?.split('@')[ 0 ];
+}
 export default reduxForm({
     form: 'blogForm',
     validate

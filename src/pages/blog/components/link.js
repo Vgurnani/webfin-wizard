@@ -55,10 +55,10 @@ export const wrapLink = (editor, url ) => {
     }
 }
 
-const insertLink = (editor, url, setOpen) => {
+const insertLink = (editor, url) => {
     if (editor.selection) {
         wrapLink(editor, url)
-        setOpen(false)
+        //setOpen(false)
     }
 }
 
@@ -112,7 +112,7 @@ const InputText = (props) => {
     return(
         <div ref={ divRef } className='emoji-mart video-mart'>
             <input placeholder="Enter Link" ref={ inputRef } type='text' defaultValue={ linkUrl }  onChange={ (event) => setLinkUrl(event.target.value) } />
-            <Button onClick={ () => insertLink(editor,linkUrl, setOpen) } >confirm</Button>
+            <Button onClick={ () => insertLink(editor,linkUrl) } >confirm</Button>
         </div>)
 }
 LinkElement.propTypes = {

@@ -1,12 +1,18 @@
 import React, { useState, useRef } from 'react'
-import { useSlate } from 'slate-react';
+import { useSlate, useSelected, useFocused } from 'slate-react';
 import { Transforms } from 'slate';
 import PropTypes from 'prop-types';
 import { Button } from './button';
 import useOutsideClick from 'components/hoc/OutsideClick'
-import { MediaEditor } from 'utils/svg';
+import { MediaEditor ,CloseIcon } from 'utils/svg';
 export const VideoElement = ({ attributes, children, element }) => {
     const { url } = element
+    const selected = useSelected()
+    const editor = useSlate();
+    const focused = useFocused()
+    const handleRemove = () =>{
+        Transforms.removeNodes(editor, element)
+    }
     return (
         <div { ...attributes }>
             <div contentEditable={ false }>
@@ -25,27 +31,28 @@ export const VideoElement = ({ attributes, children, element }) => {
                             left: '0',
                             width: '100%',
                             height: '100%',
+                            boxShadow: `${ selected && focused ? '0 0 0 3px #B4D5FF' : 'none' }`
                         } }
                     />
-                </div>
+                </div>{selected && focused && <a onClick={ () => handleRemove() } href='javascript:void(0)'><CloseIcon/></a>}
             </div>
             {children}
         </div>
     )
 }
 
-export const insertVedio = (editor, url, setOpen) => {
+export const insertVedio = (editor, url) => {
     if((url?.indexOf('http://') == 0 || url?.indexOf('https://') == 0)){
 
         const text = { text: '' }
-        const image = [ { type: 'video', url, children: [ text ] },{
+        const video = [ { type: 'video', url, children: [ text ] },{
             type: 'paragraph',
             children: [
                 { text: '' },
             ],
         } ]
-        Transforms.insertNodes(editor, image)
-        setOpen(false)
+        Transforms.insertNodes(editor, video)
+        //setOpen(false)
     }
 }
 
@@ -102,7 +109,7 @@ const InputText = (props) => {
     return(
         <div ref={ divRef } className='emoji-mart video-mart'>
             <input placeholder="Enter video Link" type='text' ref={ inputRef } defaultValue={ videoUrl }  onChange={ (event) => setVideoUrl(event.target.value) } />
-            <Button onClick={ () => insertVedio(editor,videoUrl, setOpen) } >confirm</Button>
+            <Button onClick={ () => insertVedio(editor,videoUrl) } >confirm</Button>
         </div>)
 }
 VideoElement.propTypes = {

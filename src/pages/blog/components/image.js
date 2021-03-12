@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 //import { useSelected, useFocused, useSlate } from 'slate-react';
 // import { useSlate } from 'slate-react';
 import { Transforms } from 'slate';
@@ -7,7 +7,8 @@ import { Button } from './button';
 // import { Form } from 'react-bootstrap';
 // import { Field } from 'redux-form';
 import {
-    ImageUploadEditor
+    ImageUploadEditor,
+    CloseIcon
 } from '../../../utils/svg';
 import { Modal , Row, Col } from 'react-bootstrap';
 import UploadImage from './uploadImage';
@@ -18,10 +19,15 @@ import { useSelector } from 'react-redux'
 
 export const ImageElement = ({ attributes, children, element }) => {
     const selected = useSelected()
+    const editor = useSlate();
     const focused = useFocused()
+    const imageDiv = useRef();
+    const handleRemove = () =>{
+        Transforms.removeNodes(editor, element)
+    }
     return (
-        <div { ...attributes }>
-            <div contentEditable={ false }>
+        <div  { ...attributes } >
+            <div ref={ imageDiv } contentEditable={ false }>
                 <img
                     src={ element.url }
                     style={ {
@@ -31,6 +37,7 @@ export const ImageElement = ({ attributes, children, element }) => {
                         boxShadow: `${ selected && focused ? '0 0 0 3px #B4D5FF' : 'none' }`
                     } }
                 />
+                {selected && focused && <a onClick={ () => handleRemove() } href='javascript:void(0)'><CloseIcon/></a>}
             </div>
             {children}
         </div>
