@@ -8,7 +8,7 @@ import { Button } from './button';
 // import { Field } from 'redux-form';
 import {
     ImageUploadEditor,
-    CloseIcon
+    ToolIcon
 } from '../../../utils/svg';
 import { Modal , Row, Col } from 'react-bootstrap';
 import UploadImage from './uploadImage';
@@ -19,6 +19,7 @@ import { useSelector } from 'react-redux'
 
 export const ImageElement = ({ attributes, children, element }) => {
     const selected = useSelected()
+    const [ showTool, setToolOpen ] = useState(false)
     const editor = useSlate();
     const focused = useFocused()
     const imageDiv = useRef();
@@ -37,7 +38,10 @@ export const ImageElement = ({ attributes, children, element }) => {
                         boxShadow: `${ selected && focused ? '0 0 0 3px #B4D5FF' : 'none' }`
                     } }
                 />
-                {selected && focused && <a onClick={ () => handleRemove() } href='javascript:void(0)'><CloseIcon/></a>}
+                {selected && focused && <a href='javascript:void(0)' onClick={ () => { setToolOpen(!showTool)} }><ToolIcon/></a>}
+                {selected && focused && showTool && <ul className='dropdown-menu slate-custom-tool show'>
+                    <li className='dropdown-item'><a href='javascript:void(0)' onClick={ () => handleRemove() } >Delete</a></li>
+                </ul>}
             </div>
             {children}
         </div>

@@ -4,14 +4,28 @@ import { Transforms } from 'slate';
 import PropTypes from 'prop-types';
 import { Button } from './button';
 import useOutsideClick from 'components/hoc/OutsideClick'
-import { MediaEditor ,CloseIcon } from 'utils/svg';
+import { MediaEditor ,ToolIcon } from 'utils/svg';
+
 export const VideoElement = ({ attributes, children, element }) => {
     const { url } = element
     const selected = useSelected()
     const editor = useSlate();
     const focused = useFocused()
+    const [ showTool, setToolOpen ] = useState(false)
+
     const handleRemove = () =>{
         Transforms.removeNodes(editor, element)
+    }
+    const convertWatchYoutubeEmbed = () =>{
+        const isWatchUrl = url && url.match('www.youtube.com/watch')
+        if(isWatchUrl){
+            const code = url.split('=')[ 1 ];
+            return `https://www.youtube.com/embed/${ code }`
+        }
+        return url
+    }
+    const validateUrl = () => {
+        return convertWatchYoutubeEmbed()
     }
     return (
         <div { ...attributes }>
@@ -22,8 +36,9 @@ export const VideoElement = ({ attributes, children, element }) => {
                         position: 'relative',
                     } }
                 >
+
                     <iframe
-                        src={ `${ url }?title=0&byline=0&portrait=0` }
+                        src={ `${ validateUrl() }?title=0&byline=0&portrait=0` }
                         frameBorder="0"
                         style={ {
                             position: 'absolute',
@@ -34,7 +49,10 @@ export const VideoElement = ({ attributes, children, element }) => {
                             boxShadow: `${ selected && focused ? '0 0 0 3px #B4D5FF' : 'none' }`
                         } }
                     />
-                </div>{selected && focused && <a onClick={ () => handleRemove() } href='javascript:void(0)'><CloseIcon/></a>}
+                </div>{selected && focused && <a onClick={ () => { setToolOpen(!showTool)} } href='javascript:void(0)'><ToolIcon/></a>}
+                {selected && focused && showTool && <ul className='dropdown-menu slate-custom-tool show'>
+                    <li className='dropdown-item'><a href='javascript:void(0)' onClick={ () => handleRemove() } >Delete</a></li>
+                </ul>}
             </div>
             {children}
         </div>
