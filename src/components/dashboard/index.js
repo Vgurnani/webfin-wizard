@@ -9,11 +9,14 @@ import{
 const Dashboard =(props) => {
     const { site } = props
     const dispatch = useDispatch()
+    const [ errors, setErrors ] = useState({})
     const connecting = useSelector((state) => state.blog.connecting)
     const [ openModal ,setOpenModal ] = useState(false)
 
     const connectData = (values) => {
-        dispatch(createSocialMedia(site.id,{ socialMediaLinks: values }, setOpenModal))
+        if(!Object.values(errors).includes(true)){
+            dispatch(createSocialMedia(site.id,{ socialMediaLinks: values }, setOpenModal))
+        }
     }
     return(
         <div className="blog-dashboard-data">
@@ -26,7 +29,7 @@ const Dashboard =(props) => {
                         <li>
                             <h4>1. Connect Social</h4>
                             <Button onClick={ () => { setOpenModal(!openModal)} }>connect</Button>
-                            <SocialMedia socialMediaLinks={ site?.socialMediaLinks || {} } connecting={ connecting } connectData={ connectData } openModal={ openModal } setOpenModal={ setOpenModal } />
+                            <SocialMedia errors={ errors } setErrors={ setErrors }  socialMediaLinks={ site?.socialMediaLinks || {} } connecting={ connecting } connectData={ connectData } openModal={ openModal } setOpenModal={ setOpenModal } />
                         </li>
                         <li>
                             <h4>2. Try Blog Trends </h4>

@@ -8,11 +8,14 @@ import { SOCIAL_MEDIA } from 'constants/app'
 const SocialMedia =(props) => {
     const [ values, setValues ] = useState({})
     const [ inputRadio , setInputRadio ] = useState('facebook')
-    const { openModal , setOpenModal, connectData, connecting, socialMediaLinks } = props
+    const { openModal , setOpenModal, connectData, errors,setErrors ,connecting, socialMediaLinks } = props
 
     const handleChange = (event) => {
+        const errorsObj = Object.assign({},errors)
+        errorsObj[ inputRadio ] = !(event.target.value.indexOf('http://') == 0 || event.target.value.indexOf('https://') == 0)
         values[ inputRadio ] = event.target.value
         setValues(values)
+        setErrors(errorsObj)
     }
     const handleRadioChange = (event) => {
         setInputRadio(event.target.value)
@@ -76,6 +79,7 @@ const SocialMedia =(props) => {
                                     defaultValue={ values[ inputRadio ] }
                                     className='form-control'/>}
                             </div>
+                            { errors && errors[ inputRadio ] && <span className='field_error'>should be http:// or https://</span>}
                         </div>
                         <div className="modal-btns">
                             { connecting ? <Button disabled={ true } variant="primary">connecting...</Button> : <Button onClick={ () => connectData(values) } variant="primary">connect</Button> }
@@ -87,6 +91,8 @@ const SocialMedia =(props) => {
 }
 
 SocialMedia.propTypes = {
+    errors: PropTypes.object,
+    setErrors: PropTypes.func,
     openModal: PropTypes.bool,
     setOpenModal: PropTypes.func,
     connectData: PropTypes.func,
