@@ -1,22 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types';
-import WebTemplates ,{ Header,Home, Banner,Blogs, Card } from 'web-templates';
+import WebTemplates ,{ Header,Home, Banner,Blogs, Card ,Tabs, Tab } from 'web-templates';
 import { Modal, Button } from 'react-bootstrap'
 import ColorPicker from 'components/core/color-picker'
-import { Field } from 'redux-form';
-import { renderFileDrop } from 'utils/formUtils'
+import UploadImageModal from './UploadImageModal'
+import { useDispatch, useSelector } from 'react-redux'
+import { change as reduxChange } from 'redux-form'
 import blogBanner from 'images/blog-banner.png'
 import {
     DesktopIcon,
     MobileIcon
 } from '../../../utils/svg';
 import ButtonLoader from 'components/core/loader/button-loader'
+import { getUnsplash } from 'middleware/assessments'
+import avatarUrl from 'images/user-avatar.png'
 
 const CustomColor = (props) => {
-    const { data, handleColorsData, backFun, isSubmit, loading } = props
+    const { data, handleColorsData,formName, backFun, previewFile, isSubmit, loading } = props
+    const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
+    const dispatch = useDispatch()
+    const [ openImageModal, setOpenImage ] = useState(false)
     const [ objColors,  setObjColors ] = useState({})
     const [ colors ,setColors ] = useState(data.colors && JSON.parse(data.colors) || { })
     const [ active,setActiveBox ] = useState('top-menu')
+
+    useEffect(()=>{
+        const query = 'cover'
+        dispatch(getUnsplash('/photos',query))
+    },[]);
+    const handleSearch = (event) => {
+        const query = event.target.value
+        dispatch(getUnsplash('/photos',query))
+    }
     // const [ loading, setLoading ] = useState(false)
     const handleChangeColor = (d) => {
         const colorsData =  Object.assign({}, colors)
@@ -39,6 +54,13 @@ const CustomColor = (props) => {
             colorsData[ event.target.name ] = event.target.value
             setColors(colorsData)
         }
+    }
+
+    const toggleImageModal = () => {
+        setOpenImage(!openImageModal)
+    }
+    const getBase64 = (base64) => {
+        dispatch(reduxChange(formName, 'coverImage', base64))
     }
     const radioView = (name,value1,value2) => {
         const colorsData =  Object.assign({}, colors)
@@ -109,7 +131,7 @@ const CustomColor = (props) => {
                     {radioView('background-font','#000000','#FFFFFF')}
                 </div>
             </div>
-            <div className="color-selector-group">
+            {/*<div className="color-selector-group">
                 <label>Box Shadow</label>
                 <div onClick={ () => handleClick('box-shadow') } className={ `color-box-view ${ active ==='box-shadow' ? 'active' : '' }` }>
                     <span className="color-selector-preview" style={ { background: colors[ 'box-shadow' ] } } ></span>
@@ -121,7 +143,7 @@ const CustomColor = (props) => {
                         value={ colors[ 'box-shadow' ] }
                     />
                 </div>
-            </div>
+        </div>*/}
             <div className="color-selector-group home-bg">
                 <label>Home Background</label>
                 <div onClick={ () => handleClick('home-background') } className={ `color-box-view ${ active ==='home-background' ? 'active' : '' }` }>
@@ -139,6 +161,9 @@ const CustomColor = (props) => {
                 </div>
             </div>
         </>)
+    }
+    const clearImage = () => {
+        dispatch(reduxChange(formName, 'coverImage', null))
     }
 
     const selected = Object.assign({}, data);
@@ -197,28 +222,34 @@ const CustomColor = (props) => {
                                         </div>
                                     </Banner>
                                     <Blogs>
-                                        <h2 className="wizrd-section-heading">
-                                            Recent Blog Posts
-                                            <a href="">View All</a>
-                                        </h2>
-                                        <ul className="wizrd-blog-list">
-                                            <li>
-                                                <Card
-                                                    image={ 'https://homepages.cae.wisc.edu/~ece533/images/boat.png' }
-                                                >
-                                                    <h3>The Joy of Cooking</h3>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
-                                                </Card>
-                                            </li>
-                                            <li>
-                                                <Card
-                                                    image={ 'https://homepages.cae.wisc.edu/~ece533/images/boat.png' }
-                                                >
-                                                    <h3>The Joy of Cooking</h3>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
-                                                </Card>
-                                            </li>
-                                        </ul>
+
+                                        <Tabs onSelect={ (index, label) => console.log(label + ' selected') }>
+                                            <Tab label="Recent">
+                                                <ul className="wizrd-blog-list">
+                                                    <li>
+                                                        <Card
+                                                            image={ 'https://homepages.cae.wisc.edu/~ece533/images/boat.png' }
+                                                        >
+                                                            <h3>The Joy of Cooking</h3>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
+                                                            <div className="blogger_deail mt-2">
+                                                                <div className="bloggerImage">
+                                                                    <img src={ avatarUrl } alt="" />
+                                                                </div>
+                                                                <div className="bloggerName">
+                                                                    json miler
+                                                                </div>
+                                                                <div className="d-flex w-100 post-time mt-2">
+                                                                    <span>March 10, 2021 11:10 PM</span>
+                                                                </div>
+                                                            </div>
+                                                        </Card>
+                                                    </li>
+
+                                                </ul>
+                                            </Tab>
+                                            <Tab label="Popular"></Tab>
+                                        </Tabs>
                                     </Blogs>
                                 </Home>
                             </WebTemplates>
@@ -227,13 +258,17 @@ const CustomColor = (props) => {
                     <div className='custom-color-palate mt-5'>
                         <div className={ 'manage-header' }>
                             {radioView('header-color','#000000','#FFFFFF')}
-                            <Field
+                            {/*<Field
                                 name={ 'coverImage' }
                                 component={ renderFileDrop }
                                 placeholder={ "<a><i className='fa fa-plus'/> Change Header Image </a>" }
                                 isDropText={ data.coverImage ? `<img src=${ data.coverImage } alt='cover' />` : `<img src=${ blogBanner } alt='cover' />` }
-                            /></div>
-                        <ColorPicker  colors={ objColors } onChange={ handleChangeColor } />
+                            />*/}
+                            <div tabIndex="0" className="undefined avatar-user"><div className="c-avatar cursor-pointer upload-file"><p className=""><a onClick={ toggleImageModal }><i className="fa fa-plus"> Change Header Image </i></a></p><div className="drag-image-box"><p className=""><img src={ data.coverImage || previewFile || blogBanner } alt="cover"/></p></div></div><p></p></div>
+                            <UploadImageModal getBase64={ getBase64 } handleSearch={ handleSearch } clearImage={ clearImage } previewFile={ previewFile } fieldName={ 'coverImage' } unsplashImages={ unsplashImages } openModal={ openImageModal } handleToggleModal={ toggleImageModal } />
+
+                        </div>
+                        <ColorPicker active={ active } data={ data } colors={ objColors } onChange={ handleChangeColor } />
                     </div>
 
                 </div>
@@ -258,6 +293,8 @@ const CustomColor = (props) => {
 }
 
 CustomColor.propTypes = {
+    formName: PropTypes.string,
+    previewFile: PropTypes.string,
     data: PropTypes.object,
     handleColorsData: PropTypes.func,
     backFun: PropTypes.func,

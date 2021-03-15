@@ -4,8 +4,9 @@ import { reduxForm } from 'redux-form';
 import { useSelector } from 'react-redux'
 import { headerLinksTemplate } from 'utils/helpers'
 import { assessmentFormValidate as validate } from '../../utils/validates'
-import WebTemplates ,{ Header,Home, Banner,Blogs, Card } from 'web-templates';
+import WebTemplates ,{ Header,Home, Banner,Blogs, Card, Tabs,Tab } from 'web-templates';
 import AssessmentHeader from 'pages/assessment/header'
+import avatarUrl from 'images/user-avatar.png'
 import
 {
     Row,
@@ -70,28 +71,33 @@ const Preview = (props) => {
                                                     </div>
                                                 </Banner>
                                                 <Blogs>
-                                                    <h2 className="wizrd-section-heading">
-                                                        Recent Blog Posts
-                                                        <a href="">View All</a>
-                                                    </h2>
-                                                    <ul className="wizrd-blog-list">
-                                                        <li>
-                                                            <Card
-                                                                image={ 'https://homepages.cae.wisc.edu/~ece533/images/boat.png' }
-                                                            >
-                                                                <h3>The Joy of Cooking</h3>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
-                                                            </Card>
-                                                        </li>
-                                                        <li>
-                                                            <Card
-                                                                image={ 'https://homepages.cae.wisc.edu/~ece533/images/boat.png' }
-                                                            >
-                                                                <h3>The Joy of Cooking</h3>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
-                                                            </Card>
-                                                        </li>
-                                                    </ul>
+                                                    <Tabs onSelect={ (index, label) => console.log(label + ' selected') }>
+                                                        <Tab label="Recent">
+                                                            <ul className="wizrd-blog-list">
+                                                                <li>
+                                                                    <Card
+                                                                        image={ 'https://homepages.cae.wisc.edu/~ece533/images/boat.png' }
+                                                                    >
+                                                                        <h3>The Joy of Cooking</h3>
+                                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
+                                                                        <div className="blogger_deail mt-2">
+                                                                            <div className="bloggerImage">
+                                                                                <img src={ avatarUrl } alt="" />
+                                                                            </div>
+                                                                            <div className="bloggerName">
+                                                                                json miler
+                                                                            </div>
+                                                                            <div className="d-flex w-100 post-time mt-2">
+                                                                                <span>March 10, 2021 11:10 PM</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Card>
+                                                                </li>
+
+                                                            </ul>
+                                                        </Tab>
+                                                        <Tab label="Popular"></Tab>
+                                                    </Tabs>
                                                 </Blogs>
                                             </Home>
                                         </WebTemplates>

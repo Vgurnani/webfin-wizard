@@ -12,7 +12,7 @@ import ButtonLoader from 'components/core/loader/button-loader'
 
 const ColourPalette = (props) => {
     const dispatch = useDispatch();
-    const { colorPalette,customOpen, setCustomPopup,setColorPalette,handleSubmit,submitData, site, formValues , loading } = props
+    const { colorPalette,customOpen,formName,previewFile, setCustomPopup,setColorPalette,handleSubmit,submitData, site, formValues , loading } = props
     const data = {
         colors: formValues.colors,
         logoUrl: formValues.logoUrl,
@@ -60,7 +60,7 @@ const ColourPalette = (props) => {
         <div className="color-palette-popup">
             <Form onSubmit={ handleSubmit(submitData) }>
                 {
-                    customOpen ? <CustomColor backFun={ () => setCustomPopup(false) } colorPalette={ colorPalette } handleColorsData={ (colors) => handleColorsData(colors) } loading={ loading } isSubmit={ true } data={ data } />  : <>
+                    customOpen ? <CustomColor formName={ formName } previewFile={ previewFile }  backFun={ () => setCustomPopup(false) } colorPalette={ colorPalette } handleColorsData={ (colors) => handleColorsData(colors) } loading={ loading } isSubmit={ true } data={ data } />  : <>
 
                         <Modal.Header closeButton>
                             <div className="logo-upload-header">
@@ -109,6 +109,8 @@ const ColourPalette = (props) => {
     )
 }
 ColourPalette.propTypes = {
+    formName: PropTypes.string,
+    previewFile: PropTypes.string,
     onClose: PropTypes.func,
     assessmentData: PropTypes.object,
     colorPalette: PropTypes.array,
