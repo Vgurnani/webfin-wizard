@@ -44,14 +44,17 @@ const EditSitePage =(props) => {
         })
         dispatch(getAssessment())
         dispatch(getCurrentUser());
-        dispatch(getUnsplash('/photos',form?.values?.niche && JSON.parse(form.values.niche)?.label))
     }, [  ]);
 
     useEffect(() => {
         if(!_.isEmpty(form?.values?.menuLinks)){
             setMenuLinks(form?.values?.menuLinks)
         }
+
     }, [ form?.values?.menuLinks ])
+    useEffect(() =>{
+        dispatch(getUnsplash('/photos',form?.values?.niche && JSON.parse(form.values.niche)?.label))
+    },[ form?.values ])
 
     useEffect(() => {
         if(!_.isEmpty(form?.values?.colors && JSON.parse(form?.values?.colors)?.name === 'custom-color')){
