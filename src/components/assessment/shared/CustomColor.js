@@ -23,6 +23,8 @@ const CustomColor = (props) => {
     const [ objColors,  setObjColors ] = useState({})
     const [ colors ,setColors ] = useState(data.colors && JSON.parse(data.colors) || { })
     const [ active,setActiveBox ] = useState('top-menu')
+    const [ header, setHeader ] = useState({ heading: data?.header?.heading , subHeading: data?.header?.subHeading  })
+    const [ isHeaderBgColor, setHeaderBgColor ] = useState(false)
 
     useEffect(()=>{
         const query = 'cover'
@@ -38,12 +40,18 @@ const CustomColor = (props) => {
         colorsData[ active ] = d.hex
         setColors(colorsData)
         setObjColors(d)
+        if(active ==='header-background'){
+            dispatch(reduxChange(formName, 'coverImage', null))
+        }
     }
     const handleChange = (event,name) => {
         const colorsData =  Object.assign({}, colors)
         colorsData[ name ] = event.target.value
         setColors(colorsData)
         setActiveBox(name)
+        if(name === 'header-background'){
+            dispatch(reduxChange(formName, 'coverImage', null))
+        }
     }
     const handleClick = (name) => {
         setActiveBox(name)
@@ -54,6 +62,13 @@ const CustomColor = (props) => {
             colorsData[ event.target.name ] = event.target.value
             setColors(colorsData)
         }
+    }
+
+    const handleHeaderChange = (event) => {
+        const headerObj = { ...header }
+        headerObj[ event.target.name ] = event.target.value
+        setHeader(headerObj)
+        dispatch(reduxChange(formName, 'header', headerObj))
     }
 
     const toggleImageModal = () => {
@@ -168,7 +183,6 @@ const CustomColor = (props) => {
 
     const selected = Object.assign({}, data);
     selected[ 'colors' ] = JSON.stringify(colors)
-
     return(
         <div className='custom-color-palatte'>
             <Modal.Header closeButton>
@@ -208,10 +222,10 @@ const CustomColor = (props) => {
                                 <Home>
                                     <Banner>
                                         <h1>
-                                            <span>Simple Recipes for Healthier Families</span>
+                                            <span>{ data && data.header?.heading }</span>
 
                                         </h1>
-                                        <h5>Welcome to the most reliable source for healthy recipes!</h5>
+                                        <h5>{ data && data.header?.subHeading }</h5>
                                         <div className="wizrd-form-wrapper">
                                             <form className="wizrd-newsletter">
                                                 <div className="form-group">
@@ -264,11 +278,39 @@ const CustomColor = (props) => {
                                 placeholder={ "<a><i className='fa fa-plus'/> Change Header Image </a>" }
                                 isDropText={ data.coverImage ? `<img src=${ data.coverImage } alt='cover' />` : `<img src=${ blogBanner } alt='cover' />` }
                             />*/}
-                            <div tabIndex="0" className="undefined avatar-user"><div className="c-avatar cursor-pointer upload-file"><p className=""><a onClick={ toggleImageModal }><i className="fa fa-plus"> Change Header Image </i></a></p><div className="drag-image-box"><p className=""><img src={ data.coverImage || previewFile || blogBanner } alt="cover"/></p></div></div><p></p></div>
-                            <UploadImageModal getBase64={ getBase64 } handleSearch={ handleSearch } clearImage={ clearImage } previewFile={ previewFile } fieldName={ 'coverImage' } unsplashImages={ unsplashImages } openModal={ openImageModal } handleToggleModal={ toggleImageModal } />
+                            <label>
+                                <input type="checkbox" name='isHeaderBgColor' checked={ isHeaderBgColor } onChange={ () => {
+                                    setHeaderBgColor(!isHeaderBgColor)
+                                    setActiveBox('top-menu')
+                                } } />
+                                No Header image
+                            </label>
+                            {!isHeaderBgColor && <>
+                                <div tabIndex="0" className="undefined avatar-user"><div className="c-avatar cursor-pointer upload-file"><p className=""><a onClick={ toggleImageModal }><i className="fa fa-plus"> Change Header Image </i></a></p><div className="drag-image-box"><p className=""><img src={ data.coverImage || previewFile || blogBanner } alt="cover"/></p></div></div><p></p></div>
+                                <UploadImageModal getBase64={ getBase64 } handleSearch={ handleSearch } clearImage={ clearImage } previewFile={ previewFile } fieldName={ 'coverImage' } unsplashImages={ unsplashImages } openModal={ openImageModal } handleToggleModal={ toggleImageModal } /> </>}
+
+                            {isHeaderBgColor && <div className='color-selector'><div className="color-selector-group">
+                                <label>Header Background</label>
+                                <div onClick={ () => handleClick('header-background') } className={ `color-box-view ${ active == 'header-background' ? 'active' : '' }` }>
+                                    <span className="color-selector-preview" style={ { background: colors[ 'header-background' ] } } ></span>
+                                    <input
+                                        type='text'
+                                        onChange={ (event) => handleChange(event,'header-background') }
+                                        className='form-control'
+                                        defaultValue={ colors[ 'header-background' ] }
+                                        value={ colors[ 'header-background' ] }
+                                    />
+                                </div>
+                            </div>
+                            </div>
+                            }
 
                         </div>
                         <ColorPicker active={ active } data={ data } colors={ objColors } onChange={ handleChangeColor } />
+                        <label>Heading</label>
+                        <input type='text' name='heading' defaultValue={ data && data.header?.heading }  onChange={ handleHeaderChange } />
+                        <label>Sub Heading</label>
+                        <input type='text' name='subHeading' defaultValue={ data && data.header?.subHeading } onChange={ handleHeaderChange } />
                     </div>
 
                 </div>
@@ -299,6 +341,7 @@ CustomColor.propTypes = {
     handleColorsData: PropTypes.func,
     backFun: PropTypes.func,
     isSubmit: PropTypes.bool,
+    formValues: PropTypes.object,
     loading: PropTypes.bool
 };
 export default CustomColor;

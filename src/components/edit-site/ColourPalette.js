@@ -14,6 +14,7 @@ const ColourPalette = (props) => {
     const dispatch = useDispatch();
     const { colorPalette,customOpen,formName,previewFile, setCustomPopup,setColorPalette,handleSubmit,submitData, site, formValues , loading } = props
     const data = {
+        header: formValues.header,
         colors: formValues.colors,
         logoUrl: formValues.logoUrl,
         logoText: formValues.websiteName,

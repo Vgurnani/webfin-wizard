@@ -70,6 +70,7 @@ const EditSitePage =(props) => {
                 logoUrl: site.logoUrl,
                 coverImage: site.coverImage,
                 faviconUrl: site.faviconUrl,
+                header: site.header,
                 menuLinks: _.isEmpty(site.menuLinks ) ? [ { name: 'home',url: '/' } ] : site.menuLinks
             }
             initialize(formData)

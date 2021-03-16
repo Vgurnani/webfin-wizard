@@ -21,10 +21,10 @@ export const MyPicker = (props) => {
     return (
         <div className='webfin-color-selector'>
             <div className="webfin-color-selector-palete">
-                <Saturation hsl={ colors.hsl || colorObj && hexToHsl(colorObj[ active ]) ||  hsl  } hsv={ colors.hsv || hsv } onChange={ onChange } />
+                <Saturation hsl={ colorObj && hexToHsl(colorObj[ active ]) ||  hsl  } hsv={ colors.hsv || hsv } onChange={ onChange } />
             </div>
             <div className="webfin-color-selector-line">
-                <Hue direction={ 'vertical' } hsl={ colors.hsl || hsl } onChange={ onChange } />
+                <Hue direction={ 'vertical' } hsl={ colorObj && hexToHsl(colorObj[ active ]) || hsl } onChange={ onChange } />
             </div>
             <div className="webfin-color-name">
                 <label>Hex:</label>

@@ -10,6 +10,7 @@ export const ClassicBlue = () => {
         'background-font': '#000000',
         'header-color': '#000000',
         'box-shadow': '#000000',
+        'header-background': '',
         'name': 'classic-blue'
     }
 }
@@ -24,6 +25,7 @@ export const CleanWhite = () => {
         'box-shadow': '#000000',
         'top-menu': '#FFFFFF',
         'button': '#3032C8',
+        'header-background': '',
         'name': 'clean-white'
     }
 }
@@ -38,6 +40,7 @@ export const Editorial = () => {
         'box-shadow': '#000000',
         'top-menu': '#000000',
         'button': '#E35555',
+        'header-background': '',
         'name': 'editorial'
     }
 }
@@ -53,6 +56,7 @@ export const MagentaMagic = () => {
         'box-shadow': '#000000',
         'top-menu': '#CB48B7',
         'button': '#462D70',
+        'header-background': '',
         'name': 'magenta-magic'
     }
 }
@@ -68,6 +72,7 @@ export const MidnightBlue = () => {
         'box-shadow': '#55ace3',
         'top-menu': '#000000',
         'button': '#506BF0',
+        'header-background': '',
         'name': 'midnight-blue'
     }
 }
@@ -83,6 +88,7 @@ export const NapaRed = () => {
         'box-shadow': '#000000',
         'top-menu': '#7D2C2C',
         'button': '#E4B233',
+        'header-background': '',
         'name': 'napa-red'
     }
 }
@@ -98,6 +104,7 @@ export const OliveGreen = () => {
         'box-shadow': '#000000',
         'top-menu': '#5D7749',
         'button': '#CD765C',
+        'header-background': '',
         'name': 'olive-green'
     }
 }
@@ -113,6 +120,7 @@ export const RoyalBlue = () => {
         'box-shadow': '#000000',
         'top-menu': '#09015F',
         'button': '#55ACE3',
+        'header-background': '',
         'name': 'royal-blue'
     }
 }
@@ -127,6 +135,7 @@ export const UltraViolet = () => {
         'box-shadow': '#000000',
         'top-menu': '#7051A1',
         'button': '#E4B233',
+        'header-background': '',
         'name': 'ultra-violet'
     }
 }
@@ -143,6 +152,7 @@ export const DefaultCustomColor = () => {
         'background-font': '#000000',
         'header-color': '#000000',
         'box-shadow': '#000000',
+        'header-background': '',
         'name': 'custom-color'
     }
 }
