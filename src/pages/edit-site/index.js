@@ -4,7 +4,8 @@ import { getCurrentUser } from 'middleware/auth'
 import { Modal, Form, Button } from 'react-bootstrap'
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
-import { getAssessment, updateAssessment  } from 'middleware/assessments'
+import { getAssessment, updateAssessment, getUnsplash } from 'middleware/assessments'
+
 import ColourPalette from 'components/edit-site/ColourPalette';
 import Niche from 'components/edit-site/Niche'
 import UploadLogo from 'components/edit-site/UploadLogo'
@@ -43,7 +44,7 @@ const EditSitePage =(props) => {
         })
         dispatch(getAssessment())
         dispatch(getCurrentUser());
-        //dispatch(getUnsplash('/photos','cat'))
+        dispatch(getUnsplash('/photos',form?.values?.niche && JSON.parse(form.values.niche)?.label))
     }, [  ]);
 
     useEffect(() => {
@@ -87,14 +88,14 @@ const EditSitePage =(props) => {
         setModalType(null)
         setOpen(false)
     }
-    const handleSearch = () => {
-        //let query  = getLabel(assessmentData.niches, '1')
-        //query = event.currentTarget.value || query
-        //dispatch(getUnsplash('/photos',query))
+    const handleSearch = (event) => {
+        let query  = form?.values?.niche && JSON.parse(form.values.niche)?.label
+        query = event.target.value || query
+        dispatch(getUnsplash('/photos',query))
     }
 
-    const getBase64 = (base64) => {
-        dispatch(reduxChange('assessmentUpdateForm', 'logoUrl', base64))
+    const getBase64 = (base64, fieldName) => {
+        dispatch(reduxChange('assessmentUpdateForm', fieldName, base64))
     }
 
     const clearImage = (event, field) => {
@@ -160,7 +161,7 @@ const EditSitePage =(props) => {
         case 'logo':
             return <UploadLogo handleSubmit={ handleSubmit }  submitData= { submitData }fieldName='logoUrl' previewFile={ form?.values?.logoUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } loading={ updateAssessmentLoader } />
         case 'menulinks':
-            return  <MenuLinks handleSubmit={ handleSubmit }  submitData= { submitData } isValid={ isValid } removeMenuLink={ removeMenuLink } handleChangeMenuLink={ handleChangeMenuLink } loadData={ loadData } menuLinks={ menuLinks } addMenuLinks={ addMenuLinks } loading={ updateAssessmentLoader } />
+            return <MenuLinks handleSubmit={ handleSubmit }  submitData= { submitData } isValid={ isValid } removeMenuLink={ removeMenuLink } handleChangeMenuLink={ handleChangeMenuLink } loadData={ loadData } menuLinks={ menuLinks } addMenuLinks={ addMenuLinks } loading={ updateAssessmentLoader } />
         case 'favicon':
             return <UploadLogo allowExtenstions={ 'image/jpeg, image/png, .ico' } handleSubmit={ handleSubmit }  submitData= { submitData } fieldName='faviconUrl' previewFile={ form?.values?.faviconUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } loading={ updateAssessmentLoader } />
         }

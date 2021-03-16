@@ -1,10 +1,12 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { renderFileDrop } from 'utils/formUtils'
-import { bytesToSize } from 'utils/helpers'
-import ButtonLoader from 'components/core/loader/button-loader'
-
+import { renderFileDrop } from 'utils/formUtils';
+import { bytesToSize } from 'utils/helpers';
+import ButtonLoader from 'components/core/loader/button-loader';
+import { dataUrlToBase64,debounce } from 'utils/helpers';
+import { useSelector } from 'react-redux';
+import _ from 'lodash';
 import
 {
     Button,
@@ -15,7 +17,7 @@ import
 }
     from 'react-bootstrap';
 const UploadLogo = (props) => {
-    const { handleSubmit,allowExtenstions, submitData,loading,previewFile,clearImage ,fieldName, title } = props
+    const { handleSubmit,allowExtenstions, submitData,loading,previewFile,clearImage ,fieldName, title ,unsplashImages ,getBase64,handleSearch } = props
     // const handleSelect = async(id) => {
     //     setSelectedUnsplash(id)
     //     const image = unsplashImages.filter((item) => item.id == id)[ 0 ];
@@ -23,10 +25,21 @@ const UploadLogo = (props) => {
     //         getBase64(result)
     //     });
     // }
+    const [ selectedUnsplash, setSelectedUnsplash ] = useState(null);
+    const unsplashLoading = useSelector((state) => state.assessment.unsplashLoading)
+    const handleSelect = async(id) => {
+        setSelectedUnsplash(id)
+        const image = unsplashImages.filter((item) => item.id == id)[ 0 ];
+        image && dataUrlToBase64(image.urls.regular,function(result){
+            getBase64(result, fieldName)
+        });
+    }
 
     const clearImageFun = (event) => {
+        setSelectedUnsplash(null)
         clearImage(event, fieldName)
     }
+
     return(
         <div className="">
             <Form onSubmit={ handleSubmit(submitData) }>
@@ -36,42 +49,60 @@ const UploadLogo = (props) => {
                             <Col className="col-6">
                                 <Modal.Title>{title || `Site ${ fieldName === 'logoUrl' ? 'Logo' : 'Icon/ Favicon' }`}</Modal.Title>
                             </Col>
-                            {/*<Col className="col-6 search-wrapper">
-                            <Form.Group>
-                                <input onChange={ handleSearch } name='search' className='form-control' />
-                            </Form.Group>
+                            <Col className="col-6 search-wrapper">
+                                <Form.Group>
+                                    <input onChange={ (event) => debounce(handleSearch,event,1000) } name='search' className='form-control' />
+                                </Form.Group>
 
-                        </Col>*/}
+                            </Col>
                         </Row>
                     </div>
                 </Modal.Header>
                 <Modal.Body>
-
                     <div className="">
                         <Row>
                             <Col className="col-4">
                                 <Field
                                     name={ fieldName }
                                     component={ renderFileDrop }
-                                    isDrop={ ()=> {} }
+                                    isDrop={ ()=> { setSelectedUnsplash(null)} }
                                     allowExtenstions={ allowExtenstions }
-                                    placeholder={ "<a><i className='fa fa-plus'/> upload your logo</a>" }
-                                    isDropText={ 'Drag your images' }
+                                    placeholder={ `<a><i className='fa fa-plus'/> upload your ${ title || fieldName === 'logoUrl' ? 'Logo' : 'Icon/ Favicon' } </a>` }
+                                    isDropText={ 'Drag your image' }
                                 />
-                            </Col>
-                            <Col className="col-8 logo-preview-modal">
-                                <div className="logo-preview">
-                                    <h4>Preview</h4>
-                                    {previewFile && <div className="preview-logo">
-                                        {typeof(previewFile) !== 'string' ?
-                                            <span>
-                                                {previewFile.name}-{bytesToSize(previewFile.size)}
-                                            </span> :
-                                            <img src={ previewFile } />
-                                        }
-                                    </div>}
-                                    {previewFile && <span onClick={ clearImageFun } className="clear-logo">clear</span>}
+                                {previewFile && <div className="preview-logo">
 
+                                    {typeof(previewFile) !== 'string' ?
+                                        <span>
+                                            {previewFile.name}-{bytesToSize(previewFile.size)}
+                                        </span> :
+                                        <img src={ previewFile } />
+                                    }
+                                    <span onClick={ clearImageFun } className="clear-logo">clear</span>
+                                </div>}
+                            </Col>
+                            <Col className="col-8">
+                                <div className="logo-gallery">
+                                    { unsplashLoading ?  <div className='unsplash-emtpy'><div className="small-up-loader btn-loader ">
+                                        <div className="lds-facebook"><div></div><div></div><div></div></div>
+                                    </div></div> : null }
+                                    {_.isEmpty(unsplashImages) && !unsplashLoading ? <div className='unsplash-emtpy'><p>No Records found</p></div> : <>
+                                        <ul>
+                                            {unsplashImages.slice(0,10).map((item)=>{
+                                                return( <li onClick={ () => handleSelect(item.id) } key={ item.id } className={ `${ selectedUnsplash === item.id ? 'active' : '' }` }>
+                                                    <img src={ item.urls.small } alt="media1" />
+                                                </li>)
+                                            })}
+                                        </ul>
+                                        <ul>
+                                            {unsplashImages.slice(10,20).map((item)=>{
+                                                return( <li onClick={ () => handleSelect(item.id) } key={ item.id } className={ `${ selectedUnsplash === item.id ? 'active' : '' }` }>
+                                                    <img src={ item.urls.small } alt="media1" />
+                                                </li>)
+                                            })}
+                                        </ul>
+                                    </>
+                                    }
                                 </div>
                                 {/* <div className="logo-upload-progress">
                     <ProgressBar now={60} />
