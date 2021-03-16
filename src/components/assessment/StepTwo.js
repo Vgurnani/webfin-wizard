@@ -29,6 +29,7 @@ const StepTwo = (props) => {
     const assessmentForm = useSelector((state) => state.form.assessmentForm)
     const data = {
         colors: assessmentForm?.values.colors,
+        header: assessmentForm?.values.header,
         logoUrl: assessmentForm.values.logoUrl,
         logoText: assessmentForm.values.websiteName,
         coverImage: assessmentForm.values.coverImage,
