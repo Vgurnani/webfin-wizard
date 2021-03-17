@@ -4,11 +4,12 @@ import { getCurrentUser } from 'middleware/auth'
 import { Modal, Form, Button } from 'react-bootstrap'
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
-import { getAssessment, updateAssessment, getUnsplash } from 'middleware/assessments'
+import { getAssessment, updateAssessment } from 'middleware/assessments'
 
 import ColourPalette from 'components/edit-site/ColourPalette';
 import Niche from 'components/edit-site/Niche'
 import UploadLogo from 'components/edit-site/UploadLogo'
+import HeaderCover from 'components/edit-site/HeaderCover'
 import MenuLinks from 'components/edit-site/MenuLinks'
 import _ from 'lodash';
 import { change as reduxChange } from 'redux-form'
@@ -52,9 +53,6 @@ const EditSitePage =(props) => {
         }
 
     }, [ form?.values?.menuLinks ])
-    useEffect(() =>{
-        dispatch(getUnsplash('/photos',form?.values?.niche && JSON.parse(form.values.niche)?.label))
-    },[ form?.values ])
 
     useEffect(() => {
         if(!_.isEmpty(form?.values?.colors && JSON.parse(form?.values?.colors)?.name === 'custom-color')){
@@ -92,12 +90,6 @@ const EditSitePage =(props) => {
         setModalType(null)
         setOpen(false)
     }
-    const handleSearch = (event) => {
-        let query  = form?.values?.niche && JSON.parse(form.values.niche)?.label
-        query = event.target.value || query
-        dispatch(getUnsplash('/photos',query))
-    }
-
     const getBase64 = (base64, fieldName) => {
         dispatch(reduxChange('assessmentUpdateForm', fieldName, base64))
     }
@@ -163,11 +155,13 @@ const EditSitePage =(props) => {
         case 'colour':
             return <ColourPalette formName={ 'assessmentUpdateForm' } customOpen={ customOpen } setCustomPopup={ setCustomPopup }  previewFile={ form?.values?.coverImage }  handleSubmit={ handleSubmit }  submitData= { submitData } formValues={ form.values }  site={ site }  setColorPalette={ setColorPalette } colorPalette={ colorPalette }  onClose={ handleClose }  loading={ updateAssessmentLoader } />
         case 'logo':
-            return <UploadLogo handleSubmit={ handleSubmit }  submitData= { submitData }fieldName='logoUrl' previewFile={ form?.values?.logoUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } loading={ updateAssessmentLoader } />
+            return <UploadLogo handleSubmit={ handleSubmit }  submitData= { submitData }fieldName='logoUrl' previewFile={ form?.values?.logoUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 }  assessmentData={ assessmentData } loading={ updateAssessmentLoader } />
         case 'menulinks':
             return <MenuLinks handleSubmit={ handleSubmit }  submitData= { submitData } isValid={ isValid } removeMenuLink={ removeMenuLink } handleChangeMenuLink={ handleChangeMenuLink } loadData={ loadData } menuLinks={ menuLinks } addMenuLinks={ addMenuLinks } loading={ updateAssessmentLoader } />
         case 'favicon':
-            return <UploadLogo allowExtenstions={ 'image/jpeg, image/png, .ico' } handleSubmit={ handleSubmit }  submitData= { submitData } fieldName='faviconUrl' previewFile={ form?.values?.faviconUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 } handleSearch={ handleSearch } assessmentData={ assessmentData } loading={ updateAssessmentLoader } />
+            return <UploadLogo site={ site } form={ form } allowExtenstions={ 'image/jpeg, image/png, .ico' } handleSubmit={ handleSubmit }  submitData= { submitData } fieldName='faviconUrl' previewFile={ form?.values?.faviconUrl } unsplashImages={ unsplashImages } clearImage={ clearImage } getBase64={ getBase64 }  assessmentData={ assessmentData } loading={ updateAssessmentLoader } />
+        case 'header':
+            return <HeaderCover allowExtenstions={ 'image/jpeg, image/png, .ico' } formName={ 'assessmentUpdateForm' } customOpen={ customOpen } setCustomPopup={ setCustomPopup }  previewFile={ form?.values?.coverImage }  handleSubmit={ handleSubmit }  submitData= { submitData } formValues={ form.values }   setColorPalette={ setColorPalette } colorPalette={ colorPalette }  onClose={ handleClose }  loading={ updateAssessmentLoader }  />
         }
     }
     const niche = assessmentData?.niches?.filter((item) => item.value === form?.values?.nicheId && JSON.parse(form?.values?.nicheId).id)[ 0 ] || site?.niche
@@ -207,9 +201,10 @@ const EditSitePage =(props) => {
                             <Form.Label>Site icon:</Form.Label>
                             <div className="logo-preview-btn edit-site-btn  no-arrow" onClick={ (event) => handleModal(event,'favicon') }>{form?.values?.faviconUrl ?  <img src={ form?.values?.faviconUrl || site?.faviconUrl } width={ 20 } /> : 'Select..'}</div>
                         </Form.Group>
-                        {/*<Form.Group controlId="formBasicEmail" className="edit-header-footer">
-                            <Form.Label>Header/Footer:</Form.Label>
-                            </Form.Group>*/}
+                        <Form.Group controlId="formBasicEmail" className="edit-header-footer">
+                            <Form.Label>Header</Form.Label>
+                            <Button variant="primary" onClick={ (event) => handleModal(event,'header') }>Edit</Button>
+                        </Form.Group>
                     </div>
                     <Modal show={ open } onHide={ handleClose } className={ `${ customOpen ? 'custom-color-modal' : 'logo-upload-modal' }` }>
                         {renderModalView()}

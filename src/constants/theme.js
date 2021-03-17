@@ -26,6 +26,7 @@ export const CleanWhite = () => {
         'top-menu': '#FFFFFF',
         'button': '#3032C8',
         'header-background': '',
+        'header-color': '#000000',
         'name': 'clean-white'
     }
 }
@@ -39,6 +40,7 @@ export const Editorial = () => {
         'home-background': '#DCDCDC',
         'box-shadow': '#000000',
         'top-menu': '#000000',
+        'header-color': '#000000',
         'button': '#E35555',
         'header-background': '',
         'name': 'editorial'
@@ -56,6 +58,7 @@ export const MagentaMagic = () => {
         'box-shadow': '#000000',
         'top-menu': '#CB48B7',
         'button': '#462D70',
+        'header-color': '#000000',
         'header-background': '',
         'name': 'magenta-magic'
     }
@@ -71,6 +74,7 @@ export const MidnightBlue = () => {
         'home-background': '#0C0C35',
         'box-shadow': '#55ace3',
         'top-menu': '#000000',
+        'header-color': '#000000',
         'button': '#506BF0',
         'header-background': '',
         'name': 'midnight-blue'
@@ -85,6 +89,7 @@ export const NapaRed = () => {
         'home-background-font': '#000000',
         'background': '#FEF6EB',
         'home-background': '#FEF6EB',
+        'header-color': '#000000',
         'box-shadow': '#000000',
         'top-menu': '#7D2C2C',
         'button': '#E4B233',
@@ -105,6 +110,7 @@ export const OliveGreen = () => {
         'top-menu': '#5D7749',
         'button': '#CD765C',
         'header-background': '',
+        'header-color': '#000000',
         'name': 'olive-green'
     }
 }
@@ -121,6 +127,7 @@ export const RoyalBlue = () => {
         'top-menu': '#09015F',
         'button': '#55ACE3',
         'header-background': '',
+        'header-color': '#000000',
         'name': 'royal-blue'
     }
 }
@@ -136,6 +143,7 @@ export const UltraViolet = () => {
         'top-menu': '#7051A1',
         'button': '#E4B233',
         'header-background': '',
+        'header-color': '#000000',
         'name': 'ultra-violet'
     }
 }

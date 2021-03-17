@@ -46,3 +46,7 @@ export const BLOG_STATUS = {
     DELETED: 'DELETED',
     PUBLISHED: 'PUBLISHED'
 }
+export const HEADER = {
+    HEADING: 'Simple Recipes for Healthier Families',
+    SUB_HEADING: 'Welcome to the most reliable source for healthy recipes!'
+}

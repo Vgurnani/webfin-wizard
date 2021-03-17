@@ -1,12 +1,12 @@
-import React,{ useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { renderFileDrop } from 'utils/formUtils';
-import { bytesToSize } from 'utils/helpers';
-import ButtonLoader from 'components/core/loader/button-loader';
-import { dataUrlToBase64,debounce } from 'utils/helpers';
-import { useSelector } from 'react-redux';
-import _ from 'lodash';
+import { renderFileDrop } from 'utils/formUtils'
+import { bytesToSize } from 'utils/helpers'
+import ButtonLoader from 'components/core/loader/button-loader'
+import WebTemplates ,{ Header, Home, Banner } from 'web-templates';
+import { headerLinksTemplate } from 'utils/helpers'
+import { HEADER } from 'constants/app'
 import
 {
     Button,
@@ -17,7 +17,7 @@ import
 }
     from 'react-bootstrap';
 const UploadLogo = (props) => {
-    const { handleSubmit,allowExtenstions, submitData,loading,previewFile,clearImage ,fieldName, title ,unsplashImages ,getBase64,handleSearch } = props
+    const { handleSubmit,allowExtenstions,form,site, submitData,loading,previewFile,clearImage ,fieldName, title } = props
     // const handleSelect = async(id) => {
     //     setSelectedUnsplash(id)
     //     const image = unsplashImages.filter((item) => item.id == id)[ 0 ];
@@ -25,21 +25,52 @@ const UploadLogo = (props) => {
     //         getBase64(result)
     //     });
     // }
-    const [ selectedUnsplash, setSelectedUnsplash ] = useState(null);
-    const unsplashLoading = useSelector((state) => state.assessment.unsplashLoading)
-    const handleSelect = async(id) => {
-        setSelectedUnsplash(id)
-        const image = unsplashImages.filter((item) => item.id == id)[ 0 ];
-        image && dataUrlToBase64(image.urls.regular,function(result){
-            getBase64(result, fieldName)
-        });
+    const data = {
+        colors: form?.values?.colors,
+        header: form?.values?.header,
+        logoUrl: form?.values?.logoUrl,
+        logoText: form?.values?.websiteName,
+        faviconUrl: form?.values?.faviconUrl,
+        coverImage: form?.values?.coverImage,
+        headerLinks: headerLinksTemplate(),
+        readOnly: true
     }
 
     const clearImageFun = (event) => {
-        setSelectedUnsplash(null)
         clearImage(event, fieldName)
     }
+    const previewTemplate = () =>{
+        return(<Col className="col-8 name-website-selector-preview wizard-preview">
+            <h4>Preview</h4>
+            <div className="blog-preview wizrd-blog-preview color-palate-preview wizard-home ">
+                <div className='browser-tab-preview'>{data.faviconUrl && <img src={ data.faviconUrl } />}<span>{site?.websiteName}</span></div>
+                <WebTemplates data={ data }>
+                    <Header>
+                        <Header.Left />
+                        <Header.Right />
+                    </Header>
+                    <Home>
+                        <Banner>
+                            <h1>
+                                <span>{ data && data.header?.heading || HEADER.HEADING }</span>
 
+                            </h1>
+                            <h5>{ data && data.header?.heading || HEADER.SUB_HEADING }</h5>
+                            <div className="wizrd-form-wrapper">
+                                <form className="wizrd-newsletter">
+                                    <div className="form-group">
+                                        <input className="form-control" placeholder="Enter your email" type="text" />
+                                    </div>
+                                    <button type="submit" className="btn btn-primary">Subscribe!</button>
+                                </form>
+                            </div>
+                        </Banner>
+
+                    </Home>
+                </WebTemplates>
+            </div>
+        </Col>)
+    }
     return(
         <div className="">
             <Form onSubmit={ handleSubmit(submitData) }>
@@ -49,65 +80,46 @@ const UploadLogo = (props) => {
                             <Col className="col-6">
                                 <Modal.Title>{title || `Site ${ fieldName === 'logoUrl' ? 'Logo' : 'Icon/ Favicon' }`}</Modal.Title>
                             </Col>
-                            <Col className="col-6 search-wrapper">
-                                <Form.Group>
-                                    <input onChange={ (event) => debounce(handleSearch,event,1000) } name='search' className='form-control' />
-                                </Form.Group>
+                            {/*<Col className="col-6 search-wrapper">
+                            <Form.Group>
+                                <input onChange={ handleSearch } name='search' className='form-control' />
+                            </Form.Group>
 
-                            </Col>
+                        </Col>*/}
                         </Row>
                     </div>
                 </Modal.Header>
                 <Modal.Body>
+
                     <div className="">
                         <Row>
                             <Col className="col-4">
                                 <Field
                                     name={ fieldName }
                                     component={ renderFileDrop }
-                                    isDrop={ ()=> { setSelectedUnsplash(null)} }
+                                    isDrop={ ()=> {} }
                                     allowExtenstions={ allowExtenstions }
-                                    placeholder={ `<a><i className='fa fa-plus'/> upload your ${ title || fieldName === 'logoUrl' ? 'Logo' : 'Icon/ Favicon' } </a>` }
-                                    isDropText={ 'Drag your image' }
+                                    placeholder={ "<a><i className='fa fa-plus'/> upload your logo</a>" }
+                                    isDropText={ 'Drag your images' }
                                 />
-                                {previewFile && <div className="preview-logo">
+                            </Col>
+                            {fieldName === 'faviconUrl' ? previewTemplate() : <Col className="col-8 logo-preview-modal">
+                                <div className="logo-preview">
+                                    <h4>Preview</h4>
 
-                                    {typeof(previewFile) !== 'string' ?
-                                        <span>
-                                            {previewFile.name}-{bytesToSize(previewFile.size)}
-                                        </span> :
-                                        <img src={ previewFile } />
-                                    }
-                                    <span onClick={ clearImageFun } className="clear-logo">clear</span>
-                                </div>}
-                            </Col>
-                            <Col className="col-8">
-                                <div className="logo-gallery">
-                                    { unsplashLoading ?  <div className='unsplash-emtpy'><div className="small-up-loader btn-loader ">
-                                        <div className="lds-facebook"><div></div><div></div><div></div></div>
-                                    </div></div> : null }
-                                    {_.isEmpty(unsplashImages) && !unsplashLoading ? <div className='unsplash-emtpy'><p>No Records found</p></div> : <>
-                                        <ul>
-                                            {unsplashImages.slice(0,10).map((item)=>{
-                                                return( <li onClick={ () => handleSelect(item.id) } key={ item.id } className={ `${ selectedUnsplash === item.id ? 'active' : '' }` }>
-                                                    <img src={ item.urls.small } alt="media1" />
-                                                </li>)
-                                            })}
-                                        </ul>
-                                        <ul>
-                                            {unsplashImages.slice(10,20).map((item)=>{
-                                                return( <li onClick={ () => handleSelect(item.id) } key={ item.id } className={ `${ selectedUnsplash === item.id ? 'active' : '' }` }>
-                                                    <img src={ item.urls.small } alt="media1" />
-                                                </li>)
-                                            })}
-                                        </ul>
-                                    </>
-                                    }
+                                    {previewFile && <div className="preview-logo">
+                                        {typeof(previewFile) !== 'string' ?
+                                            <span>
+                                                {previewFile.name}-{bytesToSize(previewFile.size)}
+                                            </span> :
+                                            <img src={ previewFile } />
+                                        }
+                                    </div>}
+                                    {previewFile && <span onClick={ clearImageFun } className="clear-logo">clear</span>}
+
                                 </div>
-                                {/* <div className="logo-upload-progress">
-                    <ProgressBar now={60} />
-                    </div> */}
                             </Col>
+                            }
                         </Row>
                     </div>
                 </Modal.Body>
@@ -130,6 +142,8 @@ const UploadLogo = (props) => {
 }
 
 UploadLogo.propTypes = {
+    form: PropTypes.object,
+    site: PropTypes.object,
     submitData: PropTypes.func,
     handleSubmit: PropTypes.func,
     onClose: PropTypes.func,

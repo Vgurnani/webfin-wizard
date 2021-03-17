@@ -14,7 +14,7 @@ import {
 import ButtonLoader from 'components/core/loader/button-loader'
 import { getUnsplash } from 'middleware/assessments'
 import avatarUrl from 'images/user-avatar.png'
-
+import { HEADER } from 'constants/app'
 const CustomColor = (props) => {
     const { data, handleColorsData,formName, backFun, previewFile, isSubmit, loading } = props
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
@@ -23,8 +23,8 @@ const CustomColor = (props) => {
     const [ objColors,  setObjColors ] = useState({})
     const [ colors ,setColors ] = useState(data.colors && JSON.parse(data.colors) || { })
     const [ active,setActiveBox ] = useState('top-menu')
-    const [ header, setHeader ] = useState({ heading: data?.header?.heading , subHeading: data?.header?.subHeading  })
-    const [ isHeaderBgColor, setHeaderBgColor ] = useState(false)
+    // const [ header, setHeader ] = useState({ heading: data?.header?.heading , subHeading: data?.header?.subHeading  })
+    //const [ isHeaderBgColor, setHeaderBgColor ] = useState(false)
 
     useEffect(()=>{
         const query = 'cover'
@@ -64,12 +64,12 @@ const CustomColor = (props) => {
         }
     }
 
-    const handleHeaderChange = (event) => {
-        const headerObj = { ...header }
-        headerObj[ event.target.name ] = event.target.value
-        setHeader(headerObj)
-        dispatch(reduxChange(formName, 'header', headerObj))
-    }
+    // const handleHeaderChange = (event) => {
+    //     const headerObj = { ...header }
+    //     headerObj[ event.target.name ] = event.target.value
+    //     setHeader(headerObj)
+    //     dispatch(reduxChange(formName, 'header', headerObj))
+    // }
 
     const toggleImageModal = () => {
         setOpenImage(!openImageModal)
@@ -222,10 +222,10 @@ const CustomColor = (props) => {
                                 <Home>
                                     <Banner>
                                         <h1>
-                                            <span>{ data && data.header?.heading }</span>
+                                            <span>{ data && data.header?.heading || HEADER.HEADING }</span>
 
                                         </h1>
-                                        <h5>{ data && data.header?.subHeading }</h5>
+                                        <h5>{ data && data.header?.subHeading || HEADER.SUB_HEADING }</h5>
                                         <div className="wizrd-form-wrapper">
                                             <form className="wizrd-newsletter">
                                                 <div className="form-group">
@@ -278,18 +278,18 @@ const CustomColor = (props) => {
                                 placeholder={ "<a><i className='fa fa-plus'/> Change Header Image </a>" }
                                 isDropText={ data.coverImage ? `<img src=${ data.coverImage } alt='cover' />` : `<img src=${ blogBanner } alt='cover' />` }
                             />*/}
-                            <label>
+                            {/*<label>
                                 <input type="checkbox" name='isHeaderBgColor' checked={ isHeaderBgColor } onChange={ () => {
                                     setHeaderBgColor(!isHeaderBgColor)
                                     setActiveBox('top-menu')
                                 } } />
                                 No Header image
-                            </label>
-                            {!isHeaderBgColor && <>
-                                <div tabIndex="0" className="undefined avatar-user"><div className="c-avatar cursor-pointer upload-file"><p className=""><a onClick={ toggleImageModal }><i className="fa fa-plus"> Change Header Image </i></a></p><div className="drag-image-box"><p className=""><img src={ data.coverImage || previewFile || blogBanner } alt="cover"/></p></div></div><p></p></div>
-                                <UploadImageModal getBase64={ getBase64 } handleSearch={ handleSearch } clearImage={ clearImage } previewFile={ previewFile } fieldName={ 'coverImage' } unsplashImages={ unsplashImages } openModal={ openImageModal } handleToggleModal={ toggleImageModal } /> </>}
+                            </label>*/}
 
-                            {isHeaderBgColor && <div className='color-selector'><div className="color-selector-group">
+                            <div tabIndex="0" className="undefined avatar-user"><div className="c-avatar cursor-pointer upload-file"><p className=""><a onClick={ toggleImageModal }><i className="fa fa-plus"> Change Header Image </i></a></p><div className="drag-image-box"><p className=""><img src={ data.coverImage || previewFile || blogBanner } alt="cover"/></p></div></div><p></p></div>
+                            <UploadImageModal getBase64={ getBase64 } handleSearch={ handleSearch } clearImage={ clearImage } previewFile={ previewFile } fieldName={ 'coverImage' } unsplashImages={ unsplashImages } openModal={ openImageModal } handleToggleModal={ toggleImageModal } />
+
+                            {/*isHeaderBgColor && <div className='color-selector'><div className="color-selector-group">
                                 <label>Header Background</label>
                                 <div onClick={ () => handleClick('header-background') } className={ `color-box-view ${ active == 'header-background' ? 'active' : '' }` }>
                                     <span className="color-selector-preview" style={ { background: colors[ 'header-background' ] } } ></span>
@@ -303,14 +303,15 @@ const CustomColor = (props) => {
                                 </div>
                             </div>
                             </div>
-                            }
+                            */}
 
                         </div>
                         <ColorPicker active={ active } data={ data } colors={ objColors } onChange={ handleChangeColor } />
-                        <label>Heading</label>
+                        {/*<label>Heading</label>
                         <input type='text' name='heading' defaultValue={ data && data.header?.heading }  onChange={ handleHeaderChange } />
                         <label>Sub Heading</label>
                         <input type='text' name='subHeading' defaultValue={ data && data.header?.subHeading } onChange={ handleHeaderChange } />
+                        */}
                     </div>
 
                 </div>
