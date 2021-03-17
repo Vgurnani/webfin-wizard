@@ -120,7 +120,7 @@ export const getDraftBlogs =  (args) => {
         try{
             const site = getSite();
             dispatch(getBlogsRequest())
-            const result = await axiosInstance.get(`/site/${ site?.id }/posts?state=${ BLOG_STATUS.DRAFT }&${ args }`)
+            const result = await axiosInstance.get(`/publisher/site/${ site?.id }/posts?state=${ BLOG_STATUS.DRAFT }&${ args }`)
             if([ 200,203 ].includes(result.status)){
                 dispatch(getDraftBlogListSuccess(result.data));
             }
@@ -136,7 +136,7 @@ export const getPublishedBlogs =  (args) => {
         try{
             const site = getSite();
             dispatch(getBlogsRequest())
-            const result = await axiosInstance.get(`/site/${ site?.id }/posts?state=${ BLOG_STATUS.PUBLISHED }&${ args }`)
+            const result = await axiosInstance.get(`/publisher/site/${ site?.id }/posts?state=${ BLOG_STATUS.PUBLISHED }&${ args }`)
             if([ 200,203 ].includes(result.status)){
                 dispatch(getPublishBlogListSuccess(result.data));
             }
