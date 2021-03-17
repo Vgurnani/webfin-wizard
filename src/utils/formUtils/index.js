@@ -322,6 +322,7 @@ const renderNicheSelectField = (props) => {
         meta: { touched, error, warning },
         options,
         defaultValue,
+        placeHolder,
         handleChange,
         defaultWarning
     } = props;
@@ -334,7 +335,7 @@ const renderNicheSelectField = (props) => {
 
     return (
         <Form.Group>
-            <input defaultValue={ defaultValue } autoComplete={ 'off' } id='selectFieldInput' list='selectField' name={ name }  className={ validationError || (touched && error) ? 'form-control validation-error' : 'form-control' } onChange={ onChange } />
+            <input defaultValue={ defaultValue } autoComplete={ 'off' } id='selectFieldInput' list='selectField' name={ name }  className={ validationError || (touched && error) ? 'form-control validation-error' : 'form-control' } placeHolder={ placeHolder } onChange={ onChange } />
             <datalist id="selectField">
 
                 {

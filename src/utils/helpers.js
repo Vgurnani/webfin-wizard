@@ -32,7 +32,7 @@ export const addBodyClass = (pathname) =>{
         document.body.classList.add('no-header');
         document.body.classList.add('no-footer');
     }else if(path.match('/blog')){
-        document.body.classList.add('full-width-header');
+        document.body.classList.add('no-header');
         document.body.classList.add('no-footer');
     }
 }

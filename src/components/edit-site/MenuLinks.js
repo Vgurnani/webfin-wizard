@@ -13,16 +13,17 @@ const MenuLinks = (props) => {
     const getData = () => {
         return menuLinks[ linkType ]
     }
-    const addLinks = () =>{
-        addMenuLinks()
-    }
-    useEffect(()=>{
-        setLoadingType(false)
-    },[ linkType ])
     const setLinkTypeFun = (index) => {
         linkType !== index && setLoadingType(true)
         setLinkType(index)
     }
+    const addLinks = () =>{
+        addMenuLinks()
+        setLinkTypeFun(menuLinks.length)
+    }
+    useEffect(()=>{
+        setLoadingType(false)
+    },[ linkType ])
     const removeLinkTypeFun = (index) =>{
         setLoadingType(true)
         setLinkType(linkType-1)
@@ -50,7 +51,7 @@ const MenuLinks = (props) => {
                             <ol>
                                 { menuLinks.map((item,index) => {
                                     return(
-                                        <li key={ index }>
+                                        <li key={ index } className={ `${ linkType === index ? 'active' :'' }` }>
                                             <div className="menu-order">{ index+1 }.</div>
                                             <div className="menu-detail">
                                                 <div className="menu-detail-inner">
@@ -68,7 +69,7 @@ const MenuLinks = (props) => {
                                 }) }
                             </ol>
 
-                            {menuLinks.length < 5 && <button className='add-icon-btn' type='button' onClick={ addLinks }><PlusIcon /></button>}
+                            {menuLinks.length < 7 && <button className='add-icon-btn' type='button' onClick={ addLinks }><PlusIcon /></button>}
                         </div>
 
                         <div className="add-menu">

@@ -118,6 +118,7 @@ const StepOne = (props) => {
                                             name="niche"
                                             defaultValue={ setDefaultValue() }
                                             options={ customNiches || [] }
+                                            placeHolder='Enter niche here'
                                             handleChange = { asyncChangeCallback }
                                             component={ renderNicheSelectField }
                                         />}

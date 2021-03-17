@@ -24,8 +24,7 @@ import {
     EditBlogListIcon,
     CloneBlogListIcon,
     ShareBlogListIcon,
-    ViewsBlogListIcon,
-    CommentsBlogListIcon,
+    // ViewsBlogListIcon,
     DeleteBlogListIcon,
     SortBlogIcon,
     DateBlogListIcon,
@@ -35,7 +34,7 @@ import {
     MobileSearchIcon,
 } from '../../utils/svg';
 import { getSessionData } from 'utils/helpers'
-import searchIcon from '../../images/search.png';
+// import searchIcon from '../../images/search.png';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 const searchInput = React.createRef()
 const BlogsPage = () => {
@@ -66,14 +65,14 @@ const BlogsPage = () => {
         dispatch(getPublishedBlogs(`page=${ activePagePublish }&size=${ limit }`));
     }, [ dispatch ]);
 
-    const handleFilter = () => {
-        // const filterData = `_where[title_contains]=${ filter }&_limit=${ limit }`
-        // dispatch(getDraftBlogs(filterData));
-        // dispatch(getPublishedBlogs(filterData));
-        // setActivePagePublish(1)
-        // setActivePageDraft(1)
+    // const handleFilter = () => {
+    //     // const filterData = `_where[title_contains]=${ filter }&_limit=${ limit }`
+    //     // dispatch(getDraftBlogs(filterData));
+    //     // dispatch(getPublishedBlogs(filterData));
+    //     // setActivePagePublish(1)
+    //     // setActivePageDraft(1)
 
-    }
+    // }
 
     const handleEdit = (event, blog) => {
         event.preventDefault();
@@ -202,14 +201,14 @@ const BlogsPage = () => {
                         </div>
                     </div>
                     <div className="dashboard-actions">
-                        <Form className="search-form">
+                        {/*<Form className="search-form">
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Control ref={ searchInput } onChange={ () => {} }  className="form-control" placeholder="Search" />
                             </Form.Group>
                             <Button onClick={ handleFilter } className="btn-search" type="button">
                                 <img src={ searchIcon } alt={ 'searchIcon' } />
                             </Button>
-                        </Form>
+                        </Form>*/}
                     </div>
                 </div>
                 <div>{copySuccess}</div>
@@ -227,9 +226,6 @@ const BlogsPage = () => {
                             </div>
                             <div className="blog-list-column blog-list-views">
                                 Views
-                            </div>
-                            <div className="blog-list-column blog-list-comments">
-                                Comments
                             </div>
                             <div className="blog-list-column blog-list-delete">
                                 Delete
@@ -260,13 +256,13 @@ const BlogsPage = () => {
                                     <span> { blog.createdAt && moment(blog.createdAt).format('L')}</span>
                                 </div>
                                 <div className="blog-list-column blog-list-views">
-                                    <ViewsBlogListIcon />
+                                    {/*<ViewsBlogListIcon />*/}
                                     <span>70,365</span>
                                 </div>
-                                <div className="blog-list-column blog-list-comments">
+                                {/*<div className="blog-list-column blog-list-comments">
                                     <CommentsBlogListIcon />
                                     <span>32</span>
-                                </div>
+                                </div>*/}
                                 <div className="blog-list-column blog-list-actions  blog-list-delete">
                                     <div className="hover-actions">
                                         <a onClick={ (e) => handleEdit(e, blog) } className="table-action-btns" href="/#">
@@ -329,9 +325,9 @@ const BlogsPage = () => {
                                                 <div className="blog-list-column blog-list-views">
                                                     Views
                                                 </div>
-                                                <div className="blog-list-column blog-list-comments">
+                                                {/*<div className="blog-list-column blog-list-comments">
                                                     Comments
-                                                </div>
+                            </div>*/}
                                                 <div className="blog-list-column blog-list-delete">
                                                     Delete
                                                 </div>
@@ -361,13 +357,13 @@ const BlogsPage = () => {
                                                         <span> { blog.createdAt && moment(blog.createdAt).format('L')}</span>
                                                     </div>
                                                     <div className="blog-list-column blog-list-views">
-                                                        <ViewsBlogListIcon />
+                                                        {/*<ViewsBlogListIcon />*/}
                                                         <span>70,365</span>
                                                     </div>
-                                                    <div className="blog-list-column blog-list-comments">
+                                                    {/*<div className="blog-list-column blog-list-comments">
                                                         <CommentsBlogListIcon />
                                                         <span></span>
-                                                    </div>
+                        </div>*/}
                                                     <div className="blog-list-column blog-list-actions  blog-list-delete">
                                                         <div className="hover-actions">
                                                             <a onClick={ (e) => handleEdit(e, blog) } className="table-action-btns" href="/#">

@@ -66,7 +66,7 @@ const UserProfilePage =(props) => {
     }
 
     const handleSearch = (event) => {
-        const query = event.currentTarget.value || 'cat'
+        const query = event.target.value || 'cat'
         dispatch(getUnsplash('/photos',query))
     }
     const handleChange = (value) => {
