@@ -3,6 +3,8 @@ import facebook  from 'images/facebook-color.png'
 import youtube  from 'images/youtube-color.png'
 import instrgram  from 'images/instagram-color.png'
 import linkedin  from 'images/linkedin-color.png'
+import blogUser from 'images/blog-user.png'
+import sampleBlog from 'images/sample-blog.png'
 export const NOTIFICATION_TYPES = {
     SUCCESS: 'success',
     ERROR: 'error',
@@ -49,4 +51,14 @@ export const BLOG_STATUS = {
 export const HEADER = {
     HEADING: 'Simple Recipes for Healthier Families',
     SUB_HEADING: 'Welcome to the most reliable source for healthy recipes!'
+}
+
+export const SAMPLE_BLOG = {
+    HEADING: 'Simple Recipes for Healthier Families',
+    SUB_HEADING: 'Welcome to the most reliable source for healthy recipes!',
+    BLOG_NAME: 'The wonderful world of cooking in the world 2021',
+    USER_NAME: 'Json Miller',
+    DATE: 'Jun 8, 2021',
+    BLOG_IMAGE: sampleBlog,
+    USER_IMAGE: blogUser
 }

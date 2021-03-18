@@ -13,8 +13,7 @@ import {
 } from '../../../utils/svg';
 import ButtonLoader from 'components/core/loader/button-loader'
 import { getUnsplash } from 'middleware/assessments'
-import avatarUrl from 'images/user-avatar.png'
-import { HEADER } from 'constants/app'
+import { HEADER , SAMPLE_BLOG } from 'constants/app'
 const CustomColor = (props) => {
     const { data, handleColorsData,formName, backFun, previewFile, isSubmit, loading } = props
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
@@ -23,6 +22,7 @@ const CustomColor = (props) => {
     const [ objColors,  setObjColors ] = useState({})
     const [ colors ,setColors ] = useState(data.colors && JSON.parse(data.colors) || { })
     const [ active,setActiveBox ] = useState('top-menu')
+    const [ isMobileView , setMobileView ] = useState(false)
     // const [ header, setHeader ] = useState({ heading: data?.header?.heading , subHeading: data?.header?.subHeading  })
     //const [ isHeaderBgColor, setHeaderBgColor ] = useState(false)
 
@@ -205,15 +205,15 @@ const CustomColor = (props) => {
                                 Desktop
                             </span>
                             <div className="preview-switcher-wrap">
-                                <a className="preview-switcher active">
+                                <a className={ `preview-switcher ${ !isMobileView ? 'active' : '' }` } onClick={ () => setMobileView(false) }>
                                     <DesktopIcon />
                                 </a>
-                                <a className="preview-switcher">
+                                <a className={ `preview-switcher ${ isMobileView ? 'active' : '' }` } onClick={ () => setMobileView(true) }>
                                     <MobileIcon />
                                 </a>
                             </div>
                         </div>
-                        <div className='color-preview wizard-home wizrd-blog-preview color-palate-preview'>
+                        <div className={ `color-preview ${ isMobileView ? 'mobile-version' : '' }  wizard-home wizrd-blog-preview color-palate-preview` }>
                             <WebTemplates data={ selected || props.data }>
                                 <Header>
                                     <Header.Left />
@@ -241,25 +241,26 @@ const CustomColor = (props) => {
                                             <Tab label="Recent">
                                                 <ul className="wizrd-blog-list">
                                                     <li>
-                                                        <Card
-                                                            image={ 'https://homepages.cae.wisc.edu/~ece533/images/boat.png' }
-                                                        >
-                                                            <h3>The Joy of Cooking</h3>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet praesent eu accumsan, curabitur. Nulla viverra aliquam viverra id a.</p>
-                                                            <div className="blogger_deail mt-2">
-                                                                <div className="bloggerImage">
-                                                                    <img src={ avatarUrl } alt="" />
+                                                        <a href='#'>
+                                                            <Card
+                                                                image={ SAMPLE_BLOG.BLOG_IMAGE }
+                                                            >
+                                                                <h3>{ SAMPLE_BLOG.BLOG_NAME }</h3>
+                                                                <div className="wizrd-blog-author">
+                                                                    {/* <RichTextEditor readOnly={true} initialValue={blog?.content} /> */}
+                                                                    <div className="wizrd-blog-author-img">
+                                                                        <img src={ SAMPLE_BLOG.USER_IMAGE } alt="" />
+                                                                    </div>
+                                                                    <div className="wizrd-blog-author-name">
+                                                                        { SAMPLE_BLOG.USER_NAME }
+                                                                    </div>
                                                                 </div>
-                                                                <div className="bloggerName">
-                                                                    json miler
+                                                                <div className="wizrd-blog-date">
+                                                                    <span>{ SAMPLE_BLOG.DATE }</span>
                                                                 </div>
-                                                                <div className="d-flex w-100 post-time mt-2">
-                                                                    <span>March 10, 2021 11:10 PM</span>
-                                                                </div>
-                                                            </div>
-                                                        </Card>
+                                                            </Card>
+                                                        </a>
                                                     </li>
-
                                                 </ul>
                                             </Tab>
                                             <Tab label="Popular"></Tab>

@@ -88,6 +88,7 @@ const EditSitePage =(props) => {
         setMenuLinks(updatedMenuLinks)
         dispatch(reduxChange('assessmentUpdateForm', 'menuLinks', updatedMenuLinks))
         setModalType(null)
+        setCustomPopup(false)
         setOpen(false)
     }
     const getBase64 = (base64, fieldName) => {
