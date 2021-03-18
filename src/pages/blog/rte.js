@@ -237,7 +237,7 @@ const isImageUrl = url => {
     return imageExtensions.includes(ext)
 }
 
-const getIcon = (iconType, bogFormData) => {
+const getIcon = (iconType, blogFormData) => {
     switch (iconType) {
     case 'FontSizeEditor':
         return <FontSizeEditor />
@@ -262,7 +262,7 @@ const getIcon = (iconType, bogFormData) => {
     case 'QuoteEditor':
         return <QuoteEditor />
     case 'ImageUploadEditor':
-        return <InsertImageButton bogFormData={ bogFormData } />
+        return <InsertImageButton blogFormData={ blogFormData } />
     case 'SmileEditor':
         return <EmojiButton />
     case 'MediaEditor':
