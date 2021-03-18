@@ -92,6 +92,9 @@ const UploadImageModal = (props) => {
                                 </>
                                 }
                             </div>
+                            <div className="powered-by-unsplash">
+                                <a href="https://unsplash.com/" target="_blank"  rel="noreferrer" >Powered by Unsplash</a>
+                            </div>
                             {/* <div className="logo-upload-progress">
                     <ProgressBar now={60} />
                     </div> */}
