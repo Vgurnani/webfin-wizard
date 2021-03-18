@@ -15,7 +15,8 @@ const Footer = () => (
                         <img src={ webFinLogo } alt="WebFin" />
                     </Link>
                     <span className="copyright">
-                        &copy; 2020 Powered by Geekbears
+                        &copy; 2020
+                        {/* Powered by Geekbears */}
                     </span>
                 </Col>
                 <Col className="col-6 footer-social-icon-menu text-right">
