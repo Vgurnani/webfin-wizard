@@ -13,7 +13,6 @@ import {
 
 import {
     Form,
-    ProgressBar,
     Button
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -155,9 +154,9 @@ const BlogPage =(props) => {
                                         placeholder={ 'Blog post title' }
                                         normalize={ capitalize }
                                     />
-                                    <Form.Text>
+                                    {/*<Form.Text>
                                         March 25, 2020 / 4 min read / Author Name
-                                    </Form.Text>
+                                    </Form.Text>*/}
                                 </Form.Group>
                                 <div className="upload-feature-img-wrap">
                                     <div className="upload-feature-img" onClick={ handleToggleModal }>
@@ -211,13 +210,12 @@ const BlogPage =(props) => {
                             </div>
                         </div>
                         <div className="blog-creation-content">
-                            <div className="word-count">
+                            {/*<div className="word-count">
                                 <div className="word-count-progressbar">
                                     <label>Word Count: </label>
                                     <ProgressBar now="72" label="357/500" />
                                 </div>
-
-                            </div>
+                              </div>*/}
                             <div className="blog-editor">
                                 {id && blog && blog.content &&  <RichTextEditor bogFormData={ blogForm.values } readOnly={ false } setRTEData={ handleRTEdata } initialValue={ blog && blog.content || initialValue } /> }
                                 {!id && !rteLoading && <RichTextEditor bogFormData={ blogForm.values } readOnly={ false } setRTEData={ handleRTEdata } initialValue={ blogForm?.values?.data || initialValue } />}
