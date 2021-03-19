@@ -4,6 +4,7 @@ import { getCurrentUser } from '../../middleware/auth'
 import { removeItem } from '../../utils/cache'
 import Dashboard from '../../components/dashboard'
 import axios from 'axios'
+import history from 'utils/history'
 import {
     TopRightArrow,
 } from '../../utils/svg'
@@ -68,11 +69,11 @@ const DashboardPage =() => {
                         </div>*/}
                     </div>
                     <div className="dashboard-actions">
-                        { user && <div className="author-info">
-                            <div className="author-img">
+                        { user && <div className="author-info" >
+                            <div className="author-img" onClick={ () => history.push('/user-profile') }>
                                 <img src={ user?.profileImageUrl || profilePic } alt="Jason Miller" />
                             </div>
-                            <div className="author-name">
+                            <div className="author-name" onClick={ () => history.push('/user-profile') }>
                                 <h6>Welcome back!</h6>
                                 <h5>{user?.userName?.toUsername()} </h5>
                             </div>

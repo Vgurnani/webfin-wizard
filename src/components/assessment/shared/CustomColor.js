@@ -19,7 +19,8 @@ const CustomColor = (props) => {
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
     const dispatch = useDispatch()
     const [ openImageModal, setOpenImage ] = useState(false)
-    const [ objColors,  setObjColors ] = useState({})
+    const [ hsl,  setHsl ] = useState(null)
+    const [ hsv,  setHsv ] = useState(null)
     const [ colors ,setColors ] = useState(data.colors && JSON.parse(data.colors) || { })
     const [ active,setActiveBox ] = useState('top-menu')
     const [ isMobileView , setMobileView ] = useState(false)
@@ -39,7 +40,8 @@ const CustomColor = (props) => {
         const colorsData =  Object.assign({}, colors)
         colorsData[ active ] = d.hex
         setColors(colorsData)
-        setObjColors(d)
+        setHsl(d.hsl)
+        setHsv(d.hsv)
         if(active ==='header-background'){
             dispatch(reduxChange(formName, 'coverImage', null))
         }
@@ -49,12 +51,16 @@ const CustomColor = (props) => {
         colorsData[ name ] = event.target.value
         setColors(colorsData)
         setActiveBox(name)
+        setHsl(null)
+        setHsv(null)
         if(name === 'header-background'){
             dispatch(reduxChange(formName, 'coverImage', null))
         }
     }
     const handleClick = (name) => {
         setActiveBox(name)
+        setHsl(null)
+        setHsv(null)
     }
     const handleRadio = (event) => {
         if(event.target.checked){
@@ -307,7 +313,7 @@ const CustomColor = (props) => {
                             */}
 
                         </div>
-                        <ColorPicker active={ active } data={ data } colors={ objColors } onChange={ handleChangeColor } />
+                        <ColorPicker active={ active } obj={ { hsl: hsl,hsv: hsv } } colors={ colors } onChange={ handleChangeColor } />
                         {/*<label>Heading</label>
                         <input type='text' name='heading' defaultValue={ data && data.header?.heading }  onChange={ handleHeaderChange } />
                         <label>Sub Heading</label>

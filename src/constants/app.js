@@ -62,3 +62,9 @@ export const SAMPLE_BLOG = {
     BLOG_IMAGE: sampleBlog,
     USER_IMAGE: blogUser
 }
+
+export const SHARING_URLS = {
+    FACEBOOK: 'https://www.facebook.com/sharer/sharer.php?u=',
+    TWITTER: 'https://twitter.com/intent/tweet/?url=',
+    EMAIL: (subject, body) => `mailto:?subject=${ subject }&body=${ body }`
+}

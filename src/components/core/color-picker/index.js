@@ -8,28 +8,31 @@ import {
 import {
     CopyIcon,
 } from '../../../utils/svg';
-import { hexToHsl } from 'utils/helpers'
+import { hexToHsl, hexToHsv } from 'utils/helpers'
 export const MyPicker = (props) => {
-    const { onChange,data,active, colors, hsl, hsv } = props;
-    const colorObj = data && data.colors && JSON.parse(data.colors)
+    const { onChange,obj,active, hsl, hsv , colors } = props;
     const copyHex = () => {
         const color = document.getElementsByClassName('select-color-name')[ 0 ]
         color.select();
         color.setSelectionRange(0, 99999)
         document.execCommand('copy');
     }
+    const hexObj = colors && colors[ active ]
+    const hslObj = colors && hexToHsl(colors[ active ])
+    const hsvObj = colors && hexToHsv(colors[ active ])
+
     return (
         <div className='webfin-color-selector'>
             <div className="webfin-color-selector-palete">
-                <Saturation hsl={ colorObj && hexToHsl(colorObj[ active ]) ||  hsl  } hsv={ colors.hsv || hsv } onChange={ onChange } />
+                <Saturation hsl={ obj.hsl ||  hslObj || hsl } hsv={ obj.hsv || hsvObj  || hsv   } onChange={ onChange } />
             </div>
             <div className="webfin-color-selector-line">
-                <Hue direction={ 'vertical' } hsl={ colorObj && hexToHsl(colorObj[ active ]) || hsl } onChange={ onChange } />
+                <Hue direction={ 'vertical' } hsl={ obj.hsl ||  hsvObj || hsl } onChange={ onChange } />
             </div>
             <div className="webfin-color-name">
                 <label>Hex:</label>
-                <span className="color-selector-preview" style={ { background: colors.hex || colorObj&& colorObj[ active ] } }></span>
-                <span><input type='text' className="select-color-name" value={ colors.hex || colorObj && colorObj[ active ] } /></span>
+                <span className="color-selector-preview" style={ { background: colors[ active ] ||  hexObj } }></span>
+                <span><input type='text' className="select-color-name" value={  colors[ active ] || hexObj } /></span>
                 <a onClick={ () => copyHex() } className="copy-color">
                     <CopyIcon />
                 </a>
@@ -38,6 +41,7 @@ export const MyPicker = (props) => {
     );
 };
 MyPicker.propTypes = {
+    obj: PropTypes.object,
     active: PropTypes.string,
     data: PropTypes.object,
     onChange: PropTypes.func,

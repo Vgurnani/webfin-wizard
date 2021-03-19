@@ -41,6 +41,7 @@ const Dashboard =(props) => {
                         </li>
                     </ul>
                 </div>
+                {/*
                 <div className="data-box">
                     <div className="data-box-title">
                         <h3>Email Marketing</h3>
@@ -60,7 +61,9 @@ const Dashboard =(props) => {
                         </li>
                     </ul>
                 </div>
+                */}
             </div>
+            {/*
             <div className="blog-dashboard-graph">
                 <div className="data-box">
                     <div className="data-box-title">
@@ -87,6 +90,7 @@ const Dashboard =(props) => {
                     </ul>
                 </div>
             </div>
+        */}
         </div>
     )
 }

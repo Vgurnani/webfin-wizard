@@ -13,8 +13,8 @@ import HeaderCover from 'components/edit-site/HeaderCover'
 import MenuLinks from 'components/edit-site/MenuLinks'
 import _ from 'lodash';
 import { change as reduxChange } from 'redux-form'
-import searchIcon from '../../images/search.png';
-import filterIcon from '../../images/filter.png';
+// import searchIcon from '../../images/search.png';
+// import filterIcon from '../../images/filter.png';
 import {
     //PageDeleteIcon,
     PageLayoutIcon,
@@ -215,6 +215,7 @@ const EditSitePage =(props) => {
                     <div className="dashboard-title">
                         {/* <h3>Pages</h3> */}
                     </div>
+                    {/*
                     <div className="dashboard-actions">
                         <Form className="search-form">
                             <Form.Group controlId="formBasicEmail">
@@ -228,6 +229,7 @@ const EditSitePage =(props) => {
                             <img src={ filterIcon } alt={ 'filterIcon' } />
                         </a>
                     </div>
+                    */}
                 </div>
                 <div className="pages-listing">
                     <ul>

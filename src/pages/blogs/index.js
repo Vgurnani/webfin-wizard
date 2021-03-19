@@ -12,12 +12,13 @@ import
     Button,
     Accordion,
     Card,
+    Dropdown
 }
     from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import { getDraftBlogs,callPublish, getPublishedBlogs, getBlogById, deleteBlog } from '../../middleware/blog';
 import { ROUTES } from '../../constants/appRoutes';
-import { BLOG_STATUS } from 'constants/app'
+import { BLOG_STATUS, SHARING_URLS } from 'constants/app'
 import { getDynamicURL } from '../../services/api';
 import {
     OpenArrow,
@@ -162,6 +163,10 @@ const BlogsPage = () => {
         setCopySuccess('Copied!');
         setTimeout(() => setCopySuccess(''), 1000);
     };
+    const shareBlog = (type, event, blog) => {
+        event.preventDefault();
+        window.open(`${ SHARING_URLS[ type ] } https://${ data.sites[ 0 ].domain }/blog/${ blog.slug }`)
+    }
 
     const toggleActiveBlogs = (id) => {
         const blogsData = [ ...activeBlogs ];
@@ -273,10 +278,20 @@ const BlogsPage = () => {
                                             <CloneBlogListIcon />
                                             <span>Clone</span>
                                         </a>
-                                        <a className='table-action-btns' href="/#" onClick={ (e) => copyToClipBoard(e, blog) }>
-                                            <ShareBlogListIcon />
-                                            <span>Share</span>
-                                        </a>
+                                        <Dropdown>
+                                            <Dropdown.Toggle as={ Link } className='table-action-btns'>
+                                                <ShareBlogListIcon />
+                                                <span>Share</span>
+                                            </Dropdown.Toggle>
+
+                                            <Dropdown.Menu>
+                                                <Dropdown.Item href="#" onClick={ (e) => copyToClipBoard(e, blog) }>Copy to clipboard</Dropdown.Item>
+                                                <Dropdown.Item href="#" onClick={ (e) => shareBlog('FACEBOOK',e,blog ) } >Share on facebook</Dropdown.Item>
+                                                <Dropdown.Item href="#" onClick={ (e) => shareBlog('TWITTER',e,blog ) } >Share on twitter</Dropdown.Item>
+                                                <Dropdown.Item href={ SHARING_URLS.EMAIL(blog?.title, 'https://'+ data.sites[ 0 ].domain+'/blog/'+ blog.slug) }  >Share on email</Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+
                                     </div>
                                     <a onClick={ (e) => handleDelete(e, blog) } className="table-action-btns table-action-btns-delete" href="/#">
                                         <DeleteBlogListIcon />

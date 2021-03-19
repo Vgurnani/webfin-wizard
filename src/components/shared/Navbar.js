@@ -54,29 +54,29 @@ const Navbar = (props) => {
             return(
                 <ul className="main-navigation">
                     <li>
-                        <Link to="/dashboard">
+                        <Link to="/dashboard" onClick={ () => setMobileHumberger(false) }>
                             <DashboardMenuIcon />
                             Dashboard
                         </Link>
                     </li>
                     <li>
-                        <Link to="/blogs">
+                        <Link to="/blogs" onClick={ () => setMobileHumberger(false) }>
                             <BlogMenuIcon />
                             Blog
                         </Link>
                     </li>
                     <li>
-                        <Link to="/edit-site">
+                        <Link to="/edit-site" onClick={ () => setMobileHumberger(false) }>
                             <EditSiteMenuIcon />
                             Edit Site
                         </Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link to="#">
                             <MarketingMenuIcon />
                             Marketing
                         </Link>
-                    </li>
+                    </li>*/}
                     <li>
                         <Link to="#">
                             <SupportMenuIcon />

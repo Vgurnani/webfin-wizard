@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import RichTextEditor from './rte';
-import { Field, change } from 'redux-form';
+import { Field , change } from 'redux-form';
 import { renderFieldWG } from '../../utils/formUtils'
 import { getDomain, getSite, getSlugFromPath } from 'utils/helpers'
 import {
@@ -49,9 +49,9 @@ const BlogPage =(props) => {
         }
     ]
 
-    const { handleSubmit, initialize } = props;
+    const { initialize } = props;
 
-    const submitData = (formData) => {
+    const submitData = (formData ,status ) => {
         if (!formData.blogUrl) {
             setErrorMessageUrl(true);
             return;
@@ -70,7 +70,7 @@ const BlogPage =(props) => {
             content: formData.data ? formData.data : initialValue,
             imageUrl: formData.blogUrl,
             title: formData.title,
-            status: id && blog.status ? blog.status : BLOG_STATUS.PUBLISHED
+            status: status
         }
         if (id && blog.title === formData.title) {
             delete data.title;
@@ -117,7 +117,6 @@ const BlogPage =(props) => {
         if (data && data.length === 1 && !data[ 0 ].children[ 0 ].text?.trim()) {
             content = null;
         }
-
         dispatch(change('blogForm', 'data', content))
     }
     const handleToggleModal = () => {
@@ -144,7 +143,7 @@ const BlogPage =(props) => {
         <main className="dashboard-data">
             <section className="dashboard-body">
                 <div className="blog-creation">
-                    <Form onSubmit={ handleSubmit(submitData) }>
+                    <Form onSubmit={ () => {} }>
                         <div className="blog-creation-head">
                             <div className="blog-creation-head-left">
                                 <Form.Group className="blog-title-group">
@@ -409,7 +408,8 @@ const BlogPage =(props) => {
                         />
 
                         <div className="blog-btns">
-                            <Button type='submit' variant="primary">Save</Button>
+                            <Button type='button' onClick={ () => submitData(blogForm?.values,BLOG_STATUS.DRAFT) } variant="outline-primary">Save Draft</Button>
+                            <Button type='button' onClick={ () => submitData(blogForm?.values,BLOG_STATUS.PUBLISHED) } variant="primary">Publish</Button>
                             {/*!isReadyPublish ? <Button type='submit' variant="primary">Save</Button> : <Button type='button' disabled={true} variant="primary">Save</Button>*/}
                             {/*isReadyPublish ? <a href='javascript:void(0)' className='btn btn-success' onClick={() => dispatch(callPublish())}>Publish</a> :
                   <a href='javascript:void(0)' className='btn'>Publish</a>

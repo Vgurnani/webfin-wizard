@@ -11,7 +11,7 @@ import {
     DrawerArrowIcon,
     EditSiteMenuIcon,
     ViewWebsiteIcon,
-    MarketingMenuIcon,
+    // MarketingMenuIcon,
     SupportMenuIcon,
     NotificationIcon,
 } from '../../utils/svg'
@@ -22,7 +22,7 @@ import { ROUTES } from 'constants/appRoutes';
 
 const SideBar = () => {
     const dispatch  = useDispatch();
-    const [ isSideBarActive, toggleSideBar ] = React.useState(false);
+    const [ isSideBarActive, toggleSideBar ] = React.useState(true);
     const data = useSelector(state => state.user.sessionData?.data?.data)
     const theme = useSelector((state) => state.theme)
 
@@ -64,12 +64,12 @@ const SideBar = () => {
                         <EditSiteMenuIcon />
                     </Link>
                 </li>
-                <li className={ `${ theme.sidebarActive === '' ?  'active' : '' }` } >
+                {/* <li className={ `${ theme.sidebarActive === '' ?  'active' : '' }` } >
                     <Link to="#">
                         Marketing
                         <MarketingMenuIcon />
                     </Link>
-                </li>
+    </li>*/}
                 <li className={ `${ theme.sidebarActive === '' ?  'active' : '' }` } >
                     <Link to="#">
                         Support
