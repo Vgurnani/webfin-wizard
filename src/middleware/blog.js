@@ -202,7 +202,7 @@ export const deleteBlog =  (id,draftArgs, publishArgs) => {
 export const getBlogById =  (id) => {
     return async(dispatch) => {
         dispatch(getBlogRequest())
-        axiosInstance.get(`/posts/${ id }?type=blog`).then((response) => {
+        axiosInstance.get(`/posts/${ id }`).then((response) => {
             dispatch(getBlogSuccess(response.data))
         }).catch(() => {
             history.push(ROUTES.BLOGS)
