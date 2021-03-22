@@ -42,9 +42,6 @@ const CustomColor = (props) => {
         setColors(colorsData)
         setHsl(d.hsl)
         setHsv(d.hsv)
-        if(active ==='header-background'){
-            dispatch(reduxChange(formName, 'coverImage', null))
-        }
     }
     const handleChange = (event,name) => {
         const colorsData =  Object.assign({}, colors)
@@ -53,9 +50,6 @@ const CustomColor = (props) => {
         setActiveBox(name)
         setHsl(null)
         setHsv(null)
-        if(name === 'header-background'){
-            dispatch(reduxChange(formName, 'coverImage', null))
-        }
     }
     const handleClick = (name) => {
         setActiveBox(name)

@@ -10,14 +10,17 @@ import { change as reduxChange } from 'redux-form'
 import { headerLinksTemplate } from 'utils/helpers'
 import blogBanner from 'images/blog-banner.png'
 import { HEADER , SAMPLE_BLOG } from 'constants/app'
+import ColorPicker from 'components/core/color-picker'
 
 const HeaderCover = (props) => {
     const { handleSubmit, formValues, previewFile, loading, submitData } = props
-
+    const [ activeCustomColor , setActiveCustomColor ] = useState(false)
+    const [ hsl,  setHsl ] = useState(null)
+    const [ hsv,  setHsv ] = useState(null)
     const [ colors ,setColors ] = useState(formValues?.colors && JSON.parse(formValues.colors) || { })
     const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
     const data = {
-        colors: formValues?.colors,
+        colors: colors || formValues?.colors,
         header: formValues?.header,
         logoUrl: formValues?.logoUrl,
         logoText: formValues?.websiteName,
@@ -40,6 +43,7 @@ const HeaderCover = (props) => {
         dispatch(getUnsplash('/photos',query))
     }
     const toggleImageModal = () => {
+        setActiveCustomColor(false)
         setOpenImage(!openImageModal)
     }
     const handleRadio = (event) => {
@@ -58,6 +62,28 @@ const HeaderCover = (props) => {
         headerObj[ event.target.name ] = event.target.value
         setHeader(headerObj)
         dispatch(reduxChange('assessmentUpdateForm', 'header', headerObj))
+    }
+    const handleChange = (event,name) => {
+        const colorsData =  Object.assign({}, colors)
+        colorsData[ name ] = event.target.value
+        setColors(colorsData)
+        setActiveCustomColor(true)
+        dispatch(reduxChange('assessmentUpdateForm', 'colors', JSON.stringify(colorsData)))
+        dispatch(reduxChange('assessmentUpdateForm', 'coverImage', null))
+
+    }
+    const handleChangeColor = (d) => {
+        const colorsData =  Object.assign({}, colors)
+        colorsData[ 'header-background' ] = d.hex
+        setColors(colorsData)
+        setHsl(d.hsl)
+        setHsv(d.hsv)
+        dispatch(reduxChange('assessmentUpdateForm', 'colors', JSON.stringify(colorsData)))
+        dispatch(reduxChange('assessmentUpdateForm', 'coverImage', null))
+
+    }
+    const handleClick = () => {
+        setActiveCustomColor(true)
     }
     const radioView = (name,value1,value2) => {
         const colorsData =  Object.assign({}, colors)
@@ -88,7 +114,7 @@ const HeaderCover = (props) => {
                 </div>
             </Modal.Header>
             <Modal.Body>
-                <div className="custom-color-row">
+                <div className="custom-color-row color-selector">
                     <div className='custom-color-preview'>
                         <div className='color-preview wizard-home wizrd-blog-preview color-palate-preview'>
                             <WebTemplates data={ data }>
@@ -146,14 +172,25 @@ const HeaderCover = (props) => {
                                 </Home>
                             </WebTemplates>
                         </div>
-                    </div>
-                    <div className='custom-color-palate mt-5'>
-                        <div className={ 'manage-header' }>
-                            {radioView('header-color','#000000','#FFFFFF')}
-                            <div tabIndex="0" className="undefined avatar-user"><div className="c-avatar cursor-pointer upload-file"><p className=""><a onClick={ toggleImageModal }><i className="fa fa-plus"> Change Header Image </i></a></p><div className="drag-image-box"><p className=""><img src={ data.coverImage || previewFile || blogBanner } alt="cover"/></p></div></div><p></p></div>
-                            <UploadImageModal getBase64={ getBase64 } handleSearch={ handleSearch } clearImage={ clearImage } previewFile={ previewFile } fieldName={ 'coverImage' } unsplashImages={ unsplashImages } openModal={ openImageModal } handleToggleModal={ toggleImageModal } />
+                        <h5>Choose an image and color</h5>
+                        <div tabIndex="0" className="undefined avatar-user"><div className="c-avatar cursor-pointer "><p className=""></p><div className="drag-image-box"><p onClick={ toggleImageModal } className=""><img src={ data.coverImage || previewFile || blogBanner } alt="cover"/></p></div></div><p></p></div>
+                        <UploadImageModal getBase64={ getBase64 } handleSearch={ handleSearch } clearImage={ clearImage } previewFile={ previewFile } fieldName={ 'coverImage' } unsplashImages={ unsplashImages } openModal={ openImageModal } handleToggleModal={ toggleImageModal } />
+                        <div className="color-selector-group">
+                            <div onClick={ () => handleClick('header-background') } className={ `color-box-view ${ activeCustomColor ? 'active' : '' }` }>
+                                <span className="color-selector-preview" style={ { background: colors[ 'header-background' ] } }></span>
+                                <input
+                                    type='text'
+                                    onChange={ (event) => handleChange(event,'header-background') }
+                                    className='form-control'
+                                    defaultValue={ colors[ 'header-background' ] }
+                                    value={ colors[ 'header-background' ] }
+                                />
+                            </div>
 
                         </div>
+
+                    </div>
+                    <div className='custom-color-palate mt-5'>
                         <Form.Group>
                             <label>Heading</label>
                             <input type='text' name='heading' defaultValue={ data && data.header?.heading }  onChange={ handleHeaderChange } />
@@ -162,6 +199,10 @@ const HeaderCover = (props) => {
                             <label>Tag Line</label>
                             <input type='text' name='subHeading' defaultValue={ data && data.header?.subHeading } onChange={ handleHeaderChange } />
                         </Form.Group>
+                        <div className={ 'manage-header' }>
+                            {radioView('header-color','#FFFFFF', '#000000')}
+                        </div>
+                        {activeCustomColor && <ColorPicker active={ 'header-background' } obj={ { hsl: hsl,hsv: hsv } } colors={ colors } onChange={ handleChangeColor } />}
                     </div>
                 </div>
             </Modal.Body>
