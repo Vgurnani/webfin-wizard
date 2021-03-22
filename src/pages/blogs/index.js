@@ -54,8 +54,8 @@ const BlogsPage = () => {
     const draftBlogs = useSelector(state => state.blog.draftBlogs)
     const draftMetaData = useSelector(state => state.blog.draftMetaData)
     const data = useSelector(state => state.user.sessionData?.data?.data) || getSessionData();
-    const [ sortPublish, setSortPublish ] = useState({ title: 'desc', createdAt: 'desc' })
-    const [ sortDraft, setSortDraft ] = useState({ title: 'desc', createdAt: 'desc' })
+    const [ sortPublish, setSortPublish ] = useState({ title: '', createdAt: 'desc' })
+    const [ sortDraft, setSortDraft ] = useState({ title: '', createdAt: 'desc' })
 
     useEffect(() => {
         dispatch({
@@ -134,15 +134,16 @@ const BlogsPage = () => {
     }
 
     const sortData = (type,blogType) => {
+        const obj = {}
         if(BLOG_STATUS.PUBLISHED === blogType ){
-            sortPublish[ type ] = sortPublish[ type ] === 'asc' ? 'desc' : 'asc'
-            setSortPublish(sortPublish)
+            obj[ type ] = sortPublish && sortPublish[ type ] === 'asc' ? 'desc' : 'asc' || 'desc'
+            setSortPublish(obj)
 
         }else{
-            sortDraft[ type ] = sortDraft[ type ] === 'asc' ? 'desc' : 'asc'
-            setSortDraft(sortDraft)
+            obj[ type ] = sortDraft && sortDraft[ type ] === 'asc' ? 'desc' : 'asc' || 'desc'
+            setSortDraft(obj)
         }
-        const args = `page=${ blogType === BLOG_STATUS.PUBLISHED ? activePagePublish : activePageDraft }&size=${ limit }&sort=${ type },${ BLOG_STATUS.PUBLISHED ? sortPublish[ type ] : sortDraft[ type ] }`
+        const args = `page=${ blogType === BLOG_STATUS.PUBLISHED ? activePagePublish : activePageDraft }&size=${ limit }&sort=${ type },${ BLOG_STATUS.PUBLISHED ? obj[ type ] : obj[ type ] }`
         blogType === BLOG_STATUS.PUBLISHED ?  dispatch(getPublishedBlogs(args)) : dispatch(getDraftBlogs(args));
 
     }
@@ -226,24 +227,24 @@ const BlogsPage = () => {
                             <div className="blog-list-column blog-list-live" >
                                 Live
                             </div>
-                            <div className={ `blog-list-column blog-list-title headerSort ${ sortPublish[ 'title' ] ==='desc' ?  'headerSortDown': 'headerSortUp' }` } onClick={ () => sortData('title',BLOG_STATUS.PUBLISHED) }>
+                            <div className={ 'blog-list-column blog-list-title headerSort' } onClick={ () => sortData('title',BLOG_STATUS.PUBLISHED) }>
                                 <span className="sort-column">Title</span>
                                 <span className="sort-icon">
-                                    <span className="sort-up">
+                                    <span className={ `sort-up ${ sortPublish[ 'title' ] ==='asc' && 'active' }` }>
                                         <BlogSortIcon />
                                     </span>
-                                    <span className="sort-down">
+                                    <span className={ `sort-down ${ sortPublish[ 'title' ] ==='desc' && 'active' }` }>
                                         <BlogSortIcon />
                                     </span>
                                 </span>
                             </div>
-                            <div className={ `blog-list-column blog-list-date headerSort ${ sortPublish[ 'createdAt' ] ==='desc' ?  'headerSortDown': 'headerSortUp' }` } onClick={ () => sortData('createdAt',BLOG_STATUS.PUBLISHED) } >
+                            <div className={ 'blog-list-column blog-list-date headerSort' } onClick={ () => sortData('createdAt',BLOG_STATUS.PUBLISHED) } >
                                 <span className="sort-column">Date Created</span>
                                 <span className="sort-icon">
-                                    <span className="sort-up">
+                                    <span className={ `sort-up ${ sortPublish[ 'createdAt' ] ==='asc' && 'active' }` }>
                                         <BlogSortIcon />
                                     </span>
-                                    <span className="sort-down">
+                                    <span className={ `sort-down ${ sortPublish[ 'createdAt' ] ==='desc' && 'active' }` }>
                                         <BlogSortIcon />
                                     </span>
                                 </span>
@@ -350,25 +351,25 @@ const BlogsPage = () => {
                                                 <div className="blog-list-column blog-list-live">
                                                     Live
                                                 </div>
-                                                <div className={ `blog-list-column blog-list-title headerSort ${ sortDraft[ 'title' ] ==='desc' ?  'headerSortDown': 'headerSortUp' }` } onClick={ () => sortData('title',BLOG_STATUS.DRAFT) }>
+                                                <div className={ 'blog-list-column blog-list-title headerSort' } onClick={ () => sortData('title',BLOG_STATUS.DRAFT) }>
                                                     <span className="sort-column">Title</span>
                                                     <span className="sort-icon">
-                                                        <span className="sort-up">
+                                                        <span className={ `sort-up ${ sortDraft[ 'title' ] ==='asc' && 'active' }` } >
                                                             <BlogSortIcon />
                                                         </span>
-                                                        <span className="sort-down">
+                                                        <span className={ `sort-down ${ sortDraft[ 'title' ] ==='desc' && 'active' }` }>
                                                             <BlogSortIcon />
                                                         </span>
                                                     </span>
                                                 </div>
-                                                <div className={ `blog-list-column blog-list-date headerSort ${ sortDraft[ 'createdAt' ] ==='desc' ?  'headerSortDown': 'headerSortUp' }` }  onClick={ () => sortData('createdAt',BLOG_STATUS.DRAFT) }>
+                                                <div className={ 'blog-list-column blog-list-date headerSort' }  onClick={ () => sortData('createdAt',BLOG_STATUS.DRAFT) }>
 
                                                     <span className="sort-column">Date Created</span>
                                                     <span className="sort-icon">
-                                                        <span className="sort-up">
+                                                        <span className={ `sort-up ${ sortDraft[ 'createdAt' ] ==='asc' && 'active' }` }>
                                                             <BlogSortIcon />
                                                         </span>
-                                                        <span className="sort-down">
+                                                        <span className={ `sort-down ${ sortDraft[ 'createdAt' ] ==='desc' && 'active' }` }>
                                                             <BlogSortIcon />
                                                         </span>
                                                     </span>
