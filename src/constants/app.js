@@ -1,7 +1,7 @@
 import twitter  from 'images/twitter-color.png'
 import facebook  from 'images/facebook-color.png'
 import youtube  from 'images/youtube-color.png'
-import instrgram  from 'images/instagram-color.png'
+import instagram  from 'images/instagram-color.png'
 import linkedin  from 'images/linkedin-color.png'
 import blogUser from 'images/blog-user.png'
 import sampleBlog from 'images/sample-blog.png'
@@ -37,7 +37,7 @@ export const MESSAGE = {
 export const SOCIAL_MEDIA = [
     { name: 'Facebook',value: 'facebook', imgUrl: `<img src=${ facebook } />` },
     { name: 'Linked in',value: 'linkedin', imgUrl: `<img src=${ linkedin } />` },
-    { name: 'Instagram',value: 'instagram', imgUrl: `<img src=${ instrgram } />` },
+    { name: 'Instagram',value: 'instagram', imgUrl: `<img src=${ instagram } />` },
     { name: 'Twitter',value: 'twitter', imgUrl: `<img src=${ twitter } />` },
     { name: 'Youtube',value: 'youtube', imgUrl: `<img src=${ youtube } />` },
     { name: 'Label',value: 'label', imgUrl: `<img src=${ facebook } />` }
