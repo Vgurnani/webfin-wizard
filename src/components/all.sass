@@ -992,6 +992,29 @@ ul
     margin: 15px 0
   .social-btn
     margin: 15px 0 0
+    .login-or
+      font-weight: 900
+      font-size: 14px
+      line-height: 1
+      text-align: center
+      text-transform: uppercase
+      position: relative
+      margin: 0
+      &::after
+        content: ''
+        position: absolute
+        top: 50%
+        left: 0
+        right: 0
+        transform: translateY(-50%)
+        background-color: $dark-grey-color
+        height: 1px
+      span
+        display: inline-block
+        background-color: $light-bg-color
+        padding: 10px
+        position: relative
+        z-index: 1
   .btn
     width: 100%
     svg

@@ -38,15 +38,12 @@ const RegisterPage = (props) => {
                 <Row className="align-items-center">
                     <Col className="content-side col-6 light-content sigunp-content-side">
                         <div className="content-side-inner">
-                            <h4>Benefits of Registering </h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.
-                            </p>
+                            <h4>One step away from your beautiful blog! </h4>
                             <ul>
-                                <li>Out of the box website</li>
-                                <li>SEO Tools focused on results </li>
-                                <li>Lorem ipsum dolor sit amet.</li>
-                                <li>Lorem ipsum dolor sit amet.</li>
+                                <li>No Credit Card Required </li>
+                                <li>Start Writing Your First Blog Post In Seconds </li>
+                                <li>Get SEO Topics In Your Niche With Blog Trends</li>
+                                <li>14-Day Free Trial</li>
                             </ul>
                         </div>
                     </Col>
@@ -60,6 +57,23 @@ const RegisterPage = (props) => {
                                     <p className="heading-detail">
                                         Already have an account?  <Link to="/login">Sign In</Link>
                                     </p>
+                                    <div className="social-logins">
+                                        <div className="social-btn">
+                                            <button href='#' className="btn btn-primary btn-google">
+                                                <img src={ googleLogin } alt="Google" />
+                                                <a href={ `${ process.env.REACT_APP_API_URL }/v1/oauth2/authorize/google` }>Sign up with Google</a>
+                                            </button>
+                                        </div>
+                                        <div className="social-btn">
+                                            <button href='#' className="btn btn-primary btn-facebook">
+                                                <img src={ facebookLogin } alt="facebook" />
+                                                <a href={ `${ process.env.REACT_APP_API_URL }/v1/oauth2/authorize/facebook` }>Sign up with Facebook</a>
+                                            </button>
+                                        </div>
+                                        <div className="social-btn">
+                                            <p className="login-or"><span>Or</span></p>
+                                        </div>
+                                    </div>
                                     <Form className="form" onSubmit={ handleSubmit(submitData) }>
                                         <Field
                                             name="email"
@@ -94,20 +108,7 @@ const RegisterPage = (props) => {
                                             Sign Up
                                         </Button>
                                     </Form>
-                                    <div className="social-logins">
-                                        <div className="social-btn">
-                                            <button href='#' className="btn btn-primary btn-facebook">
-                                                <img src={ facebookLogin } alt="facebook" />
-                                                <a href={ `${ process.env.REACT_APP_API_URL }/v1/oauth2/authorize/facebook` }>Sign up with Facebook</a>
-                                            </button>
-                                        </div>
-                                        <div className="social-btn">
-                                            <button href='#' className="btn btn-primary btn-google">
-                                                <img src={ googleLogin } alt="Google" />
-                                                <a href={ `${ process.env.REACT_APP_API_URL }/v1/oauth2/authorize/google` }>Sign up with Google</a>
-                                            </button>
-                                        </div>
-                                    </div>
+
                                 </Col>
                             </Row>
                         </div>
