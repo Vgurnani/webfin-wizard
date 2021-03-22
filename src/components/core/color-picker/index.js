@@ -32,7 +32,7 @@ export const MyPicker = (props) => {
             <div className="webfin-color-name">
                 <label>Hex:</label>
                 <span className="color-selector-preview" style={ { background: colors[ active ] ||  hexObj } }></span>
-                <span><input type='text' className="select-color-name" value={  colors[ active ] || hexObj } /></span>
+                <span><input type='text' className="select-color-name form-control" value={  colors[ active ] || hexObj } /></span>
                 <a onClick={ () => copyHex() } className="copy-color">
                     <CopyIcon />
                 </a>

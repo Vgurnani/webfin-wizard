@@ -105,7 +105,12 @@ const CustomColor = (props) => {
 
         return(<>
             <div className="color-selector-group">
-                <label>Top Menu</label>
+                <div className="color-selector-label">
+                    <label>Top Menu</label>
+                    <div className="font-switcher">
+                        {radioView('top-menu-font','#000000','#FFFFFF')}
+                    </div>
+                </div>
                 <div onClick={ () => handleClick('top-menu') } className={ `color-box-view ${ active ==='top-menu' ? 'active' : '' }` }>
                     <span className="color-selector-preview" style={ { background: colors[ 'top-menu' ] } } ></span>
                     <input
@@ -116,12 +121,15 @@ const CustomColor = (props) => {
                         value={ colors[ 'top-menu' ] }
                     />
                 </div>
-                <div className="font-switcher">
-                    {radioView('top-menu-font','#000000','#FFFFFF')}
-                </div>
+
             </div>
             <div className="color-selector-group">
-                <label>Button</label>
+                <div className="color-selector-label">
+                    <label>Button</label>
+                    <div className="font-switcher">
+                        {radioView('button-font','#000000','#FFFFFF')}
+                    </div>
+                </div>
                 <div onClick={ () => handleClick('button') } className={ `color-box-view ${ active ==='button' ? 'active' : '' }` }>
                     <span className="color-selector-preview" style={ { background: colors[ 'button' ] } }></span>
                     <input
@@ -132,11 +140,9 @@ const CustomColor = (props) => {
                         value={ colors[ 'button' ] }
                     />
                 </div>
-                <div className="font-switcher">
-                    {radioView('button-font','#000000','#FFFFFF')}
-                </div>
+
             </div>
-            <div className="color-selector-group">
+            {/* <div className="color-selector-group">
                 <label>Background</label>
                 <div onClick={ () => handleClick('background') } className={ `color-box-view ${ active ==='background' ? 'active' : '' }` }>
                     <span className="color-selector-preview" style={ { background: colors[ 'background' ] } }></span>
@@ -151,7 +157,7 @@ const CustomColor = (props) => {
                 <div className="font-switcher">
                     {radioView('background-font','#000000','#FFFFFF')}
                 </div>
-            </div>
+            </div> */}
             {/*<div className="color-selector-group">
                 <label>Box Shadow</label>
                 <div onClick={ () => handleClick('box-shadow') } className={ `color-box-view ${ active ==='box-shadow' ? 'active' : '' }` }>
@@ -166,7 +172,12 @@ const CustomColor = (props) => {
                 </div>
         </div>*/}
             <div className="color-selector-group home-bg">
-                <label>Home Background</label>
+                <div className="color-selector-label">
+                    <label>Background</label>
+                    <div className="font-switcher">
+                        {radioView('home-background-font','#000000','#FFFFFF')}
+                    </div>
+                </div>
                 <div onClick={ () => handleClick('home-background') } className={ `color-box-view ${ active ==='home-background' ? 'active' : '' }` }>
                     <span className="color-selector-preview" style={ { background: colors[ 'home-background' ] } } ></span>
                     <input
@@ -177,9 +188,7 @@ const CustomColor = (props) => {
                         value={ colors[ 'home-background' ] }
                     />
                 </div>
-                <div className="font-switcher">
-                    {radioView('home-background-font','#000000','#FFFFFF')}
-                </div>
+
             </div>
         </>)
     }
@@ -275,10 +284,16 @@ const CustomColor = (props) => {
                                 </Home>
                             </WebTemplates>
                         </div>
+
                     </div>
-                    <div className='custom-color-palate mt-5'>
-                        <div className={ 'manage-header' }>
-                            {radioView('header-color','#000000','#FFFFFF')}
+                    <div className='custom-color-palate'>
+                        <div className="custom-header">
+                            <div className="color-selector-group">
+                                <div className="color-selector-label">
+                                    <label>Header Text</label>
+                                    {radioView('header-color','#000000','#FFFFFF')}
+                                </div>
+                            </div>
                             {/*<Field
                                 name={ 'coverImage' }
                                 component={ renderFileDrop }
@@ -293,7 +308,22 @@ const CustomColor = (props) => {
                                 No Header image
                             </label>*/}
 
-                            <div tabIndex="0" className="undefined avatar-user"><div className="c-avatar cursor-pointer upload-file"><p className=""><a onClick={ toggleImageModal }><i className="fa fa-plus"> Change Header Image </i></a></p><div className="drag-image-box"><p className=""><img src={ data.coverImage || previewFile || blogBanner } alt="cover"/></p></div></div><p></p></div>
+                            <div tabIndex="0" className="undefined avatar-user">
+                                <div className="c-avatar cursor-pointer">
+
+                                    <div className="drag-image-box">
+                                        <p className="">
+                                            <img src={ data.coverImage || previewFile || blogBanner } alt="cover"/>
+                                        </p>
+                                    </div>
+                                    <p className="upload-file">
+                                        <a onClick={ toggleImageModal }>
+                                            <i className="fa fa-plus"></i>
+                                            Change Header Image
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
                             <UploadImageModal getBase64={ getBase64 } handleSearch={ handleSearch } clearImage={ clearImage } previewFile={ previewFile } fieldName={ 'coverImage' } unsplashImages={ unsplashImages } openModal={ openImageModal } handleToggleModal={ toggleImageModal } />
 
                             {/*isHeaderBgColor && <div className='color-selector'><div className="color-selector-group">
@@ -311,7 +341,6 @@ const CustomColor = (props) => {
                             </div>
                             </div>
                             */}
-
                         </div>
                         <ColorPicker active={ active } obj={ { hsl: hsl,hsv: hsv } } colors={ colors } onChange={ handleChangeColor } />
                         {/*<label>Heading</label>
@@ -319,12 +348,15 @@ const CustomColor = (props) => {
                         <label>Sub Heading</label>
                         <input type='text' name='subHeading' defaultValue={ data && data.header?.subHeading } onChange={ handleHeaderChange } />
                         */}
-                    </div>
 
+                    </div>
+                    <div className='custom-color-preview'>
+                        <div className="color-selector">
+                            { inputViews() }
+                        </div>
+                    </div>
                 </div>
-                <div className="color-selector">
-                    { inputViews() }
-                </div>
+
             </Modal.Body>
             <Modal.Footer>
                 <div className="modal-btns">

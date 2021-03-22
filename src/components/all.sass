@@ -2078,16 +2078,25 @@ body.modal-open
           width: 60%
           text-align: center
 .custom-color-modal
+  .upload-file
+    padding: 3px 0 0 24px
+    margin: 5px 0 30px
+    @media (max-width: $breakpoint-ipad)
+      margin: 5px 0 15px
+  .wizrd-blog-preview
+    width: 582px
   .modal-dialog
-    width: 888px
+    width: 1041px
     @media (max-width: $breakpoint-ipad)
       width: 100%;
       max-width: 100%;
       margin: 0
     .modal-content
       width: 100%
-      @media (max-width: $breakpoint-mobile)
+      @media (max-width: $breakpoint-ipad)
+        width: 100%
         max-height: 100vh
+        height: 100vh
         border-radius: 0
     .back-to-home
       a
@@ -2109,8 +2118,9 @@ body.modal-open
   .drag-image-box
     padding: 0
     position: relative
+    max-width: 204px
     img
-      border-radius: 24px
+      border-radius: 5px
       object-fit: cover
       position: absolute
       top: -1px
@@ -2126,11 +2136,13 @@ body.modal-open
     width: 100%
     display: inline-block
     margin: 0 0 33px
+    @media (max-width: $breakpoint-ipad)
+      margin: 0
   .custom-color-preview
     width: 62%
     display: inline-block
     vertical-align: top
-    @media (max-width: $breakpoint-mobile)
+    @media (max-width: $breakpoint-ipad)
       width: 100%
       .color-palate-preview
         max-width: 100%
@@ -2139,13 +2151,24 @@ body.modal-open
     display: inline-block
     vertical-align: top
     width: 38%
-    @media (max-width: $breakpoint-mobile)
+    @media (max-width: $breakpoint-ipad)
       width: 100%
-    .manage-header
-      position: relative
-      .font-color-switcher
-        position: absolute
-        right: 0
+    .custom-header
+      width: 100%
+      display: inline-block
+      margin: 45px 0 0
+      @media (max-width: $breakpoint-ipad)
+        display: flex
+        margin: 15px 0 0
+      .color-selector-group
+        @media (max-width: $breakpoint-ipad)
+          order: 2
+          margin: 7px 0 0 20px
+        @media (max-width: $breakpoint-mobile)
+          margin: 7px 0 0 10px
+      .color-selector-label
+        @media (max-width: $breakpoint-mobile)
+          width: 85px
   .preview-switch
     width: 100%
     display: inline-block
@@ -2189,48 +2212,45 @@ body.modal-open
           svg
             path
               fill: $white-color
+.color-selector-label
+  background-color: #9E9E9E
+  border-radius: 5px
+  padding: 3px 6px
+  width: auto
+  display: inline-block
+  margin: 0 0 8px
+  label
+    font-size: 18px
+    line-height: 1.5
+    color: $white-color
+    font-weight: 700
+    margin: 0 0 4px
+    text-align: center
+    width: auto
+    display: inline-block
+    vertical-align: middle
+    margin: 0
+    @media (max-width: $breakpoint-ipad-pro)
+      font-size: 16px
+    @media (max-width: $breakpoint-mobile)
+      font-size: 12px
+      width: 100%
+      display: inline-block
+      text-align: left
 .color-selector
   width: 100%
   display: inline-block
-  @media (max-width: $breakpoint-mobile)
-    display: flex
-    flex-direction: row
-    flex-wrap: wrap
-    justify-content: space-between
+  margin: 50px 0 0
   @media (max-width: $breakpoint-ipad)
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    margin: 0 0 0
   .color-selector-group
-    width: 126px
+    width: 31.3%
     display: inline-block
     vertical-align: top
-    margin-left: 20px
+    margin-left: 2%
     margin-bottom: 20px
-    @media (max-width: $breakpoint-ipad)
-      margin-left: 3px
-    @media (max-width: $breakpoint-mobile)
-      width: 49%
-      margin-left: 2%
-      text-align: center
-      &:nth-child(2n+1)
-        margin-left: 0
-    &.home-bg
-      width: 162px
-      @media (max-width: $breakpoint-mobile)
-        width: 60%
     &:first-child
       margin-left: 0
-    label
-      font-size: 18px
-      line-height: 1.5
-      color: $dark-grey-color
-      font-weight: 700
-      margin: 0 0 4px
-      text-align: center
-      width: 100%
-      display: inline-block
     .color-box-view
       width:  100%
       display: inline-block
@@ -2238,6 +2258,9 @@ body.modal-open
       border-radius: 24px
       padding: 7px 10px
       height: 45px
+      @media (max-width: $breakpoint-mobile)
+        padding: 0 0 2px 3px
+        height: auto
       &.active
         border: 2px solid $primary-color !important
       .form-control
@@ -2255,6 +2278,9 @@ body.modal-open
         height: auto
         &:focus
           box-shadow: none
+        @media (max-width: $breakpoint-mobile)
+          font-size: 12px
+          width: calc(100% - 26px)
       .color-selector-preview
         display: inline-block
         vertical-align: middle
@@ -2263,23 +2289,28 @@ body.modal-open
         height: 27.2px
         border-radius: 100%
         margin: 0 3.8px 0 0
+        @media (max-width: $breakpoint-mobile)
+          width: 18.2px
+          height: 18.2px
+          margin: 0 2px 0 0
   .font-switcher
-    width: 100%
+    width: auto
     display: inline-block
+    vertical-align: middle
     text-align: center
-    margin: 4px 0 0
+    margin: 0
 .font-color-switcher
   width: auto
   display: inline-block
   vertical-align: middle
   .custom-radio
-    width: 23px
-    height: 23px
     display: inline-block
     vertical-align: middle
-    margin-left: 10px
+    margin-left: 8px
+    line-height: 0
     &:first-child
-      margin-left: 0
+      @media (max-width: $breakpoint-mobile)
+        margin-left: 0
     &.black-color-font
       .radio-item
         label
@@ -2303,13 +2334,14 @@ body.modal-open
             border: 3px solid $primary-color
       label
         margin: 0
-        font-size: 18px
+        font-size: 0
         font-weight: 700
         color: $black-color
-        border: 1px solid $black-color
+        border: 3px solid $black-color
+        background-color: $white-color
         border-radius: 5px
-        width: 23px
-        height: 23px
+        width: 20px
+        height: 20px
         box-sizing: border-box
         position: relative
         span
@@ -2321,6 +2353,8 @@ body.modal-open
 .webfin-color-selector
   width: 253px
   display: inline-block
+  @media (max-width: $breakpoint-ipad)
+    display: none
   .webfin-color-selector-palete
     width: 204px
     height: 209px
@@ -2368,6 +2402,14 @@ body.modal-open
       border: 1.695px solid #1E1E1E
       line-height: 0
       padding: 6px
+    .form-control
+      border: none
+      display: inline-block
+      vertical-align: middle
+      height: auto
+      padding: 0
+      min-width: 0
+      width: 70px
 .signup-section
   @media (max-width: $breakpoint-mobile)
     padding: 0
@@ -2556,12 +2598,6 @@ body.modal-open
     width: 38%
     @media (max-width: $breakpoint-mobile)
       width: 100%
-    .manage-header
-      position: relative
-      .font-color-switcher
-        z-index: 10
-        position: absolute
-        right: 0
   .preview-switch
     width: 100%
     display: inline-block
