@@ -444,8 +444,7 @@
                     .dashboard-title
                         @media (max-width: $breakpoint-mobile)
                             vertical-align: middle
-                            width: 40%
-                            width: calc(100% - 137px)
+                            width: 100%
                         h5
                             font-weight: 700
                             color: $dark-grey-color
@@ -462,7 +461,14 @@
                             margin-left: 25px
                             position: relative
                             @media (max-width: $breakpoint-mobile)
-                                margin-left: 5px
+                                margin: 10px 0 0
+                                width: 100%
+                                display: inline-block
+                            .sort-blog-wrap
+                                display: inline-block
+                                position: relative
+                                @media (max-width: $breakpoint-mobile)
+                                    margin-left: 20px
                             .btn.btn-primary
                                 &.sort-blogs
                                     background-color: $white-color
@@ -481,7 +487,7 @@
                                         display: inline-block
                                 &.add-new-blog
                                     @media (max-width: $breakpoint-mobile)
-                                        display: none
+                                       // display: none
                             ul.wrap-drop.drop
                                 position: absolute
                                 top: 100%
@@ -492,6 +498,7 @@
                                 margin: 5px 0 0
                                 min-width: 165px
                                 box-shadow: 0 0 5px 1px rgba(0,0,0,.1)
+                                right: 0
                                 li
                                     font-size: 14px
                                     font-weight: 700

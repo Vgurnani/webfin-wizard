@@ -192,30 +192,32 @@ const BlogsPage = () => {
                         <div className="dashboard-body-actions">
 
                             <Link to={ ROUTES.BLOG } className='btn btn-primary add-new-blog'>Add New+</Link>
-                            <Link to='#' onClick={ () => setSortToggle(!sortToggle) } className='btn btn-primary sort-blogs'>
-                                <SortBlogIcon />
-                                Sort By
-                            </Link>
-                            {
-                                sortToggle && <ul className='wrap-drop drop'>
-                                    <li  onClick={ () => sortDataMobile('title','asc') }><a>Title -asc</a></li>
-                                    <li onClick={ () => sortDataMobile('createdAt','asc') } ><a>Created At -asc</a></li>
-                                    <li onClick={ () => sortDataMobile('title','desc') }><a>Title -desc</a></li>
-                                    <li className={ sortPublish[ 'createdAt' ] === 'desc' ? 'active' : '' } onClick={ () => sortDataMobile('createdAt','desc') }><a>Created At -desc</a></li>
-                                </ul>
-                            }
+                            <div className="sort-blog-wrap">
+                                <Link to='#' onClick={ () => setSortToggle(!sortToggle) } className='btn btn-primary sort-blogs'>
+                                    <SortBlogIcon />
+                                    Sort By
+                                </Link>
+                                {
+                                    sortToggle && <ul className='wrap-drop drop'>
+                                        <li  onClick={ () => sortDataMobile('title','asc') }><a>Title -asc</a></li>
+                                        <li onClick={ () => sortDataMobile('createdAt','asc') } ><a>Created At -asc</a></li>
+                                        <li onClick={ () => sortDataMobile('title','desc') }><a>Title -desc</a></li>
+                                        <li className={ sortPublish[ 'createdAt' ] === 'desc' ? 'active' : '' } onClick={ () => sortDataMobile('createdAt','desc') }><a>Created At -desc</a></li>
+                                    </ul>
+                                }
+                            </div>
                         </div>
                     </div>
-                    <div className="dashboard-actions">
-                        {/*<Form className="search-form">
+                    {/*<div className="dashboard-actions">
+                        <Form className="search-form">
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Control ref={ searchInput } onChange={ () => {} }  className="form-control" placeholder="Search" />
                             </Form.Group>
                             <Button onClick={ handleFilter } className="btn-search" type="button">
                                 <img src={ searchIcon } alt={ 'searchIcon' } />
                             </Button>
-                        </Form>*/}
-                    </div>
+                        </Form>
+                    </div>*/}
                 </div>
                 <div>{copySuccess}</div>
                 <div className="blog-custom-list-table">
