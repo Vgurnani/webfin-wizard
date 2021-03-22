@@ -108,7 +108,7 @@ const CustomColor = (props) => {
                 <div className="color-selector-label">
                     <label>Top Menu</label>
                     <div className="font-switcher">
-                        {radioView('top-menu-font','#000000','#FFFFFF')}
+                        {radioView('top-menu-font','#FFFFFF','#000000')}
                     </div>
                 </div>
                 <div onClick={ () => handleClick('top-menu') } className={ `color-box-view ${ active ==='top-menu' ? 'active' : '' }` }>
@@ -127,7 +127,7 @@ const CustomColor = (props) => {
                 <div className="color-selector-label">
                     <label>Button</label>
                     <div className="font-switcher">
-                        {radioView('button-font','#000000','#FFFFFF')}
+                        {radioView('button-font','#FFFFFF','#000000')}
                     </div>
                 </div>
                 <div onClick={ () => handleClick('button') } className={ `color-box-view ${ active ==='button' ? 'active' : '' }` }>
@@ -175,7 +175,7 @@ const CustomColor = (props) => {
                 <div className="color-selector-label">
                     <label>Background</label>
                     <div className="font-switcher">
-                        {radioView('home-background-font','#000000','#FFFFFF')}
+                        {radioView('home-background-font','#FFFFFF','#000000')}
                     </div>
                 </div>
                 <div onClick={ () => handleClick('home-background') } className={ `color-box-view ${ active ==='home-background' ? 'active' : '' }` }>
@@ -291,7 +291,7 @@ const CustomColor = (props) => {
                             <div className="color-selector-group">
                                 <div className="color-selector-label">
                                     <label>Header Text</label>
-                                    {radioView('header-color','#000000','#FFFFFF')}
+                                    {radioView('header-color','#FFFFFF','#000000')}
                                 </div>
                             </div>
                             {/*<Field
