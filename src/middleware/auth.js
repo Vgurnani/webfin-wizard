@@ -180,6 +180,7 @@ export const updateCurrentUser = (data) => {
             .then((response) => {
                 const user = JSON.parse(getItem('user'));
                 setItem('user', { ...user, ...response.data })
+                dispatch(getCurrentUser())
                 dispatch(updateUserProfileSuccess(response.data));
             })
             .catch((error) => {

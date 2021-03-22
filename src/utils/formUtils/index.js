@@ -80,6 +80,49 @@ const renderFieldWG = (props) => {
     );
 };
 
+const renderTextArea= (props) => {
+    const {
+        input,
+        defaultValue,
+        label,
+        name,
+        placeholder,
+        asyncLoading,
+        disabled,
+        validationError,
+        meta: { asyncValidating, touched, error, warning },
+        maxLength,
+        handleKeyUp,
+        rows,
+        withoutTouch,
+        defaultWarning
+    } = props;
+
+    const changeValue = (event) =>{
+        handleKeyUp && handleKeyUp(event.currentTarget.value)
+        //input.onChange(event.currentTarget.value)
+    }
+
+    return (
+        <Form.Group controlId={ name }>
+            { label &&  <Form.Label>{label || ''}</Form.Label> }
+            <textarea  rows={ rows } { ...input } onBlur={ changeValue } defaultValue={ defaultValue }   maxLength={ maxLength } disabled={ disabled || false }  className={  validationError || (touched && error) ? 'form-control validation-error' : 'form-control' } placeholder={ placeholder || '' } />
+            {defaultWarning && !input.value && <span className="default-warning"><i className="fas fa-exclamation-triangle"></i> {defaultWarning}</span>}
+            <Validations
+                props={ {
+                    touched,
+                    error,
+                    validationError,
+                    warning,
+                    withoutTouch
+                } }
+            />
+            { asyncLoading && asyncValidating ? <div className="small-up-loader">
+                <div className="lds-facebook"><div></div><div></div><div></div></div>
+            </div> : null }
+        </Form.Group>
+    );
+};
 const renderFieldChangeWG = (props) => {
     const {
         input,
@@ -365,4 +408,5 @@ export {
     renderOTPField,
     renderStyleMultipleRadio,
     renderFieldChangeWG,
+    renderTextArea
 };
