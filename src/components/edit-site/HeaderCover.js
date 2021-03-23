@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types';
 import WebTemplates ,{ Header,Home, Banner,Blogs, Card ,Tabs, Tab } from 'web-templates';
-import { Modal, Button, Row, Col,Form } from 'react-bootstrap'
+import { Modal, Button,Form } from 'react-bootstrap'
 import ButtonLoader from 'components/core/loader/button-loader'
 import UploadImageModal from 'components/assessment/shared/UploadImageModal'
 import { useDispatch, useSelector } from 'react-redux';
@@ -105,17 +105,19 @@ const HeaderCover = (props) => {
     return(<div className='custom-color-palatte'>
         <Form onSubmit={ handleSubmit(submitData) }>
             <Modal.Header closeButton>
-                <div className="logo-upload-header">
+                <div className="back-to-home"></div>
+                {/* <div className="logo-upload-header">
                     <Row>
                         <Col className="col-12">
                             <Modal.Title>Header</Modal.Title>
                         </Col>
                     </Row>
-                </div>
+                </div> */}
             </Modal.Header>
             <Modal.Body>
                 <div className="custom-color-row color-selector">
                     <div className='custom-color-preview'>
+                        <h3 className="preview-head">Preview</h3>
                         <div className='color-preview wizard-home wizrd-blog-preview color-palate-preview'>
                             <WebTemplates data={ data }>
                                 <Header>
@@ -172,42 +174,65 @@ const HeaderCover = (props) => {
                                 </Home>
                             </WebTemplates>
                         </div>
-                        <h5>Choose an image and color</h5>
-                        <div tabIndex="0" className="undefined avatar-user"><div className="c-avatar cursor-pointer "><p className=""></p><div className="drag-image-box"><p onClick={ toggleImageModal } className=""><img src={ data.coverImage || previewFile || blogBanner } alt="cover"/></p></div></div><p></p></div>
-                        <UploadImageModal getBase64={ getBase64 } handleSearch={ handleSearch } clearImage={ clearImage } previewFile={ previewFile } fieldName={ 'coverImage' } unsplashImages={ unsplashImages } openModal={ openImageModal } handleToggleModal={ toggleImageModal } />
-                        <div className="color-selector-group">
-                            <div onClick={ () => handleClick('header-background') } className={ `color-box-view ${ activeCustomColor ? 'active' : '' }` }>
-                                <span className="color-selector-preview" style={ { background: colors[ 'header-background' ] } }></span>
-                                <input
-                                    type='text'
-                                    onChange={ (event) => handleChange(event,'header-background') }
-                                    className='form-control'
-                                    defaultValue={ colors[ 'header-background' ] }
-                                    value={ colors[ 'header-background' ] }
-                                />
-                            </div>
-
-                        </div>
-
                     </div>
-                    <div className='custom-color-palate mt-5'>
+                    <div className='custom-color-palate header-text-edit'>
                         <Form.Group>
                             <label>Heading</label>
-                            <input type='text' name='heading' defaultValue={ data && data.header?.heading }  onChange={ handleHeaderChange } />
+                            <input className="form-control" type='text' name='heading' defaultValue={ data && data.header?.heading }  onChange={ handleHeaderChange } />
                         </Form.Group>
                         <Form.Group>
                             <label>Tag Line</label>
-                            <input type='text' name='subHeading' defaultValue={ data && data.header?.subHeading } onChange={ handleHeaderChange } />
+                            <input className="form-control" type='text' name='subHeading' defaultValue={ data && data.header?.subHeading } onChange={ handleHeaderChange } />
                         </Form.Group>
-                        <div className={ 'manage-header' }>
+                        <div className="color-selector-label">
+                            <label>Header Text</label>
                             {radioView('header-color','#FFFFFF', '#000000')}
                         </div>
+
                         {activeCustomColor && <ColorPicker active={ 'header-background' } obj={ { hsl: hsl,hsv: hsv } } colors={ colors } onChange={ handleChangeColor } />}
+                    </div>
+                    <div className="custom-color-preview header-banner-edit">
+                        <h5>Choose an image OR color</h5>
+                        <div className="header-color-img">
+                            <div className="header-img">
+                                <div tabIndex="0" className="undefined avatar-user">
+                                    <div className="c-avatar cursor-pointer ">
+                                        <div className="drag-image-box">
+                                            <p onClick={ toggleImageModal } className="">
+                                                <img src={ data.coverImage || previewFile || blogBanner } alt="cover"/>
+                                            </p>
+                                        </div>
+                                        <p className="upload-file">
+                                            <a onClick={ toggleImageModal }>
+                                                <i className="fa fa-plus"></i>
+                                                Change Header Image
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <UploadImageModal getBase64={ getBase64 } handleSearch={ handleSearch } clearImage={ clearImage } previewFile={ previewFile } fieldName={ 'coverImage' } unsplashImages={ unsplashImages } openModal={ openImageModal } handleToggleModal={ toggleImageModal } />
+                            </div>
+                            <div className="header-color">
+                                <div className="color-selector-group">
+                                    <div onClick={ () => handleClick('header-background') } className={ `color-box-view ${ activeCustomColor ? 'active' : '' }` }>
+                                        <span className="color-selector-preview" style={ { background: colors[ 'header-background' ] } }></span>
+                                        <input
+                                            type='text'
+                                            onChange={ (event) => handleChange(event,'header-background') }
+                                            className='form-control'
+                                            defaultValue={ colors[ 'header-background' ] }
+                                            value={ colors[ 'header-background' ] }
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </Modal.Body>
             <Modal.Footer>
                 <div className="modal-btns">
+                    <Button type='submit' variant="secondary">cancel</Button>
                     <ButtonLoader
                         button={ <Button type='submit' variant="primary">confirm</Button> }
                         loadButton= {

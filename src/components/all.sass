@@ -2132,7 +2132,7 @@ body.modal-open
       left: 0
       right: 0
       top: 0
-      z-index: 9999
+      z-index: 1
       border: none
     .modal-body
       padding: 26px 45px 0
@@ -2192,6 +2192,7 @@ body.modal-open
       .color-selector-label
         @media (max-width: $breakpoint-mobile)
           width: 85px
+
   .preview-switch
     width: 100%
     display: inline-block
@@ -2212,6 +2213,8 @@ body.modal-open
       border: 2px solid #9E9E9E
       border-radius: 10px
       margin-left: 6px
+      position: relative
+      z-index: 2
       .preview-switcher
         width: 44px
         height: 40px
@@ -2671,3 +2674,54 @@ body.modal-open
   a
     text-decoration: underline
     color: $primary-color
+.header-banner-edit
+  text-align: center
+  margin: 30px 0 0
+  h5
+    font-size: 18px
+    line-height: 1.5
+    font-weight: bold
+    color: $black-color
+    margin: 0 0 13px
+.header-color-img
+  width: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+  @media (max-width: $breakpoint-mobile)
+    flex-direction: column
+  .header-img
+    border-right: 1px solid $black-color
+    padding: 0 10px 0 0
+    margin: 0 14px 0 0
+    width: 204px
+    @media (max-width: $breakpoint-mobile)
+      border-right: none
+  .header-color
+    @media (max-width: $breakpoint-mobile)
+      width: 100%
+    .color-selector-group
+      width: 132px
+.header-text-edit
+  padding: 35px 0 0
+  .form-group
+    margin: 0 0 15px
+    label
+      width: 100%
+      display: inline-block
+      font-size: 14px
+      line-height: 1.4
+      color: $dark-grey-color
+    .form-control
+      border-radius: 5px
+      border: 2px solid rgba(51, 51, 51, 0.3)
+      padding: 0 7px
+      font-size: 18px
+      line-height: 1.4
+      font-weight: 600
+.preview-head
+  font-weight: bold
+  font-size: 18px
+  line-height: 150%
+  margin: 0 0 15px
+  text-align: center
