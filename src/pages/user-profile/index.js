@@ -359,7 +359,7 @@ const UserProfilePage =(props) => {
                     </div>
                 </div>
                 <UploadImageModal
-                    fieldName={ 'blogUrl' }
+                    fieldName={ 'profileImageUrl' }
                     clearImage={ clearImage }
                     previewFile={ userProfileForm.values?.profileImageUrl }
                     getBase64={ getBase64 }

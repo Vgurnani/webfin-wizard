@@ -1,22 +1,26 @@
-import React,{ useState ,useEffect  } from 'react'
-import { Link } from 'react-router-dom'
+import React,{ useState ,useEffect , useCallback } from 'react'
 import SocialMedia from './socialMedia'
 import PropTypes  from 'prop-types'
 import { createSocialMedia } from 'middleware/blog'
 import { useDispatch , useSelector } from 'react-redux';
-import { Field ,reduxForm, reset  } from 'redux-form';
-import { renderTextArea } from 'utils/formUtils';
+import { Field ,reduxForm, reset ,stopAsyncValidation } from 'redux-form';
+import { renderTextArea, renderFieldChangeWG } from 'utils/formUtils';
 import { SOCIAL_MEDIA } from 'constants/app'
+import asyncValidate  from 'utils/asyncValidate';
+import UploadImageModal from 'components/assessment/shared/UploadImageModal';
+import { change as reduxChange } from 'redux-form';
+import ButtonLoader from 'components/core/loader/button-loader'
+import _ from 'lodash'
 import{
     Button,
     Col,
     Row,
     Form
 }from 'react-bootstrap';
-import history from 'utils/history'
 import {
     TopRightArrow,
 } from 'utils/svg'
+import { getUnsplash } from 'middleware/assessments';
 import profilePic from 'images/user-avatar.png';
 import { updateCurrentUser } from 'middleware/auth'
 export const AuthorDescription =(props) => {
@@ -57,6 +61,121 @@ export const AuthorDescription =(props) => {
         </Form>
     )
 }
+
+export const UserName =(props) => {
+    const dispatch  = useDispatch()
+    // eslint-disable-next-line react/prop-types
+    const { handleSubmit, setUsernameEdit , initialize } = props
+    const [ asyncLoad, setAsyncLoad ] =  useState(false)
+    const selectorData = useSelector(state => state.user.sessionData?.data?.data)
+    const user =  selectorData?.user
+    const submitData = (data) => {
+        dispatch(updateCurrentUser(data))
+        setUsernameEdit(false)
+    }
+    useEffect(() => {
+        // eslint-disable-next-line react/prop-types
+        initialize({ userName: user?.userName })
+        return () => {
+            dispatch(reset('userProfileForm'))
+        }
+    },[ user ])
+    const cancelFun = () => {
+        // eslint-disable-next-line react/prop-types
+        initialize({ userName: user?.userName })
+        setUsernameEdit(false)
+    }
+    const handleChange = (value) => {
+        if(value){
+            setAsyncLoad(true)
+            asyncValidate(value).then((result) => {
+                !result ? dispatch(stopAsyncValidation('userProfileForm', { userName: 'That username is taken' })) : null
+                setAsyncLoad(false)
+            })
+        }
+    }
+    const asyncValidateFunc = _.debounce(handleChange, 800);
+    const asyncChangeCallback = useCallback(asyncValidateFunc, []);
+    return(
+        <Form onSubmit={ handleSubmit(submitData) }>
+            <Field
+                name="userName"
+                label=""
+                // eslint-disable-next-line react/prop-types
+                defaultValue={ user?.userName }
+                handleChange={ asyncChangeCallback }
+                component={ renderFieldChangeWG }
+                maxLength="150"
+                withoutTouch={ true }
+                placeholder='Enter your Username'
+            />
+            { asyncLoad && <div className="small-up-loader">
+                <div className="lds-facebook"><div></div><div></div><div></div></div>
+            </div> }
+            <Button variant='primary' type='submit'>Update</Button>
+            <a href='#' onClick={ () => cancelFun() }>cancel</a>
+        </Form>
+    )
+}
+
+const UserProfile = (props) =>{
+    // eslint-disable-next-line react/prop-types
+    const { setProfileModal, profileModal } = props
+    const dispatch = useDispatch();
+    const userProfileForm = useSelector((state)=>state.form.userProfileForm);
+    const unsplashImages  = useSelector((state) => state.assessment.unsplashImages)
+    const userProfileLoading = useSelector((state) => state.user.userProfileLoading )
+    const handleToggleModal = () => {
+        setProfileModal(!profileModal)
+    }
+    const submitData = ( ) => {
+        dispatch(updateCurrentUser({ profileImageUrl: userProfileForm?.values?.profileImageUrl }))
+    }
+
+    const clearImage = () => {
+        dispatch(reduxChange('userProfileForm', 'profileImageUrl', null))
+    }
+
+    const getBase64 = (base64) => {
+        dispatch(reduxChange('userProfileForm', 'profileImageUrl', base64))
+    }
+
+    const handleSearch = (event) => {
+        const query = event.target.value || 'cat'
+        dispatch(getUnsplash('/photos',query))
+    }
+    useEffect(() => {
+        if(!userProfileLoading){
+            setProfileModal(false)
+        }
+
+    },[ userProfileLoading ])
+
+    return(
+        <Form onSubmit={ ()  => {} }>
+            <UploadImageModal
+                fieldName={ 'profileImageUrl' }
+                clearImage={ clearImage }
+                previewFile={ userProfileForm?.values?.profileImageUrl }
+                getBase64={ getBase64 }
+                handleSearch={ handleSearch }
+                unsplashImages={ unsplashImages }
+                openModal={ profileModal }
+                submitData={ submitData }
+                handleToggleModal={ handleToggleModal }
+            >
+                <ButtonLoader
+                    button={ <Button onClick={ () => submitData() } variant="primary">confirm</Button> }
+                    loadButton= {
+                        <Button disabled={ true } type='button' variant="primary">saving..</Button>
+                    }
+                    loading={ userProfileLoading }
+
+                />
+            </UploadImageModal>
+        </Form>
+    )
+}
 const Dashboard =(props) => {
     const { site, status } = props
     const dispatch = useDispatch()
@@ -64,8 +183,10 @@ const Dashboard =(props) => {
     const connecting = useSelector((state) => state.blog.connecting)
     const [ openModal ,setOpenModal ] = useState(false)
     const [ editable, setEditable ] = useState(false)
+    const [ usernameEdit, setUsernameEdit ] = useState(false)
     const selectorData = useSelector(state => state.user.sessionData?.data?.data)
     const user =  selectorData?.user
+    const [ profileModal, setProfileModal ] = useState(false )
 
     const connectData = (values) => {
         if(!Object.values(errors).includes(true)){
@@ -74,6 +195,9 @@ const Dashboard =(props) => {
     }
     const openEditFunc = () => {
         setEditable(true)
+    }
+    const openUsernameFunc = () => {
+        setUsernameEdit(true)
     }
     return(
         <Col md='12'>
@@ -116,12 +240,16 @@ const Dashboard =(props) => {
 
                     <div className="dashboard-header data-box">
                         { user && <div className="author-info" >
-                            <div className="author-img" onClick={ () => history.push('/user-profile') }>
-                                <img src={ user?.profileImageUrl || profilePic } alt="Jason Miller" />
-                            </div>
-                            <div className="author-name" onClick={ () => history.push('/user-profile') }>
-                                <h5>{user?.firstName } { user?.lastName } </h5>
-                                <Link to={ '/user-profile' } >Edit</Link>
+                            <div className='row'>
+                                <div className="author-img" onClick={ () => setProfileModal(!profileModal) }>
+                                    <img src={ user?.profileImageUrl || profilePic } alt="Jason Miller" />
+                                </div>
+                                <UserProfile setProfileModal={ setProfileModal } profileModal={ profileModal } />
+                                <div className="author-name  col-md-9" >
+                                    {
+                                        usernameEdit ? <UserName setUsernameEdit={ setUsernameEdit } { ...props }  /> : <><h5>{user?.userName?.toUsername() } </h5><a href='#' onClick={ openUsernameFunc } >Edit</a></>
+                                    }
+                                </div>
                             </div>
                             <hr/>
                             <div className='about'>
@@ -161,7 +289,9 @@ AuthorDescription.PropTypes = {
     handleSubmit:  PropTypes.func,
     setEditable:  PropTypes.func
 }
-
+String.prototype.toUsername = function(){
+    return this?.split('@') && this?.split('@')[ 0 ];
+}
 export default reduxForm({
     form: 'userProfileForm',
 })(Dashboard);

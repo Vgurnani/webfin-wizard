@@ -14,7 +14,7 @@ import
 } from 'react-bootstrap';
 import _ from 'lodash';
 const UploadImageModal = (props) => {
-    const { openModal, handleToggleModal, fieldName,unsplashImages ,getBase64,clearImage, handleSearch, previewFile } = props
+    const { openModal, handleToggleModal,submitData, fieldName,unsplashImages ,getBase64,clearImage, handleSearch, previewFile } = props
     const [ selectedUnsplash, setSelectedUnsplash ] = useState(null);
     const unsplashLoading = useSelector((state) => state.assessment.unsplashLoading)
     const handleSelect = async(id) => {
@@ -28,6 +28,9 @@ const UploadImageModal = (props) => {
     const clearImageFun = (event) => {
         setSelectedUnsplash(null)
         clearImage(event)
+    }
+    const handleConfirm = () => {
+        submitData && submitData() || handleToggleModal && handleToggleModal()
     }
     return(
         <Modal show={ openModal } onHide={ handleToggleModal } className="logo-upload-modal">
@@ -104,7 +107,8 @@ const UploadImageModal = (props) => {
             </Modal.Body>
             <Modal.Footer>
                 <div className="modal-btns">
-                    <Button variant="primary" onClick={ handleToggleModal }>Confirm</Button>
+                    { !props.children && <Button variant="primary" onClick={ handleConfirm }>Confirm</Button>}
+                    { props.children }
                 </div>
             </Modal.Footer>
         </Modal>
@@ -121,7 +125,9 @@ UploadImageModal.propTypes = {
     previewImage: PropTypes.object,
     fieldName: PropTypes.string,
     unsplashImages: PropTypes.array,
-    previewFile: PropTypes.object
+    previewFile: PropTypes.object,
+    submitData: PropTypes.func,
+    children: PropTypes.children
 
 };
 
